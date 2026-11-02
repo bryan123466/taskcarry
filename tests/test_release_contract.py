@@ -113,7 +113,7 @@ class InstalledWheelContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="taskcarry-wheel-") as temporary:
             root = Path(temporary)
             installed = root / "installed"
-            project = root / "synthetic-project"
+            project = root / "synthetic-project 合成"
             project.mkdir()
             process = subprocess.run([sys.executable, "-m", "pip", "install", "--no-index", "--no-deps", "--target", str(installed), str(wheel)], capture_output=True, text=True, encoding="utf-8", timeout=90)
             self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
@@ -129,28 +129,43 @@ class InstalledWheelContractTests(unittest.TestCase):
             for skill in skill_files:
                 self.assertTrue(skill.read_text(encoding="utf-8").startswith("---\nname: taskcarry-"))
             config = tomllib.loads((project / ".taskcarry/codex.mcp.toml").read_text(encoding="utf-8"))["mcp_servers"]["taskcarry"]
-            self.assertEqual(Path(config["env"]["PYTHONPATH"]), installed)
-            environment.update(config["env"])
+            self.assertEqual(config["args"][:3], ["-I", "-X", "utf8"])
+            self.assertNotIn("PYTHONPATH", config.get("env", {}))
+            repository = Path(__file__).resolve().parents[1]
+            # Same interpreter and installed path, but the old ordinary launch
+            # selects cwd source. This demonstrates why wheel version alone
+            # cannot establish which implementation a self-host uses.
+            process = subprocess.run(
+                [sys.executable, "-c", "import taskcarry; print(taskcarry.__file__)"],
+                capture_output=True, text=True, encoding="utf-8", cwd=repository,
+                env=environment, timeout=20)
+            self.assertEqual(process.returncode, 0, process.stderr)
+            self.assertEqual(Path(process.stdout.strip()).parent, repository / "taskcarry")
+            environment.update(PYTHONPATH=str(repository), PYTHONUTF8="0", PYTHONIOENCODING="ascii")
             frames = [
                 {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-11-25", "capabilities": {}, "clientInfo": {"name": "wheel-contract", "version": "1"}}},
                 {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"name": "taskcarry_status"}},
                 {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "taskcarry_agenda", "arguments": {"limit": 1}}},
                 {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "taskcarry_doctor"}},
+                {"jsonrpc": "2.0", "id": 5, "method": "tools/call", "params": {"name": "taskcarry_task", "arguments": {"task_id": "wheel-unicode", "title": "合成检查 ✓"}}},
             ]
-            process = subprocess.run([config["command"], *config["args"]], input="\n".join(json.dumps(frame) for frame in frames) + "\n", text=True, encoding="utf-8", capture_output=True, cwd=root, env=environment, timeout=20)
-            self.assertEqual(process.returncode, 0, process.stderr)
-            replies = [json.loads(line) for line in process.stdout.splitlines()]
-            self.assertFalse(replies[1]["result"]["isError"])
-            self.assertIn("tasks", replies[1]["result"]["structuredContent"]["result"])
-            agenda = replies[2]["result"]["structuredContent"]["result"]
-            self.assertTrue(agenda["selection_only"])
-            self.assertFalse(agenda["effects_executed"])
-            self.assertEqual(agenda["total"], 0)
-            runtime = replies[3]["result"]["structuredContent"]["result"]["runtime"]
-            self.assertEqual(runtime["setup_status"], "installed")
-            self.assertEqual(Path(runtime["loaded_runtime"]["module_root"]), installed / "taskcarry")
-            self.assertTrue(runtime["managed_runtime_matches_disk"])
-            self.assertFalse(runtime["loaded_code_verified"])
+            for cwd in (root, repository):
+                with self.subTest(cwd=cwd.name):
+                    process = subprocess.run([config["command"], *config["args"]], input="\n".join(json.dumps(frame, ensure_ascii=False) for frame in frames) + "\n", text=True, encoding="utf-8", capture_output=True, cwd=cwd, env=environment, timeout=20)
+                    self.assertEqual(process.returncode, 0, process.stderr)
+                    replies = [json.loads(line) for line in process.stdout.splitlines()]
+                    self.assertFalse(replies[1]["result"]["isError"])
+                    self.assertIn("tasks", replies[1]["result"]["structuredContent"]["result"])
+                    agenda = replies[2]["result"]["structuredContent"]["result"]
+                    self.assertTrue(agenda["selection_only"])
+                    self.assertFalse(agenda["effects_executed"])
+                    self.assertEqual(agenda["total"], 0)
+                    runtime = replies[3]["result"]["structuredContent"]["result"]["runtime"]
+                    self.assertEqual(runtime["setup_status"], "installed")
+                    self.assertEqual(Path(runtime["loaded_runtime"]["module_root"]), installed / "taskcarry")
+                    self.assertTrue(runtime["managed_runtime_matches_disk"])
+                    self.assertFalse(runtime["loaded_code_verified"])
+                    self.assertEqual(replies[4]["result"]["structuredContent"]["result"]["title"], "合成检查 ✓")
 
 
 @unittest.skipUnless(os.environ.get("TASKCARRY_TEST_SOURCE_BUILD") == "1", "Opt in to the independent source build with TASKCARRY_TEST_SOURCE_BUILD=1")

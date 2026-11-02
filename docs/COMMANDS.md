@@ -3,10 +3,12 @@
 All ordinary actions route through one dispatch API. Use JSON files to avoid shell-dependent quoting. 所有普通动作调用同一个分发 API；使用 JSON 文件避免不同终端的引号差异。
 
 ```text
-python -m taskcarry --project <control-directory> <action> --input <request.json>
+python -I -X utf8 -m taskcarry --project <control-directory> <action> --input <request.json>
 ```
 
 `--input` and `--json` are mutually exclusive. Input files contain the **argument object only**, not an action wrapper. `status` and `doctor` need no input file. Replace angle-bracket placeholders; do not type them literally. 请求文件只包含参数对象，`status` 与 `doctor` 无需请求文件；尖括号是占位符。
+
+Use the fixed installed interpreter for `python` above. Isolated startup excludes cwd and environment import overrides. Source development must explicitly select its checkout instead; it is not a governance installation. 上述 python 指固定安装解释器；源码开发需明确选定源码，不作为正式治理安装。
 
 Success: `{"ok":true,"result":{...}}`. Failure: `{"ok":false,"error":{"code":"...","message":"...","details":{...}}}` and a nonzero exit status. A successful planning result is not proof that execution occurred. 计划成功不代表实际执行成功。
 
@@ -35,7 +37,7 @@ Paths in a checkpoint or submission are workspace-relative exact files, not wild
 
 `reconcile` and `adopt` default to planning. To execute, copy the returned plan identifier into a request with `execute: true`. First reconcile recorded unfinished operations against their actual effects and resume the original operation when applicable. If external changes invalidate the relevant facts and there is no applicable operation to resume, inspect the error and generate a fresh plan. Do not edit the persisted plan. 接收和采用默认只计划；先核对未完操作的实际效果，适用时接续原操作。外部变化使前提失效且无适用原操作可续办时，再检查错误并重新计划，不直接修改保存的计划。
 
-MCP starts with `python -m taskcarry --project <control-directory> mcp`. Tools have `taskcarry_` prefixes and expose the corresponding ordinary actions, except project initialization and setup. The server is project-bound. CLI and MCP output formatting differ where required by their protocols, but both call the same action dispatcher.
+Installed MCP can start with `python -I -X utf8 -m taskcarry --project <control-directory> mcp`. The setup-generated fragment additionally pins its selected package path through an isolated launcher, supporting explicit source development and failing if that path is unavailable. Retain the generated arguments when activating it. Tools have `taskcarry_` prefixes and expose the corresponding ordinary actions, except project initialization and setup. The server is project-bound. CLI and MCP output formatting differ where required by their protocols, but both call the same action dispatcher.
 
 Receiving plans include selected recovery operations in their identity. `scope: plan` and `plan_complete` describe the frozen selection; `project_complete` remains null, with current remaining work reported separately. An old empty plan can complete while later deliveries remain queued. An adoption preparation failure stays visible for review, with its checkpoint and original error. Matching `refresh_plan` experience can supply a `plan_request` for a proven no-effect operation; it proposes a fresh plan, never automatic execution. A candidate or uncertain effect requires effect reconciliation first.
 

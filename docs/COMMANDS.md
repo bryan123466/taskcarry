@@ -35,6 +35,12 @@ Success: `{"ok":true,"result":{...}}`. Failure: `{"ok":false,"error":{"code":"..
 
 Paths in a checkpoint or submission are workspace-relative exact files, not wildcard expressions. In a cumulative submission, `relation` is `cumulative` and `supersedes` lists the exact earlier stage identifiers. The default relation is `independent`. 检查点和交付的路径是工作区相对精确文件，不使用通配符；累计交付明确列出被替代阶段。
 
+Plain-directory checkpoints and their restoration do not require Git. A workspace with Git metadata, or inside a repository, still requires working Git and the exact working-tree root; an unreadable or damaged repository is never silently saved as plain files. A repository appearing during a plain capture prevents checkpoint publication.
+
+普通目录的检查点及恢复不要求安装 Git。工作区或父级存在 Git 元数据时，仍须使用可用的 Git 和准确的工作树根；不会把不可读取或损坏的仓库悄悄降为普通文件保存。普通目录在捕获期间变为仓库时，不发布该检查点。
+
+一般目錄的檢查點及還原不要求安裝 Git。工作區或父層存在 Git 中繼資料時，仍須使用可用的 Git 與正確的工作樹根；不會將無法讀取或損壞的儲存庫悄悄降為一般檔案儲存。一般目錄在擷取期間變為儲存庫時，不發布該檢查點。
+
 `reconcile` and `adopt` default to planning. To execute, copy the returned plan identifier into a request with `execute: true`. First reconcile recorded unfinished operations against their actual effects and resume the original operation when applicable. If external changes invalidate the relevant facts and there is no applicable operation to resume, inspect the error and generate a fresh plan. Do not edit the persisted plan. 接收和采用默认只计划；先核对未完操作的实际效果，适用时接续原操作。外部变化使前提失效且无适用原操作可续办时，再检查错误并重新计划，不直接修改保存的计划。
 
 Installed MCP can start with `python -I -X utf8 -m taskcarry --project <control-directory> mcp`. The setup-generated fragment additionally pins its selected package path through an isolated launcher, supporting explicit source development and failing if that path is unavailable. Retain the generated arguments when activating it. Tools have `taskcarry_` prefixes and expose the corresponding ordinary actions, except project initialization and setup. The server is project-bound. CLI and MCP output formatting differ where required by their protocols, but both call the same action dispatcher.

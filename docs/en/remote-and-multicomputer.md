@@ -75,7 +75,7 @@ This is a curated project handoff, not model weights, all private chats or a res
 PowerShell 7 export example, with the destination parent already present:
 
 ```powershell
-python -m taskcarry --project "<A_CONTROL>" status | Set-Content -LiteralPath "<SNAPSHOT>/status.json" -Encoding utf8
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status | Set-Content -LiteralPath "<SNAPSHOT>/status.json" -Encoding utf8
 ```
 
 Check that the JSON has `ok: true` and record the capture time. Do not treat an error envelope as a valid state report. Curated memory files use normal delivery and reception; do not dirty the dedicated receiving workspace just to add a summary. An exact commit example:
@@ -158,8 +158,8 @@ A bundle clone has the bundle as `origin`. Before uploading later, explicitly co
 ```
 
 ```text
-python -m taskcarry --project "<RECOVERY_CONTROL>" status
-python -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
+python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" status
+python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
 ```
 
 The destination must be absent or empty, separate from the source workspace and recovery control directory. `restore` recovers only selected checkpoint files. A Git checkpoint creates a **synthetic restoration baseline** to represent HEAD/index/worktree layers and preserves the original HEAD as provenance; it does not restore the complete original repository history. It records a restoration event in the recovery working copy, leaving the backup original unchanged. Compare recovered files with the real cloned project before resuming on a named task branch. Never label the synthetic commit as the original commit.
@@ -168,10 +168,10 @@ The destination must be absent or empty, separate from the source workspace and 
 5. Regenerate local Skills/MCP configuration and call `doctor`/`status`. Old MCP fragments contain the original Python executable and project paths. Do not reuse them unchanged. Workspace re-registration also cannot bypass pending stages, operations or the bound integration-baseline identity.
 
 ```text
-python -m taskcarry --project "<NEW_CONTROL>" init
-python -m taskcarry --project "<NEW_CONTROL>" workspace --input new-baseline.json
-python -m taskcarry --project "<NEW_CONTROL>" doctor
-python -m taskcarry --project "<NEW_CONTROL>" status
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" init
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" workspace --input new-baseline.json
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" doctor
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" status
 ```
 
 Example `new-baseline.json`: `{"name":"baseline","path":"<NEW_BASELINE_ABSOLUTE_PATH>"}`. Follow the [operation manual](operation-manual.md) for other registrations and connection. Record the mapping from old IDs to new registrations. This is an explicit human/agent-assisted reconstruction, not automatic continuation of all transactions in the old database.
@@ -308,9 +308,9 @@ An ancestry check succeeds with exit code 0. Resolve content, manifest, authoriz
 ```
 
 ```text
-python -m taskcarry --project "<A_CONTROL>" workspace --input intake-workspace.json
-python -m taskcarry --project "<A_CONTROL>" task --input intake-task.json
-python -m taskcarry --project "<A_CONTROL>" submit --input intake-submit.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" workspace --input intake-workspace.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" task --input intake-task.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" submit --input intake-submit.json
 ```
 
 If a task ID already exists, confirm it is the same task instead of overwriting another task's meaning. `independent` here applies only to the example's new stage. A cumulative replacement must satisfy **the same task, the same registered workspace, original commit ancestry and path coverage**, with explicit `supersedes`. Matching names on two computers do not establish lineage. Retain evidence and resolve the relationship when those conditions are absent; do not invent coverage.
@@ -322,7 +322,7 @@ Create `receive-plan.json`:
 ```
 
 ```text
-python -m taskcarry --project "<A_CONTROL>" reconcile --input receive-plan.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" reconcile --input receive-plan.json
 ```
 
 Review all returned `stage_ids`, baseline HEAD, unfinished operations and conflicts. A reception plan can include other already queued stages; it does not automatically select only this task. Execute only if the whole plan is within the authorized scope. Copy its returned `plan_id` into `receive-execute.json`:
@@ -332,8 +332,8 @@ Review all returned `stage_ids`, baseline HEAD, unfinished operations and confli
 ```
 
 ```text
-python -m taskcarry --project "<A_CONTROL>" reconcile --input receive-execute.json
-python -m taskcarry --project "<A_CONTROL>" status
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" reconcile --input receive-execute.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status
 ```
 
 Confirm the stage is actually `COMMITTED`, its operations are complete and baseline content is correct. A successful call does not mean every queued item completed. Resolve specific conflicts without overwriting other WIP. Use planned `adopt` from the main manual when an A workspace needs the update. Publish the authorized baseline to `main` as in 4.2; preserve traceability between A's integration commit and B's source commit.

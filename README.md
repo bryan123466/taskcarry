@@ -8,7 +8,7 @@
 
 TaskCarry provides **project memory, workspace collaboration, and project workflow governance** for people working with AI tools. Bring ready stages into a shared project, preserve unfinished work, and resume supported interrupted operations from recorded and verified results. Task context, selected files, deliverable history, and next steps stay with the project across conversations and pauses.
 
-Use it when one project has outgrown a single conversation: software and documentation advancing together, a research project with several workstreams, or a product with development, operations, and writing happening in parallel. Your AI tool helps do the work; TaskCarry gives that work a durable local record and a way to bring results together.
+Use it with a project already advancing in your AI chats, whether one long-running conversation or several parallel workstreams. Keep prior outputs, decisions and unfinished work. Your AI tool helps do the work; TaskCarry gives it a durable local record and a way to bring results together. An extra specialist chat is useful only when the work benefits from it.
 
 **The current step-by-step examples use Codex.** The toolkit exposes the same local engine through a command line and MCP, providing a foundation for other AI-tool integrations. Each host still needs its own connection and workflow verification.
 
@@ -55,7 +55,7 @@ Memory comes from the tasks, notes, files, and deliveries you or your AI assista
 
 ![People set direction, a governance chat coordinates, specialist workspaces advance in parallel, and TaskCarry retains project records](docs/assets/collaboration.en.svg)
 
-Your **governance chat** coordinates the project. It uses the AI capabilities of your host to understand the supplied work information, review the current state, and call TaskCarry tools. Specialist chats focus on their own tasks in clearly assigned workspaces.
+Your independent **governance chat** maintains project memory and reviews connected progress. It uses the host AI to understand permitted sources, distinguish confirmed decisions from suggestions, and call TaskCarry tools. It can also coordinate project priorities if you choose. Keep giving work directly to your existing main or specialist chats; governance does not become a required dispatch gate.
 
 TaskCarry stores records and performs the supported local operations. You retain decisions about project direction, priorities, business acceptance, and external delivery. The toolkit does not require a separate model API or train a model.
 
@@ -75,19 +75,21 @@ A received stage can be part of an unfinished task. A paused task can stay pause
 
 ## Start with one project
 
-Download **taskcarry-0.2.0rc5-product.zip** from the [release page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5), then follow the [Windows user manual](docs/en/windows-example.md).
+The confirmed download remains **taskcarry-0.2.0rc5-product.zip** on the [release page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5). Use the instructions shipped with that package. This source tree prepares the **0.2.0rc6 candidate** and its [revised conversational onboarding guide](docs/en/windows-example.md); candidate preparation does not mean it has been published or installed.
 
-1. **Create the project directory and governance chat.** The manual gives a concrete folder example and a copyable installation prompt. Fill in **[Project name]** and **[One-sentence introduction]**.
-2. **Connect existing work or add task workspaces.** Keep a suitable existing chat, or create independent workspaces for parallel tasks. Fill in **[The actual work this chat is responsible for]**.
-3. **Ask governance to run its first review.** It checks the connected project and reports the result in that same chat. You can then continue working and add scheduling when useful.
+The candidate's main path is for people already using Codex:
 
-There is no separate report application to open. Initial setup feedback and everyday project summaries are produced by your governance AI in its chat, using TaskCarry records and tools. A configured host automation can perform those reviews on a schedule.
+1. **Establish an independent governance chat.** Reuse a verified existing TaskCarry governance chat/control if present. Give a project locator and the product-package location, then send the guide's one prompt.
+2. **Let governance connect existing work.** It inherits known outputs, decisions, tasks and continuation points, guides installation and remaining host actions, and suggests a useful division of work. Added specialists may be zero.
+3. **Continue working in your usual chats.** Governance maintains memory and progress; temporary or ongoing project coordination is optional. At work boundaries, assistants save the relevant evidence and read the effective context before continuing.
 
-You do not need to learn the engine, inspect its database, or run developer tests before using the product.
+The same conversation handles installation, governance responsibility and the first bounded review. If the host cannot complete an action, governance supplies the exact current manual step. Commands and separate transfer prompts live in the [fallback manual](docs/en/manual-setup.md), not in a parallel main route.
 
-<img src="docs/assets/workspace-sidebar-example.png" alt="Example arrangement of governance and specialist chats" width="360">
+You do not need to learn the engine, inspect its database or run developer tests. Reports appear in the governance chat. Native connection, saved progress, delivery and acceptance have separate evidence; optional scheduling does not start during installation.
 
-This is an organization example. Choose your own roles and number of chats. If several existing chats share a working directory, retain one main writer there and move responsibilities that need parallel work into separate workspaces, as the manual explains.
+<img src="docs/assets/workspace-sidebar-example.png" alt="Example arrangement of governance and working chats; specialist count is optional" width="360">
+
+This is an organization example. Existing working chats remain useful. If they share a directory, inspect active writers and preserve scoped WIP before arranging independent write areas.
 
 ## Build on the local workflow
 
@@ -102,6 +104,7 @@ TaskCarry uses Python 3.11+; Git is needed for Git workflows. It stores project 
 
 | Guide | English | 简体中文 | 繁體中文 |
 |---|---|---|---|
+| Manual fallback | [Commands and handoffs](docs/en/manual-setup.md) | [手动后备](docs/zh-CN/manual-setup.md) | [手動後備](docs/zh-TW/manual-setup.md) |
 | User manual | [Start here](docs/en/windows-example.md) | [从这里开始](docs/zh-CN/windows-example.md) | [從這裡開始](docs/zh-TW/windows-example.md) |
 | Architecture | [How it works](docs/en/architecture.md) | [架构说明](docs/zh-CN/architecture.md) | [架構說明](docs/zh-TW/architecture.md) |
 | Maintenance | [Maintain a project](docs/en/governance-maintenance.md) | [维护项目](docs/zh-CN/governance-maintenance.md) | [維護專案](docs/zh-TW/governance-maintenance.md) |

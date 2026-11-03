@@ -128,6 +128,9 @@ class InstalledWheelContractTests(unittest.TestCase):
             self.assertEqual(len(skill_files), 4)
             for skill in skill_files:
                 self.assertTrue(skill.read_text(encoding="utf-8").startswith("---\nname: taskcarry-"))
+            onboarding = project / ".agents/skills/taskcarry-project-setup/references/onboarding.md"
+            self.assertEqual(onboarding.read_bytes(),
+                             (installed / "taskcarry/skill_data/taskcarry-project-setup/references/onboarding.md").read_bytes())
             config = tomllib.loads((project / ".taskcarry/codex.mcp.toml").read_text(encoding="utf-8"))["mcp_servers"]["taskcarry"]
             self.assertEqual(config["args"][:3], ["-I", "-X", "utf8"])
             self.assertNotIn("PYTHONPATH", config.get("env", {}))
@@ -185,8 +188,10 @@ class StandardSourceBuildTests(unittest.TestCase):
                 target = source / "taskcarry" / package_file.name
                 target.parent.mkdir(exist_ok=True)
                 target.write_bytes(package_file.read_bytes())
-            for name in names:
-                relative = Path("skills") / name / "SKILL.md"
+            resources = [*(name + "/SKILL.md" for name in names),
+                         "taskcarry-project-setup/references/onboarding.md"]
+            for resource in resources:
+                relative = Path("skills") / resource
                 target = source / relative
                 target.parent.mkdir(parents=True)
                 target.write_bytes((repository / relative).read_bytes())
@@ -200,6 +205,9 @@ class StandardSourceBuildTests(unittest.TestCase):
                 self.assertEqual(packaged, {f"taskcarry/skill_data/{name}/SKILL.md" for name in names})
                 for name in names:
                     self.assertEqual(wheel.read(f"taskcarry/skill_data/{name}/SKILL.md"), (source / "skills" / name / "SKILL.md").read_bytes())
+                for resource in resources:
+                    self.assertEqual(wheel.read("taskcarry/skill_data/" + resource),
+                                     (source / "skills" / resource).read_bytes())
             self.assertFalse((source / "taskcarry/skill_data").exists(), "Build must not generate duplicate source resources")
             # Verify the sdist retains those same canonical assets for downstream builds.
             process = subprocess.run([sys.executable, "-c", "import sys; from setuptools.build_meta import build_sdist; build_sdist(sys.argv[1])", str(output)], capture_output=True, text=True, encoding="utf-8", cwd=source, timeout=90)
@@ -208,10 +216,10 @@ class StandardSourceBuildTests(unittest.TestCase):
             self.assertEqual(len(archives), 1)
             with tarfile.open(archives[0], "r:gz") as archive:
                 members = archive.getnames()
-                for name in names:
-                    matches = [member for member in members if member.endswith(f"/skills/{name}/SKILL.md")]
-                    self.assertEqual(len(matches), 1, name)
-                    self.assertEqual(archive.extractfile(matches[0]).read(), (source / "skills" / name / "SKILL.md").read_bytes())
+                for resource in resources:
+                    matches = [member for member in members if member.endswith("/skills/" + resource)]
+                    self.assertEqual(len(matches), 1, resource)
+                    self.assertEqual(archive.extractfile(matches[0]).read(), (source / "skills" / resource).read_bytes())
             self.assertFalse((source / "taskcarry/skill_data").exists())
 
 

@@ -1,201 +1,22 @@
 {
   "product": "TaskCarry",
-  "version": "0.2.0rc6.dev1",
-  "status": "local_development_candidate_not_published",
-  "rc6_nongit_checkpoint_source_stage": {
-    "status": "unreleased_source_stage_not_package_release",
-    "issue": "taskcarry-nongit-checkpoint-requires-git",
-    "source_base": "30cadd787faabf3f7e9edc09b8b9a3ff97148db5",
-    "scope": "Plain-directory checkpoints without Git; repository boundaries remain fail-closed.",
-    "platform": "Windows",
-    "python": "3.12.10",
-    "validation": {
-      "full_before_split_metadata": {
-        "recorded_at": "2026-11-03T22:46:55.149183+00:00",
-        "source_sha256": "1a5f47e1f2fc151e8449fff36da8a8f13e9072a8c69b00487113d7021e2e12e8",
-        "tests_run": 228,
-        "passed": 224,
-        "skipped": 4,
-        "failures": 0,
-        "errors": 0,
-        "successful": true,
-        "skips": [
-          {
-            "test": "test_core.CoreTests.test_symlink_escape_rejected",
-            "outcome": "SKIP",
-            "reason": "Host cannot create symlinks; native junction test remains separate."
-          },
-          {
-            "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
-            "outcome": "SKIP",
-            "reason": "Host cannot create a directory symlink"
-          },
-          {
-            "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
-            "outcome": "SKIP",
-            "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
-          },
-          {
-            "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
-            "outcome": "SKIP",
-            "reason": "Opt in to the independent source build with TASKCARRY_TEST_SOURCE_BUILD=1"
-          }
-        ],
-        "optional_git_tests": [
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
-            "outcome": "PASS"
-          }
-        ]
-      },
-      "final_targeted": {
-        "recorded_at": "2026-11-03T22:47:28.651853+00:00",
-        "source_sha256": "8af0e27a48fba39f737e492180267e23c506f295c43bb8a3c829dbd403a1f4a1",
-        "tests_run": 58,
-        "passed": 56,
-        "skipped": 2,
-        "failures": 0,
-        "errors": 0,
-        "successful": true,
-        "skips": [
-          {
-            "test": "test_core.CoreTests.test_symlink_escape_rejected",
-            "outcome": "SKIP",
-            "reason": "Host cannot create symlinks; native junction test remains separate."
-          },
-          {
-            "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
-            "outcome": "SKIP",
-            "reason": "Host cannot create a directory symlink"
-          }
-        ],
-        "optional_git_tests": [
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_commondir_filename_alone_does_not_require_git",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
-            "outcome": "PASS"
-          },
-          {
-            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_split_metadata_with_commondir_cannot_be_saved_as_plain_files",
-            "outcome": "PASS"
-          }
-        ]
-      }
-    },
-    "verification_mapping": "The complete suite predates only the HEAD+commondir detection addition and its two tests. The final targeted run includes all optional-Git, Core, atomic-store and CLI/MCP interface tests on the final core.py SHA256.",
-    "not_verified": [
-      "new wheel or sdist build",
-      "final RC6 package installation",
-      "cross-platform CI for this source stage",
-      "native host loading of this source stage"
-    ],
-    "remaining_work": [
-      "restore post-effect receipt recovery",
-      "remaining full RC6 B1 onboarding, workspace binding and documentation scope"
-    ]
-  },
+  "version": "0.2.0rc6",
+  "status": "local_candidate_for_review_not_published",
+  "recorded_date": "2026-11-04",
+  "scope": "Disposable synthetic projects and candidate installations; no production runtime or host configuration upgrade.",
   "source_suite": {
-    "schema": "taskcarry.test-evidence.v1",
-    "recorded_at": "2026-11-02T09:38:35.282498+00:00",
-    "platform": "Windows",
-    "python": "3.12.10",
-    "tests_run": 216,
-    "passed": 214,
-    "skipped": 2,
+    "recorded_at": "2026-11-03T23:24:24.999384+00:00",
+    "tests_run": 265,
+    "passed": 262,
+    "skipped": 3,
     "failures": 0,
     "errors": 0,
     "successful": true,
+    "changed_during_run": [],
+    "schema": "taskcarry.test-evidence.v1",
+    "platform": "Windows",
+    "python": "3.12.10",
+    "standard_wheel_and_sdist_build": "enabled_and_passed",
     "tests": [
       {
         "test": "test_adversarial.AdversarialGovernanceTests.test_adoption_does_not_overwrite_an_ignored_local_artifact",
@@ -330,6 +151,62 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_commondir_filename_alone_does_not_require_git",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_split_metadata_with_commondir_cannot_be_saved_as_plain_files",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_continuity.ContinuityGitTests.test_receipt_interruption_run_closeout_and_experience_recovery_preserve_effect",
         "outcome": "PASS"
       },
@@ -399,6 +276,10 @@
       },
       {
         "test": "test_continuity.ContinuityTests.test_pending_work_blocks_only_selected_closeout_and_no_repeat_event",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_continuity.ContinuityTests.test_restore_run_requires_matching_durable_receipt",
         "outcome": "PASS"
       },
       {
@@ -844,6 +725,14 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_onboarding_flow.ExistingProjectOnboardingTests.test_multiple_existing_chats_keep_identity_wip_and_one_control",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_onboarding_flow.ExistingProjectOnboardingTests.test_single_existing_chat_needs_no_new_professional_task",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_receipt_transactions.ReceiptTransactionTests.test_adopt_event_failure_preserves_wip_and_finalizes_without_replay",
         "outcome": "PASS"
       },
@@ -881,7 +770,8 @@
       },
       {
         "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
-        "outcome": "PASS"
+        "outcome": "SKIP",
+        "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
       },
       {
         "test": "test_release_contract.PublicApiContractTests.test_bad_initialization_name_does_not_create_state",
@@ -909,6 +799,78 @@
       },
       {
         "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_changed_checkpoint_cannot_reuse_existing_restore",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_changed_restored_file_is_preserved_without_receipt",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_existing_target_without_intent_is_not_claimed_even_if_bytes_match",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_extra_file_or_empty_directory_is_preserved",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_extra_git_metadata_is_preserved_and_rejected_before_git_commands",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_git_event_failure_recovers_without_replaying_git_and_preserves_layers",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_intent_failure_has_no_filesystem_effect",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_legacy_checkpoint_and_plain_restore_without_git",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_missing_or_changed_completed_receipt_is_not_silently_recreated",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_partial_file_effect_is_visible_and_never_replayed",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_plain_event_failure_recovers_only_receipt_without_git_or_file_writes",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_prepared_intent_without_effect_can_continue",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_replaced_destination_with_identical_content_is_not_adopted",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_unknown_complete_effect_without_durable_fingerprint_is_not_replayed",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_unknown_operation_protocol_is_rejected_even_after_completion",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_user_git_config_change_is_preserved",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_user_git_head_change_is_preserved_even_when_tree_is_identical",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_restore_recovery.RestoreRecoveryTests.test_user_git_index_change_is_preserved",
         "outcome": "PASS"
       },
       {
@@ -1032,6 +994,62 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_an_existing_separate_control_cannot_be_used_as_target",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_another_control_cannot_rebind_workbench_identity",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_branch_change_during_install_leaves_intent_and_resumes_after_identity_is_restored",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_changed_registered_branch_is_rejected_before_setup_writes",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_existing_binding_cannot_silently_change_task_or_become_default_setup",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_install_and_repeat_preserve_live_configuration_agents_and_git_wip",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_interrupted_workbench_install_resumes_without_rewriting_completed_files",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_legacy_manifest_upgrades_without_new_installation_identity",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_missing_identity_registration_or_path_mismatch_never_initializes_target",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_preview_is_read_only_and_identifies_separate_control",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_public_reference_is_installed_and_user_changes_are_preserved",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_reference_link_is_rejected_without_copying_external_content",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_two_workbenches_share_control_without_new_databases",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_setup_workbench.WorkbenchSetupTests.test_user_revision_after_interruption_is_not_overwritten_or_adopted",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_windows_quickstart.WindowsQuickstartTests.test_cli_uses_explicit_isolated_root",
         "outcome": "PASS"
       },
@@ -1063,1055 +1081,2382 @@
         "test": "test_windows_quickstart.WindowsQuickstartTests.test_optional_one_and_five_workers_need_explicit_task_registration",
         "outcome": "PASS"
       }
-    ]
+    ],
+    "source_snapshot_sha256": {
+      "taskcarry/__init__.py": "f2bd48bd42ccc377c492048d9ca3e58ecd545b18c76c4445ef474bee16f0f219",
+      "taskcarry/__main__.py": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7",
+      "taskcarry/api.py": "fba570b7ef1a78261d93b896839032563190a6f6433bd9792cb8706b58c67027",
+      "taskcarry/cli.py": "ac46cbec11e1569ed050902da26f137c783cda4c805c91e86f924aa80998eebe",
+      "taskcarry/continuity.py": "de9d6b09a7be17159a18da3fba1ee3bf0f83a71eb24a51ad7aa192010db994e0",
+      "taskcarry/contracts.py": "7cd186741c0700cf449ab1cd696b93f7189cb7db0b589c65a2b8d9e7b755eaf7",
+      "taskcarry/core.py": "b396a886dcbba8df0ecfe1c72b31092b0274334cb6b98c3febe7b36e493417a7",
+      "taskcarry/gitops.py": "7c08327a8329ce0f90ba21e4597e6f625b464cc1add83bf9bd1274094466ed3f",
+      "taskcarry/integration.py": "ae38f8944e0cdb6a39dd860ee43a5d1734c242b3e27adc734e6d0ad67fce67f4",
+      "taskcarry/maintenance.py": "ad42a872583c196c800e13f5432ef88e92240a1a641b36670420180d3f565f5f",
+      "taskcarry/mcp.py": "e2ad5ce87e1fc19c2ae5a9f08a2d60fa1a426373bde5cb671f52f93a575489b7",
+      "taskcarry/setup.py": "d829834bb221ceb592f194e2a52b85417046d335de948447d1c55ba857810994",
+      "taskcarry/store.py": "555dc5ca7bde4a2f93dfb24fafb208488e015cf8384b5581867f3a0c6c8227f6",
+      "tests/mcp_client.py": "8718eaf9b8bb66351a86f0ae91db856f6e51d95b6e92455d3a2ecf93ad5e887f",
+      "tests/test_adversarial.py": "3bed62036473c836b8a2280ba5dc4a423e8bd6976e91db300994ca31644cdfd1",
+      "tests/test_atomic_store.py": "9e66e83a74cb9e46f228ef577d41983e68aa3ee65aecfd3577183af0ff3130d2",
+      "tests/test_bounded_integration.py": "a2f21e90f0eaeb818e6ba16f36c28059c4086d461ceb3bdd8d5c948f48ef345f",
+      "tests/test_checkpoint_optional_git.py": "24c104486b9849a98dc9fa1e2a833cc58b1dd525ac63e8053b1bcd4da4818f44",
+      "tests/test_continuity.py": "8cac53315aa2846c804c4e2c63b376d0f131d1f7c42ec1123af83c9d2cdae6c6",
+      "tests/test_continuity_interfaces.py": "8f3d1b634dc0f89392bfac0e5201edcb42bf74fb1a2396ab2fc6d0d96cce8ebc",
+      "tests/test_core.py": "6ee97ea223d5043b80e3608f2fbad32b4709caab4ac3ee5b528778f81ccc027d",
+      "tests/test_current_view.py": "97872a71aeccdd94496133601d275abfd552bc0969eca7c8d5630482d0264cb9",
+      "tests/test_example_release_screen.py": "3df723d460579442e37ad6c02d46352c84604ff934e6cd1f286efeebc7992337",
+      "tests/test_governance_lifecycle.py": "df103f36aac34a3c7e7d52132749d259ab4ef880649229132ffecee9dbac7d72",
+      "tests/test_incremental_view.py": "5e4edf50fccca7a800ce5431d53723cd33a63f7aecf5009ef5a881fcf815e30f",
+      "tests/test_integration.py": "6e2b96153b800a14a65c9f444cf6259040274aed55ae04a05dfc093deab278d7",
+      "tests/test_interfaces.py": "6ff5fbc2b493da83466b98a1f6d274051df606abd1916d19b506b15b9fa03a9f",
+      "tests/test_maintenance.py": "1abda483e46abe2ced4cdc6717bb071a45af2f763c3fa2725a6031f4b30db21a",
+      "tests/test_onboarding_flow.py": "94a73990d8ab7bf3b8425208ef2301af1ca740a12440c20ac2b4c62da25bf841",
+      "tests/test_receipt_transactions.py": "e463637c25281a2e85ce728251aaf00de96db929549847f23c0913789c1803eb",
+      "tests/test_recovery_advice.py": "df22ca8777e5f12b24fc0a0eb4e182ce17a40b8411f06d6b592fe95f97c3c2f8",
+      "tests/test_release_contract.py": "8df16736fd232e3baab0c0e44f412eb8d3c9143bdbe4a79afaff4e251e73061b",
+      "tests/test_restore_recovery.py": "14520a4e01d66bdcb8f0454a6edcbc129109cf7189388ce833f74be2f37daf86",
+      "tests/test_setup_launch.py": "240e6462319c632b020b4d5e0463212da6b6f3ddddeac948816c997d9d3538da",
+      "tests/test_setup_recovery.py": "977bb2d81ad6f17d3f19417a7afe15fb6156cd30bbe1e86cb0bb2195e3251400",
+      "tests/test_setup_workbench.py": "3802fb29b57cedac81ddade25521684dd64f1769a232319ca19341cb45004750",
+      "tests/test_windows_quickstart.py": "04b732e7040757e3103e94f5bfb24037f89b6b9d5071b64ad1dab416f552a1ce",
+      "skills/taskcarry-experience-recovery/SKILL.md": "20904c402c678c780bb4b55e313624018a118690725f0c2bd2b51eca1665d945",
+      "skills/taskcarry-governance-reconcile/SKILL.md": "91f4bf6f8c3392f596ead5b22e70da8d6995947cf420f3743c14734cae8e79d0",
+      "skills/taskcarry-project-setup/references/onboarding.md": "28182e63ed64d3d4f575fc90f39dd4cc0cd2cb772b1a13eeee72193734f2260a",
+      "skills/taskcarry-project-setup/SKILL.md": "0fa8df2e28aa78d5d6c5d878fcb7e71e8c05bb7b8cb87a66790f7e6b09b02e05",
+      "skills/taskcarry-task-delivery/SKILL.md": "29ffb3309510e8088e08c64754862a5db2568f7b0d0490afd579111d812820af",
+      "scripts/build_trial.py": "c1e2c6c3de80dcc1c67b8b3e22506b6cd9432f744057b409127280e95b4ca53c",
+      "scripts/create_sandbox.py": "6052033d576d3b250512e8ee1348160278693cce27bd0b3d67768dda03b66410",
+      "scripts/verify_installed_wheel.py": "8800626057f08e18e42be6b79e0af15e1952bc6f64848619e9f1a9fb3de2175a",
+      "scripts/verify_release.py": "14ebe23744fc7f9500c2dd38efeb2450243ad76ab7f90bfef32748a7fe16f57c",
+      "docs/assets/README.md": "df2fae6049e31b74ab43487cb3dcd7585c7ec407db3657787dbd0a3a33c177d8",
+      "docs/COMMANDS.md": "2bdb14f883980b442c0821c538585365be82c9ededf922ddc0834b1a9e08b713",
+      "docs/en/architecture.md": "4e43823048e1b8b6d0d2a104a0bbc37a677581e60e9fecea685ca70e871a049b",
+      "docs/en/automation.md": "f926959e9dd735699e745529edb86e66d37af0762e76c223afc7f9c577408293",
+      "docs/en/getting-started.md": "299039825150096c0bb395d0e44515a16070aac75835b26ab55cd6b12ae5e39c",
+      "docs/en/governance-evolution.md": "0aa9afcf4405eb392e98a50c02ef0e0cf584fc79b8ab3691f330e081965d76d9",
+      "docs/en/governance-maintenance.md": "6b2561e02d2eefb290a318c8d636d7614d80adbaf920d7244886ca7491ef9f9e",
+      "docs/en/manual-setup.md": "5f4adb2fc0ea27f5a8490b3ddf9fd1dc0aa671a73ee3b5d161417fb3dab7cc7b",
+      "docs/en/operation-manual.md": "025cb1d88c03945d6ed4feaec933d30ea9f8aaaacce29d321d2821f635173009",
+      "docs/en/remote-and-multicomputer.md": "1350ae41a044a3f1b32c4248a61d915448428d9821ce652ce4c041702857c6f0",
+      "docs/en/trial-guide.md": "d678178154c6ec280618bd1321e7bab9b8e011e51fed2c4a067ecb4f8d3f546a",
+      "docs/en/windows-example.md": "3eef28d580f264cb09451e1b748792d173717d12eb800ac1c65efb4b53407263",
+      "docs/OPERATING_PRINCIPLES.md": "1babd82f31ad51083592e17e3eb8746436d89e8feb09e9687c0a7e5dcc54a178",
+      "docs/RELEASE_0.2.0rc4.md": "62393ac4e747c9d65a64152b6e4ef4c51462a053af460b95935296f8ff9e4fd5",
+      "docs/RELEASE_0.2.0rc5.md": "a2336927320ba6cf5b8fd24ce4003a48c6310f3f6c44c730df3a09d50e0d3dea",
+      "docs/RELEASE_0.2.0rc6.dev1.md": "169316c4dc64287075a202fd1768010351f8137e8d86f6f298d4e3a3c73b4961",
+      "docs/RELEASE_0.2.0rc6.md": "1038d6d2197a91eaf1c05b3c8edf31ea681f6fbebe16aff903cd1f7e85d69d09",
+      "docs/RELEASE_BOUNDARIES.md": "17396bb96be1cc27881fd95d80d81d8fabd7d5ac3ffde6d9c404d5b56f1103e9",
+      "docs/TESTER_START.md": "de207937f424427446ab1881140c01e9e5205b14b4fb4756f3b3b842c6b1848b",
+      "docs/TESTER_START.zh-CN.md": "5abc2cffd494689e7c50c05abbbcd1f9b859e528f138a6f6ec9d5e4050070138",
+      "docs/VALIDATION.md": "23c21e95b1e0f9ac7ccf566ca375c5f6b817443cef320f5e776ef70786c19282",
+      "docs/zh-CN/architecture.md": "fed9a217d26ddf0377642d66947fdbc250fcd83c224abd9f38ceff153a847760",
+      "docs/zh-CN/automation.md": "89f985886bf67255446a6cfdd162495fc9a95df23962ceca0eacfc96cca1cdbb",
+      "docs/zh-CN/getting-started.md": "b06133e35021e859a0713b5e5e86ba48b07142b3058118876b7d990f7358c3f1",
+      "docs/zh-CN/governance-evolution.md": "9eabc47b4d5230328365d2a2a90978f956181a18f501dc1b2dfa8ba82e8e06e2",
+      "docs/zh-CN/governance-maintenance.md": "d06168d684c532af5f045ab801d88b076a948fe1f568219554454baf3dd70a91",
+      "docs/zh-CN/manual-setup.md": "baf5a8c36eacfd13dd9ecb0cdfd58f1ba537794738af7b9b92b2d46c720f5e56",
+      "docs/zh-CN/operation-manual.md": "2d54d3e8ea18556f9acecd5af225b8018e96eed6a8cbe7dad45de800e17205ee",
+      "docs/zh-CN/remote-and-multicomputer.md": "4834b93f47535ff6807bdfb434e5e190de304dfae7fdb079187bcf25106dfcaf",
+      "docs/zh-CN/trial-guide.md": "95afe6ef358e81f437d96073718a11cd6d110fe370aca37a22b347541490b025",
+      "docs/zh-CN/windows-example.md": "e4b136594f65a449030d342dc98ac2ed34dbbcb72faf94ce64f840553501c556",
+      "docs/zh-TW/architecture.md": "978dc448bbdcc0e85977de38fb966573b5afa88316b10eec9ad5e3fb8717eba2",
+      "docs/zh-TW/automation.md": "5321658a2290f0d7ff3432b44f6d5d78a60d03e848c22b7d406b53c1ccb6f700",
+      "docs/zh-TW/getting-started.md": "afbee2fc2186d4f1496b20cd9b4dd547bb0c5df9ef77a67540a386b254f8d654",
+      "docs/zh-TW/governance-evolution.md": "ce943cfb992240bdbac6c2ec2c849ff76bbcbea1a5b4b47cbd0a90404431c150",
+      "docs/zh-TW/governance-maintenance.md": "1f781139d9feae0d25ca16579f08f11331828257fb4c7cf2fe954e47168104bc",
+      "docs/zh-TW/manual-setup.md": "ba93476718fa2909d26119a50e06178e02a9a878332ab3f427e9416728fa5211",
+      "docs/zh-TW/operation-manual.md": "ec7bda7f57bf6740f6d542a4f18ff27c17a70abbe6538f78201a4c8fe4ec25a4",
+      "docs/zh-TW/remote-and-multicomputer.md": "cd376240dfb37850121e5e5653524a9b9c29d3ce43a567dfcdfaf8f3aa02197d",
+      "docs/zh-TW/windows-example.md": "60fcdac5e5998e85fd912479fa6d3abbdd00322e84cbdbf1c1428d5ca9a198e1",
+      "docs/index.html": "3b2a8838b86a1955f990a7093c2c3d95ad1041e6ed34a404a46272b5eb8e3f95",
+      "README.md": "a0b247c7b72bb6d4fb17d1df45d7abe0c8501405a2063f447f79c28e9c7582cb",
+      "README.zh-CN.md": "742f67a70e857f9e09a73b7954118d618bdd543cd946aace2b3f5d6a86adc061",
+      "README.zh-TW.md": "d3989091c936738182369f0b9236bf62ac7b79e18baae8aa39fefb50064ebb85",
+      "START_HERE.md": "13a9104aaf25896230004200e6b434fce5ee5744ae2b0f7bcd19133523353c05",
+      "setup.py": "1041645d673c8c13ba9359b28bde909584e87af328a06a5d99188e392dbe762b",
+      "pyproject.toml": "6b56699a2c51d697d377558814409ca50658e902dcd88266af6fb33354746b4a"
+    },
+    "snapshot_note": "These are the files measured before and after the source run. Later validation-report and artifact-record edits do not extend that run to different source bytes."
   },
   "installed_wheel": {
-    "schema": "taskcarry.installed-wheel-evidence.v1",
-    "wheel": "taskcarry-0.2.0rc6.dev1-py3-none-any.whl",
+    "recorded_at": "2026-11-03T23:33:19.643546+00:00",
     "tests_run": 1,
+    "passed": 1,
+    "skipped": 0,
     "failures": 0,
     "errors": 0,
+    "successful": true,
+    "changed_during_run": [],
+    "scope": "Independent disposable installation and generated stdio MCP contract.",
+    "artifact_phase": "final_exact_git_blob_product",
+    "resolves_source_skip": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
+    "wheel_sha256": "cab5c877a68ca519675ec518e0c447ff53c58fc69a94e1abed91622797b55b12"
+  },
+  "remaining_source_limitations": [
+    {
+      "test": "test_core.CoreTests.test_symlink_escape_rejected",
+      "reason": "Host cannot create symlinks; native junction test remains separate."
+    },
+    {
+      "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+      "reason": "Host cannot create a directory symlink"
+    }
+  ],
+  "wheel_existing_project_onboarding": {
+    "recorded_at": "2026-11-03T23:33:01.824605+00:00",
+    "tests_run": 2,
+    "passed": 2,
     "skipped": 0,
-    "successful": true
+    "failures": 0,
+    "errors": 0,
+    "successful": true,
+    "changed_during_run": [],
+    "artifact_phase": "final_exact_git_blob_product",
+    "scenarios": [
+      "One existing work chat and registered workspace",
+      "Multiple existing work chats and separate worktrees sharing one control"
+    ],
+    "observations": [
+      "Existing task and checkpoint identities preserved",
+      "Staged and unstaged user work preserved",
+      "User AGENTS and live host configuration preserved",
+      "No second control database",
+      "Four public Skills and onboarding reference installed",
+      "Generated isolated MCP selects the installed candidate"
+    ],
+    "native_host_acceptance": false,
+    "wheel_sha256": "cab5c877a68ca519675ec518e0c447ff53c58fc69a94e1abed91622797b55b12"
+  },
+  "product_cold_start": {
+    "scope": "actual product ZIP and fresh disposable wheel runtime",
+    "version": "0.2.0rc6",
+    "archive_sha256": "74bb4b22f8b4f5499b5ec6cb3b7e73e6b116ea23ca4c5d8df7b83e03919c09ad",
+    "wheel_sha256": "cab5c877a68ca519675ec518e0c447ff53c58fc69a94e1abed91622797b55b12",
+    "manifest_files_verified": 97,
+    "bundled_wheel_matches": true,
+    "three_fallback_manuals_present": true,
+    "onboarding_reference_installed": true,
+    "module_is_fresh_runtime_site_packages": true,
+    "repeated_setup_writes": 0,
+    "synthetic_workbench_scenarios": 2,
+    "scenarios_successful": true,
+    "native_host_acceptance": false,
+    "production_runtime_changed": false
   },
   "legacy_upgrade": {
     "synthetic_only": true,
     "from_version": "0.2.0rc5",
-    "to_version": "0.2.0rc6.dev1",
+    "to_version": "0.2.0rc6",
     "old_wheel_sha256": "d00f74637f2e7724a38e7e16d91ec1fdc60b7d68c5849a725411cfd6b95385c4",
-    "new_wheel_sha256": "9f0368668653a9dad1c6109c1cb4d2b58233492886e5f5749f57cd80e9aac945",
-    "files_updated": 2,
+    "new_wheel_sha256": "cab5c877a68ca519675ec518e0c447ff53c58fc69a94e1abed91622797b55b12",
+    "files_updated": 6,
     "repeated_writes": 0,
     "installation_identity_preserved": true,
     "user_config_preserved": true,
     "task_state_preserved": true,
+    "old_checkpoint_restored_and_retry_reused": true,
+    "onboarding_reference_installed": true,
+    "rc5_setup_rejects_new_managed_resource_set_without_writes": true,
     "generated_mcp_from_source_cwd_uses_new_wheel": true,
     "native_host_tested": false
   },
-  "candidate_package": {
-    "version": "0.2.0rc6.dev1",
-    "payloads": 91,
-    "manifest_hashes_match": true,
-    "current_product_source_bytes_match": true,
-    "wheel": {
-      "verified_package_files": 17,
-      "skill_count": 4,
-      "membership_and_hashes_match": true
-    },
-    "screening": {
-      "screened_files": 133,
+  "bounded_ai_onboarding_review": {
+    "recorded_date": "2026-11-04",
+    "synthetic_only": true,
+    "fixture_cases": 2,
+    "input_files": 7,
+    "method": "An AI read the current public setup Skill and onboarding reference, then produced bounded handoff responses for two synthetic existing-project contexts.",
+    "scenarios": [
+      "Single existing non-Git writing project",
+      "Two existing work chats with separate Git worktrees and one control"
+    ],
+    "observations": [
+      "Inherited accepted work and original task/checkpoint positions",
+      "Separated confirmed decisions from unconfirmed AI suggestions",
+      "Applied later explicit responsibility corrections",
+      "Preserved paused tasks and staged versus unstaged work boundaries",
+      "Recommended zero unnecessary new work chats",
+      "Identified the current connection gap without repeating the complete setup",
+      "Did not invent host paths, runtime identities, tool results or governance completion"
+    ],
+    "fixture_hashes_unchanged": true,
+    "governance_or_installation_actions_executed": false,
+    "evidence_level": "Observed AI outputs for these two bounded textual fixtures; not a statistical understanding or general usability evaluation.",
+    "native_host_acceptance": false
+  },
+  "artifact_record": {
+    "status": "verified_local_candidate_not_published",
+    "version": "0.2.0rc6",
+    "export": "Exact Git blob bytes, with no checkout or archive EOL filters",
+    "archives": [
+      {
+        "name": "taskcarry-0.2.0rc6-product.zip",
+        "bytes": 1344666,
+        "sha256": "74bb4b22f8b4f5499b5ec6cb3b7e73e6b116ea23ca4c5d8df7b83e03919c09ad"
+      },
+      {
+        "name": "taskcarry-0.2.0rc6-py3-none-any.whl",
+        "bytes": 79675,
+        "sha256": "cab5c877a68ca519675ec518e0c447ff53c58fc69a94e1abed91622797b55b12"
+      }
+    ],
+    "content_screening": {
+      "screened_files": 95,
       "findings": [],
       "scope": "allowlist, host paths, caller deny tokens, common secret patterns; manual scope review remains required"
     },
-    "documents_checked": 50,
-    "missing_local_links": [],
-    "archives": [
-      {
-        "name": "taskcarry-0.2.0rc6.dev1-product.zip",
-        "sha256": "61f087bd78014e95854fd2a3a27a43559d86dde2d86beb627a262f14c78b603f"
-      },
-      {
-        "name": "taskcarry-0.2.0rc6.dev1-py3-none-any.whl",
-        "sha256": "9f0368668653a9dad1c6109c1cb4d2b58233492886e5f5749f57cd80e9aac945"
-      }
-    ]
+    "wheel_verification": {
+      "verified_package_files": 18,
+      "skill_count": 4,
+      "membership_and_hashes_match": true
+    },
+    "source_payloads_verified_against_git": 95,
+    "zip_members": 98,
+    "local_links_checked": 461,
+    "legacy_heading_anchors_checked": 75,
+    "link_issues": []
   },
-  "environment_correction": {
-    "initial_tests": 216,
-    "initial_passed": 210,
-    "initial_errors": 4,
-    "initial_skipped": 2,
-    "cause": "Plain-directory fixtures created within the source Git worktree inherited its repository root.",
-    "resolution": "Reran the full suite in an explicitly assigned external synthetic sandbox; no product guard relaxed."
+  "resolved_historical_findings": {
+    "cwd_source_shadowing": "Isolated generated launch selects the intended package and fails closed when that package is absent.",
+    "taskcarry-nongit-checkpoint-requires-git": "Plain-directory checkpoints work without Git; repository metadata requires successful Git verification.",
+    "restore_post_effect_event_failure": "A durable verified restore operation can retry only its receipt; changed or unknown effects remain preserved for review."
   },
-  "known_followups": [
-    "Plain-directory checkpoint still requires Git to be executable.",
-    "Restore target effects can survive an event-write failure; retry to the same nonempty target is refused."
+  "recovery_limitations": [
+    "APPLYING or otherwise unknown restore effects require review and are not automatically replayed.",
+    "Receipt recovery rejects changed user files, extra paths, replaced destination identity and changed Git metadata.",
+    "A target without a matching durable restore intent cannot be adopted as a completed restore."
   ],
   "native_host_verified": false,
   "natural_automation_verified": false,
   "new_cross_platform_ci_verified": false,
-  "historical_rc5": {
-    "product": "TaskCarry",
-    "version": "0.2.0rc5",
-    "source_suite": {
-      "schema": "taskcarry.test-evidence.v1",
-      "recorded_at": "2026-10-28T07:51:00.382595+00:00",
+  "production_runtime_upgraded": false,
+  "production_runtime_remains": "0.2.0rc5",
+  "not_verified": [
+    "Native host activation or acceptance for this candidate",
+    "Natural scheduled or production automation",
+    "Public CI for the final candidate commit",
+    "Physical multi-computer operation",
+    "Independent-user acceptance"
+  ],
+  "historical": {
+    "reading_note": "Dated records below retain their original scope, artifacts and then-open findings. They are not current rc6 claims or renewed backlog; see resolved_historical_findings above.",
+    "rc6_nongit_checkpoint_source_stage": {
+      "status": "unreleased_source_stage_not_package_release",
+      "issue": "taskcarry-nongit-checkpoint-requires-git",
+      "source_base": "30cadd787faabf3f7e9edc09b8b9a3ff97148db5",
+      "scope": "Plain-directory checkpoints without Git; repository boundaries remain fail-closed.",
       "platform": "Windows",
-      "python": "3.12.14",
-      "tests_run": 211,
-      "passed": 208,
-      "skipped": 3,
-      "failures": 0,
-      "errors": 0,
-      "successful": true,
-      "tests": [
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_adoption_does_not_overwrite_an_ignored_local_artifact",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_does_not_convert_untracked_lf_bytes_during_adoption",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_preserves_distinct_staged_and_worktree_bytes",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_recovery_never_overwrites_new_user_content",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_invalid_execute_does_not_claim_an_integration_baseline",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_latest_cumulative_conflict_never_falls_back_to_older_delivery",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_legacy_conflict_can_be_closed_by_verified_cumulative_successor",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_oversized_deleted_blob_rejected_from_original_tree",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_oversized_new_blob_rejected_before_delivery_record",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_private_scratch_root_cannot_be_redirected_by_junction",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_same_sha_branch_switch_after_plan_is_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_same_sha_branch_switch_during_candidate_preparation_is_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_second_baseline_cannot_reuse_first_baseline_receipt",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_three_stage_chain_after_first_accepted_has_no_historical_backlog",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_adversarial.AdversarialGovernanceTests.test_untracked_file_under_in_tree_junction_is_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_atomic_store.AtomicStoreTests.test_artifact_event_failure_cannot_leave_an_unrecorded_decision",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_atomic_store.AtomicStoreTests.test_checkpoint_event_failure_keeps_task_and_source_then_retry_succeeds",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_atomic_store.AtomicStoreTests.test_experience_event_failure_preserves_previous_rule",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_atomic_store.AtomicStoreTests.test_guard_preserves_effect_journal_when_external_operation_raises",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_atomic_store.AtomicStoreTests.test_nested_savepoint_reads_own_writes_and_inner_failure_isolated",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_atomic_store.AtomicStoreTests.test_task_event_failure_rolls_back_fact_and_retry_publishes_one_event",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.AdoptionPreparationTests.test_actual_preparation_failure_is_visible_after_reopening_and_reuses_checkpoint",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.AdoptionPreparationTests.test_changed_baseline_can_reuse_unchanged_wip_checkpoint",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.AdoptionPreparationTests.test_changed_target_requires_new_plan_and_success_retains_resolves_old_failure",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.AdoptionPreparationTests.test_interruption_before_candidate_can_resume_preparation",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.AdoptionPreparationTests.test_invalid_or_stale_plan_does_not_create_failure_records",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.AdoptionPreparationTests.test_transient_preparation_failure_retries_same_plan_without_repeating_checkpoint",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.BoundedReceiveTests.test_default_twenty_and_explicit_limit_bound_actual_intake",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.BoundedReceiveTests.test_empty_old_plan_reports_new_queued_work_without_executing_it",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.BoundedReceiveTests.test_invalid_limits_do_not_create_plans_or_operations",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.BoundedReceiveTests.test_legacy_plan_without_selection_still_executes_its_exact_scope",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.BoundedReceiveTests.test_only_selected_recovery_operation_is_resumed",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_bounded_integration.BoundedReceiveTests.test_pending_operations_change_plan_identity_and_do_not_double_count_stage",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityGitTests.test_receipt_interruption_run_closeout_and_experience_recovery_preserve_effect",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityGitTests.test_received_operation_stays_complete_after_cumulative_stage",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityGitTests.test_run_closes_after_successor_adoption_resolves_old_preparation",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_adoption_replacement_cycle_is_not_a_completion",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_adoption_replacement_requires_same_scope_and_reciprocal_link",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_artifact_content_change_changes_evidence_even_if_host_revision_reused",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_changed_observation_is_visible_without_replaying_completed_work",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_changed_observation_requires_cas_and_retains_prior_source",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_empty_selection_is_explicit_and_does_not_complete_active_task",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_finished_selection_does_not_imply_all_project_work_complete",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_inspect_is_readonly_and_missing_run_is_not_created",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_invalid_observation_fields_and_duplicate_relations_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_legacy_partial_stage_receipt_does_not_hide_unfinished_operation",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_observation_event_failure_rolls_back_current_and_history",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_observation_identity_cannot_move_to_another_source_or_task",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_observation_is_durable_and_identical_retry_writes_no_event",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_operation_completion_requires_matching_receipt_not_status_only",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_pending_work_blocks_only_selected_closeout_and_no_repeat_event",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_run_selection_cannot_change_or_claim_missing_records",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_run_start_and_finish_are_atomic_when_event_write_fails",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_transitive_supersession_resolves_history_with_real_successor_receipt",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity.ContinuityTests.test_unknown_or_cross_task_workspace_relations_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_cli_and_mcp_share_index_upgrade_and_run_inspection",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_issue_reaches_agenda_then_resolved_evidence_leaves_current_selection",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_unfinished_run_reads_only_its_observation_dependencies",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_artifact_backup_verified_by_bytes",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_artifact_decision_is_bound_to_content",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_corrupt_snapshot_fails_before_destination_write",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_current_view_excludes_terminal_history",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_current_view_shows_cumulative_leaf_without_forging_old_terminal_state",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_experience_scope_version_enabled_and_action",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_git_checkpoint_reconstructs_binary_layers_and_deletions",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_partial_git_root_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_path_escape_metadata_and_secrets_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_plain_checkpoint_restore_and_source_preserved",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_restore_requires_independent_empty_destination",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_store_guard_is_reentrant_and_process_exclusive",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_store_persists_without_replaying_history",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_symlink_detection_portable_negative_path",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_symlink_escape_rejected",
-          "outcome": "SKIP",
-          "reason": "Host cannot create symlinks; native junction test remains separate."
-        },
-        {
-          "test": "test_core.CoreTests.test_task_pause_is_retained_not_actionable",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_unsupported_schema_does_not_silently_downgrade",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_core.CoreTests.test_windows_junction_escape_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_actionable_record_without_identity_fails_instead_of_disappearing",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_added_failure_changes_fingerprint_and_appears_first",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_change_beyond_first_page_invalidates_cursor_and_changes_fingerprint",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_changed_relevant_predecessor_is_not_mistaken_for_unrelated_history",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_corrupt_database_is_reported_not_replaced_or_hidden",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_cumulative_projection_selects_current_leaf_without_mutating_history",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_cursor_cannot_cross_project_identity",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_database_removed_after_open_is_not_recreated_by_read",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_experience_is_a_conditioned_suggestion_not_an_executed_recovery",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_interrupted_receipt_tracks_baseline_and_protects_source_binding",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_large_history_does_not_fill_or_change_the_current_agenda",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_limit_and_page_do_not_change_whole_input_fingerprint",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_observation_timestamp_alone_is_not_new_work",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_pages_cover_every_current_item_without_a_persisted_cursor",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_paused_and_waiting_tasks_are_retained_without_becoming_backlog",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_read_connections_cannot_write_records",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_reading_missing_project_never_initializes_it",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_status_and_agenda_do_not_change_records_events_or_work_files",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_status_reads_one_snapshot_while_another_connection_commits",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_strict_limits_and_cursor_inputs",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_current_view.CurrentViewTests.test_unknown_and_review_operations_precede_stages_and_artifacts",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_complete_quoted_paths_and_standalone_lines_are_allowed",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_only_named_tutorial_resources_allow_the_synthetic_root",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_other_roots_and_escapes_remain_rejected",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_product_document_links_resolve_inside_the_download",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_quoted_paths_are_checked_in_full_including_spaces_and_parentheses",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_reviewed_image_cannot_be_replaced_or_allow_other_binary_assets",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_secret_and_private_token_screens_still_apply_to_tutorial",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_example_release_screen.ExampleReleaseScreenTests.test_unquoted_paths_cannot_allow_a_truncated_prefix",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_interrupted_effect_uses_existing_experience_without_duplicate_commit",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_project_skill_refresh_preserves_business_layers_and_task_memory",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_three_workspaces_keep_pause_and_receive_latest_plus_independent",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_ancestor_dependencies_and_pagination_match_legacy_selection",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_failed_upgrade_rolls_back_projection_and_remains_readable",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_history_growth_does_not_load_terminal_rows_or_plans",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_index_updates_on_terminal_reopen_and_artifact_decision_changes",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_legacy_reads_and_reinitialize_do_not_install_projection",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_older_writer_invalidates_projection_and_readonly_fallback_finds_work",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_incremental_view.IncrementalViewTests.test_upgrade_preserves_old_and_new_evidence_and_is_idempotent",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.AdoptTests.test_adoption_preserves_local_commits_and_all_git_layers",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.AdoptTests.test_interrupted_adoption_resumes_exact_stash",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.AdoptTests.test_staged_change_cancelled_in_worktree_is_still_backed_up",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.AdoptTests.test_wip_conflict_retains_original_state",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_binary_and_deletion_receive",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_conflict_does_not_block_independent_delivery",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_cumulative_after_received_uses_previous_source_base",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_cumulative_latest_replaces_unreceived_stages",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_exact_manifest_rejects_omitted_file",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_fault_disabled_outside_marked_tests",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_interruption_and_experience_recovery_without_duplicate_effect",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_local_commit_without_submit_is_not_backlog",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_mutable_workspace_does_not_change_frozen_delivery",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_outdated_experience_does_not_authorize_recovery",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_stale_plan_and_baseline_wip_preserved",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_three_version_chain_retires_all_historical_pending",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_true_integration_and_idempotent_receipt",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_integration.ReceiveTests.test_unrelated_task_cannot_be_superseded",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.CliSubprocessTests.test_invalid_json_and_action_have_machine_readable_errors",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.CliSubprocessTests.test_real_engine_roundtrip_in_independent_processes",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.CliSubprocessTests.test_setup_input_file_and_mutually_exclusive_inputs",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_bad_json_does_not_corrupt_next_frame",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_fixed_root_and_unicode_tool_result",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_malformed_schema_values_do_not_reach_engine",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_notification_cannot_mutate_and_unknown_tool_is_rpc_error",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_old_version_omits_structured_results",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_oversized_frame_is_bounded",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_project_override_and_fault_injection_are_not_tools",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_requires_initialize_and_rejects_unknown_method",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_session_negotiation_and_typed_tools",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.ProtocolTests.test_tool_failure_is_not_protocol_failure",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_generated_fragment_launches_real_subprocess_from_other_directory",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_install_preserves_user_configuration_and_is_idempotent",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_manifest_cannot_authorize_deleting_arbitrary_project_file",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_preview_is_read_only",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
-          "outcome": "SKIP",
-          "reason": "Host cannot create a directory symlink"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_uninstall_preserves_changed_skills_and_project_files",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_interfaces.SetupTests.test_unmanaged_destination_conflict_causes_no_install",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_changed_condition_cannot_reuse_old_resolution",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_changed_record_requires_cas_and_retains_history",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_different_fix_version_remains_recorded_without_blocking_work",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_forged_version_label_alone_cannot_claim_adoption",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_identical_issue_and_fix_do_not_add_empty_events",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_issue_and_fix_events_fail_atomically",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_real_project_setup_matches_disk_but_not_host_reload",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_maintenance.MaintenanceTests.test_resolution_and_fix_require_named_evidence",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_receipt_transactions.ReceiptTransactionTests.test_adopt_event_failure_preserves_wip_and_finalizes_without_replay",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_receipt_transactions.ReceiptTransactionTests.test_legacy_untagged_plan_and_operation_continue",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_receipt_transactions.ReceiptTransactionTests.test_receive_event_failure_retains_effect_and_retries_only_receipt",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_receipt_transactions.ReceiptTransactionTests.test_unknown_plan_protocol_rejected_without_git_effect",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_receipt_transactions.ReceiptTransactionTests.test_unknown_resume_protocol_keeps_real_effect_unreplayed",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_recovery_advice.RecoveryAdviceTests.test_advice_prepares_a_call_but_does_not_mutate",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_recovery_advice.RecoveryAdviceTests.test_missing_or_mismatched_plan_remains_evidence_gap",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_recovery_advice.RecoveryAdviceTests.test_possible_effect_never_suggests_a_replacement_plan",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_recovery_advice.RecoveryAdviceTests.test_rule_scope_and_version_are_checked_before_advice",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
-          "outcome": "SKIP",
-          "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
-        },
-        {
-          "test": "test_release_contract.PublicApiContractTests.test_bad_initialization_name_does_not_create_state",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.PublicApiContractTests.test_non_object_arguments_are_rejected_even_when_falsy",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.PublicApiContractTests.test_registered_workspace_checkpoint_uses_exact_registered_path",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.PublicApiContractTests.test_string_enabled_does_not_store_an_enabled_rule",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.PublicApiContractTests.test_string_execute_cannot_advance_a_real_baseline",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.PublicApiContractTests.test_string_pause_is_rejected_before_checkpoint_or_task_change",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_changed_disk_source_does_not_claim_loaded_code_or_upgrade",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_changed_generated_candidate_cannot_resume_pending_install",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_changed_package_version_cannot_resume_pending_install",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_copied_intent_does_not_authorize_another_project",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_crash_after_manifest_only_removes_completed_intent",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_crash_before_manifest_only_records_completed_files_on_resume",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_diagnostic_detects_user_changes_without_writing",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_diagnostic_fingerprint_attests_disk_not_loaded_process_code",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_explicit_rename_updates_only_the_fragment",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_fresh_preview_and_diagnostics_create_no_metadata",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_interrupted_update_keeps_the_existing_installation_identity",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_invalid_intent_is_reported_without_repair",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_invalid_names_cannot_create_configuration",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_legacy_manifest_upgrade_preserves_files_and_then_is_idempotent",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_manifest_change_during_pending_install_is_not_overwritten",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_modified_completed_file_is_preserved_and_not_adopted",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_package_changes_during_install_leave_a_pending_record",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_pending_install_cannot_switch_server_name_or_uninstall",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_pending_preview_and_diagnostics_are_read_only",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_repeated_install_writes_no_identical_bytes",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_resume_after_file_effect_does_not_rewrite_completed_file",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_server_names_persist_and_keep_two_projects_distinct",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_source_read_failure_is_a_specific_read_only_diagnostic",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_unmanaged_file_equal_to_release_is_still_not_owned",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_setup_recovery.SetupRecoveryTests.test_user_write_after_intent_is_not_overwritten",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_cli_uses_explicit_isolated_root",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_empty_control_is_reused_without_assigning_tasks",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_existing_target_refuses_before_other_writes",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_interruption_keeps_evidence_and_rejects_retry",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_invalid_arguments_do_not_create_a_root",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_missing_git_does_not_create_root",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_nonempty_control_including_governance_state_is_preserved",
-          "outcome": "PASS"
-        },
-        {
-          "test": "test_windows_quickstart.WindowsQuickstartTests.test_optional_one_and_five_workers_need_explicit_task_registration",
-          "outcome": "PASS"
+      "python": "3.12.10",
+      "validation": {
+        "full_before_split_metadata": {
+          "recorded_at": "2026-11-03T22:46:55.149183+00:00",
+          "source_sha256": "1a5f47e1f2fc151e8449fff36da8a8f13e9072a8c69b00487113d7021e2e12e8",
+          "tests_run": 228,
+          "passed": 224,
+          "skipped": 4,
+          "failures": 0,
+          "errors": 0,
+          "successful": true,
+          "skips": [
+            {
+              "test": "test_core.CoreTests.test_symlink_escape_rejected",
+              "outcome": "SKIP",
+              "reason": "Host cannot create symlinks; native junction test remains separate."
+            },
+            {
+              "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+              "outcome": "SKIP",
+              "reason": "Host cannot create a directory symlink"
+            },
+            {
+              "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
+              "outcome": "SKIP",
+              "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
+            },
+            {
+              "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
+              "outcome": "SKIP",
+              "reason": "Opt in to the independent source build with TASKCARRY_TEST_SOURCE_BUILD=1"
+            }
+          ],
+          "optional_git_tests": [
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
+              "outcome": "PASS"
+            }
+          ]
+        },
+        "final_targeted": {
+          "recorded_at": "2026-11-03T22:47:28.651853+00:00",
+          "source_sha256": "8af0e27a48fba39f737e492180267e23c506f295c43bb8a3c829dbd403a1f4a1",
+          "tests_run": 58,
+          "passed": 56,
+          "skipped": 2,
+          "failures": 0,
+          "errors": 0,
+          "successful": true,
+          "skips": [
+            {
+              "test": "test_core.CoreTests.test_symlink_escape_rejected",
+              "outcome": "SKIP",
+              "reason": "Host cannot create symlinks; native junction test remains separate."
+            },
+            {
+              "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+              "outcome": "SKIP",
+              "reason": "Host cannot create a directory symlink"
+            }
+          ],
+          "optional_git_tests": [
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_commondir_filename_alone_does_not_require_git",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
+              "outcome": "PASS"
+            },
+            {
+              "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_split_metadata_with_commondir_cannot_be_saved_as_plain_files",
+              "outcome": "PASS"
+            }
+          ]
         }
+      },
+      "verification_mapping": "The complete suite predates only the HEAD+commondir detection addition and its two tests. The final targeted run includes all optional-Git, Core, atomic-store and CLI/MCP interface tests on the final core.py SHA256.",
+      "not_verified": [
+        "new wheel or sdist build",
+        "final RC6 package installation",
+        "cross-platform CI for this source stage",
+        "native host loading of this source stage"
+      ],
+      "remaining_work": [
+        "restore post-effect receipt recovery",
+        "remaining full RC6 B1 onboarding, workspace binding and documentation scope"
       ]
     },
-    "installed_wheel": {
-      "schema": "taskcarry.installed-wheel-evidence.v1",
-      "wheel": "taskcarry-0.2.0rc5-py3-none-any.whl",
-      "tests_run": 1,
-      "failures": 0,
-      "errors": 0,
-      "skipped": 0,
-      "successful": true
-    },
-    "product_walkthrough": {
-      "version": "0.2.0rc5",
-      "checks": [
-        "archive paths are unique and confined",
-        "manifest exactly names the product",
-        "all product member hashes match",
-        "product excludes maintenance receipts and test payloads",
-        "active product text has no old brand",
-        "imports come from installed wheel",
-        "installed console command exists",
-        "installed console command runs",
-        "CLI status returns success",
-        "fresh setup invents no tasks or deliveries",
-        "three registered specialist workspaces",
-        "four installed Skills carry the new names",
-        "generated MCP command actually starts",
-        "MCP advertises TaskCarry rc5",
-        "MCP tools use new prefix",
-        "fresh MCP agenda is empty",
-        "CLI task returns success",
-        "CLI submit returns success",
-        "CLI submit returns success",
-        "CLI checkpoint returns success",
-        "CLI task returns success",
-        "CLI submit returns success",
-        "CLI reconcile returns success",
-        "bounded plan selects only latest cumulative form stage",
-        "synthetic interruption actually occurred",
-        "Git effect exists before receipt recovery",
-        "CLI reconcile returns success",
-        "existing recovery experience finishes the receipt",
-        "recovery produces no duplicate Git effect",
-        "CLI reconcile returns success",
-        "repeat execution reuses completed plan",
-        "CLI reconcile returns success",
-        "independent delivery remains for next batch",
-        "CLI reconcile returns success",
-        "later independent delivery received",
-        "original unfinished specialist bytes preserved",
-        "CLI restore returns success",
-        "saved unfinished checkpoint restores",
-        "CLI adopt returns success",
-        "CLI adopt returns success",
-        "workspace update receives accepted work",
-        "workspace update preserves local draft",
-        "CLI status returns success",
-        "latest accepted and historical stage superseded",
-        "paused task stays paused",
-        "CLI reconcile returns success",
-        "no delivery backlog from paused work",
-        "CLI observe returns success",
-        "installed observation freezes linked evidence",
-        "CLI run returns success",
-        "CLI run returns success",
-        "installed round confirms selected receipts only",
-        "CLI issue returns success",
-        "CLI agenda returns success",
-        "installed issue is visible to current governance",
-        "CLI fix returns success",
-        "installed fix compares genuine setup evidence",
-        "CLI issue returns success",
-        "CLI agenda returns success",
-        "resolved issue no longer repeats as pending",
-        "CLI upgrade returns success",
-        "fresh index needs no migration"
-      ],
-      "scope": "final ZIP, isolated installed wheel, CLI, stdio MCP and synthetic Git workspaces",
-      "native_host_or_schedule_tested": false,
-      "successful": true,
-      "check_count": 62
-    },
-    "ai_guided_synthetic_rehearsal": {
-      "validation": "AI-guided forward Skill rehearsal using synthetic local Git materials and public API/CLI",
-      "overall": "PASS",
-      "checks": {
-        "only_declared_stage_received": true,
-        "injected_interruption_observed": true,
-        "unfinished_run_was_retained": true,
-        "experience_was_used_by_executor": true,
-        "recovery_did_not_repeat_git_effect": true,
-        "one_integration_commit": true,
-        "one_stage_received_event": true,
-        "one_experience_applied_event": true,
-        "run_completed_only_selected_scope": true,
-        "guide_remains_paused": true,
-        "guide_checkpoint_remains": true,
-        "guide_and_unsubmitted_wip_unchanged": true,
-        "paused_state_not_new_backlog": true,
-        "observation_reused_without_new_revision": true,
-        "run_reused_without_new_finished_event": true,
-        "no_artificial_maintenance_issue_or_fix": true,
-        "business_task_not_implicitly_complete": true
+    "rc6_dev1": {
+      "product": "TaskCarry",
+      "version": "0.2.0rc6.dev1",
+      "status": "local_development_candidate_not_published",
+      "source_suite": {
+        "schema": "taskcarry.test-evidence.v1",
+        "recorded_at": "2026-11-02T09:38:35.282498+00:00",
+        "platform": "Windows",
+        "python": "3.12.10",
+        "tests_run": 216,
+        "passed": 214,
+        "skipped": 2,
+        "failures": 0,
+        "errors": 0,
+        "successful": true,
+        "tests": [
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_adoption_does_not_overwrite_an_ignored_local_artifact",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_does_not_convert_untracked_lf_bytes_during_adoption",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_preserves_distinct_staged_and_worktree_bytes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_recovery_never_overwrites_new_user_content",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_invalid_execute_does_not_claim_an_integration_baseline",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_latest_cumulative_conflict_never_falls_back_to_older_delivery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_legacy_conflict_can_be_closed_by_verified_cumulative_successor",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_oversized_deleted_blob_rejected_from_original_tree",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_oversized_new_blob_rejected_before_delivery_record",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_private_scratch_root_cannot_be_redirected_by_junction",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_same_sha_branch_switch_after_plan_is_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_same_sha_branch_switch_during_candidate_preparation_is_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_second_baseline_cannot_reuse_first_baseline_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_three_stage_chain_after_first_accepted_has_no_historical_backlog",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_untracked_file_under_in_tree_junction_is_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_artifact_event_failure_cannot_leave_an_unrecorded_decision",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_checkpoint_event_failure_keeps_task_and_source_then_retry_succeeds",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_experience_event_failure_preserves_previous_rule",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_guard_preserves_effect_journal_when_external_operation_raises",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_nested_savepoint_reads_own_writes_and_inner_failure_isolated",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_task_event_failure_rolls_back_fact_and_retry_publishes_one_event",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_actual_preparation_failure_is_visible_after_reopening_and_reuses_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_changed_baseline_can_reuse_unchanged_wip_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_changed_target_requires_new_plan_and_success_retains_resolves_old_failure",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_interruption_before_candidate_can_resume_preparation",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_invalid_or_stale_plan_does_not_create_failure_records",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_transient_preparation_failure_retries_same_plan_without_repeating_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_default_twenty_and_explicit_limit_bound_actual_intake",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_empty_old_plan_reports_new_queued_work_without_executing_it",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_invalid_limits_do_not_create_plans_or_operations",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_legacy_plan_without_selection_still_executes_its_exact_scope",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_only_selected_recovery_operation_is_resumed",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_pending_operations_change_plan_identity_and_do_not_double_count_stage",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityGitTests.test_receipt_interruption_run_closeout_and_experience_recovery_preserve_effect",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityGitTests.test_received_operation_stays_complete_after_cumulative_stage",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityGitTests.test_run_closes_after_successor_adoption_resolves_old_preparation",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_adoption_replacement_cycle_is_not_a_completion",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_adoption_replacement_requires_same_scope_and_reciprocal_link",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_artifact_content_change_changes_evidence_even_if_host_revision_reused",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_changed_observation_is_visible_without_replaying_completed_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_changed_observation_requires_cas_and_retains_prior_source",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_empty_selection_is_explicit_and_does_not_complete_active_task",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_finished_selection_does_not_imply_all_project_work_complete",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_inspect_is_readonly_and_missing_run_is_not_created",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_invalid_observation_fields_and_duplicate_relations_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_legacy_partial_stage_receipt_does_not_hide_unfinished_operation",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_observation_event_failure_rolls_back_current_and_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_observation_identity_cannot_move_to_another_source_or_task",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_observation_is_durable_and_identical_retry_writes_no_event",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_operation_completion_requires_matching_receipt_not_status_only",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_pending_work_blocks_only_selected_closeout_and_no_repeat_event",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_run_selection_cannot_change_or_claim_missing_records",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_run_start_and_finish_are_atomic_when_event_write_fails",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_transitive_supersession_resolves_history_with_real_successor_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_unknown_or_cross_task_workspace_relations_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_cli_and_mcp_share_index_upgrade_and_run_inspection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_issue_reaches_agenda_then_resolved_evidence_leaves_current_selection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_unfinished_run_reads_only_its_observation_dependencies",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_artifact_backup_verified_by_bytes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_artifact_decision_is_bound_to_content",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_corrupt_snapshot_fails_before_destination_write",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_current_view_excludes_terminal_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_current_view_shows_cumulative_leaf_without_forging_old_terminal_state",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_experience_scope_version_enabled_and_action",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_git_checkpoint_reconstructs_binary_layers_and_deletions",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_partial_git_root_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_path_escape_metadata_and_secrets_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_plain_checkpoint_restore_and_source_preserved",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_restore_requires_independent_empty_destination",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_store_guard_is_reentrant_and_process_exclusive",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_store_persists_without_replaying_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_symlink_detection_portable_negative_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_symlink_escape_rejected",
+            "outcome": "SKIP",
+            "reason": "Host cannot create symlinks; native junction test remains separate."
+          },
+          {
+            "test": "test_core.CoreTests.test_task_pause_is_retained_not_actionable",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_unsupported_schema_does_not_silently_downgrade",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_windows_junction_escape_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_actionable_record_without_identity_fails_instead_of_disappearing",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_added_failure_changes_fingerprint_and_appears_first",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_change_beyond_first_page_invalidates_cursor_and_changes_fingerprint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_changed_relevant_predecessor_is_not_mistaken_for_unrelated_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_corrupt_database_is_reported_not_replaced_or_hidden",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_cumulative_projection_selects_current_leaf_without_mutating_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_cursor_cannot_cross_project_identity",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_database_removed_after_open_is_not_recreated_by_read",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_experience_is_a_conditioned_suggestion_not_an_executed_recovery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_interrupted_receipt_tracks_baseline_and_protects_source_binding",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_large_history_does_not_fill_or_change_the_current_agenda",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_limit_and_page_do_not_change_whole_input_fingerprint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_observation_timestamp_alone_is_not_new_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_pages_cover_every_current_item_without_a_persisted_cursor",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_paused_and_waiting_tasks_are_retained_without_becoming_backlog",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_read_connections_cannot_write_records",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_reading_missing_project_never_initializes_it",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_status_and_agenda_do_not_change_records_events_or_work_files",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_status_reads_one_snapshot_while_another_connection_commits",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_strict_limits_and_cursor_inputs",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_unknown_and_review_operations_precede_stages_and_artifacts",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_complete_quoted_paths_and_standalone_lines_are_allowed",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_only_named_tutorial_resources_allow_the_synthetic_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_other_roots_and_escapes_remain_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_product_document_links_resolve_inside_the_download",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_quoted_paths_are_checked_in_full_including_spaces_and_parentheses",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_reviewed_image_cannot_be_replaced_or_allow_other_binary_assets",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_secret_and_private_token_screens_still_apply_to_tutorial",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_unquoted_paths_cannot_allow_a_truncated_prefix",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_interrupted_effect_uses_existing_experience_without_duplicate_commit",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_project_skill_refresh_preserves_business_layers_and_task_memory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_three_workspaces_keep_pause_and_receive_latest_plus_independent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_ancestor_dependencies_and_pagination_match_legacy_selection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_failed_upgrade_rolls_back_projection_and_remains_readable",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_history_growth_does_not_load_terminal_rows_or_plans",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_index_updates_on_terminal_reopen_and_artifact_decision_changes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_legacy_reads_and_reinitialize_do_not_install_projection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_older_writer_invalidates_projection_and_readonly_fallback_finds_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_upgrade_preserves_old_and_new_evidence_and_is_idempotent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_adoption_preserves_local_commits_and_all_git_layers",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_interrupted_adoption_resumes_exact_stash",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_staged_change_cancelled_in_worktree_is_still_backed_up",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_wip_conflict_retains_original_state",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_binary_and_deletion_receive",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_conflict_does_not_block_independent_delivery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_cumulative_after_received_uses_previous_source_base",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_cumulative_latest_replaces_unreceived_stages",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_exact_manifest_rejects_omitted_file",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_fault_disabled_outside_marked_tests",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_interruption_and_experience_recovery_without_duplicate_effect",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_local_commit_without_submit_is_not_backlog",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_mutable_workspace_does_not_change_frozen_delivery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_outdated_experience_does_not_authorize_recovery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_stale_plan_and_baseline_wip_preserved",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_three_version_chain_retires_all_historical_pending",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_true_integration_and_idempotent_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_unrelated_task_cannot_be_superseded",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.CliSubprocessTests.test_invalid_json_and_action_have_machine_readable_errors",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.CliSubprocessTests.test_real_engine_roundtrip_in_independent_processes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.CliSubprocessTests.test_setup_input_file_and_mutually_exclusive_inputs",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_bad_json_does_not_corrupt_next_frame",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_fixed_root_and_unicode_tool_result",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_malformed_schema_values_do_not_reach_engine",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_notification_cannot_mutate_and_unknown_tool_is_rpc_error",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_old_version_omits_structured_results",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_oversized_frame_is_bounded",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_project_override_and_fault_injection_are_not_tools",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_requires_initialize_and_rejects_unknown_method",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_session_negotiation_and_typed_tools",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_tool_failure_is_not_protocol_failure",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_generated_fragment_launches_real_subprocess_from_other_directory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_install_preserves_user_configuration_and_is_idempotent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_manifest_cannot_authorize_deleting_arbitrary_project_file",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_preview_is_read_only",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+            "outcome": "SKIP",
+            "reason": "Host cannot create a directory symlink"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_uninstall_preserves_changed_skills_and_project_files",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_unmanaged_destination_conflict_causes_no_install",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_changed_condition_cannot_reuse_old_resolution",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_changed_record_requires_cas_and_retains_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_different_fix_version_remains_recorded_without_blocking_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_forged_version_label_alone_cannot_claim_adoption",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_identical_issue_and_fix_do_not_add_empty_events",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_issue_and_fix_events_fail_atomically",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_real_project_setup_matches_disk_but_not_host_reload",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_resolution_and_fix_require_named_evidence",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_adopt_event_failure_preserves_wip_and_finalizes_without_replay",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_legacy_untagged_plan_and_operation_continue",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_receive_event_failure_retains_effect_and_retries_only_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_unknown_plan_protocol_rejected_without_git_effect",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_unknown_resume_protocol_keeps_real_effect_unreplayed",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_advice_prepares_a_call_but_does_not_mutate",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_missing_or_mismatched_plan_remains_evidence_gap",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_possible_effect_never_suggests_a_replacement_plan",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_rule_scope_and_version_are_checked_before_advice",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_bad_initialization_name_does_not_create_state",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_non_object_arguments_are_rejected_even_when_falsy",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_registered_workspace_checkpoint_uses_exact_registered_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_string_enabled_does_not_store_an_enabled_rule",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_string_execute_cannot_advance_a_real_baseline",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_string_pause_is_rejected_before_checkpoint_or_task_change",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_launch.SetupLaunchTests.test_legacy_fragment_upgrade_preserves_identity_user_config_and_replay",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_launch.SetupLaunchTests.test_missing_selected_package_fails_without_falling_back_to_checkout",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_launch.SetupLaunchTests.test_modified_legacy_fragment_is_preserved_without_adoption",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_launch.SetupLaunchTests.test_source_launch_ignores_cwd_and_environment_and_preserves_unicode",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_launch.SetupLaunchTests.test_upgrade_interruption_resumes_receipt_without_rewriting_fragment",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_changed_disk_source_does_not_claim_loaded_code_or_upgrade",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_changed_generated_candidate_cannot_resume_pending_install",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_changed_package_version_cannot_resume_pending_install",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_copied_intent_does_not_authorize_another_project",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_crash_after_manifest_only_removes_completed_intent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_crash_before_manifest_only_records_completed_files_on_resume",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_diagnostic_detects_user_changes_without_writing",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_diagnostic_fingerprint_attests_disk_not_loaded_process_code",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_explicit_rename_updates_only_the_fragment",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_fresh_preview_and_diagnostics_create_no_metadata",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_interrupted_update_keeps_the_existing_installation_identity",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_invalid_intent_is_reported_without_repair",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_invalid_names_cannot_create_configuration",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_legacy_manifest_upgrade_preserves_files_and_then_is_idempotent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_manifest_change_during_pending_install_is_not_overwritten",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_modified_completed_file_is_preserved_and_not_adopted",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_package_changes_during_install_leave_a_pending_record",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_pending_install_cannot_switch_server_name_or_uninstall",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_pending_preview_and_diagnostics_are_read_only",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_repeated_install_writes_no_identical_bytes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_resume_after_file_effect_does_not_rewrite_completed_file",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_server_names_persist_and_keep_two_projects_distinct",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_source_read_failure_is_a_specific_read_only_diagnostic",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_unmanaged_file_equal_to_release_is_still_not_owned",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_user_write_after_intent_is_not_overwritten",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_cli_uses_explicit_isolated_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_empty_control_is_reused_without_assigning_tasks",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_existing_target_refuses_before_other_writes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_interruption_keeps_evidence_and_rejects_retry",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_invalid_arguments_do_not_create_a_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_missing_git_does_not_create_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_nonempty_control_including_governance_state_is_preserved",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_optional_one_and_five_workers_need_explicit_task_registration",
+            "outcome": "PASS"
+          }
+        ]
       },
-      "check_count": 17,
-      "version_at_scaffold": "0.2.0rc4",
-      "version_at_final_read": "0.2.0rc5",
-      "runtime": "development source candidate; not an installed wheel or native host MCP session"
+      "installed_wheel": {
+        "schema": "taskcarry.installed-wheel-evidence.v1",
+        "wheel": "taskcarry-0.2.0rc6.dev1-py3-none-any.whl",
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "successful": true
+      },
+      "legacy_upgrade": {
+        "synthetic_only": true,
+        "from_version": "0.2.0rc5",
+        "to_version": "0.2.0rc6.dev1",
+        "old_wheel_sha256": "d00f74637f2e7724a38e7e16d91ec1fdc60b7d68c5849a725411cfd6b95385c4",
+        "new_wheel_sha256": "9f0368668653a9dad1c6109c1cb4d2b58233492886e5f5749f57cd80e9aac945",
+        "files_updated": 2,
+        "repeated_writes": 0,
+        "installation_identity_preserved": true,
+        "user_config_preserved": true,
+        "task_state_preserved": true,
+        "generated_mcp_from_source_cwd_uses_new_wheel": true,
+        "native_host_tested": false
+      },
+      "candidate_package": {
+        "version": "0.2.0rc6.dev1",
+        "payloads": 91,
+        "manifest_hashes_match": true,
+        "current_product_source_bytes_match": true,
+        "wheel": {
+          "verified_package_files": 17,
+          "skill_count": 4,
+          "membership_and_hashes_match": true
+        },
+        "screening": {
+          "screened_files": 133,
+          "findings": [],
+          "scope": "allowlist, host paths, caller deny tokens, common secret patterns; manual scope review remains required"
+        },
+        "documents_checked": 50,
+        "missing_local_links": [],
+        "archives": [
+          {
+            "name": "taskcarry-0.2.0rc6.dev1-product.zip",
+            "sha256": "61f087bd78014e95854fd2a3a27a43559d86dde2d86beb627a262f14c78b603f"
+          },
+          {
+            "name": "taskcarry-0.2.0rc6.dev1-py3-none-any.whl",
+            "sha256": "9f0368668653a9dad1c6109c1cb4d2b58233492886e5f5749f57cd80e9aac945"
+          }
+        ]
+      },
+      "environment_correction": {
+        "initial_tests": 216,
+        "initial_passed": 210,
+        "initial_errors": 4,
+        "initial_skipped": 2,
+        "cause": "Plain-directory fixtures created within the source Git worktree inherited its repository root.",
+        "resolution": "Reran the full suite in an explicitly assigned external synthetic sandbox; no product guard relaxed."
+      },
+      "known_followups": [
+        "Plain-directory checkpoint still requires Git to be executable.",
+        "Restore target effects can survive an event-write failure; retry to the same nonempty target is refused."
+      ],
+      "native_host_verified": false,
+      "natural_automation_verified": false,
+      "new_cross_platform_ci_verified": false
     },
-    "skill_format_validation": {
-      "count": 4,
-      "successful": true
-    },
-    "not_verified": [
-      "native AI-host activation",
-      "real scheduled triggers",
-      "physical multi-computer takeover",
-      "independent-user usability"
-    ],
-    "cross_platform": "See the Actions run for the exact release commit; local results alone do not verify every operating system."
+    "rc5": {
+      "product": "TaskCarry",
+      "version": "0.2.0rc5",
+      "source_suite": {
+        "schema": "taskcarry.test-evidence.v1",
+        "recorded_at": "2026-10-28T07:51:00.382595+00:00",
+        "platform": "Windows",
+        "python": "3.12.14",
+        "tests_run": 211,
+        "passed": 208,
+        "skipped": 3,
+        "failures": 0,
+        "errors": 0,
+        "successful": true,
+        "tests": [
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_adoption_does_not_overwrite_an_ignored_local_artifact",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_does_not_convert_untracked_lf_bytes_during_adoption",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_preserves_distinct_staged_and_worktree_bytes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_autocrlf_recovery_never_overwrites_new_user_content",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_invalid_execute_does_not_claim_an_integration_baseline",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_latest_cumulative_conflict_never_falls_back_to_older_delivery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_legacy_conflict_can_be_closed_by_verified_cumulative_successor",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_oversized_deleted_blob_rejected_from_original_tree",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_oversized_new_blob_rejected_before_delivery_record",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_private_scratch_root_cannot_be_redirected_by_junction",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_same_sha_branch_switch_after_plan_is_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_same_sha_branch_switch_during_candidate_preparation_is_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_second_baseline_cannot_reuse_first_baseline_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_three_stage_chain_after_first_accepted_has_no_historical_backlog",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_adversarial.AdversarialGovernanceTests.test_untracked_file_under_in_tree_junction_is_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_artifact_event_failure_cannot_leave_an_unrecorded_decision",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_checkpoint_event_failure_keeps_task_and_source_then_retry_succeeds",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_experience_event_failure_preserves_previous_rule",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_guard_preserves_effect_journal_when_external_operation_raises",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_nested_savepoint_reads_own_writes_and_inner_failure_isolated",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_atomic_store.AtomicStoreTests.test_task_event_failure_rolls_back_fact_and_retry_publishes_one_event",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_actual_preparation_failure_is_visible_after_reopening_and_reuses_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_changed_baseline_can_reuse_unchanged_wip_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_changed_target_requires_new_plan_and_success_retains_resolves_old_failure",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_interruption_before_candidate_can_resume_preparation",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_invalid_or_stale_plan_does_not_create_failure_records",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.AdoptionPreparationTests.test_transient_preparation_failure_retries_same_plan_without_repeating_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_default_twenty_and_explicit_limit_bound_actual_intake",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_empty_old_plan_reports_new_queued_work_without_executing_it",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_invalid_limits_do_not_create_plans_or_operations",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_legacy_plan_without_selection_still_executes_its_exact_scope",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_only_selected_recovery_operation_is_resumed",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_bounded_integration.BoundedReceiveTests.test_pending_operations_change_plan_identity_and_do_not_double_count_stage",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityGitTests.test_receipt_interruption_run_closeout_and_experience_recovery_preserve_effect",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityGitTests.test_received_operation_stays_complete_after_cumulative_stage",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityGitTests.test_run_closes_after_successor_adoption_resolves_old_preparation",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_adoption_replacement_cycle_is_not_a_completion",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_adoption_replacement_requires_same_scope_and_reciprocal_link",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_artifact_content_change_changes_evidence_even_if_host_revision_reused",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_changed_observation_is_visible_without_replaying_completed_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_changed_observation_requires_cas_and_retains_prior_source",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_empty_selection_is_explicit_and_does_not_complete_active_task",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_finished_selection_does_not_imply_all_project_work_complete",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_inspect_is_readonly_and_missing_run_is_not_created",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_invalid_observation_fields_and_duplicate_relations_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_legacy_partial_stage_receipt_does_not_hide_unfinished_operation",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_observation_event_failure_rolls_back_current_and_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_observation_identity_cannot_move_to_another_source_or_task",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_observation_is_durable_and_identical_retry_writes_no_event",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_operation_completion_requires_matching_receipt_not_status_only",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_pending_work_blocks_only_selected_closeout_and_no_repeat_event",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_run_selection_cannot_change_or_claim_missing_records",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_run_start_and_finish_are_atomic_when_event_write_fails",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_transitive_supersession_resolves_history_with_real_successor_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity.ContinuityTests.test_unknown_or_cross_task_workspace_relations_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_cli_and_mcp_share_index_upgrade_and_run_inspection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_issue_reaches_agenda_then_resolved_evidence_leaves_current_selection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_continuity_interfaces.ContinuityInterfaceTests.test_unfinished_run_reads_only_its_observation_dependencies",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_artifact_backup_verified_by_bytes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_artifact_decision_is_bound_to_content",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_corrupt_snapshot_fails_before_destination_write",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_current_view_excludes_terminal_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_current_view_shows_cumulative_leaf_without_forging_old_terminal_state",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_experience_scope_version_enabled_and_action",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_git_checkpoint_reconstructs_binary_layers_and_deletions",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_partial_git_root_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_path_escape_metadata_and_secrets_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_plain_checkpoint_restore_and_source_preserved",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_restore_requires_independent_empty_destination",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_store_guard_is_reentrant_and_process_exclusive",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_store_persists_without_replaying_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_symlink_detection_portable_negative_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_symlink_escape_rejected",
+            "outcome": "SKIP",
+            "reason": "Host cannot create symlinks; native junction test remains separate."
+          },
+          {
+            "test": "test_core.CoreTests.test_task_pause_is_retained_not_actionable",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_unsupported_schema_does_not_silently_downgrade",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_core.CoreTests.test_windows_junction_escape_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_actionable_record_without_identity_fails_instead_of_disappearing",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_added_failure_changes_fingerprint_and_appears_first",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_change_beyond_first_page_invalidates_cursor_and_changes_fingerprint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_changed_relevant_predecessor_is_not_mistaken_for_unrelated_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_corrupt_database_is_reported_not_replaced_or_hidden",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_cumulative_projection_selects_current_leaf_without_mutating_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_cursor_cannot_cross_project_identity",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_database_removed_after_open_is_not_recreated_by_read",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_experience_is_a_conditioned_suggestion_not_an_executed_recovery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_interrupted_receipt_tracks_baseline_and_protects_source_binding",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_large_history_does_not_fill_or_change_the_current_agenda",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_limit_and_page_do_not_change_whole_input_fingerprint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_observation_timestamp_alone_is_not_new_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_pages_cover_every_current_item_without_a_persisted_cursor",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_paused_and_waiting_tasks_are_retained_without_becoming_backlog",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_read_connections_cannot_write_records",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_reading_missing_project_never_initializes_it",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_status_and_agenda_do_not_change_records_events_or_work_files",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_status_reads_one_snapshot_while_another_connection_commits",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_strict_limits_and_cursor_inputs",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_current_view.CurrentViewTests.test_unknown_and_review_operations_precede_stages_and_artifacts",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_complete_quoted_paths_and_standalone_lines_are_allowed",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_only_named_tutorial_resources_allow_the_synthetic_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_other_roots_and_escapes_remain_rejected",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_product_document_links_resolve_inside_the_download",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_quoted_paths_are_checked_in_full_including_spaces_and_parentheses",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_reviewed_image_cannot_be_replaced_or_allow_other_binary_assets",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_secret_and_private_token_screens_still_apply_to_tutorial",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_example_release_screen.ExampleReleaseScreenTests.test_unquoted_paths_cannot_allow_a_truncated_prefix",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_interrupted_effect_uses_existing_experience_without_duplicate_commit",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_project_skill_refresh_preserves_business_layers_and_task_memory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_three_workspaces_keep_pause_and_receive_latest_plus_independent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_ancestor_dependencies_and_pagination_match_legacy_selection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_failed_upgrade_rolls_back_projection_and_remains_readable",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_history_growth_does_not_load_terminal_rows_or_plans",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_index_updates_on_terminal_reopen_and_artifact_decision_changes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_legacy_reads_and_reinitialize_do_not_install_projection",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_older_writer_invalidates_projection_and_readonly_fallback_finds_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_incremental_view.IncrementalViewTests.test_upgrade_preserves_old_and_new_evidence_and_is_idempotent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_adoption_preserves_local_commits_and_all_git_layers",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_interrupted_adoption_resumes_exact_stash",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_staged_change_cancelled_in_worktree_is_still_backed_up",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.AdoptTests.test_wip_conflict_retains_original_state",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_binary_and_deletion_receive",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_conflict_does_not_block_independent_delivery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_cumulative_after_received_uses_previous_source_base",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_cumulative_latest_replaces_unreceived_stages",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_exact_manifest_rejects_omitted_file",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_fault_disabled_outside_marked_tests",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_interruption_and_experience_recovery_without_duplicate_effect",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_local_commit_without_submit_is_not_backlog",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_mutable_workspace_does_not_change_frozen_delivery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_outdated_experience_does_not_authorize_recovery",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_stale_plan_and_baseline_wip_preserved",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_three_version_chain_retires_all_historical_pending",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_true_integration_and_idempotent_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_integration.ReceiveTests.test_unrelated_task_cannot_be_superseded",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.CliSubprocessTests.test_invalid_json_and_action_have_machine_readable_errors",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.CliSubprocessTests.test_real_engine_roundtrip_in_independent_processes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.CliSubprocessTests.test_setup_input_file_and_mutually_exclusive_inputs",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_bad_json_does_not_corrupt_next_frame",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_fixed_root_and_unicode_tool_result",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_malformed_schema_values_do_not_reach_engine",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_notification_cannot_mutate_and_unknown_tool_is_rpc_error",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_old_version_omits_structured_results",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_oversized_frame_is_bounded",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_project_override_and_fault_injection_are_not_tools",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_requires_initialize_and_rejects_unknown_method",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_session_negotiation_and_typed_tools",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.ProtocolTests.test_tool_failure_is_not_protocol_failure",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_generated_fragment_launches_real_subprocess_from_other_directory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_install_preserves_user_configuration_and_is_idempotent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_manifest_cannot_authorize_deleting_arbitrary_project_file",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_preview_is_read_only",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+            "outcome": "SKIP",
+            "reason": "Host cannot create a directory symlink"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_uninstall_preserves_changed_skills_and_project_files",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_unmanaged_destination_conflict_causes_no_install",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_changed_condition_cannot_reuse_old_resolution",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_changed_record_requires_cas_and_retains_history",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_different_fix_version_remains_recorded_without_blocking_work",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_forged_version_label_alone_cannot_claim_adoption",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_identical_issue_and_fix_do_not_add_empty_events",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_issue_and_fix_events_fail_atomically",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_real_project_setup_matches_disk_but_not_host_reload",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_maintenance.MaintenanceTests.test_resolution_and_fix_require_named_evidence",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_adopt_event_failure_preserves_wip_and_finalizes_without_replay",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_legacy_untagged_plan_and_operation_continue",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_receive_event_failure_retains_effect_and_retries_only_receipt",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_unknown_plan_protocol_rejected_without_git_effect",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_receipt_transactions.ReceiptTransactionTests.test_unknown_resume_protocol_keeps_real_effect_unreplayed",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_advice_prepares_a_call_but_does_not_mutate",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_missing_or_mismatched_plan_remains_evidence_gap",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_possible_effect_never_suggests_a_replacement_plan",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_recovery_advice.RecoveryAdviceTests.test_rule_scope_and_version_are_checked_before_advice",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
+            "outcome": "SKIP",
+            "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_bad_initialization_name_does_not_create_state",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_non_object_arguments_are_rejected_even_when_falsy",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_registered_workspace_checkpoint_uses_exact_registered_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_string_enabled_does_not_store_an_enabled_rule",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_string_execute_cannot_advance_a_real_baseline",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.PublicApiContractTests.test_string_pause_is_rejected_before_checkpoint_or_task_change",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_changed_disk_source_does_not_claim_loaded_code_or_upgrade",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_changed_generated_candidate_cannot_resume_pending_install",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_changed_package_version_cannot_resume_pending_install",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_copied_intent_does_not_authorize_another_project",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_crash_after_manifest_only_removes_completed_intent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_crash_before_manifest_only_records_completed_files_on_resume",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_diagnostic_detects_user_changes_without_writing",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_diagnostic_fingerprint_attests_disk_not_loaded_process_code",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_explicit_rename_updates_only_the_fragment",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_fresh_preview_and_diagnostics_create_no_metadata",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_interrupted_update_keeps_the_existing_installation_identity",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_invalid_intent_is_reported_without_repair",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_invalid_names_cannot_create_configuration",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_legacy_manifest_upgrade_preserves_files_and_then_is_idempotent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_manifest_change_during_pending_install_is_not_overwritten",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_modified_completed_file_is_preserved_and_not_adopted",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_package_changes_during_install_leave_a_pending_record",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_pending_install_cannot_switch_server_name_or_uninstall",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_pending_preview_and_diagnostics_are_read_only",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_repeated_install_writes_no_identical_bytes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_resume_after_file_effect_does_not_rewrite_completed_file",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_server_names_persist_and_keep_two_projects_distinct",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_source_read_failure_is_a_specific_read_only_diagnostic",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_unmanaged_file_equal_to_release_is_still_not_owned",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_setup_recovery.SetupRecoveryTests.test_user_write_after_intent_is_not_overwritten",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_cli_uses_explicit_isolated_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_empty_control_is_reused_without_assigning_tasks",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_existing_target_refuses_before_other_writes",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_interruption_keeps_evidence_and_rejects_retry",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_invalid_arguments_do_not_create_a_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_missing_git_does_not_create_root",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_nonempty_control_including_governance_state_is_preserved",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_windows_quickstart.WindowsQuickstartTests.test_optional_one_and_five_workers_need_explicit_task_registration",
+            "outcome": "PASS"
+          }
+        ]
+      },
+      "installed_wheel": {
+        "schema": "taskcarry.installed-wheel-evidence.v1",
+        "wheel": "taskcarry-0.2.0rc5-py3-none-any.whl",
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "successful": true
+      },
+      "product_walkthrough": {
+        "version": "0.2.0rc5",
+        "checks": [
+          "archive paths are unique and confined",
+          "manifest exactly names the product",
+          "all product member hashes match",
+          "product excludes maintenance receipts and test payloads",
+          "active product text has no old brand",
+          "imports come from installed wheel",
+          "installed console command exists",
+          "installed console command runs",
+          "CLI status returns success",
+          "fresh setup invents no tasks or deliveries",
+          "three registered specialist workspaces",
+          "four installed Skills carry the new names",
+          "generated MCP command actually starts",
+          "MCP advertises TaskCarry rc5",
+          "MCP tools use new prefix",
+          "fresh MCP agenda is empty",
+          "CLI task returns success",
+          "CLI submit returns success",
+          "CLI submit returns success",
+          "CLI checkpoint returns success",
+          "CLI task returns success",
+          "CLI submit returns success",
+          "CLI reconcile returns success",
+          "bounded plan selects only latest cumulative form stage",
+          "synthetic interruption actually occurred",
+          "Git effect exists before receipt recovery",
+          "CLI reconcile returns success",
+          "existing recovery experience finishes the receipt",
+          "recovery produces no duplicate Git effect",
+          "CLI reconcile returns success",
+          "repeat execution reuses completed plan",
+          "CLI reconcile returns success",
+          "independent delivery remains for next batch",
+          "CLI reconcile returns success",
+          "later independent delivery received",
+          "original unfinished specialist bytes preserved",
+          "CLI restore returns success",
+          "saved unfinished checkpoint restores",
+          "CLI adopt returns success",
+          "CLI adopt returns success",
+          "workspace update receives accepted work",
+          "workspace update preserves local draft",
+          "CLI status returns success",
+          "latest accepted and historical stage superseded",
+          "paused task stays paused",
+          "CLI reconcile returns success",
+          "no delivery backlog from paused work",
+          "CLI observe returns success",
+          "installed observation freezes linked evidence",
+          "CLI run returns success",
+          "CLI run returns success",
+          "installed round confirms selected receipts only",
+          "CLI issue returns success",
+          "CLI agenda returns success",
+          "installed issue is visible to current governance",
+          "CLI fix returns success",
+          "installed fix compares genuine setup evidence",
+          "CLI issue returns success",
+          "CLI agenda returns success",
+          "resolved issue no longer repeats as pending",
+          "CLI upgrade returns success",
+          "fresh index needs no migration"
+        ],
+        "scope": "final ZIP, isolated installed wheel, CLI, stdio MCP and synthetic Git workspaces",
+        "native_host_or_schedule_tested": false,
+        "successful": true,
+        "check_count": 62
+      },
+      "ai_guided_synthetic_rehearsal": {
+        "validation": "AI-guided forward Skill rehearsal using synthetic local Git materials and public API/CLI",
+        "overall": "PASS",
+        "checks": {
+          "only_declared_stage_received": true,
+          "injected_interruption_observed": true,
+          "unfinished_run_was_retained": true,
+          "experience_was_used_by_executor": true,
+          "recovery_did_not_repeat_git_effect": true,
+          "one_integration_commit": true,
+          "one_stage_received_event": true,
+          "one_experience_applied_event": true,
+          "run_completed_only_selected_scope": true,
+          "guide_remains_paused": true,
+          "guide_checkpoint_remains": true,
+          "guide_and_unsubmitted_wip_unchanged": true,
+          "paused_state_not_new_backlog": true,
+          "observation_reused_without_new_revision": true,
+          "run_reused_without_new_finished_event": true,
+          "no_artificial_maintenance_issue_or_fix": true,
+          "business_task_not_implicitly_complete": true
+        },
+        "check_count": 17,
+        "version_at_scaffold": "0.2.0rc4",
+        "version_at_final_read": "0.2.0rc5",
+        "runtime": "development source candidate; not an installed wheel or native host MCP session"
+      },
+      "skill_format_validation": {
+        "count": 4,
+        "successful": true
+      },
+      "not_verified": [
+        "native AI-host activation",
+        "real scheduled triggers",
+        "physical multi-computer takeover",
+        "independent-user usability"
+      ],
+      "cross_platform": "See the Actions run for the exact release commit; local results alone do not verify every operating system."
+    }
   }
 }

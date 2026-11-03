@@ -28,6 +28,7 @@ REVIEWED_BINARY_ASSETS = {
 }
 EXCLUDED = {"__pycache__", ".taskcarry", ".venv", ".git", "node_modules", "dist", "build", "local"}
 SKILLS = {"taskcarry-project-setup", "taskcarry-task-delivery", "taskcarry-governance-reconcile", "taskcarry-experience-recovery"}
+SKILL_REFERENCES = {"taskcarry-project-setup/references/onboarding.md"}
 REQUIRED = {"docs/VALIDATION.md", "docs/VALIDATION_RESULTS.json", "README.md", "README.zh-CN.md", "README.zh-TW.md", "LICENSE", "LICENSE_SCOPE.md", "pyproject.toml", "setup.py"}
 # Deliberately invalid path in a public traversal-rejection test fixture.
 SYNTHETIC_ABSOLUTE_LITERALS = {"C:/outside.txt"}
@@ -35,8 +36,11 @@ SYNTHETIC_ABSOLUTE_LITERALS = {"C:/outside.txt"}
 # This does not permit real user paths, traversal, another drive, or secrets.
 SYNTHETIC_EXAMPLE_FILES = {
     "docs/en/windows-example.md", "docs/zh-CN/windows-example.md", "docs/zh-TW/windows-example.md",
+    "docs/en/manual-setup.md", "docs/zh-CN/manual-setup.md", "docs/zh-TW/manual-setup.md",
     "examples/windows_quickstart/bootstrap.py",
 }
+REQUIRED.update({f"docs/{language}/manual-setup.md" for language in ("en", "zh-CN", "zh-TW")})
+REQUIRED.update({"skills/" + name for name in SKILL_REFERENCES})
 # The documented fresh-install example must be runnable from the archive.
 REQUIRED.update({"examples/quality_forms/fixture/requirements.md",
                  "examples/quality_forms/fixture/forms/inspection.csv",
@@ -145,6 +149,8 @@ def snapshot(deny_tokens=()):
         raise RuntimeError("The release must contain the four reviewed public skills")
     for skill in sorted(SKILLS):
         contents[f"taskcarry/skill_data/{skill}/SKILL.md"] = contents[f"skills/{skill}/SKILL.md"]
+    for resource in sorted(SKILL_REFERENCES):
+        contents["taskcarry/skill_data/" + resource] = contents["skills/" + resource]
     screening = screen_content(contents, deny_tokens)
     return contents, screening
 
@@ -208,6 +214,10 @@ def product_contents(contents):
                 "examples/windows_quickstart/bootstrap.py"}
     if not required.issubset(result):
         raise RuntimeError("Product package needs complete project onboarding documentation")
+    if not {f"docs/{language}/manual-setup.md" for language in ("en", "zh-CN", "zh-TW")}.issubset(result):
+        raise RuntimeError("Product package needs the three manual fallback guides")
+    if not {"skills/" + name for name in SKILL_REFERENCES}.issubset(result):
+        raise RuntimeError("Product package needs the public onboarding skill references")
     return result
 
 

@@ -10,6 +10,8 @@ TaskCarry gives AI-assisted projects a local record of progress and results. It 
 
 ### Everyday use
 
+The RC6 candidate adds one guided onboarding conversation for an existing Codex project. Establish or reuse its governance chat, preserve existing responsibilities and decisions, and choose whether it also coordinates the project. Other work chats remain usable directly. Generated workbench files bind a registered Git workspace and task to the existing control; native host loading and calls remain separate acceptance steps. Plain document checkpoints can work without Git, while Git workspace registration and delivery still require Git.
+
 - Keep one receiving baseline per control scope and separate registered workspaces for parallel tasks. CLI and MCP call the same tools for saved progress, stage collection, workspace updates, and supported recovery.
 - Preserve unfinished work without marking it complete. A checkpoint captures selected files already saved to disk; it does not capture unsaved editor buffers or all conversation history.
 - Review plans before collecting stages or updating workspaces. Supported local commits, staged changes, working-file changes, and new files are preserved during updates; specific conflicts need attention.
@@ -42,6 +44,8 @@ TaskCarry 为 AI 辅助项目提供本地进度与成果记录。它把任务记
 
 ### 日常可以怎样用
 
+RC6 候选把已有 Codex 项目的接入合并为一段连续对话：建立或复用治理窗口，继承原分工和决定，由用户选择是否同时承担项目协调。其他工作聊天仍可直接使用。生成的工作台材料将已登记 Git 工作区和任务绑定到原 control，宿主加载与原生调用另行验收。普通文档检查点可不依赖 Git；Git 工作区登记和成果交付仍需要 Git。
+
 - 每个治理范围保留一条接收基线，并为并行任务登记独立工作区。CLI 与 MCP 调用同一套保存进度、汇总阶段、更新工作区和已知恢复工具。
 - 保留未完成工作，不必把它标成完成。检查点保存选定且已经写入磁盘的文件，不包含编辑器未保存内容或全部聊天历史。
 - 汇总阶段或更新工作区前先检查计划。更新会保全支持范围内的本地提交、暂存修改、工作文件修改和新文件；具体冲突需单独处理。
@@ -73,6 +77,8 @@ MCP 要在你使用的 AI 宿主中接通，并实际调用工具确认。CLI �
 TaskCarry 為 AI 輔助專案提供本機進度與成果記錄。它把任務記錄、選定且已儲存的檔案、Git 歷史與治理對話接起來，讓工作可以暫停、按階段貢獻成果，再從原位置繼續。目前操作手冊使用 Codex 示範這套流程。
 
 ### 日常可以如何使用
+
+RC6 候選將已有 Codex 專案的接入合併為一段連續對話：建立或重用治理視窗，繼承原分工和決定，由使用者選擇是否同時承擔專案協調。其他工作對話仍可直接使用。產生的工作台材料將已登記 Git 工作區與任務綁定至原 control，宿主載入與原生呼叫另行驗收。一般文件檢查點可不依賴 Git；Git 工作區登記與成果交付仍需要 Git。
 
 - 每個治理範圍保留一條接收基線，並為並行任務登記獨立工作區。CLI 與 MCP 呼叫同一套儲存進度、彙整階段、更新工作區及已知恢復工具。
 - 保留未完成工作，不必將它標為完成。檢查點儲存選定且已寫入磁碟的檔案，不包含編輯器未儲存的內容或全部對話歷史。

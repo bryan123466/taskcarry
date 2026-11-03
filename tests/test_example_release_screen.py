@@ -31,6 +31,7 @@ class ExampleReleaseScreenTests(unittest.TestCase):
     def test_only_named_tutorial_resources_allow_the_synthetic_root(self):
         root = "C:" + "/TaskCarry"
         for name in ("docs/en/windows-example.md", "docs/zh-CN/windows-example.md", "docs/zh-TW/windows-example.md",
+                     "docs/en/manual-setup.md", "docs/zh-CN/manual-setup.md", "docs/zh-TW/manual-setup.md",
                      "examples/windows_quickstart/bootstrap.py"):
             for path in (root, root + "/runtime/Scripts/python.exe", root + "/control/"):
                 with self.subTest(name=name, path=path):

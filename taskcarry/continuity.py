@@ -203,6 +203,21 @@ class Continuity(Core):
             if operation.get('effect_state') == 'VERIFIED' and operation.get('candidate'):
                 return True, None
             return False, 'RECEIPT_INCOMPLETE'
+        if operation.get('kind') == 'restore':
+            receipt = load('restore_receipts', identity)
+            checkpoint = load('checkpoints', operation.get('checkpoint_id', ''))
+            fields = ('operation_id', 'checkpoint_id', 'checkpoint_sha256', 'destination', 'effect_sha256')
+            if (any(type(operation.get(key)) is not int or operation[key] != 1
+                    for key in ('operation_protocol', 'restore_protocol'))
+                    or operation.get('effect_state') != 'VERIFIED'
+                    or not receipt or receipt.get('verified') is not True
+                    or not checkpoint or checkpoint.get('task_id') != operation.get('task_id')
+                    or Core._restore_digest(checkpoint) != operation.get('checkpoint_sha256')
+                    or any(not operation.get(field) or receipt.get(field) != operation[field] for field in fields)):
+                return False, 'RECEIPT_INCOMPLETE'
+            # This closes a selected recorded operation, not a fresh claim
+            # that the restored destination remains unchanged today.
+            return True, None
         return False, 'OPERATION_KIND_UNSUPPORTED'
 
     def _inspection(self, record, load):

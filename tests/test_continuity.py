@@ -194,6 +194,37 @@ class ContinuityTests(unittest.TestCase):
         self.stage('draft', status='COMMITTED', accepted_commit='synthetic-accepted')
         self.assertTrue(self.core.run('morning', mode='finish')['inspection']['selected_complete'])
 
+    def test_restore_run_requires_matching_durable_receipt(self):
+        source = self.project.parent / 'plain-documents'
+        source.mkdir()
+        (source / 'notes.md').write_text('Synthetic existing project\n', encoding='utf-8')
+        checkpoint = self.core.checkpoint('forms', str(source), ['notes.md'], 'Continue the existing project')
+        target = self.project.parent / 'restored-documents'
+        result = self.core.restore(checkpoint['checkpoint_id'], str(target))
+        identity = result['operation_id']
+        self.core.run('restore-round', operation_ids=[identity])
+        receipt = self.store.get('restore_receipts', identity)
+        operation = self.store.get('operations', identity)
+        for change in ({'verified': False}, {'destination': 'different-target'},
+                       {'effect_sha256': 'different-effect'}, {'checkpoint_id': 'different-checkpoint'}):
+            with self.subTest(change=change):
+                self.store.put('restore_receipts', identity, {**receipt, **change})
+                inspected = self.core.run('restore-round', mode='inspect')['inspection']
+                self.assertFalse(inspected['selected_complete'])
+                self.assertEqual('RECEIPT_INCOMPLETE', inspected['pending'][0]['reason'])
+        self.store.put('restore_receipts', identity, receipt)
+        self.store.put('operations', identity, {**operation, 'restore_protocol': 99})
+        self.assertFalse(self.core.run('restore-round', mode='inspect')['inspection']['selected_complete'])
+        self.store.put('operations', identity, operation)
+        # A later edit is not an unfinished historical operation. run only
+        # checks durable receipts and must not rewrite the target or source.
+        (target / 'notes.md').write_text('Later user work\n', encoding='utf-8')
+        finished = self.core.run('restore-round', mode='finish')
+        self.assertEqual('COMPLETED', finished['run']['state'])
+        self.assertFalse(finished['inspection']['effects_executed'])
+        self.assertEqual('Later user work\n', (target / 'notes.md').read_text(encoding='utf-8'))
+        self.assertEqual('Synthetic existing project\n', (source / 'notes.md').read_text(encoding='utf-8'))
+
     def test_transitive_supersession_resolves_history_with_real_successor_receipt(self):
         self.stage('draft', status='SUPERSEDED', successor='release')
         self.stage('revision', status='SUPERSEDED', successor='release', supersedes=['draft'])

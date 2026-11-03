@@ -25,7 +25,7 @@ DESCRIPTIONS = {
     "doctor": "Read runtime prerequisites and project support; no installation or repair.",
     "task": "Create or update a task's retained current state. This does not declare a delivery.",
     "checkpoint": "Save exact files and Git work layers for later continuation; not a submission.",
-    "restore": "Restore an immutable checkpoint into an empty independent directory, preserving the original.",
+    "restore": "Restore into an empty independent directory, or verify the same recorded destination and finish its missing receipt without replaying effects. Preserve the original and later user changes.",
     "artifact": "Register content identity, task relationship, optional verified backup and decision.",
     "experience": "Register a conditional recovery rule from the fixed allowed actions; no executable shell.",
     "workspace": "Register an existing local Git workspace for bounded governance operations.",

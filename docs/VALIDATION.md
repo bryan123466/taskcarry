@@ -1,3 +1,29 @@
+# TaskCarry 0.2.0rc6.dev1 — local candidate validation
+
+This is an unpublished development candidate. Windows / Python 3.12.10: **216 tests, 214 passed, 2 skipped, 0 failures or errors**. Both skips require unavailable symlink permissions. The full run explicitly enabled standard wheel/sdist build and the actual candidate wheel contract. The final rebuilt wheel also passed its independent installed-wheel contract (1 test). No governance installation was upgraded.
+
+Real MCP subprocess regressions cover source and other working directories, conflicting Python import/encoding environment variables, Unicode, selected package disappearance, legacy fragment updates, user-file preservation, idempotence and interrupted-update recovery. A synthetic project upgraded from the original rc5 wheel to the final candidate: exactly two managed files changed (setup Skill and MCP fragment); installation identity, task state and user config were preserved; repeat install wrote nothing; MCP launched from source cwd loaded the new wheel.
+
+The final product archive has 91 manifest payloads plus the manifest, with matching hashes and current product-source bytes. The wheel's 17 package files and four Skills match the allowlist; 50 Markdown/HTML documents have no missing local link targets. Release screening found no findings. Exact candidate hashes and portable results are in [VALIDATION_RESULTS.json](VALIDATION_RESULTS.json).
+
+The initial full run placed temporary plain-directory fixtures inside the source Git worktree: 210 passed, 4 encountered the intended Git-root guard, and 2 skipped. Those failure records were retained privately. The complete suite was rerun in a dedicated external synthetic sandbox; the product guard was not relaxed.
+
+Separate audit follow-ups remain: a plain-directory checkpoint still requires an executable Git, and a restore whose final event write fails leaves target effects but cannot resume its receipt in the same nonempty target. This candidate addresses launch selection, not those recovery contracts. Native host activation, natural scheduled runs, new cross-platform CI, physical multi-computer use and independent-user acceptance were not tested for this candidate. The historical rc5 evidence below is retained with its original version and scope.
+
+## 简体中文：本地候选
+
+本候选未发布、未安装到正式治理环境。Windows / Python 3.12.10 完整测试216项：214通过、2项因符号链接权限跳过、0失败/错误；已启用标准wheel/sdist和真实候选wheel测试，最终重建包的独立安装合同另有1项通过。真实MCP覆盖源码cwd、环境污染、中文、缺包失败和旧安装保全；原始rc5 wheel到最终候选的合成更新只写2份管理文件，身份/任务/用户配置保留，重复0写。最终产品包91个payload逐项hash匹配，50份文档链接无缺失。
+
+首轮仓库内临时目录使4个普通目录场景触发Git根保护；失败证据保留，完整重跑改用专属外部合成沙箱，未放宽产品保护。无Git普通checkpoint及restore效果后事件失败的接续缺口另列后续，未混称已修复。本候选原生宿主、自然自动化及新跨平台CI未验收。下方保留rc5历史验证时点。
+
+## 繁體中文：本機候選
+
+本候選未發布、未安裝至正式治理環境。Windows / Python 3.12.10 完整測試216項：214通過、2項因符號連結權限跳過、0失敗/錯誤；已啟用標準wheel/sdist及實際候選wheel測試，最終重建套件的獨立安裝合同另有1項通過。實際MCP涵蓋原始碼cwd、環境污染、中文、缺包失敗與舊安裝保全；原始rc5 wheel至最終候選的合成更新僅寫2份管理檔案，身分/任務/使用者設定保留，重複0寫。最終產品套件91個payload逐項hash相符，50份文件連結無缺失。
+
+首輪倉庫內暫存目錄使4個普通目錄情境觸發Git根保護；失敗證據保留，完整重跑改用專屬外部合成沙箱，未放寬產品保護。無Git普通checkpoint與restore效果後事件失敗的接續缺口另列後續，未混稱已修復。本候選原生宿主、自然自動化及新跨平台CI尚未驗收。下方保留rc5歷史驗證時點。
+
+---
+
 # TaskCarry 0.2.0rc5 — validation
 
 [English](#english) · [简体中文](#简体中文) · [繁體中文](#繁體中文)

@@ -196,7 +196,7 @@ if (@($taskcarryWheel).Count -ne 1) { throw '产品 packages 目录应只有一�
 
 ```text
 請為 `C:/TaskCarry/control` 設定專案級 TaskCarry MCP，使用 `C:/TaskCarry/runtime/Scripts/python.exe`。
-先核對安裝結果和本專案 setup 生成的 .taskcarry/codex.mcp.toml，將其中 TaskCarry 服務設定合併到 `C:/TaskCarry/control/.codex/config.toml`；保留現有其他設定，不更改使用者全局設定。該服務啟動指令應綁定 -m taskcarry --project 和這個唯一 control，再啟動 mcp 子指令。
+先核對安裝結果和本專案 setup 生成的 .taskcarry/codex.mcp.toml，將其中 TaskCarry 服務設定合併到 `C:/TaskCarry/control/.codex/config.toml`；保留現有其他設定，不更改使用者全局設定。保留生成片段中的隔離 UTF-8 啟動參數與明確套件路徑；它通過 --project 綁定這個唯一 control，再啟動 mcp 子指令。
 如當前專案尚未獲得 Codex 信任，或需要重新開啟對話/重載設定，告訴我具體一步。完成後實際呼叫 taskcarry_doctor 和 taskcarry_status，確認工具可用且指向本專案；僅生成設定檔案不算已經連接。
 如果本視窗不能設定或尚未載入工具，保留現有 CLI 工作方式，並明確還缺哪一步。其他專業視窗若要使用 MCP，需要各自設定同一 control；預設先通過 CLI 接入即可。
 ```
@@ -204,8 +204,8 @@ if (@($taskcarryWheel).Count -ne 1) { throw '产品 packages 目录应只有一�
 CLI 後備可以直接執行：
 
 ```powershell
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -m taskcarry --project 'C:/TaskCarry/control' status
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -m taskcarry --project 'C:/TaskCarry/control' doctor
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' status
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor
 ```
 
 MCP 的專案設定、信任與載入方式以所用 Codex 版本為準，參考 [Codex 官方 MCP 文件](https://learn.chatgpt.com/docs/extend/mcp)。

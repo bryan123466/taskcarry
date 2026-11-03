@@ -190,7 +190,7 @@ class SetupTests(unittest.TestCase):
         configure(self.root, mode="install")
         config = tomllib.loads((self.root / ".taskcarry/codex.mcp.toml").read_text(encoding="utf-8"))["mcp_servers"]["taskcarry"]
         environment = os.environ.copy()
-        environment.update(config["env"])
+        environment.update(config.get("env", {}))
         frames = "\n".join(json.dumps(item) for item in [initialize(), request("tools/list", request_id=2)]) + "\n"
         process = subprocess.run([config["command"], *config["args"]], input=frames, text=True, encoding="utf-8", capture_output=True, cwd=self.root, env=environment, timeout=20)
         self.assertEqual(process.returncode, 0, process.stderr)

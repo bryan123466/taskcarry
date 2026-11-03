@@ -196,7 +196,7 @@ Paste into the governance chat:
 
 ```text
 Please configure project-scoped TaskCarry MCP for `C:/TaskCarry/control` using `C:/TaskCarry/runtime/Scripts/python.exe`.
-First check the installation and this project's setup-generated .taskcarry/codex.mcp.toml. Merge its TaskCarry server configuration into `C:/TaskCarry/control/.codex/config.toml`, preserving other existing settings and leaving user-global configuration unchanged. The server command should bind -m taskcarry --project to this one control directory, followed by the mcp subcommand.
+First check the installation and this project's setup-generated .taskcarry/codex.mcp.toml. Merge its TaskCarry server configuration into `C:/TaskCarry/control/.codex/config.toml`, preserving other existing settings and leaving user-global configuration unchanged. Retain the generated isolated UTF-8 launcher and its explicit package path; it binds --project to this one control directory and starts the mcp subcommand.
 If Codex does not yet trust this project, or the chat must be reopened or configuration reloaded, tell me the specific step. Then actually call taskcarry_doctor and taskcarry_status to confirm that the tools are available and point to this project. Generating a configuration file alone does not prove connection.
 If this chat cannot configure the connection or has not loaded the tools, preserve the CLI workflow and state exactly what remains. Other professional chats need their own configuration pointing to the same control if they want MCP; using the CLI is the default starting route for them.
 ```
@@ -204,8 +204,8 @@ If this chat cannot configure the connection or has not loaded the tools, preser
 The CLI fallback can be run directly:
 
 ```powershell
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -m taskcarry --project 'C:/TaskCarry/control' status
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -m taskcarry --project 'C:/TaskCarry/control' doctor
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' status
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor
 ```
 
 Project configuration, trust, and loading behavior depend on the Codex version in use. See the [official Codex MCP documentation](https://learn.chatgpt.com/docs/extend/mcp).

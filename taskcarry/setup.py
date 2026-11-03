@@ -62,24 +62,42 @@ def validate_server_name(value):
     return value
 
 
+def mcp_launch_args(root):
+    """Pin the selected installation (or explicit source checkout), not cwd.
+
+    Isolated mode ignores PYTHONPATH and user site packages. The explicit path
+    also supports unpacked/source development without an editable installation.
+    If that package disappears, fail rather than fall back to another copy.
+    """
+    package_parent = Path(__file__).resolve().parent.parent
+    bootstrap = (
+        "import importlib.util, pathlib, runpy, sys\n"
+        "root = pathlib.Path(sys.argv.pop(1)).resolve()\n"
+        "sys.path.insert(0, str(root))\n"
+        "spec = importlib.util.find_spec('taskcarry')\n"
+        "if spec is None or spec.origin is None or pathlib.Path(spec.origin).resolve() != root / 'taskcarry' / '__init__.py':\n"
+        "    raise SystemExit('Selected TaskCarry package is unavailable; regenerate setup with the intended runtime')\n"
+        "runpy.run_module('taskcarry', run_name='__main__', alter_sys=True)\n"
+    )
+    return ["-I", "-X", "utf8", "-c", bootstrap, str(package_parent),
+            "--project", str(root), "mcp"]
+
+
 def planned_files(root, server_name="taskcarry"):
     server_name = validate_server_name(server_name)
     files = {}
     for source in skill_sources():
         files[f".agents/skills/{source.parent.name}/SKILL.md"] = source.read_bytes()
-    package_parent = Path(__file__).resolve().parent.parent
     quote = lambda value: json.dumps(str(value), ensure_ascii=False)
-    args = ["-m", "taskcarry", "--project", str(root), "mcp"]
+    args = mcp_launch_args(root)
     fragment = (
         "# Generated project-specific MCP fragment. This is NOT loaded automatically.\n"
         "# Review and add this section to the appropriate Codex configuration.\n"
         "# Do not copy this fragment to another machine: regenerate it there.\n"
+        "# Isolated UTF-8 startup pins the package selected during setup.\n"
         f"[mcp_servers.{server_name}]\n"
         f"command = {quote(sys.executable)}\n"
         f"args = {json.dumps(args, ensure_ascii=False)}\n"
-        f"\n[mcp_servers.{server_name}.env]\n"
-        f"PYTHONPATH = {quote(package_parent)}\n"
-        "PYTHONUTF8 = \"1\"\n"
     )
     files[".taskcarry/codex.mcp.toml"] = fragment.encode("utf-8")
     return files

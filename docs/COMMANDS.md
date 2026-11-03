@@ -65,8 +65,26 @@ Observation `relations` contain objects with `kind: stage` or `kind: artifact` a
 
 New plans and operations carry `operation_protocol: 1`. Untagged earlier records follow the compatible version-one contract; unsupported future protocols are rejected before continuing the selected operations. Tool version tags alone are not authorization to replay an effect.
 
-See `python -m taskcarry --help` and MCP `tools/list` for the installed version's exact interface. Fault-injection controls are for explicitly marked synthetic test projects only; they are not a supported production recovery method. 参数以已安装版本帮助和工具列表为准；故障注入只用于明确标记的合成项目。
+See `python -I -X utf8 -m taskcarry --help` and MCP `tools/list` for the installed version's exact interface. Fault-injection controls are for explicitly marked synthetic test projects only; they are not a supported production recovery method. 参数以已安装版本帮助和工具列表为准；故障注入只用于明确标记的合成项目。
 
 `setup` is CLI-only: `mode` is `preview`, `install`, or `uninstall`; optional `server_name` selects a distinct MCP service name and is retained for later setup calls. Setup changes project-managed Skills and the generated configuration fragment, not live Codex configuration or business Git branches. A frozen pending install resumes only when its candidate and exact file evidence remain valid. `doctor.runtime` reports the package imported by the current process and managed setup state. See [maintenance and upgrades](en/governance-maintenance.md).
+
+Workbench setup additionally accepts `target`, `workspace` and `task_id` together. `--project` remains the existing control. The target must match the registered Git workspace's current identity and the task must already exist in that control. Preview verifies the registration and lists files without writing them; install uses the same preservation and resumable-intent machinery as ordinary setup. It copies the four Skills and their public Markdown references, generates the MCP fragment and `.taskcarry/workbench.json` / `.taskcarry/workbench.md`, and creates no target governance database. A different binding or another existing target control is rejected. Repeat the same complete binding arguments to resume; do not initialize a second control. Uninstall removes only unchanged managed files and keeps user edits and live host configuration.
+
+```json
+{
+  "mode": "preview",
+  "target": "<registered-workbench-directory>",
+  "workspace": "existing-workspace",
+  "task_id": "existing-task",
+  "server_name": "project_memory"
+}
+```
+
+Results include `control`, `target`, `workspace`, `task_id`, `registration_verified`, `connection_state` and `next_steps`. `connection_state.materials` distinguishes preview, generated files and removal; `host_loading` and `native_acceptance` remain `not_verified`. They must be verified in the actual target chat. Neither generating these files nor a standalone MCP subprocess creates a chat or proves native host loading. Ordinary non-Git checkpoint use remains available by explicit path; workbench registration/delivery still use the Git contract.
+
+专业工作台接入同时传入 `target`、`workspace`、`task_id`，`--project` 仍指原 control。目标须匹配已登记 Git 工作区的当前身份，任务须已存在。预览只核对，安装复用文件保全与中断续办机制，复制四 Skills 及公开引用，并生成 MCP 片段、工作台 JSON/说明，不创建第二份治理库。重复使用相同完整绑定参数续办；身份冲突或目标已有其他 control 时拒绝。返回实际绑定、材料状态和下一步；宿主加载与原生验收保持未核验，须在目标窗口实调，不能以生成文件代替。卸载保留用户修改与已启用的宿主配置。
+
+專業工作台接入須同時傳入 `target`、`workspace`、`task_id`，`--project` 仍指原 control。目標須符合已登記 Git 工作區的目前身分，任務須已存在。預覽只核對，安裝重用檔案保全與中斷續辦機制，複製四 Skills 及公開引用，產生 MCP 片段與工作台說明，不建立第二份治理庫。同一完整綁定可續辦；身分衝突或已有其他 control 時拒絕。回傳實際綁定、材料狀態與下一步，宿主載入及原生驗收須在目標視窗另行實測。移除時保留使用者修改與已啟用的宿主設定。
 
 `setup` 仅通过 CLI 配置，支持 `mode` 和可选 `server_name`。安装中断后，在相同候选和精确文件证据仍有效时接续；实际文件有独立修改时保留现场。它不修改已启用的 Codex 配置或业务分支。`doctor.runtime` 区分当前进程导入的版本和项目接入状态，不能替代其他进程的实际加载验证。详见[维护与升级](zh-CN/governance-maintenance.md)。

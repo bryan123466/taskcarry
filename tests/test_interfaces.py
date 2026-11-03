@@ -144,7 +144,9 @@ class SetupTests(unittest.TestCase):
     def test_preview_is_read_only(self):
         result = configure(self.root)
         self.assertEqual(result["mode"], "preview")
-        self.assertEqual(len(result["files"]), 5)
+        self.assertEqual(len(result["files"]), 6)
+        self.assertIn(".agents/skills/taskcarry-project-setup/references/onboarding.md",
+                      [row["path"] for row in result["files"]])
         self.assertFalse(result["conflicts"])
         self.assertEqual(list(self.root.iterdir()), [])
 

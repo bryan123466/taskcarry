@@ -83,11 +83,35 @@ def mcp_launch_args(root):
             "--project", str(root), "mcp"]
 
 
-def planned_files(root, server_name="taskcarry"):
-    server_name = validate_server_name(server_name)
+def skill_files():
+    """Copy the four public skills and their explicitly scoped Markdown references."""
     files = {}
     for source in skill_sources():
-        files[f".agents/skills/{source.parent.name}/SKILL.md"] = source.read_bytes()
+        base = source.parent
+        if is_link(base):
+            raise SetupError("SETUP_LINK", "Skill directories cannot be links")
+        paths = [source]
+        references = base / "references"
+        if is_link(references):
+            raise SetupError("SETUP_LINK", "Skill references cannot be links")
+        if references.exists():
+            if not references.is_dir():
+                raise SetupError("SKILLS_NOT_PACKAGED", "Skill references must be a directory")
+            for path in sorted(references.rglob("*")):
+                if is_link(path):
+                    raise SetupError("SETUP_LINK", "Skill references cannot contain links")
+                if path.is_file() and path.suffix == ".md":
+                    paths.append(path)
+        for path in paths:
+            relative = path.relative_to(base).as_posix()
+            safe_target(base, relative)
+            files[f".agents/skills/{base.name}/{relative}"] = path.read_bytes()
+    return files
+
+
+def planned_files(root, server_name="taskcarry", binding=None):
+    server_name = validate_server_name(server_name)
+    files = skill_files()
     quote = lambda value: json.dumps(str(value), ensure_ascii=False)
     args = mcp_launch_args(root)
     fragment = (
@@ -100,6 +124,28 @@ def planned_files(root, server_name="taskcarry"):
         f"args = {json.dumps(args, ensure_ascii=False)}\n"
     )
     files[".taskcarry/codex.mcp.toml"] = fragment.encode("utf-8")
+    if binding:
+        files[".taskcarry/workbench.json"] = encoded(dict(binding, format=1, server_name=server_name,
+            skills_directory=".agents/skills", mcp_fragment=".taskcarry/codex.mcp.toml",
+            host_loading_verified=False, native_acceptance_verified=False))
+        instructions = (
+            "# TaskCarry workbench binding\n\n"
+            "These are generated connection materials, not a second governance database.\n"
+            "Keep these machine-specific paths and identities private.\n\n"
+            f"- Control: {quote(binding['control'])}\n"
+            f"- Workbench directory: {quote(binding['target'])}\n"
+            f"- Workspace: {quote(binding['workspace'])}\n"
+            f"- Task: {quote(binding['task_id'])}\n"
+            f"- MCP server: {quote(server_name)}\n\n"
+            "The four Skills and their public Markdown references are in `.agents/skills`.\n"
+            "Read `taskcarry-project-setup/SKILL.md` there to continue onboarding.\n\n"
+            "1. Review `.taskcarry/codex.mcp.toml` and explicitly merge its server section into the host configuration, preserving existing settings.\n"
+            "2. Reload the host as needed. Generated files do not prove that the host loaded this server or these Skills.\n"
+            "3. In this workbench, call the native `taskcarry_doctor` and `taskcarry_status` tools on the named server. Check the control, registered workspace/task, checkpoint, interpreter and module path.\n"
+            "4. Record the actual native result and any remaining step in the existing governance records. A CLI or standalone stdio check is separate evidence.\n\n"
+            "Do not initialize another control, change task state, receive a delivery, upgrade the runtime, or activate a schedule merely to finish setup.\n"
+        )
+        files[".taskcarry/workbench.md"] = instructions.encode("utf-8")
     return files
 
 
@@ -120,7 +166,12 @@ def validate_manifest(result, root):
     for name, value in result["files"].items():
         if not isinstance(name, str) or not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
             raise SetupError("SETUP_MANIFEST_INVALID", "Invalid managed file record")
-        if not (name == ".taskcarry/codex.mcp.toml" or (name.startswith(".agents/skills/taskcarry-") and name.endswith("/SKILL.md") and len(Path(name).parts) == 4)):
+        parts = Path(name).parts
+        skill_path = (len(parts) >= 4 and parts[:2] == (".agents", "skills")
+                      and parts[2].startswith("taskcarry-")
+                      and (parts[3:] == ("SKILL.md",)
+                           or (len(parts) >= 5 and parts[3] == "references" and parts[-1].endswith(".md"))))
+        if not (name in {".taskcarry/codex.mcp.toml", ".taskcarry/workbench.json", ".taskcarry/workbench.md"} or skill_path):
             raise SetupError("SETUP_MANIFEST_INVALID", "Manifest includes a path outside the managed setup scope")
         safe_target(root, name)
     if "server_name" in result:
@@ -131,6 +182,13 @@ def validate_manifest(result, root):
         raise SetupError("SETUP_MANIFEST_INVALID", "Invalid setup installation identity")
     if "runtime" in result and not valid_runtime(result["runtime"]):
         raise SetupError("SETUP_MANIFEST_INVALID", "Invalid managed runtime record")
+    if "binding" in result:
+        binding = result["binding"]
+        if (not isinstance(binding, dict) or set(binding) != {"control", "target", "workspace", "task_id"}
+                or binding.get("target") != str(root)
+                or not isinstance(binding.get("control"), str) or not Path(binding["control"]).is_absolute()
+                or not valid_identity(binding.get("workspace")) or not valid_identity(binding.get("task_id"))):
+            raise SetupError("SETUP_MANIFEST_INVALID", "Invalid workbench binding")
     return result
 
 
@@ -251,6 +309,56 @@ def project_root(project):
     return root
 
 
+def valid_identity(value):
+    return isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,99}", value) is not None
+
+
+def workbench_binding(control, target, workspace, task_id, verify=True):
+    if not valid_identity(workspace) or not valid_identity(task_id):
+        raise SetupError("SETUP_BINDING_REQUIRED", "Workbench setup requires target, workspace and task_id together, with valid registered identities")
+    if target != control and safe_target(target, ".taskcarry/state.sqlite3").exists():
+        raise SetupError("SETUP_CONTROL_CONFLICT", "The target already contains a governance database; preserve its separate control")
+    binding = {"control": str(control), "target": str(target), "workspace": workspace, "task_id": task_id}
+    if verify:
+        from .integration import Integration
+        from .store import GovernanceError
+        try:
+            integration = Integration(control)
+            if integration.store.get("tasks", task_id) is None:
+                raise SetupError("SETUP_TASK_UNKNOWN", "Register the existing task in this control before workbench setup", {"task_id": task_id})
+            registered = integration._ws(workspace)
+            if registered != target:
+                raise SetupError("SETUP_WORKSPACE_MISMATCH", "The registered workspace does not match the target directory",
+                                 {"workspace": workspace, "registered": str(registered), "target": str(target)})
+        except GovernanceError as exc:
+            raise SetupError(exc.code, exc.message, exc.details) from exc
+    return binding
+
+
+def check_binding(manifest, intent, binding):
+    recorded = (intent["manifest_after"] if intent else manifest).get("binding")
+    if recorded is not None and recorded != binding:
+        raise SetupError("SETUP_BINDING_CONFLICT", "This setup belongs to another workbench identity; use its recorded control, target, workspace and task_id",
+                         {"recorded": recorded, "requested": binding})
+
+
+def connection_result(result, control, root, binding):
+    installed = result["mode"] == "install"
+    removed = result["mode"] == "uninstall"
+    return dict(result, control=str(control), target=str(root), workspace=binding["workspace"] if binding else None,
+                task_id=binding["task_id"] if binding else None,
+                registration_verified=bool(binding) and not removed,
+                connection_state={"materials": "removed_or_preserved_modified" if removed else ("generated" if installed else "preview"),
+                                  "host_loading": "not_verified", "native_acceptance": "not_verified"},
+                host_loading_verified=False, native_acceptance_verified=False,
+                next_steps=(["Manually activated host configuration remains user managed."] if removed else [
+                    "Review the planned file list, resolve conflicts, then run setup with mode=install and the same binding." if not installed else
+                    "Review the generated MCP fragment and explicitly merge it into the host configuration, preserving existing settings.",
+                    "Load the project-scoped Skills in the target workbench; reload the host if required.",
+                    "Call native taskcarry_doctor and taskcarry_status on this server in the target workbench; verify control, workspace, task, checkpoint and runtime.",
+                    "Record actual native results and the next unfinished step in the existing control; generated materials do not attest host acceptance."]))
+
+
 def pending_matches(root, intent, files, runtime, server_name):
     # A changed source tree requires completing the pending operation with its
     # original package, rather than silently rebasing a partly applied install.
@@ -289,24 +397,34 @@ def preview(root, files, manifest, intent=None):
             "global_config_changed": False, "agents_md_changed": False}
 
 
-def configure(project, mode="preview", server_name=None):
+def configure(project, mode="preview", server_name=None, target=None, workspace=None, task_id=None):
     if mode not in {"preview", "install", "uninstall"}:
         raise SetupError("SETUP_MODE", "mode must be preview, install or uninstall")
-    root = project_root(project)
+    control = project_root(project)
+    if target is None and (workspace is not None or task_id is not None):
+        raise SetupError("SETUP_BINDING_REQUIRED", "Workbench setup requires target, workspace and task_id together")
+    root = project_root(target) if target is not None else control
+    binding = workbench_binding(control, root, workspace, task_id, verify=mode != "uninstall") if target is not None else None
+    # Metadata is local to the workbench, while every generated MCP command
+    # points to the existing control. No setup mode initializes governance.
+    make_files = lambda selected: planned_files(control, selected, binding) if binding else planned_files(control, selected)
+    finish = lambda result: connection_result(result, control, root, binding)
     if server_name is not None:
         validate_server_name(server_name)
     if mode == "preview":
         manifest, intent = read_manifest(root), read_intent(root)
+        check_binding(manifest, intent, binding)
         selected = server_name or (intent or manifest).get("server_name", "taskcarry")
-        files, runtime = planned_files(root, selected), loaded_runtime()
+        files, runtime = make_files(selected), loaded_runtime()
         if intent:
             pending_matches(root, intent, files, runtime, selected)
-        return dict(preview(root, files, manifest, intent), server_name=selected, runtime=runtime)
+        return finish(dict(preview(root, files, manifest, intent), server_name=selected, runtime=runtime))
     with setup_lock(root):
         manifest = read_manifest(root)
         manifest_path = safe_target(root, ".taskcarry/setup-manifest.json")
         intent_path = safe_target(root, ".taskcarry/setup-intent.json")
         intent = read_intent(root)
+        check_binding(manifest, intent, binding)
         if mode == "uninstall":
             if intent:
                 raise SetupError("SETUP_PENDING", "Complete the pending installation before uninstalling its managed files")
@@ -327,11 +445,11 @@ def configure(project, mode="preview", server_name=None):
                     atomic_write(manifest_path, encoded(updated))
             elif manifest_path.exists():
                 manifest_path.unlink()
-            return {"mode": mode, "removed": removed, "preserved_modified": preserved,
+            return finish({"mode": mode, "removed": removed, "preserved_modified": preserved,
                     "global_config_changed": False, "agents_md_changed": False,
-                    "note": "Any configuration section manually activated in Codex remains user managed. Governance state and user files are retained."}
+                    "note": "Any configuration section manually activated in Codex remains user managed. Governance state and user files are retained."})
         selected = server_name or (intent or manifest).get("server_name", "taskcarry")
-        files, runtime = planned_files(root, selected), loaded_runtime()
+        files, runtime = make_files(selected), loaded_runtime()
         if intent:
             pending_matches(root, intent, files, runtime, selected)
         result = preview(root, files, manifest, intent)
@@ -342,9 +460,11 @@ def configure(project, mode="preview", server_name=None):
             manifest_after = dict(manifest, format=1, project=str(root), server_name=selected,
                                   runtime=runtime, installation_id=manifest.get("installation_id") or uuid.uuid4().hex,
                                   files={**manifest["files"], **{name: digest(content) for name, content in files.items()}})
+            if binding:
+                manifest_after["binding"] = binding
             if all(row["action"] == "unchanged" for row in result["files"]) and manifest == manifest_after:
-                return dict(result, mode="install", server_name=selected, runtime=runtime,
-                            resumed=False, files_written=0, manifest_written=False)
+                return finish(dict(result, mode="install", server_name=selected, runtime=runtime,
+                            resumed=False, files_written=0, manifest_written=False))
             body = {"format": 1, "action": "install", "project": str(root),
                     "installation_id": manifest_after["installation_id"], "server_name": selected,
                     "runtime": runtime, "manifest_before_sha256": file_hash(manifest_path),
@@ -368,7 +488,9 @@ def configure(project, mode="preview", server_name=None):
                 raise SetupError("SETUP_CONFLICT", "Managed file changed after installation was planned", {"path": name})
             atomic_write(path, content)
             writes += 1
-        pending_matches(root, intent, planned_files(root, selected), loaded_runtime(), selected)
+        if binding:
+            workbench_binding(control, root, workspace, task_id)
+        pending_matches(root, intent, make_files(selected), loaded_runtime(), selected)
         if any(file_hash(safe_target(root, name)) != proof["after"] for name, proof in intent["files"].items()):
             raise SetupError("SETUP_CONFLICT", "Managed file changed before installation could be recorded")
         target_manifest = encoded(intent["manifest_after"])
@@ -378,8 +500,8 @@ def configure(project, mode="preview", server_name=None):
         if file_hash(intent_path) != digest(encoded(intent)):
             raise SetupError("SETUP_INTENT_CHANGED", "Setup intent changed before completion")
         intent_path.unlink()
-        return dict(result, mode="install", server_name=selected, runtime=runtime, resumed=resumed,
-                    pending_installation=False, files_written=writes, manifest_written=manifest_written)
+        return finish(dict(result, mode="install", server_name=selected, runtime=runtime, resumed=resumed,
+                    pending_installation=False, files_written=writes, manifest_written=manifest_written))
 
 
 def runtime_info(project):
@@ -400,7 +522,10 @@ def runtime_info(project):
         result["server_name"] = (intent or manifest).get("server_name", "taskcarry")
         if intent:
             result["pending_runtime_version"] = intent.get("runtime", {}).get("version")
-        files = planned_files(root, result["server_name"])
+        binding = (intent["manifest_after"] if intent else manifest).get("binding")
+        control = Path(binding["control"]) if binding else root
+        result.update(control=str(control), target=str(root), binding=binding)
+        files = planned_files(control, result["server_name"], binding) if binding else planned_files(root, result["server_name"])
         details = []
         for name in sorted(set(files) | set(manifest["files"])):
             current = file_hash(safe_target(root, name))

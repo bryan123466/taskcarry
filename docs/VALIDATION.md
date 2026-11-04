@@ -1,3 +1,18 @@
+# Unreleased RC6 source work — optional Git checkpoints
+
+The plain-directory checkpoint fix is implemented in a separate source stage. Plain files can be saved and restored without Git; repository metadata in the workspace or its ancestors requires successful Git verification. Corrupt, unreadable, bare or split metadata cannot silently become a plain checkpoint. The existing Git layer capture and atomic publication remain in use.
+
+Windows / Python 3.12.10: the complete source suite passed **224 of 228 tests, 4 skipped, no failures/errors**. The four skips are two native symlink limitations plus the opt-in installed-wheel and standard source-build contracts. After adding the final split-metadata boundary and two tests, the affected suites passed **56 of 58 tests, 2 native symlink skips, no failures/errors**. All **14 optional-Git tests passed**, including real CLI/MCP subprocesses with an empty PATH. Exact core source hashes and the full-versus-final-targeted mapping are in the `rc6_nongit_checkpoint_source_stage` entry of [VALIDATION_RESULTS.json](VALIDATION_RESULTS.json).
+
+This is source-stage evidence, not a newly built wheel, an installation, final RC6 acceptance or a public release. The restore post-effect receipt issue and the remaining RC6 onboarding, workspace-binding and manual work are still pending. Historical dev1 evidence below remains tied to its original source and artifacts.
+
+**简体中文：** 无 Git 普通目录保存/恢复已形成独立源码修正；存在仓库元数据时必须核验 Git，失败不降级。完整源码测试 228 项中 224 通过、4 跳过；最后补充分离元数据边界后，相关 58 项中 56 通过、2 项原生符号链接限制跳过；14 项新增专项均通过。四项全套跳过还包含未启用的 wheel/源码构建合同，不能算本次新包验证。此阶段不表示完整 RC6、安装或公开发行已完成，restore 回执恢复及其余接入/手册工作仍待完成。
+
+**繁體中文：** 無 Git 一般目錄儲存/還原已形成獨立原始碼修正；存在儲存庫中繼資料時必須驗證 Git，失敗不降級。完整原始碼測試 228 項中 224 通過、4 跳過；最後補充分離中繼資料邊界後，相關 58 項中 56 通過、2 項原生符號連結限制跳過；14 項新增專項均通過。四項全套跳過還包含未啟用的 wheel/原始碼建置合同，不能算本次新套件驗證。此階段不表示完整 RC6、安裝或公開發布已完成，restore 回執恢復與其餘接入/手冊工作仍待完成。
+
+---
+
+
 # TaskCarry 0.2.0rc6.dev1 — local candidate validation
 
 This is an unpublished development candidate. Windows / Python 3.12.10: **216 tests, 214 passed, 2 skipped, 0 failures or errors**. Both skips require unavailable symlink permissions. The full run explicitly enabled standard wheel/sdist build and the actual candidate wheel contract. The final rebuilt wheel also passed its independent installed-wheel contract (1 test). No governance installation was upgraded.

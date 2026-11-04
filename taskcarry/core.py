@@ -110,6 +110,47 @@ def _id(value, label):
     return value
 
 
+def _checkpoint_uses_git(workspace):
+    """Plain files need no Git; repository-shaped paths require verification.
+
+    Inspect ancestors as well as the selected directory so a missing or broken
+    Git executable cannot silently discard a repository's HEAD/index layers.
+    lstat preserves dangling markers and propagates unreadable metadata instead
+    of treating either as proof that this is a plain directory.
+    """
+    def present(path):
+        try:
+            path.lstat()
+        except FileNotFoundError:
+            return False
+        return True
+
+    try:
+        for parent in (workspace, *workspace.parents):
+            if present(parent / '.git'):
+                break
+            head = present(parent / 'HEAD')
+            objects = present(parent / 'objects')
+            refs = present(parent / 'refs') or present(parent / 'packed-refs')
+            common = present(parent / 'commondir')
+            # Include split metadata and damaged bare repositories without HEAD.
+            if (head and (objects or refs or common)) or (objects and refs):
+                break
+        else:
+            return False
+    except OSError as exc:
+        raise GovernanceError('GIT_WORKSPACE_UNVERIFIED',
+                              'Could not inspect the workspace Git boundary.') from exc
+
+    try:
+        result = git(workspace, 'rev-parse', '--is-inside-work-tree')
+    except OSError as exc:
+        raise GovernanceError('GIT_UNAVAILABLE', 'Git could not be executed for this workspace.') from exc
+    if result.stdout.strip() != b'true':
+        raise GovernanceError('GIT_WORKSPACE_ROOT', 'Use a Git working tree root, not repository metadata.')
+    return True
+
+
 class Core:
     def __init__(self, project):
         self.store = Store(project)
@@ -418,7 +459,7 @@ class Core:
             validate_relative_path(workspace, path)
         with self.store.guard():
             task = self._task(task_id)
-            is_git = git(workspace, 'rev-parse', '--is-inside-work-tree', check=False).returncode == 0
+            is_git = _checkpoint_uses_git(workspace)
             if is_git and Path(git(workspace, 'rev-parse', '--show-toplevel').stdout.decode().strip()).resolve() != workspace:
                 raise GovernanceError('GIT_WORKSPACE_ROOT', 'Use the Git worktree root and paths relative to that root.')
             head = git(workspace, 'rev-parse', '--verify', 'HEAD', check=False).stdout.decode().strip() if is_git else None
@@ -462,6 +503,8 @@ class Core:
                 frozen = record['worktree']
                 if (source.exists() != (frozen is not None)) or (frozen and digest_bytes(read_file_bytes(source)) != frozen['sha256']):
                     raise GovernanceError('SOURCE_CHANGED', 'A selected worktree file changed during capture.')
+            if not is_git and _checkpoint_uses_git(workspace):
+                raise GovernanceError('SOURCE_CHANGED', 'The plain workspace became a Git repository during capture.')
             checkpoint_id = 'cp-' + uuid.uuid4().hex
             result = {'checkpoint_id': checkpoint_id, 'task_id': task_id, 'workspace': str(workspace),
                       'git': is_git, 'original_head': head or None, 'files': files, 'next_step': next_step,

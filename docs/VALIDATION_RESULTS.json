@@ -2,6 +2,189 @@
   "product": "TaskCarry",
   "version": "0.2.0rc6.dev1",
   "status": "local_development_candidate_not_published",
+  "rc6_nongit_checkpoint_source_stage": {
+    "status": "unreleased_source_stage_not_package_release",
+    "issue": "taskcarry-nongit-checkpoint-requires-git",
+    "source_base": "30cadd787faabf3f7e9edc09b8b9a3ff97148db5",
+    "scope": "Plain-directory checkpoints without Git; repository boundaries remain fail-closed.",
+    "platform": "Windows",
+    "python": "3.12.10",
+    "validation": {
+      "full_before_split_metadata": {
+        "recorded_at": "2026-11-03T22:46:55.149183+00:00",
+        "source_sha256": "1a5f47e1f2fc151e8449fff36da8a8f13e9072a8c69b00487113d7021e2e12e8",
+        "tests_run": 228,
+        "passed": 224,
+        "skipped": 4,
+        "failures": 0,
+        "errors": 0,
+        "successful": true,
+        "skips": [
+          {
+            "test": "test_core.CoreTests.test_symlink_escape_rejected",
+            "outcome": "SKIP",
+            "reason": "Host cannot create symlinks; native junction test remains separate."
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+            "outcome": "SKIP",
+            "reason": "Host cannot create a directory symlink"
+          },
+          {
+            "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
+            "outcome": "SKIP",
+            "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
+          },
+          {
+            "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
+            "outcome": "SKIP",
+            "reason": "Opt in to the independent source build with TASKCARRY_TEST_SOURCE_BUILD=1"
+          }
+        ],
+        "optional_git_tests": [
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
+            "outcome": "PASS"
+          }
+        ]
+      },
+      "final_targeted": {
+        "recorded_at": "2026-11-03T22:47:28.651853+00:00",
+        "source_sha256": "8af0e27a48fba39f737e492180267e23c506f295c43bb8a3c829dbd403a1f4a1",
+        "tests_run": 58,
+        "passed": 56,
+        "skipped": 2,
+        "failures": 0,
+        "errors": 0,
+        "successful": true,
+        "skips": [
+          {
+            "test": "test_core.CoreTests.test_symlink_escape_rejected",
+            "outcome": "SKIP",
+            "reason": "Host cannot create symlinks; native junction test remains separate."
+          },
+          {
+            "test": "test_interfaces.SetupTests.test_symlinked_install_directory_is_refused",
+            "outcome": "SKIP",
+            "reason": "Host cannot create a directory symlink"
+          }
+        ],
+        "optional_git_tests": [
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_ancestor_git_root_is_not_mistaken_for_plain_directory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_bare_repository_root_and_descendants_never_use_plain_mode",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_cli_plain_checkpoint_and_restore_with_empty_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_commondir_filename_alone_does_not_require_git",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_corrupt_git_file_or_directory_is_not_a_plain_directory",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_dangling_git_marker_is_not_treated_as_absent",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_failed_or_inaccessible_git_probe_never_publishes_plain_checkpoint",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_linked_worktree_git_file_requires_git",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_mcp_plain_checkpoint_and_restore_with_empty_path",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_metadata_inspection_permission_failure_preserves_task_and_source",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_becoming_repository_during_capture_is_not_published",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_plain_directory_does_not_invoke_git_even_when_it_is_present",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_real_git_root_requires_git_without_changing_index_or_worktree",
+            "outcome": "PASS"
+          },
+          {
+            "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_split_metadata_with_commondir_cannot_be_saved_as_plain_files",
+            "outcome": "PASS"
+          }
+        ]
+      }
+    },
+    "verification_mapping": "The complete suite predates only the HEAD+commondir detection addition and its two tests. The final targeted run includes all optional-Git, Core, atomic-store and CLI/MCP interface tests on the final core.py SHA256.",
+    "not_verified": [
+      "new wheel or sdist build",
+      "final RC6 package installation",
+      "cross-platform CI for this source stage",
+      "native host loading of this source stage"
+    ],
+    "remaining_work": [
+      "restore post-effect receipt recovery",
+      "remaining full RC6 B1 onboarding, workspace binding and documentation scope"
+    ]
+  },
   "source_suite": {
     "schema": "taskcarry.test-evidence.v1",
     "recorded_at": "2026-11-02T09:38:35.282498+00:00",

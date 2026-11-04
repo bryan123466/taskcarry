@@ -17,19 +17,19 @@
 
 ## 安装或核对固定运行时
 
-先检查已有安装与 control，有效时直接复用。确实首次安装工具时，创建 `C:/TaskCarry/control` 和 `C:/TaskCarry/toolkit`，将选定产品 ZIP 的内容直接解压到 `toolkit`。原业务项目保留在原位置。需要 Python 3.11+；只有 Git 工作流需要 Git。
+先检查已有安装与 control，有效时直接复用。确实首次安装工具时，创建 `C:/TaskCarry/control`，将选定产品 ZIP 解压到 `C:/TaskCarry/toolkit`。RC6 ZIP 自带顶层目录 `taskcarry-0.2.0rc6/`，因此实际产品根是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`，其中包含 `START_HERE.md`、`packages/`、`docs/` 和 `skills/`。选用其他版本时按实际解压出的版本目录调整。原业务项目保留在原位置。需要 Python 3.11+；只有 Git 工作流需要 Git。
 
 以下命令在 PowerShell 执行，**仅用于专用 runtime 尚不存在的情况**。安装工具不创建新的业务项目，也不意味着获准升级已有运行时。
 
 ```powershell
 py -3 -m venv 'C:/TaskCarry/runtime'
-$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/packages' -Filter '*.whl' -File
+$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc6/packages' -Filter '*.whl' -File
 if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor
 ```
 
-doctor 返回实际运行时与前提条件。control 尚未初始化或 Git 能力不可用，需要结合当前操作判断；不要为了清除提示重建已有状态。将输出交回治理窗口，继续同一次接入。
+control 尚未初始化时，doctor 返回 `NOT_INITIALIZED`，不含运行时细节；仅此结果不表示安装失败。治理按下节核实这个 control 确实没有状态并初始化后，再运行同一条 doctor 命令查看实际运行时与前提条件。Git 能力不可用时结合当前操作判断；不要为了清除提示重建已有状态。将输出交回治理窗口，继续同一次接入。
 
 <a id="governance"></a>
 
@@ -51,9 +51,11 @@ doctor 返回实际运行时与前提条件。control 尚未初始化或 Git 能
 
 检查拟变更文件和冲突。在已授权接入范围内，只将 `mode` 改为 `install`，再执行相同命令。中断续办保持原候选与参数；setup 保全用户改过的文件并报告冲突。
 
-生成的 `.taskcarry/codex.mcp.toml` 是**片段**。让助手把指定服务合并到宿主支持的项目级配置中，保留其他服务与指令。当前宿主无法代办时，应给出准确的受支持位置和合并动作，不用一份完整配置覆盖原配置。保留生成的 command/args：它们绑定固定解释器，使用隔离 UTF-8 启动并指定包来源，不换成未限定的 Python 命令。
+生成的 `.taskcarry/codex.mcp.toml` 是**片段**。在 Codex 中，将选定的 `[mcp_servers.<name>]` 表合并到目标聊天的项目级 `.codex/config.toml`：治理目录为 `C:/TaskCarry/control/.codex/config.toml`，专业工作台为 `<已登记工作台>/.codex/config.toml`。保留其他设置与服务，不覆盖整份文件或修改全局配置。保留生成的 command/args：它们绑定固定解释器，使用隔离 UTF-8 启动并指定包来源。
 
-项目信任或宿主重载可能需要你操作，setup 本身不执行。Skills 位于 `.agents/skills/`，包括引用的方法文件；未被自动发现时，明确读取该目录下需要的 `SKILL.md` 及引用。新 worktree 不会自动继承另一目录的配置。
+让目标聊天打开或选用同一目录作为项目和工作目录，并在适当时完成该项目的信任提示；Codex 只加载受信任项目的配置。随后使用宿主支持的 MCP 重启/重载操作；官方桌面说明使用 **Settings → MCP servers → Restart**。当前聊天不能更换目录时，在配置所在目录打开的聊天中按保存清单接续，仍复用同一 control。把配置写在另一目录不会让当前聊天自动连接。setup 不选择宿主目录、不授予信任，也不重载宿主。依据见官方 [MCP 配置](https://learn.chatgpt.com/docs/extend/mcp?surface=app)和[配置层级](https://learn.chatgpt.com/docs/config-file/config-basic)。
+
+Skills 位于 `.agents/skills/`，包括引用的方法文件；未被自动发现时，明确读取该目录下需要的 `SKILL.md` 及引用。新 worktree 不会自动继承另一目录的配置。每个目标窗口按下节单独验收，配置文件或独立 stdio 进程成功均不证明原生宿主已经加载。
 
 <a id="workbench"></a>
 

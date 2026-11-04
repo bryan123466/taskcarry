@@ -17,19 +17,19 @@ Use only the step governance identifies as missing. This page supports the **0.2
 
 ## Install or inspect the fixed runtime
 
-First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry/control` and `C:/TaskCarry/toolkit`; extract the selected product ZIP directly into `toolkit`. Keep the existing business project in place. Python 3.11+ is required; Git is required for Git workflows only.
+First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry/control` and extract the selected product ZIP into `C:/TaskCarry/toolkit`. The RC6 ZIP includes a top-level `taskcarry-0.2.0rc6/` directory: the extracted product root is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`, containing `START_HERE.md`, `packages/`, `docs/` and `skills/`. Use the actual extracted version directory if selecting another package. Keep the existing business project in place. Python 3.11+ is required; Git is required for Git workflows only.
 
 Run these commands in PowerShell **only when the dedicated runtime does not already exist**. Installing the package does not create a new business project or authorize upgrading an existing runtime.
 
 ```powershell
 py -3 -m venv 'C:/TaskCarry/runtime'
-$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/packages' -Filter '*.whl' -File
+$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc6/packages' -Filter '*.whl' -File
 if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor
 ```
 
-Doctor reports the actual runtime and prerequisites. A not-yet-initialized control or unavailable Git capability has to be interpreted for the operation being attempted; do not recreate an existing store to clear a warning. Return the output to the governance chat and continue the same onboarding prompt.
+Before control initialization, doctor returns `NOT_INITIALIZED` without runtime details; this alone does not mean installation failed. After governance verifies that this control genuinely has no state and initializes it as described below, repeat the same doctor command to inspect the actual runtime and prerequisites. Interpret unavailable Git capabilities for the operation being attempted; do not recreate an existing store to clear a warning. Return the output to the governance chat and continue the same onboarding prompt.
 
 <a id="governance"></a>
 
@@ -51,9 +51,11 @@ Save the reviewed JSON request as UTF-8 `C:/TaskCarry/setup-request.json` (the e
 
 Review the proposed changes and conflicts. Within the authorized setup scope, change only `mode` to `install` and repeat the command. Keep the same candidate and parameters when resuming an interrupted install. Setup preserves modified user files and reports conflicts.
 
-The generated `.taskcarry/codex.mcp.toml` is a **fragment**. Have the assistant merge its selected server into the host's supported project configuration, preserving other servers and instructions. If the current host cannot do that, it must give the exact supported location and merge action. Do not paste a second complete config over an existing one. Keep the generated command/arguments: they use a fixed interpreter, isolated UTF-8 startup and the selected package location. Do not replace them with an unqualified Python command.
+The generated `.taskcarry/codex.mcp.toml` is a **fragment**. In Codex, merge its selected `[mcp_servers.<name>]` table into the target chat's project-level `.codex/config.toml`: `C:/TaskCarry/control/.codex/config.toml` for governance, or `<registered-workbench>/.codex/config.toml` for that workbench. Preserve other settings and servers; do not replace the whole file or change global configuration. Keep the generated command/arguments: they use a fixed interpreter, isolated UTF-8 startup and the selected package location.
 
-Project trust or a host reload may be required. Those are host actions; setup does not perform them. Skills appear under `.agents/skills/`, including referenced method files. If not automatically discovered, explicitly read the needed `SKILL.md` and its references from that directory. Do not assume a new worktree inherits another directory's configuration.
+Open/select that same directory as the target chat's project and working directory, and complete its project-trust prompt if appropriate. Codex loads project configuration only for trusted projects. Then use the host's supported MCP restart/reload action; the official desktop instructions use **Settings → MCP servers → Restart**. If the current chat cannot switch directories, resume the saved checklist in a chat opened in the configured directory, using the same control. Writing a config in another folder does not connect the current chat. Setup does not choose a host folder, grant trust or reload the host. See the official [MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=app) and [configuration layers](https://learn.chatgpt.com/docs/config-file/config-basic).
+
+Skills appear under `.agents/skills/`, including referenced method files. If not automatically discovered, explicitly read the needed `SKILL.md` and its references from that directory. Do not assume a new worktree inherits another directory's configuration. Verify each target window below; configuration files or a successful standalone stdio process do not prove native host loading.
 
 <a id="workbench"></a>
 

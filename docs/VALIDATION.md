@@ -1,5 +1,17 @@
 # TaskCarry 0.2.0rc6 — local candidate validation
 
+## 2026-11-04 fresh-chat follow-up
+
+An independent Codex chat followed the public package/manuals on a synthetic existing project, installed a dedicated wheel runtime, generated governance/workbench materials, and exercised CLI, standalone stdio, checkpoints and selected-file restoration. Seven original files and both Git work layers remained unchanged. The trial exposed a version-directory mismatch in the installation example, missing artifact decision choices and unclear first-doctor/host-loading instructions. This follow-up corrects those contracts and instructions; **29 focused source checks passed**, with zero skips, failures or errors. Native tool exposure in that fresh chat was unavailable and remains unverified; this was a projectless test chat, so it does not demonstrate that a configured project failed to load.
+
+The earlier received candidate passed all six [public CI jobs](https://github.com/bryan123466/taskcarry/actions/runs/41839380725) for Python 3.11/3.12 on Windows, macOS and Linux. That run belongs to commit `381623375e40ba0d6a58756ac7573382e6c7775e`, before these follow-up changes. The complete-suite counts and artifact hashes below and in `VALIDATION_RESULTS.json` are the earlier frozen candidate's evidence, not hashes or a complete-suite run for this revision. New release artifacts and final-commit CI require their own matching evidence. No RC6 tag or Release had been created at this follow-up; the existing candidate branch is publicly inspectable.
+
+简体中文：独立新聊天已依公开包在合成旧项目完成安装、CLI/独立 stdio、保存和选定文件恢复；7 个原文件及两层 Git 工作保全。实测发现并修正安装路径、材料决定参数及首次诊断/宿主接入说明，新增定向回归 **29 项全部通过**。该验收聊天未绑定项目，原生工具未暴露，不能据此认定已配置项目加载失败，也不能宣称原生接入成功。六组公开 CI 只对应上述旧提交；下文及 JSON 的全套数字和包哈希保留为修正前冻结候选证据，新修正版须另核对包及提交 CI，尚未创建 RC6 tag/Release。
+
+繁體中文：獨立新對話已依公開套件在合成既有專案完成安裝、CLI/獨立 stdio、儲存及選定檔案還原；7 個原檔案與兩層 Git 工作保全。實測發現並修正安裝路徑、材料決定參數及首次診斷/宿主接入說明，新增定向回歸 **29 項全部通過**。該驗收對話未綁定專案，原生工具未暴露，不代表已設定專案載入失敗，也不代表原生接入成功。六組公開 CI 僅對應上述舊提交；下文及 JSON 全套數字和套件雜湊保留為修正前凍結候選證據，新修訂須另核對套件與提交 CI，尚未建立 RC6 tag/Release。
+
+## Earlier frozen candidate evidence
+
 Recorded 2026-11-04. **Local candidate for review; not published.** The fixed governance runtime remains rc5. All new executable checks used disposable synthetic projects or candidate installations; no production control, scheduled task or user-level host configuration was changed. Portable counts, source fingerprints and dated historical records are in [VALIDATION_RESULTS.json](VALIDATION_RESULTS.json).
 
 | Evidence | Observed result | Scope and limit |

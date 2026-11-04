@@ -35,6 +35,12 @@ Success: `{"ok":true,"result":{...}}`. Failure: `{"ok":false,"error":{"code":"..
 
 Paths in a checkpoint or submission are workspace-relative exact files, not wildcard expressions. In a cumulative submission, `relation` is `cumulative` and `supersedes` lists the exact earlier stage identifiers. The default relation is `independent`. 检查点和交付的路径是工作区相对精确文件，不使用通配符；累计交付明确列出被替代阶段。
 
+`artifact.decision` is an optional choice: `retain`, `ignore`, `dismiss`, or `no_backup_needed`. It is not the free-text reasoning accepted by `checkpoint.decision`. `retain` keeps an unverified backup item actionable; the other three choices suppress it only when the corresponding decision is authorized. They do not delete files or create a backup. Omit the field to preserve the earlier choice for unchanged content; changed content requires a fresh review. For example: `{"task_id":"example-writing","path":"<authorized-handover-file>","role":"handover","decision":"retain"}`.
+
+`artifact.decision` 只能选择 `retain`、`ignore`、`dismiss`、`no_backup_needed`，不是 `checkpoint.decision` 接受的自由说明文字。`retain` 保留尚无已核实备份的待复核项；其他三项仅在已有对应授权决定时排除该项，不删除文件、不创建备份。省略时，同内容继承旧决定；内容变化后重新复核。上例为合成材料登记，路径和任务须换成真实获准对象。
+
+`artifact.decision` 僅能選擇 `retain`、`ignore`、`dismiss`、`no_backup_needed`，不是 `checkpoint.decision` 接受的自由說明文字。`retain` 保留尚無已核實備份的待複核項；其餘三項僅在已有對應授權決定時排除該項，不刪除檔案、不建立備份。省略時，相同內容沿用舊決定；內容變更後重新複核。上例為合成材料登記，須替換為實際獲准的路徑與任務。
+
 Plain-directory checkpoints and their restoration do not require Git. A workspace with Git metadata, or inside a repository, still requires working Git and the exact working-tree root; an unreadable or damaged repository is never silently saved as plain files. A repository appearing during a plain capture prevents checkpoint publication.
 
 普通目录的检查点及恢复不要求安装 Git。工作区或父级存在 Git 元数据时，仍须使用可用的 Git 和准确的工作树根；不会把不可读取或损坏的仓库悄悄降为普通文件保存。普通目录在捕获期间变为仓库时，不发布该检查点。

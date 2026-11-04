@@ -53,6 +53,42 @@ class PublicApiContractTests(unittest.TestCase):
         self.assertEqual(raised.exception.code, "INVALID_ARGUMENT")
         self.assertFalse((target / ".taskcarry").exists())
 
+    def test_artifact_advertised_choices_work_and_free_text_has_no_effect(self):
+        from taskcarry.mcp import Server
+
+        def request(method, params=None):
+            return {"jsonrpc": "2.0", "id": 1, "method": method, "params": params or {}}
+
+        server = Server(self.project)
+        server.handle(request("initialize", {"protocolVersion": "2025-11-25", "capabilities": {},
+                                             "clientInfo": {"name": "synthetic-reviewer", "version": "1"}}))
+        tools = server.handle(request("tools/list"))["result"]["tools"]
+        artifact = next(tool for tool in tools if tool["name"] == "taskcarry_artifact")
+        choice = artifact["inputSchema"]["properties"]["decision"]
+        self.assertEqual(set(choice["enum"]), {"retain", "ignore", "dismiss", "no_backup_needed"})
+        self.assertIn("not free-text", choice["description"])
+        material = self.root / "handover.md"
+        material.write_text("Synthetic retained handover\n", encoding="utf-8")
+        arguments = {"task_id": "forms", "path": str(material)}
+        for decision in choice["enum"]:
+            response = server.handle(request("tools/call", {"name": "taskcarry_artifact", "arguments": {**arguments, "decision": decision}}))["result"]
+            self.assertFalse(response["isError"])
+            result = response["structuredContent"]["result"]
+            self.assertEqual(result["decision"], decision)
+            self.assertFalse(result["backup_verified"])
+            retained = invoke(self.project, "artifact", arguments)
+            self.assertEqual(retained["decision"], decision)
+
+        before = invoke(self.project, "status")["artifacts"]
+        invalid = {**arguments, "decision": "Keep the project handover for later"}
+        response = server.handle(request("tools/call", {"name": "taskcarry_artifact", "arguments": invalid}))
+        self.assertEqual(response["error"]["code"], -32602)
+        with self.assertRaises(GovernanceError) as raised:
+            invoke(self.project, "artifact", invalid)
+        self.assertEqual(raised.exception.code, "INVALID_ARGUMENT")
+        self.assertEqual(invoke(self.project, "status")["artifacts"], before)
+        self.assertEqual(material.read_text(encoding="utf-8"), "Synthetic retained handover\n")
+
     def test_registered_workspace_checkpoint_uses_exact_registered_path(self):
         work = self.repository("worker")
         invoke(self.project, "workspace", {"name": "worker", "path": str(work)})

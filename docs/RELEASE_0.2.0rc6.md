@@ -4,6 +4,10 @@ This candidate follows the published **0.2.0rc5**. It is prepared for review; a 
 
 ## English
 
+### New-user trial follow-up
+
+The candidate's manual installation example now follows the actual versioned ZIP root, explains the first `NOT_INITIALIZED` doctor response, and identifies each Codex project's configuration location and remaining trust/reload step. The shared CLI/MCP contract advertises the four permitted `artifact.decision` values, with an example distinguishing them from checkpoint reasoning. These corrections follow an independent-chat synthetic installation trial; they do not establish native host loading, production installation or complete-project backup.
+
 ### Connect an existing project in one guided conversation
 
 The recommended Windows/Codex guide now starts with a distinct governance chat, reusing a verified existing one when available. One prompt combines installation, project handover and governance responsibility. It asks the assistant to recover relevant existing outcomes, decisions, tasks and unfinished work, then guide the remaining connection. Users continue working directly in their original chats. Project coordination is optional; advice on responsibilities or next steps does not automatically enable dispatch, schedules or extra chats. A small project can keep its existing work chat with zero additional specialists.
@@ -33,6 +37,10 @@ The positive build allowlist includes the three fallback manuals and the public 
 
 ## 简体中文
 
+### 新窗口试用后的修正
+
+手动安装示例按 ZIP 实际带版本的顶层目录定位 wheel，说明首次 doctor 的 `NOT_INITIALIZED` 分支，并明确各 Codex 项目的配置落点与信任、重载接续步骤。共享 CLI/MCP 合同列出 `artifact.decision` 的四个允许值和示例，区分检查点的自由说明文字。这些修正来自独立新聊天的合成安装试用，不代表原生宿主已加载、生产环境已安装或完整项目已备份。
+
 ### 一次对话接入已有项目
 
 新版推荐手册先引导建立独立治理窗口；已有经核实的治理总控时直接复用。一个提示词合并安装、项目接手和治理职责，让 AI 从获准来源继承成果、决定、任务与未完成位置，并带领完成后续接入。用户仍可直接在原工作聊天推进；是否长期兼任项目总控由用户选择。分工建议不会自动启用派工、调度或额外聊天，简单项目可以新增零个专业窗口。
@@ -61,6 +69,10 @@ CLI setup 新增成组的 `target`、`workspace`、`task_id`，将材料安装�
 构建允许清单补入三语后备手册与公开接入引用。标准 wheel、源码分发及工作台安装均包含该引用。回归覆盖实际 CLI/MCP 子进程、用户文件保全、重复/中断接入、恢复失败，以及单主聊天/多旧聊天合成项目。精确测试结果、真实 wheel 检查、跳过项目和宿主/CI 尚缺证据分别列于源码验证记录及候选复核报告；不用生产项目或生产定时任务做实验。
 
 ## 繁體中文
+
+### 新視窗試用後的修正
+
+手動安裝範例依 ZIP 實際帶版本的頂層目錄定位 wheel，說明首次 doctor 的 `NOT_INITIALIZED` 分支，並明確各 Codex 專案的設定位置及信任、重新載入接續步驟。共用 CLI/MCP 合約列出 `artifact.decision` 的四個允許值和範例，區分檢查點的自由說明文字。這些修正來自獨立新對話的合成安裝試用，不代表原生宿主已載入、生產環境已安裝或完整專案已備份。
 
 ### 一次對話接入既有專案
 

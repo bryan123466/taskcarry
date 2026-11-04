@@ -4,7 +4,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[Download TaskCarry 0.2.0rc6 (prerelease)](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6) · [Start with the user manual](docs/en/windows-example.md) · [See the architecture](docs/en/architecture.md)
+[Get TaskCarry](START_HERE.md#download) · [First-time setup](docs/en/windows-example.md) · [Update an existing installation](docs/en/updating.md)
 
 TaskCarry provides **project memory, workspace collaboration, and project workflow governance** for people working with AI tools. Bring ready stages into a shared project, preserve unfinished work, and resume supported interrupted operations from recorded and verified results. Task context, selected files, deliverable history, and next steps stay with the project across conversations and pauses.
 
@@ -73,19 +73,21 @@ For example, software may have a usable module while experiments are paused and 
 
 A received stage can be part of an unfinished task. A paused task can stay paused. Replacing an older stage requires a documented relationship and matching change history, so independent results are not discarded merely because a newer file exists.
 
-## Start with one project
+<a id="start-with-one-project"></a>
 
-Download **taskcarry-0.2.0rc6-product.zip** from the [0.2.0rc6 prerelease page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6), then follow the [conversational onboarding guide](docs/en/windows-example.md). RC6 is published for review; it remains a prerelease, and publication does not install or upgrade your local runtime. The release page links to corrected online instructions where the frozen package still contains preparation-time rc5 download wording.
+## Install or update TaskCarry
 
-The main path is for people already using Codex:
+### First time using TaskCarry
 
-1. **Establish an independent governance chat.** Reuse a verified existing TaskCarry governance chat/control if present. Give a project locator and the product-package location, then send the guide's one prompt.
-2. **Let governance connect existing work.** It inherits known outputs, decisions, tasks and continuation points, guides installation and remaining host actions, and suggests a useful division of work. Added specialists may be zero.
-3. **Continue working in your usual chats.** Governance maintains memory and progress; temporary or ongoing project coordination is optional. At work boundaries, assistants save the relevant evidence and read the effective context before continuing.
+[Get the complete product package](START_HERE.md#download), then follow the [installation guide](docs/en/windows-example.md). Open an independent governance chat and send its single prompt with your project location and package location. Governance connects the work you already have, helps complete setup and suggests useful next steps.
 
-The same conversation handles installation, governance responsibility and the first bounded review. If the host cannot complete an action, governance supplies the exact current manual step. Commands and separate transfer prompts live in the [fallback manual](docs/en/manual-setup.md), not in a parallel main route.
+Keep working in your original chats. Governance maintains project memory; ongoing project coordination is optional, and you may need no additional specialist chats.
 
-You do not need to learn the engine, inspect its database or run developer tests. Reports appear in the governance chat. Native connection, saved progress, delivery and acceptance have separate evidence; optional scheduling does not start during installation.
+### Already using TaskCarry
+
+Return to your existing governance chat and send the prompt in the [update guide](docs/en/updating.md). It checks your installation, preserves project records and settings, carries out the applicable update, and verifies the result. Keep the same project and governance home.
+
+If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [release notes](docs/RELEASE_0.2.0rc7.md).
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="Example arrangement of governance and working chats; specialist count is optional" width="360">
 
@@ -106,17 +108,18 @@ TaskCarry uses Python 3.11+; Git is needed for Git workflows. It stores project 
 |---|---|---|---|
 | Manual fallback | [Commands and handoffs](docs/en/manual-setup.md) | [手动后备](docs/zh-CN/manual-setup.md) | [手動後備](docs/zh-TW/manual-setup.md) |
 | User manual | [Start here](docs/en/windows-example.md) | [从这里开始](docs/zh-CN/windows-example.md) | [從這裡開始](docs/zh-TW/windows-example.md) |
+| Existing users | [Update TaskCarry](docs/en/updating.md) | [更新指南](docs/zh-CN/updating.md) | [更新指南](docs/zh-TW/updating.md) |
 | Architecture | [How it works](docs/en/architecture.md) | [架构说明](docs/zh-CN/architecture.md) | [架構說明](docs/zh-TW/architecture.md) |
 | Maintenance | [Maintain a project](docs/en/governance-maintenance.md) | [维护项目](docs/zh-CN/governance-maintenance.md) | [維護專案](docs/zh-TW/governance-maintenance.md) |
 | Private Git and multiple computers | [Guide](docs/en/remote-and-multicomputer.md) | [说明](docs/zh-CN/remote-and-multicomputer.md) | [說明](docs/zh-TW/remote-and-multicomputer.md) |
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc6/docs/VALIDATION.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/main/docs/VALIDATION.md)
 
 ## Join in
 
-Questions, real use cases, clearer examples, translations, and code improvements are welcome. Start with [Issues](https://github.com/bryan123466/taskcarry/issues) or the [contribution guide](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc5/CONTRIBUTING.md). Remove private project information before sharing; the [security guide](SECURITY.md) explains what to keep out of a report.
+Questions, real use cases, clearer examples, translations, and code improvements are welcome. Start with [Issues](https://github.com/bryan123466/taskcarry/issues) or the [contribution guide](https://github.com/bryan123466/taskcarry/blob/main/CONTRIBUTING.md). Remove private project information before sharing; the [security guide](SECURITY.md) explains what to keep out of a report.
 
 ## License
 

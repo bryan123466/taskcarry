@@ -2,7 +2,7 @@
 
 [从对话式接入开始](windows-example.md) · [手动后备](manual-setup.md) · [English](../en/operation-manual.md) · [繁體中文](../zh-TW/operation-manual.md)
 
-这是已公开的 [**0.2.0rc6 预发布版**](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6)的日常操作索引。接入流程和修正后的下载说明统一放在[主手册](windows-example.md)；使用命令前核对本机实际安装版本。
+本页用于接入后的日常工作。首次接入看[安装主手册](windows-example.md)；已有安装需要更新时，回到原治理窗口使用[更新提示词](updating.md)。
 
 - [接入与工作方式](#onboarding)
 - [谁负责什么](#谁负责什么)

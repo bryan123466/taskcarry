@@ -4,7 +4,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[下載 TaskCarry 0.2.0rc6（預發布）](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6) · [從操作手冊開始](docs/zh-TW/windows-example.md) · [瞭解架構](docs/zh-TW/architecture.md)
+[取得 TaskCarry](START_HERE.md#download) · [首次安裝](docs/zh-TW/windows-example.md) · [既有使用者更新](docs/zh-TW/updating.md)
 
 TaskCarry 為人和 AI 共同推進的長期專案提供**專案記憶、工作區協作與專案工作流程治理**。它協助準備好的階段成果彙入共用專案，保留未完成的工作，並在支援的操作中斷後核對實際結果、接續後續步驟。任務背景、選定檔案、成果歷史與下一步跟著專案保留，讓工作能夠跨越對話與暫停時段繼續推進。
 
@@ -73,19 +73,21 @@ TaskCarry 儲存記錄並執行已支援的本機操作。你保留專案方向�
 
 一個階段被接收，不代表整個任務已經結束；暫停任務也可以繼續暫停。新階段替代舊階段需要明確關係與相符的修改歷史，獨立成果不會因為出現更新的檔案就被丟棄。
 
-## 從一個專案開始
+<a id="從一個專案開始"></a>
 
-從 [0.2.0rc6 預發布頁面](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6)下載 **taskcarry-0.2.0rc6-product.zip**，再依[對話式接入手冊](docs/zh-TW/windows-example.md)開始。RC6 已公開供複核，仍是預發布版本；發布不會自動安裝或升級本機執行環境。凍結套件內仍有準備時點的 rc5 下載文字，發布頁提供修正後的線上說明入口。
+## 安裝或更新 TaskCarry
 
-主路徑面向已經使用 Codex 的人：
+### 第一次使用 TaskCarry
 
-1. **建立獨立治理視窗。** 已有有效 TaskCarry 治理視窗/control 則重用，提供專案定位線索與產品套件位置，傳送手冊中的一條提示詞。
-2. **讓治理帶著接入既有工作。** 繼承既有成果、決定、任務與接續點，完成安裝與剩餘宿主操作，並給出有依據的分工建議；新增專業視窗可以為零。
-3. **繼續在習慣的視窗工作。** 治理維護記憶與進度，臨時或長期專案協調由你選擇；助手在工作節點儲存相關證據，接續前讀取有效上下文。
+[取得完整產品套件](START_HERE.md#download)，再依[首次安裝手冊](docs/zh-TW/windows-example.md)建立獨立治理視窗。提供專案位置與產品套件位置，傳送手冊中的一段提示詞；治理會接手既有成果，帶著完成設定，並給出下一步建議。
 
-安裝、承擔治理職責與首次有限複核在同一次對話中完成。宿主不能代辦某步時，治理給出目前準確操作。指令與拆開的轉交提示詞放在[手動後備](docs/zh-TW/manual-setup.md)，主路徑不再並列一套安裝路線。
+繼續在原來的工作視窗推進。治理負責專案記憶，是否長期兼任專案協調由你選擇，新增專業視窗可以為零。
 
-無需學習核心、查看資料庫或執行開發者測試。報告直接出現在治理對話中；原生連線、儲存進度、交付與驗收分別有證據。安裝不會自行啟動可選排程任務。
+### 已經在使用 TaskCarry
+
+回到原治理視窗，傳送[更新指南](docs/zh-TW/updating.md)中的提示詞。治理會檢查既有安裝，保留專案記錄與設定，執行適用的更新並驗證結果。繼續使用原專案與原治理目錄。
+
+需要你完成宿主操作時，助手只提供目前這一步。具體指令放在[手動後備](docs/zh-TW/manual-setup.md)，每次迭代變更了什麼集中在[版本說明](docs/RELEASE_0.2.0rc7.md)。
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="治理與工作對話的組織範例，專業視窗數量按需決定" width="360">
 
@@ -106,17 +108,18 @@ TaskCarry 使用 Python 3.11+，Git 工作流需要 Git。專案狀態儲存在�
 |---|---|---|---|
 | 手動後備 | [Commands and handoffs](docs/en/manual-setup.md) | [手动后备](docs/zh-CN/manual-setup.md) | [手動後備](docs/zh-TW/manual-setup.md) |
 | 操作手冊 | [Start here](docs/en/windows-example.md) | [从这里开始](docs/zh-CN/windows-example.md) | [從這裡開始](docs/zh-TW/windows-example.md) |
+| 既有使用者更新 | [Update TaskCarry](docs/en/updating.md) | [更新指南](docs/zh-CN/updating.md) | [更新指南](docs/zh-TW/updating.md) |
 | 架構 | [How it works](docs/en/architecture.md) | [架构说明](docs/zh-CN/architecture.md) | [架構說明](docs/zh-TW/architecture.md) |
 | 維護 | [Maintain a project](docs/en/governance-maintenance.md) | [维护项目](docs/zh-CN/governance-maintenance.md) | [維護專案](docs/zh-TW/governance-maintenance.md) |
 | 私有 Git 與多電腦 | [Guide](docs/en/remote-and-multicomputer.md) | [说明](docs/zh-CN/remote-and-multicomputer.md) | [說明](docs/zh-TW/remote-and-multicomputer.md) |
 
 [治理閉環如何變得更簡潔](docs/zh-TW/governance-evolution.md)
 
-[CLI / MCP 參考](docs/COMMANDS.md) · [公開技能](skills) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc6/docs/VALIDATION.md)
+[CLI / MCP 參考](docs/COMMANDS.md) · [公開技能](skills) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/main/docs/VALIDATION.md)
 
 ## 一起改進
 
-歡迎提問、分享實際情境、改善範例、翻譯或程式碼。可以從 [Issues](https://github.com/bryan123466/taskcarry/issues) 或[參與貢獻](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc5/CONTRIBUTING.md)開始。分享前請移除私有專案內容；[安全說明](SECURITY.md)介紹哪些資料應保留在自己手中。
+歡迎提問、分享實際情境、改善範例、翻譯或程式碼。可以從 [Issues](https://github.com/bryan123466/taskcarry/issues) 或[參與貢獻](https://github.com/bryan123466/taskcarry/blob/main/CONTRIBUTING.md)開始。分享前請移除私有專案內容；[安全說明](SECURITY.md)介紹哪些資料應保留在自己手中。
 
 ## 開源授權
 

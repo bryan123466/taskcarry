@@ -2,7 +2,7 @@
 
 [Return to conversational onboarding](windows-example.md) · [简体中文](../zh-CN/manual-setup.md) · [繁體中文](../zh-TW/manual-setup.md) · [Command reference](../COMMANDS.md)
 
-Use only the step governance identifies as missing. This corrected page supports the published **0.2.0rc6 prerelease**: [download the RC6 product ZIP](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip). Use that package with this guide; the RC5 download notice left in its bundled manual is outdated. Verify an existing runtime's actual version before using RC6 setup fields or upgrading. All paths below are synthetic examples; replace the root consistently before first setup.
+Use this fallback only for the step your governance assistant cannot complete. For a first installation, start with the [main guide](windows-example.md); for an existing installation, use [Update TaskCarry](updating.md). The paths below are synthetic examples to adapt consistently.
 
 - [Install or inspect the fixed runtime](#install)
   - [Initialize only missing governance state](#governance)
@@ -17,13 +17,13 @@ Use only the step governance identifies as missing. This corrected page supports
 
 ## Install or inspect the fixed runtime
 
-First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry/control` and extract the selected product ZIP into `C:/TaskCarry/toolkit`. The RC6 ZIP includes a top-level `taskcarry-0.2.0rc6/` directory: the extracted product root is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`, containing `START_HERE.md`, `packages/`, `docs/` and `skills/`. Use the actual extracted version directory if selecting another package. Keep the existing business project in place. Python 3.11+ is required; Git is required for Git workflows only.
+First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry/control` and extract the selected product ZIP into `C:/TaskCarry/toolkit`. The product ZIP includes a top-level `taskcarry-0.2.0rc7/` directory: the extracted product root is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc7`, containing `START_HERE.md`, `packages/`, `docs/` and `skills/`. Use the actual extracted version directory if selecting another package. Keep the existing business project in place. Python 3.11+ is required; Git is required for Git workflows only.
 
 Run these commands in PowerShell **only when the dedicated runtime does not already exist**. Installing the package does not create a new business project or authorize upgrading an existing runtime.
 
 ```powershell
 py -3 -m venv 'C:/TaskCarry/runtime'
-$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc6/packages' -Filter '*.whl' -File
+$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7/packages' -Filter '*.whl' -File
 if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor

@@ -4,7 +4,7 @@
 
 This guide is for people already working in Codex. Keep your existing project and working chats; add an independent governance chat that helps maintain project memory and progress. You can continue to give work directly to your original chats.
 
-**Version:** this guide covers the published **0.2.0rc6 prerelease**. [Download the RC6 product ZIP](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip). This corrected online guide supersedes the RC5 download notice left in the RC6 package. Check the actual version of an existing runtime before deciding to upgrade it. These examples use Codex on Windows; other hosts need their own connection verification.
+First time installing TaskCarry? Follow this guide for your existing Codex project. If TaskCarry is already in use, go to [Update an existing installation](updating.md).
 
 - [1. Establish a governance chat](#choose)
   - [Send one onboarding prompt](#install)
@@ -28,7 +28,7 @@ This guide is for people already working in Codex. Keep your existing project an
 
 If this project already has a working TaskCarry governance chat, return there and ask it to check and continue the existing connection. Otherwise create a **new independent chat** named, for example, “Project governance.” Your existing main and specialist chats keep their work and history.
 
-Choose a separate governance folder. For a first installation, the synthetic example is `C:/TaskCarry/control`; extract the selected product ZIP into `C:/TaskCarry/toolkit`. The RC6 archive includes its version directory, so the product root containing `START_HERE.md`, `packages/`, `docs/` and `skills/` is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`. Use that actual product root in the prompt below. Open the new chat in `control`. Existing projects keep their business files where they are. The assistant can prepare directories when its host permissions allow; [manual preparation](manual-setup.md#install) is available if needed. Use a different root for an unrelated project; do not move an already bound control as a shortcut.
+Download and extract the complete package from the [download entry](../../START_HERE.md#download). Give the assistant the extracted directory containing `START_HERE.md` and `packages/`. Choose a separate governance directory and open the new chat there; the assistant can help prepare it using the host tools. Keep business files in their original location. Detailed commands are in the [manual fallback](manual-setup.md#install) when needed.
 
 You only need a project locator: a directory, a relevant chat name/link, or both. A short name/description helps if it is not already in the project. You do not need to decide a task ID, branch name or number of specialist chats first.
 

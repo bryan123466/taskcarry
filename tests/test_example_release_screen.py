@@ -2,13 +2,45 @@
 import unittest
 import posixpath
 import re
+import tempfile
 from pathlib import Path
+from unittest.mock import patch
 from urllib.parse import unquote, urlsplit
 
-from scripts.build_trial import reviewed_example_path, screen_content, snapshot, product_contents
+from scripts.build_trial import ROOT, __version__, build, reviewed_example_path, screen_content, snapshot, product_contents
 
 
 class ExampleReleaseScreenTests(unittest.TestCase):
+    def test_old_download_link_stops_build_before_creating_artifacts(self):
+        read_bytes = Path.read_bytes
+        def stale_entry(path):
+            data = read_bytes(path)
+            if path == ROOT / 'START_HERE.md':
+                data = data.replace(('releases/tag/v' + __version__).encode(), b'releases/tag/v0.0.0rc1')
+            return data
+        with tempfile.TemporaryDirectory(prefix='taskcarry-download-guard-') as temporary:
+            destination = Path(temporary) / 'product'
+            with patch.object(Path, 'read_bytes', stale_entry):
+                with self.assertRaisesRegex(RuntimeError, 'download entry must match'):
+                    build(destination, profile='product')
+            self.assertFalse(destination.exists())
+            self.assertEqual(list(Path(temporary).iterdir()), [])
+
+    def test_missing_update_route_stops_build_before_creating_artifacts(self):
+        read_bytes = Path.read_bytes
+        def missing_route(path):
+            data = read_bytes(path)
+            if path == ROOT / 'START_HERE.md':
+                data = data.replace(b'](docs/zh-TW/updating.md)', b'](docs/zh-TW/windows-example.md)')
+            return data
+        with tempfile.TemporaryDirectory(prefix='taskcarry-update-route-') as temporary:
+            destination = Path(temporary) / 'product'
+            with patch.object(Path, 'read_bytes', missing_route):
+                with self.assertRaisesRegex(RuntimeError, 'both user routes'):
+                    build(destination, profile='product')
+            self.assertFalse(destination.exists())
+            self.assertEqual(list(Path(temporary).iterdir()), [])
+
     def test_product_document_links_resolve_inside_the_download(self):
         contents = product_contents(snapshot()[0])
         failures = []

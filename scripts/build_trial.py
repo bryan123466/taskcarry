@@ -40,6 +40,7 @@ SYNTHETIC_EXAMPLE_FILES = {
     "examples/windows_quickstart/bootstrap.py",
 }
 REQUIRED.update({f"docs/{language}/manual-setup.md" for language in ("en", "zh-CN", "zh-TW")})
+REQUIRED.update({f"docs/{language}/updating.md" for language in ("en", "zh-CN", "zh-TW")})
 REQUIRED.update({"skills/" + name for name in SKILL_REFERENCES})
 # The documented fresh-install example must be runnable from the archive.
 REQUIRED.update({"examples/quality_forms/fixture/requirements.md",
@@ -134,6 +135,19 @@ def screen_content(contents, deny_tokens=()):
     return {"screened_files": len(contents), "findings": [], "scope": "allowlist, host paths, caller deny tokens, common secret patterns; manual scope review remains required"}
 
 
+def validate_download_entry(contents):
+    """Refuse a product whose current download sends users to another version."""
+    entry = contents["START_HERE.md"].decode("utf-8")
+    downloads = re.findall(r"https://github\.com/bryan123466/taskcarry/releases/tag/v([^\s)\"<>]+)", entry)
+    if not downloads or any(version != __version__ for version in downloads):
+        raise RuntimeError("The current download entry must match the package version")
+    for language in ("en", "zh-CN", "zh-TW"):
+        for guide in ("windows-example", "updating"):
+            path = f"docs/{language}/{guide}.md"
+            if path not in contents or f"]({path})" not in entry:
+                raise RuntimeError("The download entry needs both user routes in all three languages")
+
+
 def snapshot(deny_tokens=()):
     contents = {path.relative_to(ROOT).as_posix(): path.read_bytes() for path in files()}
     missing = sorted(REQUIRED - set(contents))
@@ -142,6 +156,7 @@ def snapshot(deny_tokens=()):
     metadata = tomllib.loads(contents["pyproject.toml"].decode("utf-8"))
     if metadata["project"]["version"] != __version__:
         raise RuntimeError("Package and implementation versions differ")
+    validate_download_entry(contents)
     if not isinstance(json.loads(contents["docs/VALIDATION_RESULTS.json"]), dict):
         raise RuntimeError("Validation results must be a structured object")
     actual_skills = {name.split("/")[1] for name in contents if name.startswith("skills/") and name.endswith("/SKILL.md")}
@@ -216,6 +231,8 @@ def product_contents(contents):
         raise RuntimeError("Product package needs complete project onboarding documentation")
     if not {f"docs/{language}/manual-setup.md" for language in ("en", "zh-CN", "zh-TW")}.issubset(result):
         raise RuntimeError("Product package needs the three manual fallback guides")
+    if not {f"docs/{language}/updating.md" for language in ("en", "zh-CN", "zh-TW")}.issubset(result):
+        raise RuntimeError("Product package needs the three existing-user update guides")
     if not {"skills/" + name for name in SKILL_REFERENCES}.issubset(result):
         raise RuntimeError("Product package needs the public onboarding skill references")
     return result

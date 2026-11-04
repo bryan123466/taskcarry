@@ -2,7 +2,7 @@
 
 [返回對話式接入](windows-example.md) · [English](../en/manual-setup.md) · [简体中文](../zh-CN/manual-setup.md) · [命令參考](../COMMANDS.md)
 
-只執行治理指出的目前缺步。本校正版頁面對應已發布的 **0.2.0rc6 預發布版**：[下載 RC6 完整產品套件](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip)。使用該套件配合本頁操作，套件內手冊殘留的 RC5 下載說明已過時。既有執行環境先核對實際版本，再使用 RC6 的 setup 參數或決定是否升級。下列路徑均為合成範例，首次設定前統一替換根目錄。
+僅在治理助手無法代辦某一步時使用本頁。首次安裝從[主手冊](windows-example.md)開始；既有安裝使用[更新提示詞](updating.md)。下列路徑為合成範例，依實際位置統一調整。
 
 - [安裝或核對固定執行環境](#install)
   - [只初始化缺失的治理狀態](#governance)
@@ -17,13 +17,13 @@
 
 ## 安裝或核對固定執行環境
 
-先檢查既有安裝與 control，有效時直接重用。確實首次安裝工具時，建立 `C:/TaskCarry/control`，將選定產品 ZIP 解壓縮到 `C:/TaskCarry/toolkit`。RC6 ZIP 自帶頂層目錄 `taskcarry-0.2.0rc6/`，因此實際產品根目錄是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`，其中包含 `START_HERE.md`、`packages/`、`docs/` 與 `skills/`。選用其他版本時依實際解壓縮出的版本目錄調整。原業務專案保留在原位置。需要 Python 3.11+；只有 Git 工作流程需要 Git。
+先檢查既有安裝與 control，有效時直接重用。確實首次安裝工具時，建立 `C:/TaskCarry/control`，將選定產品 ZIP 解壓縮到 `C:/TaskCarry/toolkit`。產品 ZIP 自帶頂層目錄 `taskcarry-0.2.0rc7/`，因此實際產品根目錄是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc7`，其中包含 `START_HERE.md`、`packages/`、`docs/` 與 `skills/`。選用其他版本時依實際解壓縮出的版本目錄調整。原業務專案保留在原位置。需要 Python 3.11+；只有 Git 工作流程需要 Git。
 
 以下指令在 PowerShell 執行，**僅用於專用 runtime 尚不存在的情況**。安裝工具不建立新的業務專案，也不表示獲准升級既有執行環境。
 
 ```powershell
 py -3 -m venv 'C:/TaskCarry/runtime'
-$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc6/packages' -Filter '*.whl' -File
+$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7/packages' -Filter '*.whl' -File
 if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor

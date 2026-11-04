@@ -2,7 +2,7 @@
 
 [接入主手册](windows-example.md) · [日常操作索引](operation-manual.md) · [手动后备](manual-setup.md) · [English](../en/getting-started.md) · [繁體中文](../zh-TW/getting-started.md)
 
-已经在 Codex 中推进项目？保留项目与对话，TaskCarry 增加任务、成果、有效决定和接续位置的持久记录。本页介绍已公开的 **0.2.0rc6 预发布版**流程。下载 [RC6 产品包](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6)，再按[修正后的接入主手册](windows-example.md)开始。
+已经在 Codex 中推进项目？保留项目与对话，TaskCarry 增加任务、成果、有效决定和接续位置的持久记录。按你的情况选择[首次安装](windows-example.md)或[更新已有安装](updating.md)。
 
 <a id="准备目录和两项项目输入"></a>
 

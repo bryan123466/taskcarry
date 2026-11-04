@@ -4,7 +4,7 @@
 
 这份手册面向已经使用 Codex 的人。保留现有项目和工作对话，增加一个独立治理窗口，协助维护项目记忆与进展。以后仍可以直接在原来的工作窗口提出任务。
 
-**版本说明：**本手册对应已发布的 **0.2.0rc6 预发布版**，[下载 RC6 完整产品包](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip)。这是校正后的在线手册；RC6 包内残留的 RC5 下载说明已过时。已有运行环境先核对实际版本，再决定是否升级。本例使用 Windows 上的 Codex，其他宿主需分别核对接入能力。
+第一次安装 TaskCarry，请按本页接入已有的 Codex 项目。已经在使用 TaskCarry，请转到[更新已有安装](updating.md)。
 
 - [1. 建立治理总控窗口](#choose)
   - [发送一条接入提示词](#install)
@@ -28,7 +28,7 @@
 
 如果这个项目已有有效的 TaskCarry 治理总控，回到该窗口，让它核对并继续原接入即可。否则，在 Codex **新建一个独立窗口**，例如命名为“项目治理总控”。原主对话和专业对话继续保留工作与历史。
 
-为治理选择独立目录。首次安装的合成示例为 `C:/TaskCarry/control`，将选定产品 ZIP 解压到 `C:/TaskCarry/toolkit`。RC6 压缩包自带版本目录，因此包含 `START_HERE.md`、`packages/`、`docs/` 和 `skills/` 的实际产品根为 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`，下方提示词填写这个实际产品根。新治理窗口打开 `control`。原业务文件留在原位置。宿主权限允许时可让助手准备目录；需要时查看[手动准备](manual-setup.md#install)。无关项目使用另一个根目录，已有绑定的 control 不直接搬动。
+从[下载入口](../../START_HERE.md#download)取得完整包并解压，把包含 `START_HERE.md` 和 `packages/` 的目录交给助手。为治理选择独立目录，让新窗口打开该目录；助手可以通过宿主工具协助准备。业务文件继续保留在原位置。具体命令只在需要时查看[手动后备](manual-setup.md#install)。
 
 准备一个项目定位线索即可：项目目录、相关旧对话的名称或链接，或者两者都有。项目中尚无名称和简介时再补充；不用先决定任务 ID、分支名或专业窗口数量。
 

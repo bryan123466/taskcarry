@@ -4,7 +4,7 @@
 
 這份手冊面向已經使用 Codex 的人。保留現有專案與工作對話，增加一個獨立治理視窗，協助維護專案記憶與進展。以後仍可直接在原來的工作視窗提出任務。
 
-**版本說明：**本手冊對應已發布的 **0.2.0rc6 預發布版**，[下載 RC6 完整產品套件](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip)。這是校正後的線上手冊；RC6 套件內殘留的 RC5 下載說明已過時。既有執行環境先核對實際版本，再決定是否升級。本例使用 Windows 上的 Codex，其他宿主需個別核對接入能力。
+第一次安裝 TaskCarry，請依本頁接入既有的 Codex 專案。已經在使用 TaskCarry，請前往[更新既有安裝](updating.md)。
 
 - [1. 建立治理總控視窗](#choose)
   - [傳送一條接入提示詞](#install)
@@ -28,7 +28,7 @@
 
 如果這個專案已有有效的 TaskCarry 治理總控，回到該視窗，讓它核對並繼續原接入即可。否則，在 Codex **建立一個新的獨立視窗**，例如命名為「專案治理總控」。原主對話與專業對話繼續保留工作與歷史。
 
-為治理選擇獨立目錄。首次安裝的合成範例為 `C:/TaskCarry/control`，將選定產品 ZIP 解壓縮到 `C:/TaskCarry/toolkit`。RC6 壓縮套件自帶版本目錄，因此包含 `START_HERE.md`、`packages/`、`docs/` 與 `skills/` 的實際產品根目錄為 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc6`，下方提示詞填寫這個實際產品根目錄。新治理視窗開啟 `control`。原業務檔案留在原位置。宿主權限允許時可讓助手準備目錄；需要時查看[手動準備](manual-setup.md#install)。無關專案使用另一個根目錄，已有綁定的 control 不直接搬動。
+從[下載入口](../../START_HERE.md#download)取得完整套件並解壓縮，把包含 `START_HERE.md` 與 `packages/` 的目錄交給助手。為治理選擇獨立目錄，讓新視窗開啟該目錄；助手可以透過宿主工具協助準備。業務檔案繼續留在原位置。具體指令僅在需要時查看[手動備用步驟](manual-setup.md#install)。
 
 準備一個專案定位線索即可：專案目錄、相關舊對話的名稱或連結，或者兩者都有。專案中尚無名稱與簡介時再補充；不用先決定任務 ID、分支名稱或專業視窗數量。
 

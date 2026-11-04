@@ -2,7 +2,7 @@
 
 [Start with conversational onboarding](windows-example.md) · [Manual fallback](manual-setup.md) · [简体中文](../zh-CN/operation-manual.md) · [繁體中文](../zh-TW/operation-manual.md)
 
-This is the daily-operation index for the published [**0.2.0rc6 prerelease**](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6). Setup details and corrected download instructions live in one [main walkthrough](windows-example.md); verify your installed version before using its commands.
+Use this page for everyday work after setup. For initial setup, see [First installation](windows-example.md); to update an existing installation, return to your original governance chat with the [update prompt](updating.md).
 
 - [Onboarding and working modes](#onboarding)
 - [Responsibilities](#responsibilities)

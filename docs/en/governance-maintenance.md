@@ -4,7 +4,7 @@
 
 TaskCarry keeps project records in the control directory while the installed toolkit provides the operations that use them. Updating the toolkit should help the next session continue the same work. It should not create a new project, resubmit past results, or merge business branches simply to refresh a Skill.
 
-This supplement describes the published [0.2.0rc6 prerelease](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6) and maintenance of an existing installation. Start with the [corrected RC6 guide](windows-example.md) and verify the version you actually run before planning an update. For saved schedules and an optional observer, see [scheduled governance](automation.md).
+This is a technical reference for the governance assistant. Users can start with the [update prompt](updating.md); the assistant consults these details when needed. Optional scheduling is covered in [scheduled governance](automation.md).
 
 ## Three updates with different purposes
 

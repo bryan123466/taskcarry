@@ -4,7 +4,7 @@
 
 這份手冊面向已經使用 Codex 的人。保留現有專案與工作對話，增加一個獨立治理視窗，協助維護專案記憶與進展。以後仍可直接在原來的工作視窗提出任務。
 
-**版本說明：**本工作樹說明的是 **0.2.0rc6 候選**；目前已發布下載仍為 [0.2.0rc5](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5)。安裝時以實際產品套件隨附手冊為準，候選文件不表示 rc6 已發布或已安裝。本例使用 Windows 上的 Codex，其他宿主需個別核對接入能力。
+**版本說明：**本手冊對應已發布的 **0.2.0rc6 預發布版**，[下載 RC6 完整產品套件](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip)。這是校正後的線上手冊；RC6 套件內殘留的 RC5 下載說明已過時。既有執行環境先核對實際版本，再決定是否升級。本例使用 Windows 上的 Codex，其他宿主需個別核對接入能力。
 
 - [1. 建立治理總控視窗](#choose)
   - [傳送一條接入提示詞](#install)

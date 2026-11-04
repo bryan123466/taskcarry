@@ -2,7 +2,7 @@
 
 [Return to conversational onboarding](windows-example.md) · [简体中文](../zh-CN/manual-setup.md) · [繁體中文](../zh-TW/manual-setup.md) · [Command reference](../COMMANDS.md)
 
-Use only the step governance identifies as missing. This page supports the **0.2.0rc6 candidate**; the published download remains [rc5](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5), whose package includes its matching manual. Do not use candidate-only setup fields with an older installed runtime. All paths below are synthetic examples; replace the root consistently before first setup.
+Use only the step governance identifies as missing. This corrected page supports the published **0.2.0rc6 prerelease**: [download the RC6 product ZIP](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip). Use that package with this guide; the RC5 download notice left in its bundled manual is outdated. Verify an existing runtime's actual version before using RC6 setup fields or upgrading. All paths below are synthetic examples; replace the root consistently before first setup.
 
 - [Install or inspect the fixed runtime](#install)
   - [Initialize only missing governance state](#governance)

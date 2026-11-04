@@ -4,7 +4,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[下載 TaskCarry](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5) · [從操作手冊開始](docs/zh-TW/windows-example.md) · [瞭解架構](docs/zh-TW/architecture.md)
+[下載 TaskCarry 0.2.0rc6（預發布）](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6) · [從操作手冊開始](docs/zh-TW/windows-example.md) · [瞭解架構](docs/zh-TW/architecture.md)
 
 TaskCarry 為人和 AI 共同推進的長期專案提供**專案記憶、工作區協作與專案工作流程治理**。它協助準備好的階段成果彙入共用專案，保留未完成的工作，並在支援的操作中斷後核對實際結果、接續後續步驟。任務背景、選定檔案、成果歷史與下一步跟著專案保留，讓工作能夠跨越對話與暫停時段繼續推進。
 
@@ -75,9 +75,9 @@ TaskCarry 儲存記錄並執行已支援的本機操作。你保留專案方向�
 
 ## 從一個專案開始
 
-目前已確認下載仍為[發布頁面](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5)上的 **taskcarry-0.2.0rc5-product.zip**，請使用該產品套件隨附說明。本工作樹正在準備 **0.2.0rc6 候選**及其[新版對話式接入手冊](docs/zh-TW/windows-example.md)，候選準備不表示已經發布或安裝。
+從 [0.2.0rc6 預發布頁面](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6)下載 **taskcarry-0.2.0rc6-product.zip**，再依[對話式接入手冊](docs/zh-TW/windows-example.md)開始。RC6 已公開供複核，仍是預發布版本；發布不會自動安裝或升級本機執行環境。凍結套件內仍有準備時點的 rc5 下載文字，發布頁提供修正後的線上說明入口。
 
-候選主路徑面向已經使用 Codex 的人：
+主路徑面向已經使用 Codex 的人：
 
 1. **建立獨立治理視窗。** 已有有效 TaskCarry 治理視窗/control 則重用，提供專案定位線索與產品套件位置，傳送手冊中的一條提示詞。
 2. **讓治理帶著接入既有工作。** 繼承既有成果、決定、任務與接續點，完成安裝與剩餘宿主操作，並給出有依據的分工建議；新增專業視窗可以為零。
@@ -112,7 +112,7 @@ TaskCarry 使用 Python 3.11+，Git 工作流需要 Git。專案狀態儲存在�
 
 [治理閉環如何變得更簡潔](docs/zh-TW/governance-evolution.md)
 
-[CLI / MCP 參考](docs/COMMANDS.md) · [公開技能](skills) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc5/docs/VALIDATION.md)
+[CLI / MCP 參考](docs/COMMANDS.md) · [公開技能](skills) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc6/docs/VALIDATION.md)
 
 ## 一起改進
 

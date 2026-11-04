@@ -4,7 +4,7 @@
 
 This guide is for people already working in Codex. Keep your existing project and working chats; add an independent governance chat that helps maintain project memory and progress. You can continue to give work directly to your original chats.
 
-**Version:** this checkout describes the **0.2.0rc6 candidate**. The current published download remains [0.2.0rc5](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5); use the manual shipped with the package you actually install. Candidate documentation does not mean that rc6 is published or installed. These examples use Codex on Windows; other hosts need their own connection verification.
+**Version:** this guide covers the published **0.2.0rc6 prerelease**. [Download the RC6 product ZIP](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip). This corrected online guide supersedes the RC5 download notice left in the RC6 package. Check the actual version of an existing runtime before deciding to upgrade it. These examples use Codex on Windows; other hosts need their own connection verification.
 
 - [1. Establish a governance chat](#choose)
   - [Send one onboarding prompt](#install)

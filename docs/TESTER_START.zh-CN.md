@@ -4,7 +4,7 @@
 
 接入实际项目时，推荐直接按照[操作手册](zh-CN/windows-example.md)进行。如果想先看看工作流程，可以选择下面这个可选示例，在独立目录使用虚构文件体验。你不需要提供私有材料，也不需要成为软件测试人员。
 
-在[发布页面](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5)下载 **taskcarry-0.2.0rc5-product.zip**，把解压后的产品包和一个新示例目录交给 Codex 聊天。
+在 [RC6 预发布页面](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6)下载 **taskcarry-0.2.0rc6-product.zip**，把解压后的产品包、[修正后的在线操作手册](zh-CN/windows-example.md)和一个新示例目录交给 Codex 聊天。
 
 ## 可以直接使用的提示词
 

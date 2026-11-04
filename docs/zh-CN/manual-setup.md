@@ -2,7 +2,7 @@
 
 [返回对话式接入](windows-example.md) · [English](../en/manual-setup.md) · [繁體中文](../zh-TW/manual-setup.md) · [命令参考](../COMMANDS.md)
 
-只执行治理指出的当前缺步。本页对应 **0.2.0rc6 候选**；已发布下载仍为 [rc5](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5)，其产品包有对应手册。旧运行包不能直接使用候选新增 setup 参数。下列路径均为合成示例，首次配置前统一替换根目录。
+只执行治理指出的当前缺步。本校正版页面对应已发布的 **0.2.0rc6 预发布版**：[下载 RC6 完整产品包](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip)。使用该包配合本页操作，包内手册残留的 RC5 下载说明已过时。已有运行环境先核对实际版本，再使用 RC6 的 setup 参数或决定是否升级。下列路径均为合成示例，首次配置前统一替换根目录。
 
 - [安装或核对固定运行时](#install)
   - [只初始化缺失的治理状态](#governance)

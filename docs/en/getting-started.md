@@ -2,7 +2,7 @@
 
 [Main onboarding guide](windows-example.md) · [Daily-operation index](operation-manual.md) · [Manual fallback](manual-setup.md) · [简体中文](../zh-CN/getting-started.md) · [繁體中文](../zh-TW/getting-started.md)
 
-Already working in Codex? Keep your project and conversations. TaskCarry adds a durable record of tasks, results, effective decisions and where to continue. This page introduces the **0.2.0rc6 candidate** workflow; the [published rc5 package](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5) retains its own matching instructions.
+Already working in Codex? Keep your project and conversations. TaskCarry adds a durable record of tasks, results, effective decisions and where to continue. This page introduces the published **0.2.0rc6 prerelease** workflow. Download the [RC6 product package](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6) and follow the [corrected onboarding guide](windows-example.md).
 
 <a id="prepare-the-directories-and-two-project-inputs"></a>
 

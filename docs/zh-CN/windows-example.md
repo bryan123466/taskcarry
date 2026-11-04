@@ -4,7 +4,7 @@
 
 这份手册面向已经使用 Codex 的人。保留现有项目和工作对话，增加一个独立治理窗口，协助维护项目记忆与进展。以后仍可以直接在原来的工作窗口提出任务。
 
-**版本说明：**本工作树说明的是 **0.2.0rc6 候选**；当前已发布下载仍为 [0.2.0rc5](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5)。安装时以实际产品包随附手册为准，候选文档不表示 rc6 已发布或已安装。本例使用 Windows 上的 Codex，其他宿主需分别核对接入能力。
+**版本说明：**本手册对应已发布的 **0.2.0rc6 预发布版**，[下载 RC6 完整产品包](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc6/taskcarry-0.2.0rc6-product.zip)。这是校正后的在线手册；RC6 包内残留的 RC5 下载说明已过时。已有运行环境先核对实际版本，再决定是否升级。本例使用 Windows 上的 Codex，其他宿主需分别核对接入能力。
 
 - [1. 建立治理总控窗口](#choose)
   - [发送一条接入提示词](#install)

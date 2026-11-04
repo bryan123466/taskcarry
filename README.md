@@ -4,7 +4,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[Download TaskCarry](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5) · [Start with the user manual](docs/en/windows-example.md) · [See the architecture](docs/en/architecture.md)
+[Download TaskCarry 0.2.0rc6 (prerelease)](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6) · [Start with the user manual](docs/en/windows-example.md) · [See the architecture](docs/en/architecture.md)
 
 TaskCarry provides **project memory, workspace collaboration, and project workflow governance** for people working with AI tools. Bring ready stages into a shared project, preserve unfinished work, and resume supported interrupted operations from recorded and verified results. Task context, selected files, deliverable history, and next steps stay with the project across conversations and pauses.
 
@@ -75,9 +75,9 @@ A received stage can be part of an unfinished task. A paused task can stay pause
 
 ## Start with one project
 
-The confirmed download remains **taskcarry-0.2.0rc5-product.zip** on the [release page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5). Use the instructions shipped with that package. This source tree prepares the **0.2.0rc6 candidate** and its [revised conversational onboarding guide](docs/en/windows-example.md); candidate preparation does not mean it has been published or installed.
+Download **taskcarry-0.2.0rc6-product.zip** from the [0.2.0rc6 prerelease page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6), then follow the [conversational onboarding guide](docs/en/windows-example.md). RC6 is published for review; it remains a prerelease, and publication does not install or upgrade your local runtime. The release page links to corrected online instructions where the frozen package still contains preparation-time rc5 download wording.
 
-The candidate's main path is for people already using Codex:
+The main path is for people already using Codex:
 
 1. **Establish an independent governance chat.** Reuse a verified existing TaskCarry governance chat/control if present. Give a project locator and the product-package location, then send the guide's one prompt.
 2. **Let governance connect existing work.** It inherits known outputs, decisions, tasks and continuation points, guides installation and remaining host actions, and suggests a useful division of work. Added specialists may be zero.
@@ -112,7 +112,7 @@ TaskCarry uses Python 3.11+; Git is needed for Git workflows. It stores project 
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc5/docs/VALIDATION.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc6/docs/VALIDATION.md)
 
 ## Join in
 

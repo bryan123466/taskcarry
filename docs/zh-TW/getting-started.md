@@ -2,7 +2,7 @@
 
 [接入主手冊](windows-example.md) · [日常操作索引](operation-manual.md) · [手動後備](manual-setup.md) · [English](../en/getting-started.md) · [简体中文](../zh-CN/getting-started.md)
 
-已經在 Codex 中推進專案？保留專案與對話，TaskCarry 增加任務、成果、有效決定與接續位置的持久記錄。本頁介紹 **0.2.0rc6 候選**流程；[已發布 rc5 產品套件](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc5)保留其對應說明。
+已經在 Codex 中推進專案？保留專案與對話，TaskCarry 增加任務、成果、有效決定與接續位置的持久記錄。本頁介紹已公開的 **0.2.0rc6 預發布版**流程。下載 [RC6 產品套件](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc6)，再依[修正後的接入主手冊](windows-example.md)開始。
 
 <a id="準備目錄和兩項專案輸入"></a>
 

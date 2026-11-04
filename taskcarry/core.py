@@ -533,6 +533,156 @@ class Core:
             raise GovernanceError('SNAPSHOT_CORRUPT', 'Snapshot digest or size verification failed.')
         return data
 
+    @staticmethod
+    def _restore_digest(value):
+        return digest_bytes(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                       separators=(',', ':'), allow_nan=False).encode('utf-8'))
+
+    @staticmethod
+    def _restore_directory_identity(destination):
+        if _linked(destination):
+            raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The restore destination became a link.')
+        info = destination.stat()
+        if not stat.S_ISDIR(info.st_mode):
+            raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The restore destination is not a directory.')
+        return {'device': info.st_dev, 'inode': info.st_ino,
+                'birthtime_ns': getattr(info, 'st_birthtime_ns', None)}
+
+    @staticmethod
+    def _restore_metadata(metadata):
+        """Bounded evidence for the newly created repository, without links."""
+        records, total, pending = {}, 0, [metadata]
+        while pending:
+            directory = pending.pop()
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    path = Path(entry.path)
+                    relative = path.relative_to(metadata).as_posix()
+                    if _linked(path):
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git metadata contains a link.')
+                    if entry.is_dir(follow_symlinks=False):
+                        records[relative] = {'directory': True}
+                        pending.append(path)
+                    else:
+                        content = read_file_bytes(path, max_bytes=MAX_CHECKPOINT_BYTES)
+                        total += len(content)
+                        records[relative] = {'sha256': digest_bytes(content), 'size': len(content),
+                                             'mode': stat.S_IMODE(path.stat().st_mode)}
+                    if len(records) > MAX_PATHS * 8 or total > MAX_CHECKPOINT_BYTES * 2:
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git metadata exceeds verification limits.')
+        return records
+
+    def _restore_effect(self, checkpoint, destination, expected_git=None):
+        """Read exact restored layers, including absence, without repairing them."""
+        expected = {record['path']: record['worktree'] for record in checkpoint['files']
+                    if record['worktree'] is not None}
+        directories = {str(parent) for path in expected for parent in PurePosixPath(path).parents
+                       if str(parent) != '.'}
+        files, seen_directories, pending = {}, set(), [destination]
+        while pending:
+            directory = pending.pop()
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    path = Path(entry.path)
+                    relative = path.relative_to(destination).as_posix()
+                    if _linked(path):
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'A restored path became a link.', {'path': relative})
+                    if relative == '.git' and checkpoint['git']:
+                        if not entry.is_dir(follow_symlinks=False):
+                            raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git metadata was replaced.')
+                        continue
+                    if entry.is_dir(follow_symlinks=False):
+                        if relative not in directories:
+                            raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'An extra directory exists in the restored workspace.', {'path': relative})
+                        seen_directories.add(relative)
+                        pending.append(path)
+                        continue
+                    if relative not in expected:
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'An extra path exists in the restored workspace.', {'path': relative})
+                    content = read_file_bytes(path)
+                    reference = expected[relative]
+                    mode = '100755' if path.stat().st_mode & stat.S_IXUSR else '100644'
+                    if (digest_bytes(content) != reference['sha256'] or len(content) != reference['size']
+                            or os.name != 'nt' and mode != reference['mode']):
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored file content or mode changed.', {'path': relative})
+                    files[relative] = {'sha256': digest_bytes(content), 'size': len(content), 'mode': mode}
+        if set(files) != set(expected) or seen_directories != directories:
+            raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored files or directories are missing.')
+        result = {'directory_identity': self._restore_directory_identity(destination),
+                  'files': files, 'directories': sorted(seen_directories), 'git': None}
+        if checkpoint['git']:
+            metadata = destination / '.git'
+            metadata_identity = self._restore_directory_identity(metadata)
+            metadata_files = self._restore_metadata(metadata)
+            if expected_git is not None and (metadata_identity != expected_git.get('metadata_identity')
+                                            or metadata_files != expected_git.get('metadata_files')):
+                raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git metadata changed; no Git commands executed.')
+            if (Path(git(destination, 'rev-parse', '--show-toplevel').stdout.decode().strip()).resolve() != destination
+                    or Path(git(destination, 'rev-parse', '--absolute-git-dir').stdout.decode().strip()).resolve() != metadata):
+                raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git repository identity changed.')
+            if (metadata / 'commondir').exists() or _linked(metadata / 'commondir'):
+                raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git metadata was redirected.')
+            head = git(destination, 'rev-parse', '--verify', 'HEAD').stdout.decode().strip()
+            index = git(destination, 'ls-files', '--stage', '-z').stdout
+            tree = git(destination, 'ls-tree', '-r', '-z', '--full-tree', 'HEAD').stdout
+            for layer, entries in (('head', tree), ('index', index)):
+                wanted = {record['path']: record[layer] for record in checkpoint['files'] if record[layer] is not None}
+                actual = {}
+                for entry in entries.split(b'\0'):
+                    if not entry:
+                        continue
+                    fields, name = entry.split(b'\t', 1)
+                    fields = fields.decode().split()
+                    mode, oid = (fields[0], fields[2]) if layer == 'head' else (fields[0], fields[1])
+                    relative = name.decode('utf-8')
+                    if (relative not in wanted or mode != wanted[relative]['mode']
+                            or layer == 'index' and fields[2] != '0' or relative in actual):
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git layer differs from its checkpoint.')
+                    size = int(git(destination, 'cat-file', '-s', oid).stdout.strip())
+                    if size != wanted[relative]['size'] or size > MAX_FILE_BYTES:
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git blob size changed.')
+                    if digest_bytes(git(destination, 'cat-file', 'blob', oid).stdout) != wanted[relative]['sha256']:
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Restored Git blob content changed.')
+                    actual[relative] = oid
+                if set(actual) != set(wanted):
+                    raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'A restored Git layer has missing paths.')
+            result['git'] = {'head': head, 'index_entries_sha256': digest_bytes(index),
+                             'index_file_sha256': digest_bytes(read_file_bytes(metadata / 'index')),
+                             'head_file_sha256': digest_bytes(read_file_bytes(metadata / 'HEAD')),
+                             'config_sha256': digest_bytes(read_file_bytes(metadata / 'config')),
+                             'metadata_identity': metadata_identity, 'metadata_files': metadata_files}
+        return result
+
+    def _restore_finalize(self, checkpoint, destination, operation):
+        """A known complete effect permits receipt publication, never replay."""
+        oid = operation['operation_id']
+        try:
+            actual = self._restore_effect(checkpoint, destination, operation.get('effect_fingerprint', {}).get('git'))
+        except (OSError, GovernanceError) as exc:
+            raise GovernanceError('RESTORE_REVIEW_REQUIRED',
+                                  'The recorded restore effect cannot be verified; destination preserved.',
+                                  {'operation_id': oid, 'reason': getattr(exc, 'code', type(exc).__name__)}) from exc
+        if (actual != operation.get('effect_fingerprint')
+                or self._restore_digest(actual) != operation.get('effect_sha256')
+                or actual['directory_identity'] != operation.get('destination_identity')):
+            raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The restored destination changed; no effects replayed.',
+                                  {'operation_id': oid})
+        result = {'checkpoint_id': operation['checkpoint_id'], 'destination': str(destination), 'restored': True,
+                  'synthetic_git_baseline': checkpoint['git'], 'original_head': checkpoint['original_head'],
+                  'scope': 'selected_files_only', 'original_workspace_modified': False, 'operation_id': oid}
+        receipt = {'operation_id': oid, 'checkpoint_id': operation['checkpoint_id'], 'destination': str(destination),
+                   'checkpoint_sha256': operation['checkpoint_sha256'],
+                   'effect_sha256': operation['effect_sha256'], 'verified': True, 'result': result}
+        if operation['status'] == 'COMPLETED':
+            if self.store.get('restore_receipts', oid) != receipt:
+                raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The completed restore receipt is inconsistent.', {'operation_id': oid})
+            return {**result, 'reused': True}
+        with self.store.transaction():
+            self.store.put('operations', oid, {**operation, 'status': 'COMPLETED', 'effect_state': 'VERIFIED', 'completed_at': now()})
+            self.store.put('restore_receipts', oid, receipt)
+            self.store.event('checkpoint_restored', result)
+        return {**result, 'reused': False}
+
     def restore(self, checkpoint_id, destination):
         with self.store.guard():
             checkpoint = self.store.get('checkpoints', checkpoint_id)
@@ -546,16 +696,56 @@ class Core:
             source = Path(checkpoint['workspace']).resolve()
             if destination == self.root or destination.is_relative_to(self.root) or self.root.is_relative_to(destination) or destination == source or destination.is_relative_to(source) or source.is_relative_to(destination):
                 raise GovernanceError('RESTORE_NOT_INDEPENDENT', 'Restore into an independent directory outside source and governance workspaces.')
+            checkpoint_hash = self._restore_digest(checkpoint)
+            oid = 'restore-' + self._restore_digest([checkpoint_id, os.path.normcase(str(destination))])[:24]
+            operation = self.store.get('operations', oid)
+            if operation is not None:
+                if any(type(operation.get(key)) is not int or operation[key] != 1
+                       for key in ('operation_protocol', 'restore_protocol')):
+                    raise GovernanceError('OPERATION_PROTOCOL_UNSUPPORTED', 'Use a compatible toolkit for this restore operation.')
+                if (operation.get('kind') != 'restore' or operation.get('checkpoint_sha256') != checkpoint_hash
+                        or operation.get('checkpoint_id') != checkpoint_id or operation.get('destination') != str(destination)):
+                    raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The restore intent no longer matches its input.', {'operation_id': oid})
+                if operation.get('status') in ('EFFECT_APPLIED', 'COMPLETED'):
+                    return self._restore_finalize(checkpoint, destination, operation)
+                if operation.get('status') != 'PREPARED' or operation.get('effect_state') != 'NOT_APPLIED':
+                    raise GovernanceError('RESTORE_REVIEW_REQUIRED',
+                                          'An interrupted restore has uncertain or partial effects; inspect the retained destination. No effects replayed.',
+                                          {'operation_id': oid, 'destination': str(destination), 'status': operation.get('status')})
             if destination.exists() and (not destination.is_dir() or any(destination.iterdir())):
                 raise GovernanceError('RESTORE_NOT_EMPTY', 'Restore destination must be absent or empty.')
             # Validate every object before creating or writing the destination.
             contents = {}
+            if (not isinstance(checkpoint.get('files'), list) or not 1 <= len(checkpoint['files']) <= MAX_PATHS
+                    or type(checkpoint.get('git')) is not bool):
+                raise GovernanceError('CHECKPOINT_CORRUPT', 'Restore requires a bounded checkpoint file manifest.')
+            paths, total = set(), 0
             for record in checkpoint['files']:
                 validate_relative_path(destination, record['path'])
+                if record['path'].casefold() in paths:
+                    raise GovernanceError('CHECKPOINT_CORRUPT', 'Checkpoint file paths must be unique.')
+                paths.add(record['path'].casefold())
                 for layer in ('head', 'index', 'worktree'):
                     if record[layer]:
+                        if record[layer].get('mode') not in ('100644', '100755'):
+                            raise GovernanceError('CHECKPOINT_CORRUPT', 'Checkpoint layers must be regular files.')
                         contents[(record['path'], layer)] = self._snapshot_bytes(record[layer])
+                        total += len(contents[(record['path'], layer)])
+                        if total > MAX_CHECKPOINT_BYTES:
+                            raise GovernanceError('CHECKPOINT_TOO_LARGE', 'The restore exceeds the checkpoint byte limit.')
+            if operation is None:
+                operation = {'operation_id': oid, 'kind': 'restore', 'operation_protocol': 1, 'restore_protocol': 1,
+                             'task_id': checkpoint['task_id'], 'checkpoint_id': checkpoint_id,
+                             'checkpoint_sha256': checkpoint_hash, 'destination': str(destination),
+                             'status': 'PREPARED', 'effect_state': 'NOT_APPLIED', 'created_at': now()}
+                self.store.put('operations', oid, operation)
+            operation = {**operation, 'status': 'APPLYING', 'effect_state': 'UNKNOWN'}
+            self.store.put('operations', oid, operation)
             destination.mkdir(parents=True, exist_ok=True)
+            operation['destination_identity'] = self._restore_directory_identity(destination)
+            self.store.put('operations', oid, operation)
+            if any(destination.iterdir()):
+                raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'Work appeared at the restore destination; it was preserved.', {'operation_id': oid})
             if checkpoint['git']:
                 git(destination, 'init', '--quiet')
                 git(destination, 'config', 'user.name', 'TaskCarry synthetic restore')
@@ -563,28 +753,35 @@ class Core:
                 for record in checkpoint['files']:
                     if record['head']:
                         data = contents[(record['path'], 'head')]
-                        oid = git(destination, 'hash-object', '-w', '--stdin', input_bytes=data).stdout.decode().strip()
-                        git(destination, 'update-index', '--add', '--cacheinfo', record['head']['mode'], oid, record['path'])
+                        blob_oid = git(destination, 'hash-object', '-w', '--stdin', input_bytes=data).stdout.decode().strip()
+                        git(destination, 'update-index', '--add', '--cacheinfo', record['head']['mode'], blob_oid, record['path'])
                 git(destination, 'commit', '--allow-empty', '--quiet', '-m',
                     'TaskCarry synthetic restore baseline; original HEAD: ' + str(checkpoint['original_head']))
                 for record in checkpoint['files']:
                     if record['index']:
-                        oid = git(destination, 'hash-object', '-w', '--stdin', input_bytes=contents[(record['path'], 'index')]).stdout.decode().strip()
-                        git(destination, 'update-index', '--add', '--cacheinfo', record['index']['mode'], oid, record['path'])
+                        blob_oid = git(destination, 'hash-object', '-w', '--stdin', input_bytes=contents[(record['path'], 'index')]).stdout.decode().strip()
+                        git(destination, 'update-index', '--add', '--cacheinfo', record['index']['mode'], blob_oid, record['path'])
                     else:
                         git(destination, 'update-index', '--force-remove', '--', record['path'])
             for record in checkpoint['files']:
                 if record['worktree']:
-                    target = destination / record['path']
+                    if self._restore_directory_identity(destination) != operation['destination_identity']:
+                        raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The restore destination was replaced.')
+                    target = validate_relative_path(destination, record['path'])
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(contents[(record['path'], 'worktree')])
+                    with target.open('xb') as stream:
+                        stream.write(contents[(record['path'], 'worktree')])
+                        stream.flush()
+                        os.fsync(stream.fileno())
                     if os.name != 'nt':
                         target.chmod(0o755 if record['worktree']['mode'] == '100755' else 0o644)
-            result = {'checkpoint_id': checkpoint_id, 'destination': str(destination), 'restored': True,
-                      'synthetic_git_baseline': checkpoint['git'], 'original_head': checkpoint['original_head'],
-                      'scope': 'selected_files_only', 'original_workspace_modified': False}
-            self.store.event('checkpoint_restored', result)
-            return result
+            fingerprint = self._restore_effect(checkpoint, destination)
+            if fingerprint['directory_identity'] != operation['destination_identity']:
+                raise GovernanceError('RESTORE_REVIEW_REQUIRED', 'The restore destination was replaced.')
+            operation.update(status='EFFECT_APPLIED', effect_state='VERIFIED', effect_fingerprint=fingerprint,
+                             effect_sha256=self._restore_digest(fingerprint))
+            self.store.put('operations', oid, operation)
+            return self._restore_finalize(checkpoint, destination, operation)
 
     def artifact(self, task_id, path, role='input', backup=None, decision=None):
         if decision not in (None, 'ignore', 'dismiss', 'no_backup_needed', 'retain'):

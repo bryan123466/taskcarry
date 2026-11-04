@@ -34,7 +34,7 @@ SCHEMAS = {
     "doctor": schema(),
     "task": schema({"task_id": string(), "title": string(), "workstream": string(), "state": string(enum=["active", "paused", "waiting", "complete"])}, ["task_id"]),
     "checkpoint": schema({"task_id": string(), "workspace": string(), "paths": PATHS, "next_step": string(), "decision": string(), "paused": BOOL}, ["task_id", "workspace", "paths", "next_step"]),
-    "restore": schema({"checkpoint_id": string(), "destination": string("Absent or empty independent destination directory")}, ["checkpoint_id", "destination"]),
+    "restore": schema({"checkpoint_id": string(), "destination": string("Absent or empty independent destination; repeat the same checkpoint and destination to verify and finish a recorded restore")}, ["checkpoint_id", "destination"]),
     "artifact": schema({"task_id": string(), "path": string(), "role": string(), "backup": string(), "decision": string()}, ["task_id", "path"]),
     "experience": schema({"rule_id": string(), "code": string(), "operation": string(), "action": string(enum=["verify_and_finalize", "refresh_plan"]), "task_id": string(), "version": string(), "enabled": BOOL}, ["rule_id", "code", "operation", "action"]),
     "workspace": schema({"name": string(), "path": string("Existing local Git worktree")}, ["name", "path"]),

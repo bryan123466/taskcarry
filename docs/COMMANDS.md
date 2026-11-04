@@ -18,7 +18,7 @@ Success: `{"ok":true,"result":{...}}`. Failure: `{"ok":false,"error":{"code":"..
 | `task` | `task_id`, optional `title`, `workstream`, `state` | Record task; states active, paused, waiting, complete / 记录任务状态 |
 | `workspace` | `name`, `path` | Register existing Git workspace / 登记已有 Git 工作区 |
 | `checkpoint` | `task_id`, `workspace`, `paths`, `next_step`, optional `decision`, `paused` | Snapshot exact saved work / 保存精确检查点 |
-| `restore` | `checkpoint_id`, `destination` | Restore to absent/empty independent destination / 恢复到不存在或空的独立目录 |
+| `restore` | `checkpoint_id`, `destination` | Restore to absent/empty independent destination; repeat the same pair to verify a recorded effect and finish its receipt / 恢复到不存在或空的独立目录；同参数重试核验原效果并续办回执 |
 | `artifact` | `task_id`, `path`, optional `role`, `backup`, `decision` | Register content identity and available backup evidence / 记录材料身份及备份证据 |
 | `submit` | `task_id`, `workspace`, `commit`, `base`, `paths`, optional `stage_id`, `relation`, `supersedes` | Freeze explicit stage; paths must equal commit diff / 冻结明确交付，路径与提交差异须一致 |
 | `reconcile` | `baseline`, optional `execute`, `plan_id`, planning `limit` (1–100, default 20) | Plan a bounded receiving batch or execute its frozen scope / 计划有限接收批次或执行冻结范围 |
@@ -40,6 +40,12 @@ Plain-directory checkpoints and their restoration do not require Git. A workspac
 普通目录的检查点及恢复不要求安装 Git。工作区或父级存在 Git 元数据时，仍须使用可用的 Git 和准确的工作树根；不会把不可读取或损坏的仓库悄悄降为普通文件保存。普通目录在捕获期间变为仓库时，不发布该检查点。
 
 一般目錄的檢查點及還原不要求安裝 Git。工作區或父層存在 Git 中繼資料時，仍須使用可用的 Git 與正確的工作樹根；不會將無法讀取或損壞的儲存庫悄悄降為一般檔案儲存。一般目錄在擷取期間變為儲存庫時，不發布該檢查點。
+
+Restore freezes an operation before writing the destination. When file/Git effects have been verified and recorded but the final receipt transaction fails, repeat the same `checkpoint_id` and `destination`: the engine verifies the full recorded destination, then publishes only the missing receipt and event. A completed retry returns the original result without another restore event. Changed files, extra paths, changed Git layers or a replaced destination are preserved and reported for review. An interruption before durable effect evidence exists remains an explicit review case; it is not permission to clear the destination or replay all writes. Earlier checkpoints remain readable; an older failed restore without an operation journal cannot be retroactively proved by a new version. A run can close a recorded restore from its matching durable receipt; it does not recheck today's destination contents or declare business acceptance.
+
+恢复前先冻结操作记录。文件/Git 效果已经核验并记录、最后回执事务失败时，使用相同 `checkpoint_id` 和 `destination` 重试：先核对完整目标效果，再只补回执和事件。已完成操作重试不会重复产生恢复事件。目标文件、额外路径、Git 层或目录身份发生变化时保留现场并报告；效果证据落盘前的中断仍需复核，不清空目标、不整轮重放。旧检查点仍可读取；旧版失败恢复没有操作记录的，不能由新版追认其效果。run 只依据匹配的持久回执收口，不重新证明目标当前未变，也不代业务验收。
+
+還原前先凍結操作記錄。檔案/Git 效果已核驗並記錄、最後回執交易失敗時，以相同參數重試，先核對完整目標效果，再只補回執與事件；已完成操作不重複產生事件。目標內容、額外路徑、Git 層或目錄身分改變時保留現場；效果證據落盤前的中斷仍需複核，不清空目標、不整輪重做。舊檢查點仍可讀取，舊版無操作記錄的失敗不能追認。run 只依匹配的持久回執收口，不代替目前效果核驗或業務驗收。
 
 `reconcile` and `adopt` default to planning. To execute, copy the returned plan identifier into a request with `execute: true`. First reconcile recorded unfinished operations against their actual effects and resume the original operation when applicable. If external changes invalidate the relevant facts and there is no applicable operation to resume, inspect the error and generate a fresh plan. Do not edit the persisted plan. 接收和采用默认只计划；先核对未完操作的实际效果，适用时接续原操作。外部变化使前提失效且无适用原操作可续办时，再检查错误并重新计划，不直接修改保存的计划。
 

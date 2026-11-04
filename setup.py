@@ -11,6 +11,7 @@ SKILL_NAMES = (
     "taskcarry-governance-reconcile",
     "taskcarry-experience-recovery",
 )
+SKILL_REFERENCES = ("taskcarry-project-setup/references/onboarding.md",)
 SOURCE_ROOT = Path(__file__).resolve().parent
 
 
@@ -18,12 +19,13 @@ class BuildWithSkills(build_py):
     """Copy reviewed skills into the built package, never into the source tree."""
 
     def skill_sources(self):
-        for name in SKILL_NAMES:
-            relative = Path("skills") / name / "SKILL.md"
+        resources = [*(name + "/SKILL.md" for name in SKILL_NAMES), *SKILL_REFERENCES]
+        for resource in resources:
+            relative = Path("skills") / resource
             source = SOURCE_ROOT / relative
-            if not source.is_file() or source.is_symlink():
+            if not source.is_file() or any(p.is_symlink() for p in (source, *source.parents) if p != SOURCE_ROOT.parent):
                 raise RuntimeError(f"Missing canonical public skill: {relative.as_posix()}")
-            yield relative, Path(self.build_lib) / "taskcarry" / "skill_data" / name / "SKILL.md"
+            yield relative, Path(self.build_lib) / "taskcarry" / "skill_data" / resource
 
     def run(self):
         super().run()

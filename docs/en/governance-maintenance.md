@@ -4,7 +4,7 @@
 
 TaskCarry keeps project records in the control directory while the installed toolkit provides the operations that use them. Updating the toolkit should help the next session continue the same work. It should not create a new project, resubmit past results, or merge business branches simply to refresh a Skill.
 
-This supplement applies to 0.2.0rc5. The existing installation and operating walkthroughs remain applicable. Start a new project with the normal walkthrough; the arrangements below help maintain an existing installation. For saved schedules and an optional observer, see [scheduled governance](automation.md).
+This supplement describes the 0.2.0rc6 candidate and maintenance of an existing installation. Start with the guide shipped in the package you actually use. For saved schedules and an optional observer, see [scheduled governance](automation.md).
 
 ## Three updates with different purposes
 
@@ -31,7 +31,7 @@ Selection does not perform a repair, run another AI, or start a schedule. Matchi
 New projects create the derived index automatically. An older or invalidated index leaves the original records intact: `agenda` falls back to a full selection and reports `storage.upgrade_required`. After installing the chosen toolkit version and safely stopping affected governance writers, use the explicit `upgrade` action on the existing control directory:
 
 ```sh
-python -m taskcarry --project ./control upgrade
+python -I -X utf8 -m taskcarry --project ./control upgrade
 ```
 
 Use the actual existing control path; do not initialize a replacement. The action rebuilds only the derived index, in one transaction, and is safe to repeat. Original records and events remain unchanged. Confirm `storage.mode` is `indexed_current_v1` and `storage.upgrade_required` is false afterward. This is not a package updater or a migration of business files. An older client writing records can invalidate the index again; retire that writer before rebuilding it.
@@ -57,6 +57,8 @@ If you have edited a managed file, or selected a different candidate while an in
 While setup is changing its managed files, avoid editing those same files in another application. Its lock coordinates setup operations; it does not lock every external editor.
 
 ## Confirm which version is actually running
+
+RC6 preserves earlier checkpoints and can update an rc5 managed setup. Its managed file set adds public Skill references and, for workbenches, binding files. Although the manifest format number remains 1, rc5 setup does not understand these added paths and rejects the newer manifest. Forward upgrade compatibility is not an in-place downgrade promise. Before changing a runtime, retain the selected wheel and the matching managed files, manifest and activated host configuration. Any rollback needs review of that complete set and later user edits; simply installing an older wheel is insufficient. Keep control records and pending operations intact, and resume an rc6 restore or pending setup with a compatible package. There is no automatic rollback command.
 
 A historical source snapshot describes what was used then; a current runtime observation or adoption receipt describes what is used now. Preserve both when software changes. This release does not import arbitrary legacy identifiers or discover every native chat.
 

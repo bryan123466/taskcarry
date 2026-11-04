@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "taskcarry"
-version = "0.2.0rc6.dev1"
+version = "0.2.0rc6"
 description = "Local-first project memory, collaboration and workflow governance for AI tools"
 readme = "README.md"
 requires-python = ">=3.11"

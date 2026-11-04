@@ -1,4 +1,53 @@
-# Unreleased RC6 source work — optional Git checkpoints
+# TaskCarry 0.2.0rc6 — local candidate validation
+
+Recorded 2026-11-04. **Local candidate for review; not published.** The fixed governance runtime remains rc5. All new executable checks used disposable synthetic projects or candidate installations; no production control, scheduled task or user-level host configuration was changed. Portable counts, source fingerprints and dated historical records are in [VALIDATION_RESULTS.json](VALIDATION_RESULTS.json).
+
+| Evidence | Observed result | Scope and limit |
+|---|---|---|
+| Windows / Python 3.12.10 complete source suite | **265 tests: 262 passed, 3 skipped, 0 failures/errors** | Measured files did not change during the run; standard wheel/sdist build was explicitly enabled and passed |
+| Independent installed-wheel contract | **1 passed** | Resolves the installed-wheel opt-in skip in the source suite; disposable candidate runtime |
+| Existing-project onboarding from the installed wheel | **2 scenarios passed** | One existing work chat, then multiple existing work chats; real CLI and generated stdio MCP, shared control, original identities and WIP preserved |
+| Product ZIP cold start | Passed; 97 manifest payloads verified | Final exact-Git-blob archive extraction, bundled wheel and fresh runtime, three fallback manuals, installed onboarding reference, repeated setup with zero managed-file or manifest rewrites |
+| Original rc5 wheel to rc6 candidate update | Passed; 6 managed files updated, repeat wrote 0 | Installation identity, user configuration and task state retained; old checkpoint restored and repeated restore reused its receipt |
+| Bounded AI onboarding review | **2 synthetic text cases reviewed** | Seven input files unchanged; observed AI handoff responses using the public Skill and reference, separate from executable tests |
+
+The independent wheel, onboarding, cold-start and rc5 update checks above were repeated successfully against the final product built from exact Git blob bytes. Its 95 source payloads match Git, all 98 ZIP members are accounted for, and 461 local links plus 75 retained heading anchors passed. Final artifact SHA256 values are recorded in the JSON artifact_record. Counts from independent scenarios are not added to the 265-test source count.
+
+Only two source-suite skips remain unresolved by separate execution: native file and directory symlink cases require privileges unavailable on this Windows host. The source-suite installed-wheel skip was executed successfully in its separate wheel run. Junction rejection has separate coverage. A skip is not a successful native symlink test.
+
+The complete source suite covers isolated package selection and legacy setup preservation; optional-Git plain checkpoints and fail-closed repository detection; restore effect verification and atomic receipt recovery; existing-workbench binding to one control; CLI/MCP contracts; Git receive/adopt, WIP protection, atomic records and current indexes; observe/run/issue/fix and protocol compatibility. The earlier plain-checkpoint and restore-receipt findings are fixed in this candidate and are not remaining backlog. A restore stopped in `APPLYING` with an unknown effect remains a review case: it is not automatically replayed or declared complete.
+
+The executable onboarding scenarios preserve existing tasks, checkpoints, staged/unstaged work, `AGENTS.md` and live host settings. Generated bindings keep the same control and do not create task work, a second database or an acceptance claim. The rc5 update also verifies that the older setup tool refuses the newer managed resource set without writing. These checks use an actual installed candidate and generated stdio commands; they do not prove that a user's host loaded those commands or exposed native tools.
+
+The AI review read the current public setup Skill and onboarding reference, then handled one existing non-Git writing project and one project with two existing work chats/worktrees. Its outputs retained accepted results, original task/checkpoint positions and paused work, separated confirmed decisions from AI suggestions, applied a later responsibility correction, suggested no unnecessary new chats, and identified only the current connection gap. It made no governance or installation calls. This is evidence for those two bounded inputs, not a statistical model-quality assessment, a claim about arbitrary chat histories or independent-user acceptance.
+
+**Not verified for rc6:** native host activation/acceptance, natural scheduled automation, production installation, public CI for the final candidate commit, physical multi-computer use or independent-user usability. The fixed rc5 runtime was not upgraded. No generated setup file, CLI response, standalone stdio exchange or textual AI review is counted as native-host acceptance.
+
+## 简体中文：当前候选验证
+
+2026-11-04 的 RC6 是**本地待审候选，尚未发布**；正式固定运行包仍为 rc5。Windows / Python 3.12.10 完整源码测试 **265 项：262 通过、3 跳过、0 失败/错误**，测试期间记录的文件哈希未变；标准 wheel/sdist 构建已明确启用并通过。独立安装包合同另有 **1 项通过**，补足源码轮对应的 opt-in 跳过；剩余两项仍是本机原生符号链接权限限制，不算通过。
+
+实际安装候选的两项既有项目接入场景通过，覆盖单工作聊天及多个工作聊天共用 control、原 task/checkpoint、两层 Git WIP、AGENTS 与用户宿主配置保全。最终产品包冷启动核对了 97 个 manifest payload、内置 wheel、三语手动备用手册与接入引用，重复 setup 不重写受管理文件或 manifest。原始 rc5 wheel 更新至候选只改 6 份管理文件，身份/配置/任务保留，旧 checkpoint 可恢复并复用回执。这些验证已对精确 Git blob 字节构建的最终包重新执行通过；95 份源码 payload 与 Git 完全一致，98 个 ZIP 成员齐全，461 个本地链接及 75 个旧标题锚点通过。最终 SHA256 见 JSON 的 artifact_record。
+
+无 Git 普通 checkpoint 与 restore 效果后的回执恢复已实现并纳入全套回归，不再列为未修复问题。未知 `APPLYING` 效果仍须核验，不自动重放。另有 AI 实际阅读公开 Skill/引用后处理两例有界合成文本，保留旧成果与停点，区分有效决定和建议，保留暂停及责任更正，只给当前接入缺步；7 份输入的哈希不变，未执行治理或安装。该文本审验与真实 CLI/生成 stdio MCP 测试分别列证据，不能互相替代。
+
+本候选没有正式生产安装、原生宿主验收、自然自动化、最终提交的公开 CI、实体多电脑或陌生用户验收证据；没有自动升级 rc5。下方历史报告中的“待修复”描述只代表当时时点，请以本节及 JSON 的当前结论为准。
+
+## 繁體中文：目前候選驗證
+
+2026-11-04 的 RC6 是**本機待審候選，尚未發布**；正式固定執行套件仍為 rc5。Windows / Python 3.12.10 完整原始碼測試 **265 項：262 通過、3 跳過、0 失敗/錯誤**，測試期間記錄的檔案雜湊未變；標準 wheel/sdist 建置已明確啟用並通過。獨立安裝套件合同另有 **1 項通過**，補足原始碼輪對應的 opt-in 跳過；剩餘兩項仍是本機原生符號連結權限限制，不算通過。
+
+實際安裝候選的兩項既有專案接入情境通過，涵蓋單一工作聊天及多個工作聊天共用 control、原 task/checkpoint、兩層 Git WIP、AGENTS 與使用者宿主設定保全。最終產品套件冷啟動核對了 97 個 manifest payload、內置 wheel、三語手動備用手冊與接入引用，重複 setup 不重寫受管檔案或 manifest。原始 rc5 wheel 更新至候選只改 6 份管理檔案，身分/設定/任務保留，舊 checkpoint 可還原並重用回執。這些驗證已對精確 Git blob 位元組建置的最終套件重新執行通過；95 份原始碼 payload 與 Git 完全一致，98 個 ZIP 成員齊全，461 個本機連結及 75 個舊標題錨點通過。最終 SHA256 見 JSON 的 artifact_record。
+
+無 Git 一般 checkpoint 與 restore 效果後的回執恢復已實作並納入全套回歸，不再列為未修復問題。未知 `APPLYING` 效果仍須核驗，不自動重放。另有 AI 實際閱讀公開 Skill/引用後處理兩例有界合成文字，保留舊成果與停點，區分有效決定和建議，保留暫停及責任更正，只給目前接入缺步；7 份輸入的雜湊不變，未執行治理或安裝。此文字審驗與實際 CLI/產生 stdio MCP 測試分列證據，不能互相替代。
+
+本候選沒有正式生產安裝、原生宿主驗收、自然自動化、最終提交的公開 CI、實體多電腦或陌生使用者驗收證據；沒有自動升級 rc5。下方歷史報告中的「待修復」描述僅代表當時時點，請以本節及 JSON 的目前結論為準。
+
+---
+
+The following dated records are retained as historical evidence. Their artifact hashes, test counts and then-open findings belong to those earlier stages. They do not override the current rc6 results or reopen defects already fixed above.
+
+# Historical source stage — optional Git checkpoints (2026-11-04)
 
 The plain-directory checkpoint fix is implemented in a separate source stage. Plain files can be saved and restored without Git; repository metadata in the workspace or its ancestors requires successful Git verification. Corrupt, unreadable, bare or split metadata cannot silently become a plain checkpoint. The existing Git layer capture and atomic publication remain in use.
 
@@ -13,7 +62,7 @@ This is source-stage evidence, not a newly built wheel, an installation, final R
 ---
 
 
-# TaskCarry 0.2.0rc6.dev1 — local candidate validation
+# Historical TaskCarry 0.2.0rc6.dev1 candidate (2026-11-02)
 
 This is an unpublished development candidate. Windows / Python 3.12.10: **216 tests, 214 passed, 2 skipped, 0 failures or errors**. Both skips require unavailable symlink permissions. The full run explicitly enabled standard wheel/sdist build and the actual candidate wheel contract. The final rebuilt wheel also passed its independent installed-wheel contract (1 test). No governance installation was upgraded.
 
@@ -39,7 +88,7 @@ Separate audit follow-ups remain: a plain-directory checkpoint still requires an
 
 ---
 
-# TaskCarry 0.2.0rc5 — validation
+# Historical TaskCarry 0.2.0rc5 validation (2026-10-28)
 
 [English](#english) · [简体中文](#简体中文) · [繁體中文](#繁體中文)
 

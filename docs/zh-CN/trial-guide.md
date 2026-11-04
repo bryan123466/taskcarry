@@ -10,7 +10,7 @@
 
 ```text
 python -m pip install .
-python -m taskcarry --help
+python -I -X utf8 -m taskcarry --help
 ```
 
 安装可能需要本机缓存或下载的 Python 构建工具，安装后的工具运行时使用标准库。Git 集成需要单独安装 Git。不要仅为绕过项目权限错误而改用管理员终端。
@@ -19,11 +19,11 @@ python -m taskcarry --help
 
 ```text
 python examples/quality_forms/bootstrap.py --destination ../taskcarry-quality-demo
-python -m taskcarry --project ../taskcarry-quality-demo/control init --input ../taskcarry-quality-demo/requests/init.json
-python -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-baseline.json
-python -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control task --input ../taskcarry-quality-demo/requests/task-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control doctor
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control init --input ../taskcarry-quality-demo/requests/init.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-baseline.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control task --input ../taskcarry-quality-demo/requests/task-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control doctor
 ```
 
 其他两个工作者分别有 `workspace-review.json`、`task-review.json`、`workspace-quality.json`、`task-quality.json`，只登记本次准备使用的工作者。基线和工作者各有独立 Git 工作树，控制目录保存治理状态。
@@ -33,8 +33,8 @@ python -m taskcarry --project ../taskcarry-quality-demo/control doctor
 在表单工作者的 `forms/inspection.csv` 中修改虚构数值，先保存文件，再运行：
 
 ```text
-python -m taskcarry --project ../taskcarry-quality-demo/control checkpoint --input ../taskcarry-quality-demo/requests/checkpoint-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control status
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control checkpoint --input ../taskcarry-quality-demo/requests/checkpoint-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control status
 ```
 
 核对返回的检查点编号。请求将任务标记暂停并记录下一步，不创建交付阶段，也不覆盖编辑器尚未保存的内容。
@@ -54,8 +54,8 @@ git -C ../taskcarry-quality-demo/workers/forms rev-parse HEAD
 打开 `requests/submit-forms-template.json`，把 `REPLACE_WITH_YOUR_NEW_COMMIT` 换成精确提交号，另存为 `requests/submit-forms.json`。其中 `base` 来自合成基线，`paths` 必须与基准到提交的实际变化路径完全一致；只有实际提交了字段说明时才加入该路径。
 
 ```text
-python -m taskcarry --project ../taskcarry-quality-demo/control submit --input ../taskcarry-quality-demo/requests/submit-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control reconcile --input ../taskcarry-quality-demo/requests/reconcile-plan.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control submit --input ../taskcarry-quality-demo/requests/submit-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control reconcile --input ../taskcarry-quality-demo/requests/reconcile-plan.json
 ```
 
 阅读计划后新建 JSON 文件，填写 `baseline: "baseline"`、`execute: true` 和返回的 `plan_id`，用 `reconcile --input` 执行。同时核对返回结果和基线 Git 日志。不要直接改保存的计划来强迫过期计划通过。
@@ -75,7 +75,7 @@ python -m taskcarry --project ../taskcarry-quality-demo/control reconcile --inpu
 创建内容为 `{"mode":"preview"}` 的 `setup-preview.json`，运行：
 
 ```text
-python -m taskcarry --project ../taskcarry-quality-demo/control setup --input setup-preview.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control setup --input setup-preview.json
 ```
 
 预览不应修改文件。确认受管理路径适合本项目后，创建 `{"mode":"install"}` 的 `setup-install.json` 并使用同样命令调用该文件。安装生成：

@@ -10,7 +10,7 @@ Extract the release source, open a terminal in it, and run `python -m venv .venv
 
 ```text
 python -m pip install .
-python -m taskcarry --help
+python -I -X utf8 -m taskcarry --help
 ```
 
 Installation may require locally cached or downloaded Python build tooling. The installed toolkit runtime uses the standard library. Git must be installed separately for integration workflows. Do not use an administrator terminal merely to work around a project permission error.
@@ -19,11 +19,11 @@ Installation may require locally cached or downloaded Python build tooling. The 
 
 ```text
 python examples/quality_forms/bootstrap.py --destination ../taskcarry-quality-demo
-python -m taskcarry --project ../taskcarry-quality-demo/control init --input ../taskcarry-quality-demo/requests/init.json
-python -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-baseline.json
-python -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control task --input ../taskcarry-quality-demo/requests/task-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control doctor
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control init --input ../taskcarry-quality-demo/requests/init.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-baseline.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control workspace --input ../taskcarry-quality-demo/requests/workspace-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control task --input ../taskcarry-quality-demo/requests/task-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control doctor
 ```
 
 Review and quality workers have matching `workspace-review.json`, `task-review.json`, `workspace-quality.json`, and `task-quality.json` files. Register only the workers you intend to exercise. The baseline and workers are distinct Git worktrees; the control directory stores governance state.
@@ -33,8 +33,8 @@ Review and quality workers have matching `workspace-review.json`, `task-review.j
 Edit the forms worker's `forms/inspection.csv` using fictional values. Save the file. Then run:
 
 ```text
-python -m taskcarry --project ../taskcarry-quality-demo/control checkpoint --input ../taskcarry-quality-demo/requests/checkpoint-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control status
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control checkpoint --input ../taskcarry-quality-demo/requests/checkpoint-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control status
 ```
 
 Inspect the returned checkpoint identifier. The request pauses the task and records the next step. It does not create a delivered stage. Unsaved editor buffers are outside the snapshot.
@@ -54,8 +54,8 @@ git -C ../taskcarry-quality-demo/workers/forms rev-parse HEAD
 Open `requests/submit-forms-template.json`, replace `REPLACE_WITH_YOUR_NEW_COMMIT` with that exact commit, and save it as `requests/submit-forms.json`. Its `base` came from the fictional baseline; its `paths` must exactly match the changed files between base and commit. Add a new field-dictionary path only if you actually committed it.
 
 ```text
-python -m taskcarry --project ../taskcarry-quality-demo/control submit --input ../taskcarry-quality-demo/requests/submit-forms.json
-python -m taskcarry --project ../taskcarry-quality-demo/control reconcile --input ../taskcarry-quality-demo/requests/reconcile-plan.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control submit --input ../taskcarry-quality-demo/requests/submit-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control reconcile --input ../taskcarry-quality-demo/requests/reconcile-plan.json
 ```
 
 Read the plan. Make a new JSON file with `baseline: "baseline"`, `execute: true`, and the returned `plan_id`. Invoke `reconcile --input` with that execution file. Inspect both the result envelope and the baseline Git log. Do not edit a stored plan to force an outdated plan to pass.
@@ -75,7 +75,7 @@ For cumulative stages use `relation: "cumulative"` and a `supersedes` list. The 
 Create `setup-preview.json` containing `{"mode":"preview"}`. Then run:
 
 ```text
-python -m taskcarry --project ../taskcarry-quality-demo/control setup --input setup-preview.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-quality-demo/control setup --input setup-preview.json
 ```
 
 Preview must not change files. If the listed managed paths are appropriate, create `setup-install.json` containing `{"mode":"install"}` and run the same command with that file. Setup writes:

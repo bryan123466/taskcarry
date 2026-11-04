@@ -30,12 +30,14 @@ taskcarry-forms-example/
 
 ## Connect and work / 接入并工作
 
+Use the fixed installed interpreter in place of `python` below; isolated commands select that installed package. 下列 `python` 指固定安装解释器，隔离参数保证选择该安装包。
+
 ```text
-python -m taskcarry --project ../taskcarry-forms-example/control init --input ../taskcarry-forms-example/requests/init.json
-python -m taskcarry --project ../taskcarry-forms-example/control workspace --input ../taskcarry-forms-example/requests/workspace-baseline.json
-python -m taskcarry --project ../taskcarry-forms-example/control workspace --input ../taskcarry-forms-example/requests/workspace-forms.json
-python -m taskcarry --project ../taskcarry-forms-example/control task --input ../taskcarry-forms-example/requests/task-forms.json
-python -m taskcarry --project ../taskcarry-forms-example/control status
+python -I -X utf8 -m taskcarry --project ../taskcarry-forms-example/control init --input ../taskcarry-forms-example/requests/init.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-forms-example/control workspace --input ../taskcarry-forms-example/requests/workspace-baseline.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-forms-example/control workspace --input ../taskcarry-forms-example/requests/workspace-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-forms-example/control task --input ../taskcarry-forms-example/requests/task-forms.json
+python -I -X utf8 -m taskcarry --project ../taskcarry-forms-example/control status
 ```
 
 Register the review and quality workspaces using their matching request files when you want those roles. Each role can be a Codex chat, another Agent, or a person. Multiple Agents are optional; one user can perform the roles sequentially.

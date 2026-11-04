@@ -75,7 +75,7 @@ git -C "<A_BASELINE>" ls-remote origin refs/heads/main
 PowerShell 7 导出示例（目标父目录已存在）：
 
 ```powershell
-python -m taskcarry --project "<A_CONTROL>" status | Set-Content -LiteralPath "<SNAPSHOT>/status.json" -Encoding utf8
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status | Set-Content -LiteralPath "<SNAPSHOT>/status.json" -Encoding utf8
 ```
 
 检查 JSON 中 `ok` 为 `true`，并记下采集时间。不要把失败输出当成正常状态。整理后的记忆文件也应走普通专业交付与接收；不要为写摘要直接弄脏专用接收工作区。精确提交示例：
@@ -158,8 +158,8 @@ git clone --branch "<SAVED_BRANCH>" "<SNAPSHOT>/project.bundle" "<NEW_REPOSITORY
 ```
 
 ```text
-python -m taskcarry --project "<RECOVERY_CONTROL>" status
-python -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
+python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" status
+python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
 ```
 
 目标必须为空或不存在，且独立于原工作区与恢复治理目录。`restore` 只恢复检查点选中的文件；Git 检查点会建立**合成恢复基线**以呈现原 HEAD/暂存/工作区层次，保留原 HEAD 的来源记录，但不是还原完整原仓库历史。它会在恢复工作副本登记恢复事件，不修改备份原件。先比对这些文件与克隆出的真实项目，再在具名任务分支中恢复工作，不能把合成提交冒充原始提交。
@@ -168,10 +168,10 @@ python -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
 5. 重新生成本机 Skills/MCP 配置并做 `doctor`/`status` 检查。旧 MCP 片段含原 Python 和项目绝对路径，不直接复用。当前路径重绑定入口也不能绕过待处理阶段、未完操作或基线身份限制。
 
 ```text
-python -m taskcarry --project "<NEW_CONTROL>" init
-python -m taskcarry --project "<NEW_CONTROL>" workspace --input new-baseline.json
-python -m taskcarry --project "<NEW_CONTROL>" doctor
-python -m taskcarry --project "<NEW_CONTROL>" status
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" init
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" workspace --input new-baseline.json
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" doctor
+python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" status
 ```
 
 `new-baseline.json` 示例：`{"name":"baseline","path":"<NEW_BASELINE_ABSOLUTE_PATH>"}`。其余登记与接入见[操作手册](operation-manual.md)。保留恢复记录里的旧 ID 与新登记 ID 的对应关系；这是一项明确的人工/Agent 辅助重建，不能称为自动延续了旧数据库的完整事务历史。
@@ -308,9 +308,9 @@ git -C "<A_INTAKE>" switch -c codex/intake-form-export "<SOURCE_COMMIT>"
 ```
 
 ```text
-python -m taskcarry --project "<A_CONTROL>" workspace --input intake-workspace.json
-python -m taskcarry --project "<A_CONTROL>" task --input intake-task.json
-python -m taskcarry --project "<A_CONTROL>" submit --input intake-submit.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" workspace --input intake-workspace.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" task --input intake-task.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" submit --input intake-submit.json
 ```
 
 已有同名任务时先核对实际身份，不用说明文件覆盖另一任务。上面 `independent` 仅适用于这个示例的新阶段；若要累计取代旧阶段，必须满足**同一任务、同一登记工作区、原提交祖先关系及路径覆盖**，并明确给出 `supersedes`。跨电脑同名阶段不会自动产生关联。历史不满足条件时保留原证据，请治理判断关系，不能伪造覆盖。
@@ -322,7 +322,7 @@ python -m taskcarry --project "<A_CONTROL>" submit --input intake-submit.json
 ```
 
 ```text
-python -m taskcarry --project "<A_CONTROL>" reconcile --input receive-plan.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" reconcile --input receive-plan.json
 ```
 
 核对返回计划的全部 `stage_ids`、基线 HEAD、未完操作和冲突。接收计划可能包含其他已有排队阶段，并不自动只选这个任务；全部都在本次授权内才执行。将返回的 `plan_id` 原样填入 `receive-execute.json`：
@@ -332,8 +332,8 @@ python -m taskcarry --project "<A_CONTROL>" reconcile --input receive-plan.json
 ```
 
 ```text
-python -m taskcarry --project "<A_CONTROL>" reconcile --input receive-execute.json
-python -m taskcarry --project "<A_CONTROL>" status
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" reconcile --input receive-execute.json
+python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status
 ```
 
 检查阶段实际为 `COMMITTED`、相关操作完成及当前基线内容；整体调用成功不代表所有排队项都已完成。具体冲突只处理相关任务，不覆盖其他人的 WIP。需要更新 A 的某工作区时按主手册先 `adopt` 计划再执行。授权上传的基线按 4.2 精确 push 到 `main`；接收形成的新集成提交和原 B 源提交都要能追溯。

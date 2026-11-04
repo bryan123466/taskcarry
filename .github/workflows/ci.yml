@@ -13,7 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # Pin the macOS generation and architecture instead of the moving ARM alias.
+        os: [ubuntu-latest, windows-latest, macos-26-intel]
         python: ['3.11', '3.12']
     runs-on: ${{ matrix.os }}
     steps:

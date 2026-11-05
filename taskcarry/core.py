@@ -156,24 +156,42 @@ class Core:
         self.store = Store(project)
         self.root = self.store.root
         config = self.store.get('config', 'project')
-        if not config or config.get('schema_version') != 1:
+        if not config or type(config.get('schema_version')) is not int or config.get('schema_version') != 1:
             raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'Use a compatible toolkit version for this project state.')
 
     @classmethod
+    def identify(cls, project):
+        from .identification import identify
+        return identify(project)
+
+    def source(self):
+        from .identification import source
+        return source(self.root)
+
+    def context(self, task_id, limit=20, cursor=None, previous_fingerprint=None,
+                issue_ids=None, fix_ids=None):
+        from .task_context import read_context
+        return read_context(self, task_id, limit, cursor, previous_fingerprint, issue_ids, fix_ids)
+
+    @classmethod
     def initialize(cls, project, name='TaskCarry project'):
+        from .identification import identify, require_initializable
         store = Store(project, create=True)
-        with store.transaction():
-            config = store.get('config', 'project')
-            if config is not None and config.get('schema_version') != 1:
-                raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'Initialization cannot downgrade existing project state.')
-            if config is None:
-                config = {'name': name, 'schema_version': 1, 'created_at': now(), 'synthetic': False}
-                store.put('config', 'project', config)
-                store.put('experience', 'receipt-recovery-v1', {
-                    'rule_id': 'receipt-recovery-v1', 'code': 'EFFECT_PRESENT_RECEIPT_MISSING',
-                    'operation': 'reconcile', 'action': 'verify_and_finalize', 'task_id': None,
-                    'version': '1', 'enabled': True, 'updated_at': now()})
-                store.event('project_initialized', {'name': name})
+        with store.guard():
+            # Recheck before opening the publishing write transaction too.
+            require_initializable(identify(store.root, initializing=True))
+            with store.transaction():
+                config = store.get('config', 'project')
+                if config is not None and (type(config.get('schema_version')) is not int or config.get('schema_version') != 1):
+                    raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'Initialization cannot downgrade existing project state.')
+                if config is None:
+                    config = {'name': name, 'schema_version': 1, 'created_at': now(), 'synthetic': False}
+                    store.put('config', 'project', config)
+                    store.put('experience', 'receipt-recovery-v1', {
+                        'rule_id': 'receipt-recovery-v1', 'code': 'EFFECT_PRESENT_RECEIPT_MISSING',
+                        'operation': 'reconcile', 'action': 'verify_and_finalize', 'task_id': None,
+                        'version': '1', 'enabled': True, 'updated_at': now()})
+                    store.event('project_initialized', {'name': name})
         return {'initialized': True, 'project': str(store.root), 'config': config}
 
     def _task(self, task_id):
@@ -205,6 +223,7 @@ class Core:
         result = self._current_view(records)
         result['continuity'] = {name: records[name] for name in supporting}
         result['storage'] = self.store.storage_status()
+        result['source'] = self.source()
         return result
 
     def upgrade(self):
@@ -406,7 +425,7 @@ class Core:
         counts = {collection: len(current['actionable'][collection]) for _, collection, _ in kinds}
         counts.update(retained_tasks=len(current['retained_task_state']),
                       covered_stages=len(current['covered_pending_stages']))
-        return {'items': page, 'counts': counts, 'total': len(items), 'returned': len(page),
+        return {'source': self.source(), 'items': page, 'counts': counts, 'total': len(items), 'returned': len(page),
                 'offset': offset, 'truncated': len(items) - end, 'next_cursor': next_cursor,
                 'fingerprint': input_fingerprint,
                 'storage': records['_storage'],

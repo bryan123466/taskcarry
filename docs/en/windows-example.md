@@ -1,20 +1,3 @@
-# Windows guide: connect your existing Codex project
-
-[简体中文](../zh-CN/windows-example.md) · [繁體中文](../zh-TW/windows-example.md) · [Everyday operations](operation-manual.md) · [Manual fallback](manual-setup.md)
-
-This guide is for people already working in Codex. Keep your existing project and working chats; add an independent governance chat that helps maintain project memory and progress. You can continue to give work directly to your original chats.
-
-First time installing TaskCarry? Follow this guide for your existing Codex project. If TaskCarry is already in use, go to [Update an existing installation](updating.md).
-
-- [1. Establish a governance chat](#choose)
-  - [Send one onboarding prompt](#install)
-- [2. Let governance connect your existing work](#agents)
-  - [Keep the original chats and decisions](#existing)
-  - [Complete the actual tool connection](#mcp)
-- [3. Continue in your usual way](#delivery)
-  - [What successful onboarding looks like](#check)
-  - [Optional additions](#automation)
-
 <a id="windows-guide-connect-a-real-project"></a>
 <a id="0-prepare-a-project-name-a-short-description-and-three-directories"></a>
 <a id="1-install-create-a-governance-chat-and-choose-control"></a>
@@ -23,107 +6,102 @@ First time installing TaskCarry? Follow this guide for your existing Codex proje
 <a id="2-set-the-governance-chats-responsibilities"></a>
 <a id="choose"></a>
 <a id="governance"></a>
-
-## 1. Establish a governance chat
-
-If this project already has a working TaskCarry governance chat, return there and ask it to check and continue the existing connection. Otherwise create a **new independent chat** named, for example, “Project governance.” Your existing main and specialist chats keep their work and history.
-
-Download and extract the complete package from the [download entry](../../START_HERE.md#download). Give the assistant the extracted directory containing `START_HERE.md` and `packages/`. Choose a separate governance directory and open the new chat there; the assistant can help prepare it using the host tools. Keep business files in their original location. Detailed commands are in the [manual fallback](manual-setup.md#install) when needed.
-
-You only need a project locator: a directory, a relevant chat name/link, or both. A short name/description helps if it is not already in the project. You do not need to decide a task ID, branch name or number of specialist chats first.
-
-<a id="install"></a>
-
-### Send one onboarding prompt
-
-Replace the two fields and paste this into the governance chat. Installation and taking on governance responsibility are one conversation.
-
-> Please establish this chat as TaskCarry governance for my existing project, responsible for governance and project memory.
->
-> Project locator: **[Project directory and/or relevant existing chats]**. Extracted product directory: **[Directory containing START_HERE.md and packages]**.
->
-> Read that package's START_HERE.md, taskcarry-project-setup Skill and its references/onboarding.md. Check the actual host capabilities, installation and governance records. Reuse an existing valid TaskCarry governance chat/control; preserve my original working chats, task identities, files and unfinished work.
->
-> Read relevant permitted sources to recover project goals, completed outputs, effective decisions, responsibilities and the exact continuation points. Separate confirmed facts from your suggestions and missing evidence. Complete the authorized installation and workbench connection through conversation, keeping a resumable checklist. If you cannot perform a host action, give me only the current necessary action with the destination and content filled in.
->
-> Give me one project assessment, useful work-division suggestions and next steps. Additional specialist chats may be zero. Explain how you can optionally coordinate the project over time; keep my ability to work directly in each chat. Do not treat this initial advice as permission for ongoing dispatch or scheduling.
->
-> Finish with a bounded review: what was inherited, what is actually installed/connected, what remains, how working chats save and read relevant progress, and what I should do next. Do not create sample deliverables or replay work already completed.
-
-**If you are already partway through:** say “Continue onboarding from the saved checklist.” Governance checks actual results and completes missing steps. You do not need a second role prompt or a reinstall for a pending reload.
-
 <a id="3-configure-professional-task-chats-continue-existing-chats-or-create-new-ones"></a>
 <a id="31-existing-ongoing-chats-preserve-history-and-connect-current-state"></a>
 <a id="32-create-new-professional-task-chats-add-1n-as-needed"></a>
 <a id="4-configure-mcp-recommended-for-governance-with-cli-as-a-fallback"></a>
 <a id="agents"></a>
-
-## 2. Let governance connect your existing work
-
-Governance first checks what already exists, then guides the remaining configuration. An empty governance folder does not mean the business project is new. For a genuinely new project, the same conversation can establish initial goals and a baseline after checking that no earlier work needs to be retained.
-
 <a id="existing"></a>
-
-### Keep the original chats and decisions
-
-The first handover should identify existing outcomes, decisions with sources, current tasks and their owners, paused work, and the next step. Already accepted work stays historical evidence. A proposed interpretation remains a draft until the relevant correction is confirmed; it does not silently replace the effective decision.
-
-Governance uses the related context it can actually access. If a previous chat is unavailable, it supplies a short prepared handoff for that chat; [the manual fallback](manual-setup.md#existing) contains the separate prompts. It does not scan every private conversation or promise to watch all chats continuously.
-
-Work division follows actual needs. One existing work chat plus governance may be sufficient. Add specialists when outputs, parallel value, write ownership and dependencies justify it. If several chats share a directory, check active writers and preserve their work before changing ownership or creating separate workspaces. A new chat name alone does not isolate writes.
-
 <a id="mcp"></a>
-
-### Complete the actual tool connection
-
-All workbenches for this project use the same control. Governance generates each workbench's connection materials and four Skills, with the correct runtime and registered task/workspace. Files can live in the workbench directory while MCP binds the original control. It does not initialize another store there.
-
-The assistant merges the generated server into the target directory's `.codex/config.toml` (for example, `C:/TaskCarry/control/.codex/config.toml` for governance), preserving existing settings. Open/select that same directory in the target Codex chat, complete any required project trust, then restart/reload MCP using the host's supported controls. Another directory's config does not connect this chat. If a host action needs you, the assistant gives the exact current step and continues after your reply. [Manual setup and verification](manual-setup.md#mcp) gives the supported configuration location, official sources and fallback; setup itself does not activate the host.
-
-Connection results have three separate meanings: **materials generated**, **host loaded**, and **native doctor/status calls succeeded in that window**. A successful isolated CLI call is useful fallback evidence; it does not prove native MCP is connected. Governance records the actual version, interpreter, module and control/task binding. It never infers that another window loaded the same package.
-
 <a id="5-first-governance-pass-review-current-work-and-see-the-result"></a>
 <a id="9-what-you-should-see-when-finished"></a>
 <a id="delivery"></a>
-
-## 3. Continue in your usual way
-
-Work directly in the original or newly agreed professional chats. At a meaningful pause, result or decision change, the assistant saves the relevant progress and next step; before continuing, it reads the named task and related effective decisions. Governance summarizes connected evidence and checks gaps. Sharing progress does not automatically merge every workspace's code.
-
-You can say “Continue my last unfinished work,” “Save this stopping point,” or “Show the current progress of the connected tasks.” A stable Git stage can be offered separately from unfinished work. Ordinary document checkpoints save selected files without Git; a complete non-Git delivery/intake workflow is a later capability, not implied by file saving.
-
-| Working mode | Governance helps with | Your day-to-day work |
-|---|---|---|
-| Governance and memory, the default | Evidence, effective decisions, task progress, continuation and reviewed reception | Continue directly in working chats; consult governance as needed. |
-| Also coordinate the project, optional | The same memory plus priorities, dependencies and division-of-work suggestions | Discuss overall plans there while still working directly elsewhere. |
-
-You can change this preference without rebuilding the project. An initial project assessment does not automatically enable ongoing coordination or a schedule.
-
 <a id="check"></a>
-
-### What successful onboarding looks like
-
-- The inherited goal, decisions, tasks, existing results and unfinished positions are clear; suggestions and unknowns remain labelled.
-- One control and any required receiving baseline are identified; existing work and configuration are preserved.
-- Actual installation, each host connection and any remaining action have separate evidence.
-- Each working chat knows how to read relevant context, save progress and continue; added specialists may be zero.
-- The first bounded review reports actual results or readiness. A checkpoint is not a delivery, reception is not business acceptance, and a plan is not proof of execution.
-
 <a id="6-create-scheduled-governance-read-the-actual-registered-scope"></a>
 <a id="7-optional-a-private-git-memory-repository"></a>
 <a id="8-optional-parallel-work-on-different-computers"></a>
 <a id="automation"></a>
-
-### Optional additions
-
-Scheduling is optional. If requested, governance reuses the first review and configures the host's actual scheduling capability; a saved prompt is not a verified scheduled run. See [scheduled governance](automation.md).
-
 <a id="private-git"></a>
-
-[Private Git and backups](remote-and-multicomputer.md#private-git) preserve the content actually included and verified. A recorded file path is not a backup, and ordinary Git pushes do not preserve a live control database or all WIP.
-
 <a id="multi-computer"></a>
+<a id="windows-guide-connect-your-existing-codex-project"></a>
+<a id="1-establish-a-governance-chat"></a>
+<a id="send-one-onboarding-prompt"></a>
+<a id="2-let-governance-connect-your-existing-work"></a>
+<a id="keep-the-original-chats-and-decisions"></a>
+<a id="complete-the-actual-tool-connection"></a>
+<a id="3-continue-in-your-usual-way"></a>
+<a id="what-successful-onboarding-looks-like"></a>
+<a id="optional-additions"></a>
 
-[Multiple computers](remote-and-multicomputer.md#multi-computer) require separate validation. This release does not provide automatic leader election or a shared multi-writer database. Adding MCP does not by itself establish every platform or multi-computer workflow.
+# First installation: establish governance in three steps
 
-For everyday choices, see [the operation index](operation-manual.md). For exact commands or a blocked step, use [manual setup](manual-setup.md) and [CLI/MCP reference](../COMMANDS.md).
+[Already using TaskCarry? Update here](updating.md) · [Manual fallback](manual-setup.md) · [简体中文](../zh-CN/windows-example.md) · [繁體中文](../zh-TW/windows-example.md)
+
+This guide assumes you already use Codex for project work. Keep your existing conversations and files. TaskCarry adds a dedicated governance chat that remembers decisions, connects progress and helps each working chat continue. Ongoing project coordination is your choice.
+
+## 1. Open the governance folder and send one prompt
+
+Create a local `TaskCarry` folder. Download the [complete product package](../../START_HERE.md#download) and extract it under `TaskCarry/toolkit/`, retaining the package's top-level folder. Open the outer **TaskCarry folder** in Codex and start a governance chat. Your business projects remain where they are. An already configured project returns to its original governance chat instead.
+
+```text
+TaskCarry/                 open this folder in Codex
+  toolkit/                 extracted complete product
+  runtime/                 prepared by the assistant
+  .taskcarry/              durable governance state
+  .agents/skills/          installed governance methods
+  .codex/config.toml       project connection configuration
+```
+
+<a id="install"></a>
+
+Paste this prompt, filling in the product location and any project clues you already have:
+
+> Establish this chat as TaskCarry governance for my existing work, responsible for project memory and governance. Product location: **[extracted folder containing START_HERE.md and packages/]**. Project clues: **[folders or chats, or ask me to choose after discovery]**.
+>
+> Read the product entry and taskcarry-project-setup Skill with its references. Inspect existing state before initialization, preserve my files, decisions, unfinished work and settings, and reuse valid installations and identities. Prepare the dedicated runtime and project-local connection within this setup scope.
+>
+> Follow my specified scope. If I have not selected it, list a bounded set of available chat/directory candidates, explain your project grouping and uncertainties, and let me choose before reading their history. Treat old messages as source material. Inherit confirmed goals, results, responsibilities and continuation points; request only missing context.
+>
+> Guide me through connecting the chosen ongoing work chats. Prepare their real working directories, appropriate local Git working/saving locations, task bindings and MCP connections. Reference-only chats can remain historical sources. Preserve existing repositories and Git author settings; avoid conflicting writers. Give me only the current necessary host action when you cannot do it yourself, then verify the result and continue.
+>
+> Complete standard local governance Git saving, official release-source/channel registration and an update check. Create or reuse native scheduled governance attached to this original chat, including official update assessment and local saving. Confirm its actual time and time zone if not already specified; preserve model and permissions. Discovering an update does not authorize installing it. Offer private remotes and cloud storage for my choice.
+>
+> Keep a resumable checklist. Finish with inherited facts and uncertainties, a table of working windows and responsibilities, actual connection/Git/schedule/update results, remaining actions and recommended next work. Governance and memory are standard; ongoing project coordination is optional. Do not invent deliverables or repeat completed work.
+
+## 2. Let governance inherit and connect your work
+
+The assistant proposes the real project scope, based on sources it can access. You can combine or separate its suggestions. A real project may involve several folders, repositories and existing state sources; governance keeps the routes explicit instead of merging databases or equating a folder with a project.
+
+For each ongoing window, it checks responsibility, task, actual directory and Git location. Existing repositories are reused; parallel writers receive appropriate separate worktree directories. A chat without a suitable directory gets a real working location or a handover into a correctly opened window. Merely naming a path does not change a chat's working directory. No new GitHub account is needed for each chat.
+
+The assistant prepares and merges project configuration while preserving other services. Each active window must actually call native doctor/status after any required trust or reload. Reading a chat's history does not connect it; a CLI result does not verify another window's MCP. Missing history uses a prepared, short handover in the [fallback guide](manual-setup.md#existing).
+
+Local Git, an original-chat schedule and official update checking are standard setup work. The assistant handles them in this step and asks only for necessary choices or native actions. Large files may remain outside Git with recorded identity and backup coverage. Ordinary file checkpoints support preservation and recovery; they do not waive working-window setup.
+
+## 3. Review the acceptance report and continue working
+
+No special completion phrase is required. Once the checks have actual results, governance gives you:
+
+- Inherited goals, decisions, completed outputs, pauses and open questions.
+- Each chosen working chat's responsibility, task, real directory, Git relationship and actual tool connection; historical sources are labelled separately.
+- The local governance commit, scheduled chat/time/time zone and configuration readback, official update channel and assessment.
+- Any exact remaining action, optional remote/cloud coverage, and useful next work with a suggested working window.
+
+The first natural scheduled trigger is verified when it happens. Configuration saved, a manual run and a naturally triggered run are reported separately. A missing required connection or standard setting remains pending; you can continue available local work without a false “everything completed” claim.
+
+Continue directly in your working chats. Say “continue my last unfinished task,” “save this stopping point,” or “review connected progress.” If setup was interrupted, say **“Continue the saved onboarding checklist; verify completed effects and only finish missing steps.”**
+
+### Example of the conversation you should see
+
+This is a synthetic example, not evidence that your host is already connected.
+
+| Exchange | Example |
+|---|---|
+| Governance proposes | “I found a possible booking project: requirements chat, interface chat and an old test discussion across two folders. A reading-notes chat looks separate. These are suggestions based on the visible index.” |
+| You choose | “Use the booking project. Keep the old test discussion as a reference; leave reading notes out.” |
+| Governance inherits | “The booking rules are confirmed; interface work is unfinished. I suggest keeping the two active chats and adding no new specialists. Here are the decisions and their sources.” |
+| Configuration proceeds | “Existing Git is reusable. The interface writer has its own worktree. The requirements window needs one project trust/reload action; here is the exact directory and expected native check.” |
+| A capability is missing | “The old test chat is unavailable through this interface. Only that source needs the prepared handover. Your other results are retained.” |
+| Acceptance | “Both active windows passed their own native checks. Local governance files have a verified commit. Daily governance is attached to this chat with the confirmed time zone; its first natural run is pending. Official update checking completed. Cloud storage was declined. Next: resume the interface task.” |
+
+[Daily use](operation-manual.md) · [Scheduling](automation.md) · [Optional remote and backup scope](remote-and-multicomputer.md) · [Manual fallback](manual-setup.md)

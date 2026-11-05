@@ -30,7 +30,7 @@ The assistant reads permitted, related evidence and identifies missing history. 
 | Working chat | Read related effective decisions, advance the task, save meaningful progress and deliver stable stages precisely. |
 | Receiving baseline | A dedicated clean Git workspace for receiving stages; no specialist WIP. |
 | TaskCarry engine | Persist records, check conditions and perform supported checkpoint/reception/adoption/recovery operations. |
-| Host | AI interpretation, actual chat access/creation, configuration loading, permissions and optional scheduling. |
+| Host | AI interpretation, actual chat access/creation, configuration loading, permissions and native scheduling. |
 
 Keep one main writer for each task/write scope. Others may review or own distinct nonoverlapping subtasks. Separate chats are not automatically separate workspaces. Inspect real ownership and active writers before changing their arrangement.
 
@@ -51,7 +51,7 @@ Keep a sourced, versioned understanding candidate until a correction is confirme
 | Older output already included in the trusted baseline | Preserve provenance and inclusion; do not queue it again. |
 | Unfinished or uncommitted work | Save a checkpoint and exact continuation point; do not call it delivery. |
 | Stable explicit Git stage | Verify base, commit, task and complete path set; preview reception before execution. |
-| Ordinary document project | Save selected files without Git; general non-Git deliverable exchange/intake is not implemented by that checkpoint. |
+| Original ordinary documents | Preserve selected files and references; complete standard working-window Git setup for ongoing outputs. General non-Git delivery/intake is outside checkpoint scope. |
 | Paused, waiting or unchanged task | Keep its position without creating reminders or new backlog. |
 | Task needs accepted code | Preview adoption for that dependency and preserve local commits/index/worktree/new files. Reading progress alone needs no merge. |
 | Interrupted operation | Verify actual effects and original identity; complete supported missing steps. |
@@ -66,18 +66,20 @@ MCP exposes engine actions directly to the host AI. The isolated fixed-runtime C
 
 Registered workbench setup can put its four Skills and connection materials in the host directory while binding the original control. `target`, `workspace` and `task_id` are provided together and checked against existing registration. No second control is initialized. The generated fragment pins the selected package with isolated UTF-8 startup; preserve it when merging active configuration. See [manual binding and verification](manual-setup.md#mcp).
 
-The initial bounded governance pass reports actual results in the chat. If scheduling is requested later, reuse that result and use official host tools for the schedule; actual natural triggering requires its own evidence. Do not invent work or run an extra demonstration Automation. Keep unchanged tasks quiet unless the user requests a report. One receiving plan defaults to 20 selected items, at most 100; remaining work is reported separately, and this is not a timer for an entire AI turn.
-
 <a id="options"></a>
 
-## Optional extensions and limits
+## Further guidance and limits
 
 | Need | Guidance |
 |---|---|
 | Manual installation, transfer or reload | [Fallback steps](manual-setup.md). Complete only the missing step. |
-| Scheduled governance | [Automation](automation.md). Installation does not create it. |
+| Standard scheduled governance | [Automation](automation.md). Complete native setup and readback during onboarding. |
 | Selected private Git outputs and memory | [Remote and backup scope](remote-and-multicomputer.md#private-git). Actual commit/push/readback evidence is required. |
 | More computers or hosts | [Multi-computer boundaries](remote-and-multicomputer.md#multi-computer). A real two-computer end-to-end workflow remains separately unverified. |
 | Tool maintenance and failure recovery | [Maintenance](governance-maintenance.md), the four [Skills](../../skills), and [commands](../COMMANDS.md). |
 
-Only operations actually implemented and verified in the chosen version are available. Task condition revisions, complete incremental context contracts and general non-Git intake are subsequent work. Native permissions, whole-machine backup and automatic multi-writer coordination are not provided by the local engine. See [release boundaries](../RELEASE_BOUNDARIES.md).
+## Standard local governance and task continuation
+
+Complete onboarding includes local governance Git, real task/workspace/Git bindings for ongoing windows, native per-window connection checks, original-chat schedule configuration/readback and an official update check. Private remotes and cloud storage remain optional. Historical-source chats do not need active workspaces. Large external files need explicit references and backup coverage; a file reference is not a saved copy.
+
+A real project can span several directories, repositories and existing state sources. Keep their routes and local identities; one source still has one receiving baseline. Sharing context or maintaining the package does not merge business Git branches or create a multi-store transaction.

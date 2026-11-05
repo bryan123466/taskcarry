@@ -225,7 +225,8 @@ class StandardSourceBuildTests(unittest.TestCase):
                 target.parent.mkdir(exist_ok=True)
                 target.write_bytes(package_file.read_bytes())
             resources = [*(name + "/SKILL.md" for name in names),
-                         "taskcarry-project-setup/references/onboarding.md"]
+                         "taskcarry-project-setup/references/onboarding.md",
+                         "taskcarry-governance-reconcile/references/daily-governance.md"]
             for resource in resources:
                 relative = Path("skills") / resource
                 target = source / relative

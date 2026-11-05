@@ -14,6 +14,17 @@ Success: `{"ok":true,"result":{...}}`. Failure: `{"ok":false,"error":{"code":"..
 
 | Action / 动作 | Main fields / 主要字段 | Meaning / 含义 |
 |---|---|---|
+| `identify` | none / 无 | Read selected state format/source before initialization; no migration / 初始化前只读识别状态格式与来源 |
+| `context` | `task_id`; optional `limit` 1–100, `cursor`, `previous_fingerprint`, `issue_ids`, `fix_ids` | Bounded task context with source-qualified references and omitted/missing evidence / 有界任务上下文与来源身份 |
+| `connect` | `action` plan/execute/status; plan `target`, `workspace`, `task_id` for a workbench; execution `plan_id` | Preserve and merge the generated project MCP block; no host reload / 保全合并项目 MCP 配置，不代宿主重载 |
+| `onboarding` | `onboarding_id`, `action` start/update/status; `scope`, `item`, `expected_revision` | Resume standard onboarding from verified local bindings and reviewed native evidence / 可接续接入清单 |
+| `schedule_plan` | `onboarding_id` | Return original-chat schedule instructions without creating a scheduler / 生成原聊天调度计划，不创建调度 |
+| `preserve` | `action` plan/execute/status; plan `repository`, `paths`, `message`; execute/status `plan_id` | Exact local Git save, retaining unrelated index/WIP / 精确本地 Git 保存，保全其他暂存与工作内容 |
+| `governance` | `mode` inspect/record; `rule_paths`; record `record_id`, `expected_fingerprint`, `evidence_refs`, `expected_revision` | Separate package/method/user-rule identity and retain reviewed evidence / 区分包、方法与用户规则身份 |
+| `codex` | `action` capabilities/list/read, `executable`; optional `codex_home`, `limit`, `cursor`, `archived`, `thread_id`, bounded `timeout`, `max_bytes` | Optional explicit Codex App Server adapter; no AI turns or messages / 显式 Codex 只读适配 |
+| `update_source` | `channel` rc/stable, `current_version`, `current_artifacts`, `method_refs`, `maintenance`, `expected_revision` | Register official release source and current identity / 登记官方来源和当前身份 |
+| `update_check` | optional `channel` | Read bounded official releases; no local write or installation / 有界只读更新查询，不安装 |
+| `update_assess` | exact `check`, `decision` prioritize/plan/keep/wait/reject, `reason`; optional `evidence_refs`, `expected_revision` | Explicitly retain a release applicability review / 显式保存适用性判断 |
 | `init` | `name` | Initialize the control directory / 初始化控制目录 |
 | `task` | `task_id`, optional `title`, `workstream`, `state` | Record task; states active, paused, waiting, complete / 记录任务状态 |
 | `workspace` | `name`, `path` | Register existing Git workspace / 登记已有 Git 工作区 |
@@ -61,9 +72,35 @@ Receiving plans include selected recovery operations in their identity. `scope: 
 
 接收计划的身份覆盖选中的恢复操作。`scope: plan` 与 `plan_complete` 只说明冻结范围，`project_complete` 保持 null，当前剩余工作另列。旧空计划完成不代表后来交付也已接收。采用准备失败保留检查点和原错误，供下一轮复核。匹配的 `refresh_plan` 经验仅对已证明没有应用效果的操作给出 `plan_request` 建议，不自动执行；已有候选或效果未知时先对账实际效果。
 
-MCP 工具名以 `taskcarry_` 开头，提供普通动作，不通过工具初始化或改装项目。服务固定到启动时的项目。协议封装可以不同，实际行为共用同一分发器。
+MCP 工具名以 `taskcarry_` 开头，提供普通动作；`init` 和 `setup` 仍通过 CLI 完成。`connect` 可按明确计划保全合并已生成的项目配置，不能代替宿主加载。服务固定到启动时的项目。协议封装可以不同，实际行为共用同一分发器。
 
 Observation `relations` contain objects with `kind: stage` or `kind: artifact` and an existing `id`. The engine checks task/workspace links and freezes each related record's content fingerprint. Supplied source references remain host-reviewed evidence, not independently read conversations. Identical observations/issues/fixes reuse their existing record; changed content requires the current positive integer `expected_revision`. Original revisions remain available in the local history.
+
+For ordinary source material, `observe.workspace` may be JSON `null` with an existing `task_id`. It does not register a Git workspace and cannot attach a Git stage without its real workspace. Source-qualified identity is `(source_id, collection, local_id)`; unchanged local IDs from older clients remain valid inside their selected state source.
+
+`context` reads the named task, its latest checkpoint and a bounded indexed page of related records. Each payload is limited to 16 KiB; larger records are explicitly omitted with a reason. Selected unscoped issues/fixes must be named explicitly. The response distinguishes missing evidence, pagination, task input changes and external effects not reverified. Older stores lacking the derived context index require explicit `upgrade`; reads do not silently migrate or acknowledge work. SQLite may manage its own transient reader files; read-only means no project record/event mutation, not a filesystem-wide zero-write guarantee.
+
+## Standard onboarding and configuration / 标准接入与配置
+
+`onboarding` starts with a confirmed scope containing `governance_thread`, `channel`, daily `schedule` (`time`, `timezone`) and selected `windows`. Each window has `thread_id`, `mode` (`active`/`reference`), `source_ref` and `responsibility`; active windows also name their existing `task_id` and registered Git `workspace`. Update one `item` with `key`, `status`, structured `evidence`, `next_step` and the current revision. Exact repeats reuse records. Reference-only history does not become an active writer.
+
+Required evidence covers confirmed scope, governance native runtime, local Git preservation, official update assessment, saved native schedule and each active workbench's native calls. `standard_ready` concerns actual standard configuration; `closed_loop_verified` additionally needs a naturally delivered heartbeat. Supplied native receipts remain host-reviewed references, with local Git identities independently rechecked. No boolean field creates a host capability or proves a remote effect. Pending items remain actionable without erasing other completed setup.
+
+`connect` requires completed setup materials. It retains existing user configuration bytes and adds only the generated service block; a previously managed block can be replaced only when unchanged. Same-name unmanaged changes, unsupported TOML layout, changed target or binding return specific conflicts without overwriting. Execution uses the saved plan. After an interrupted file effect, repeat that plan to verify bytes and repair only the receipt. `host_loading_verified` remains false until separately checked in the actual host. User-level configuration is not a supported target.
+
+`preserve` plans exact regular files in an existing Git working tree using verified author configuration. It creates no repository and performs no push. Selected already-staged paths require review; unrelated staged/unstaged content is retained. The content policy is raw file bytes, with no clean filters or hooks. No meaningful change creates no commit. Recovery checks the recorded ref/index effect before continuing; changed index conditions require review. A local commit does not automatically become a submitted stage, remote backup or business acceptance. Use the [coverage template](../templates/preservation-coverage.json) to keep capture, upload, download and recovery evidence separate.
+
+## Host reading and release maintenance / 宿主读取与更新维护
+
+`codex` uses a selected executable and explicit history home when supplied. It supports the tested App Server protocol/version, lists from the existing state index and reads selected paginated turns. It does not start/resume an AI turn, repair missing history indexes, send messages or archive threads. Version mismatch, host configuration failures, output limits and timeouts retain specific errors. App Server startup may write its own cache/log files. Desktop, archived, cloud and other-account coverage must be verified separately; a plugin's success does not certify this independent adapter. Read results are untrusted source data, not instructions to execute.
+
+`update_check` reads at most two pages of 20 official releases, chooses the selected channel and verifies structured manifest bytes, tag commit and asset metadata when available. It does not download or attest package bytes. A legacy release without a manifest needs manual identity review; offline is `UNVERIFIED`, never “latest.” The separate `taskcarry-release.json` is generated from exact reviewed source and final artifacts, excludes itself and records compatibility/actions. No source-branch commit is an update candidate by itself.
+
+`update_assess` binds the supplied check content and source revision. Same inputs reuse the decision; conflicting identity for one version remains a conflict. Querying or assessing does not install. `governance` separately fingerprints the current runtime, managed method files and explicitly selected user rules. Its saved review does not establish another process's reload. Preserve custom rules during setup/update and verify actual native connections afterward.
+
+中文：标准三步需完成真实工作位置、Git 保存、逐窗口原生连接、原聊天调度及官方更新判断；网盘与私有远端按需选择。普通资料保存保留兼容性，不替代专业工作区配置。首次自然触发与配置回读分开，接收业务阶段与工具升级分开。
+
+繁體中文：標準三步須完成實際工作位置、Git 儲存、逐視窗原生連線、原治理對話排程與官方更新判斷；網盤及私有遠端按需選擇。一般資料儲存保留相容性，不替代專業工作區設定。首次自然觸發與設定回讀分開，業務階段接收與工具更新分開。
 
 `status.continuity` exposes current observations, runs, issues and fixes. The agenda includes open issues and unfinished runs without replacing actual operation failures. A run freezes identities at `start`; `finish` checks their durable receipt linkage and records `COMPLETED` or `WAITING`, with `project_complete: null`. Changed observations are reported separately. Neither a closed issue nor a completed run is new authorization or business acceptance. `fix.adoption` compares the current project's managed setup files, runtime disk fingerprint and version; it never installs software or proves another host process reloaded.
 

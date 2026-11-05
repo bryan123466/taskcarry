@@ -57,6 +57,8 @@ Memory comes from the tasks, notes, files, and deliveries you or your AI assista
 
 Your independent **governance chat** maintains project memory and reviews connected progress. It uses the host AI to understand permitted sources, distinguish confirmed decisions from suggestions, and call TaskCarry tools. It can also coordinate project priorities if you choose. Keep giving work directly to your existing main or specialist chats; governance does not become a required dispatch gate.
 
+The product combines a shared **Core**, maintained governance **Skills**, and **your project's own rules and memory**. Keep your decisions and custom instructions when updating the shared tools. A real project may span several directories, repositories and conversations; governance proposes their relationships and you confirm the scope. Records retain their source identity so matching task names from different stores do not become the same task.
+
 TaskCarry stores records and performs the supported local operations. You retain decisions about project direction, priorities, business acceptance, and external delivery. The toolkit does not require a separate model API or train a model.
 
 For example, software may have a usable module while experiments are paused and documentation is still a draft. Governance can receive the software stage and retain the other two tasks at their current positions. Nobody needs to mark the entire project complete just to preserve useful progress.
@@ -79,7 +81,11 @@ A received stage can be part of an unfinished task. A paused task can stay pause
 
 ### First time using TaskCarry
 
-[Get the complete product package](START_HERE.md#download), then follow the [installation guide](docs/en/windows-example.md). Open an independent governance chat and send its single prompt with your project location and package location. Governance connects the work you already have, helps complete setup and suggests useful next steps.
+[Get the complete product package](START_HERE.md#download), then follow the [three-step guide](docs/en/windows-example.md):
+
+1. **Establish governance.** Put the package under a local TaskCarry folder, open an independent Codex chat there and send the guide's single prompt.
+2. **Complete setup through conversation.** Governance inherits selected work and decisions, prepares real workspaces and local Git saving, connects the selected working chats, and configures its original-chat schedule and official release checks. It gives you the current action when host trust, login or reload needs your participation.
+3. **Review the evidence and continue.** Receive the window/role/task map, actual connection and saving results, any concrete remaining step, and project-specific next actions. Schedule configuration and its first natural trigger are reported separately.
 
 Keep working in your original chats. Governance maintains project memory; ongoing project coordination is optional, and you may need no additional specialist chats.
 
@@ -95,12 +101,12 @@ This is an organization example. Existing working chats remain useful. If they s
 
 ## Build on the local workflow
 
-- **Scheduled coordination:** use your host's scheduling feature to ask governance to review connected work and produce a useful summary. Installing TaskCarry does not create a schedule.
+- **Standard local loop:** guided setup includes local Git saving, a schedule returning to the original governance chat, and checks of official releases on your selected channel. Installing the wheel alone does not configure the host; incomplete host steps remain visible until verified. Finding a new version does not install it.
 - **Private Git:** configure your own remote repository for selected committed results. File references help locate materials, but copying, backup, and remote synchronization remain explicit operations.
 - **Additional AI tools:** CLI and MCP provide integration points around one engine. The Codex guide is the current concrete onboarding path; it does not establish that every MCP client, model, or AI platform has been verified.
 - **Multiple computers:** the [guide](docs/en/remote-and-multicomputer.md) describes separate task branches and one integration computer. Real two-computer operation has not completed end-to-end validation; start after the local workflow is established.
 
-TaskCarry uses Python 3.11+; Git is needed for Git workflows. It stores project state locally and includes four project Skills for setup, task delivery, governance, and recovery. Each control scope has one local store and one receiving baseline. Installation updates tools and Skills; adopting received business changes into a workspace is a separate, reviewed action. See [maintenance](docs/en/governance-maintenance.md) and [capabilities and limits](docs/RELEASE_BOUNDARIES.md).
+TaskCarry uses Python 3.11+ and includes four project Skills for setup, task delivery, governance, and recovery. Standard onboarding prepares local Git; the lower-level ability to checkpoint ordinary files remains available for compatibility and recovery. Each control scope has one local store and one receiving baseline; a user-defined project can connect multiple existing sources without silently merging them. Installation updates tools and Skills; adopting received business changes into a workspace is a separate, reviewed action. See [maintenance](docs/en/governance-maintenance.md) and [capabilities and limits](docs/RELEASE_BOUNDARIES.md).
 
 ## Documentation
 
@@ -115,7 +121,7 @@ TaskCarry uses Python 3.11+; Git is needed for Git workflows. It stores project 
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/main/docs/VALIDATION.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
 
 ## Join in
 

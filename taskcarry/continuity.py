@@ -39,7 +39,8 @@ class Continuity(Core):
                 summary, relations=None, expected_revision=None):
         """Record a host-reviewed reference; replacing it requires its prior revision."""
         observation_id = _id(observation_id, 'Observation ID')
-        workspace, task_id = _id(workspace, 'Workspace'), _id(task_id, 'Task ID')
+        workspace = _id(workspace, 'Workspace') if workspace is not None else None
+        task_id = _id(task_id, 'Task ID')
         _text(source_ref, 'Source reference')
         _text(source_revision, 'Source revision', 512)
         _text(summary, 'Evidence summary', 8192)
@@ -52,16 +53,18 @@ class Continuity(Core):
             raise GovernanceError('INVALID_RELATION', 'Evidence may name at most 100 explicit relationships.')
         with self.store.transaction():
             self._task(task_id)
-            registered = self.store.get('workspaces', workspace)
-            if not registered:
+            registered = self.store.get('workspaces', workspace) if workspace else None
+            if workspace is not None and not registered:
                 raise GovernanceError('WORKSPACE_UNKNOWN', 'Register this workspace before recording its evidence.')
-            if not registered.get('identity'):
+            if registered and not registered.get('identity'):
                 raise GovernanceError('WORKSPACE_IDENTITY_MISSING', 'The workspace needs a registered identity.')
             linked, seen = [], set()
             for relation in relations:
                 if not isinstance(relation, dict) or set(relation) != {'kind', 'id'} or relation['kind'] not in ('stage', 'artifact'):
                     raise GovernanceError('INVALID_RELATION', 'Use a stage or artifact relationship with an exact id.')
                 identity = _id(relation['id'], 'Related object ID')
+                if workspace is None and relation['kind'] == 'stage':
+                    raise GovernanceError('RELATION_SCOPE_MISMATCH', 'Git stages require their real registered workspace.')
                 key = (relation['kind'], identity)
                 if key in seen:
                     raise GovernanceError('INVALID_RELATION', 'Evidence relationships must be unique.')
@@ -78,7 +81,7 @@ class Continuity(Core):
                 linked.append({**relation, 'content_fingerprint': _fingerprint(content)})
             linked.sort(key=lambda value: (value['kind'], value['id']))
             body = {'observation_id': observation_id, 'workspace': workspace, 'task_id': task_id,
-                    'workspace_identity': registered['identity'], 'source_ref': source_ref,
+                    'workspace_identity': registered['identity'] if registered else None, 'source_ref': source_ref,
                     'source_revision': source_revision, 'summary': summary, 'relations': linked}
             fingerprint = _fingerprint(body)
             prior = self.store.get('observations', observation_id)

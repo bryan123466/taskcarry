@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import sqlite3
 import threading
+import uuid
 
 
 TERMINAL_STATES = frozenset(('accepted', 'committed', 'complete', 'completed', 'superseded',
@@ -47,13 +48,21 @@ class Store:
         if _linked(self.directory):
             raise GovernanceError('UNSAFE_METADATA', 'Governance metadata cannot be a symbolic link.')
         if create:
+            from .identification import identify, require_initializable
+            require_initializable(identify(self.root))
             self.root.mkdir(parents=True, exist_ok=True)
             self.directory.mkdir(exist_ok=True)
             with self.guard():
+                require_initializable(identify(self.root, initializing=True))
                 fresh = not self.path.exists()
                 if _linked(self.path):
                     raise GovernanceError('UNSAFE_METADATA', 'The state database cannot be a symbolic link.')
+                # Existing compatible databases must not be journal-migrated or
+                # repaired by initialization. Upgrades are a separate action.
+                if not fresh:
+                    return
                 with closing(sqlite3.connect(self.path, timeout=0)) as db:
+                    db.execute('PRAGMA application_id=1413693785')
                     db.execute('PRAGMA journal_mode=WAL')
                     db.execute('PRAGMA synchronous=FULL')
                     db.executescript('''
@@ -67,6 +76,7 @@ class Store:
                     if fresh:
                         with db:
                             self._create_projection(db)
+                            self._create_context_index(db)
         elif not self.path.is_file():
             raise GovernanceError('NOT_INITIALIZED', 'Initialize this project before using governance.')
         if _linked(self.path):
@@ -253,11 +263,51 @@ class Store:
                    (collection, key, int(active), state, record.get('task_id'),
                     record.get('workspace'), record.get('plan_id')))
 
+    @staticmethod
+    def _context_ready(db):
+        row = db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='context_schema'").fetchone()
+        if not row:
+            return False
+        version = db.execute('SELECT version FROM context_schema').fetchone()
+        if version is None or version[0] != 1:
+            raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'Use a compatible context index reader.')
+        return bool(db.execute("SELECT 1 FROM sqlite_master WHERE type='index' AND name='current_records_task'").fetchone())
+
+    @staticmethod
+    def _create_context_index(db):
+        db.execute('CREATE INDEX IF NOT EXISTS current_records_task ON current_records(task_id,collection,key)')
+        db.execute('CREATE TABLE IF NOT EXISTS context_schema(version INTEGER NOT NULL, generation TEXT NOT NULL)')
+        db.execute('DELETE FROM context_schema')
+        db.execute('INSERT INTO context_schema VALUES(1,?)', (uuid.uuid4().hex,))
+        db.execute('CREATE TABLE IF NOT EXISTS context_revisions(task_id TEXT PRIMARY KEY, revision INTEGER NOT NULL)')
+        db.execute('DELETE FROM context_revisions')
+        db.execute('CREATE TABLE IF NOT EXISTS context_record_revisions(collection TEXT NOT NULL, key TEXT NOT NULL, revision INTEGER NOT NULL, PRIMARY KEY(collection,key))')
+        db.execute('DELETE FROM context_record_revisions')
+        db.execute('INSERT INTO context_revisions SELECT DISTINCT task_id,1 FROM current_records WHERE task_id IS NOT NULL')
+        # SQL triggers also cover compatible older clients: a reader never
+        # depends on an in-memory cache or silently repairs this derived index.
+        collections = "('tasks','checkpoints','observations','stages','operations','artifacts','issues','fixes','runs')"
+        for operation, sources in (('insert', ('NEW',)), ('update', ('OLD', 'NEW')), ('delete', ('OLD',))):
+            db.execute('DROP TRIGGER IF EXISTS context_revision_' + operation)
+            statements = []
+            for source in sources:
+                statements.append('INSERT INTO context_record_revisions(collection,key,revision) SELECT ' + source +
+                                  '.collection,' + source + '.key,1 WHERE ' + source + '.collection IN ' + collections +
+                                  ' ON CONFLICT(collection,key) DO UPDATE SET revision=revision+1;')
+                statements.append("INSERT INTO context_revisions(task_id,revision) SELECT json_extract(" + source +
+                                  ".value,'$.task_id'),1 WHERE " + source + '.collection IN ' + collections +
+                                  " AND json_type(" + source + ".value,'$.task_id')='text' "
+                                  'ON CONFLICT(task_id) DO UPDATE SET revision=revision+1;')
+            condition = ' WHEN OLD.value IS NOT NEW.value' if operation == 'update' else ''
+            db.execute('CREATE TRIGGER context_revision_' + operation + ' AFTER ' + operation.upper() +
+                       ' ON records' + condition + ' BEGIN ' + ' '.join(statements) + ' END')
+
     def upgrade(self):
         """Explicit, atomic index migration. Existing evidence is never rewritten."""
         with self.transaction(), self._connect() as db:
             ready = self._projection_ready(db)
-            if ready and not self._projection_dirty(db):
+            context_ready = self._context_ready(db)
+            if ready and not self._projection_dirty(db) and context_ready:
                 return {'upgraded': False, 'current_projection_version': CURRENT_PROJECTION_VERSION,
                         'records_rewritten': 0, 'events_rewritten': 0}
             if ready:
@@ -269,6 +319,7 @@ class Store:
                 self._project_record(db, collection, key, json.loads(serialized))
                 count += 1
             db.execute("UPDATE store_schema SET dirty=0 WHERE name='current_records'")
+            self._create_context_index(db)
             return {'upgraded': True, 'current_projection_version': CURRENT_PROJECTION_VERSION,
                     'indexed_records': count, 'records_rewritten': 0, 'events_rewritten': 0}
 
@@ -276,8 +327,10 @@ class Store:
         with self._connect(readonly=True) as db:
             ready = self._projection_ready(db)
             dirty = self._projection_dirty(db) if ready else False
+            context_ready = ready and not dirty and self._context_ready(db)
         return {'mode': 'indexed_current_v1' if ready and not dirty else 'legacy_full_scan',
-                'upgrade_required': not ready or dirty, 'index_rebuild_required': dirty}
+                'upgrade_required': not ready or dirty, 'index_rebuild_required': dirty,
+                'context_ready': context_ready, 'context_upgrade_required': not context_ready}
 
     def snapshot_current(self):
         """Read agenda inputs using the index, plus explicitly linked ancestors.

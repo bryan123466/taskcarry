@@ -1,10 +1,14 @@
-# Chapters 4–5: private Git, recovery backups and multiple computers
+# Private remotes, recovery backups and multiple computers
 
-Windows users can follow the [fixed-path walkthrough](windows-example.md) with ready-to-paste commands and prompts. The general reference below remains configurable.
+Start with the [guided local setup](windows-example.md). Use this reference when you choose a private remote, storage service or an additional computer; detailed installation commands remain in the [manual fallback](manual-setup.md).
 
 [Operation manual](operation-manual.md) · [简体中文](../zh-CN/remote-and-multicomputer.md) · [繁體中文](../zh-TW/remote-and-multicomputer.md) · [Command reference](../COMMANDS.md)
 
-Applies to 0.2.0rc5. These are optional reference procedures, not daily tasks required after installation. The cross-computer procedure has not been validated end to end on two physical computers. It combines Git operations with the existing local TaskCarry interface; it does not add automatic cross-host synchronization or recovery.
+Local governance Git saving, the original-chat schedule and official release checks belong to standard onboarding. The private remote and multi-computer procedures below are optional extensions. The cross-computer procedure has not been validated end to end on two physical computers. It combines Git operations with the existing local TaskCarry interface; it does not add automatic cross-host synchronization or recovery.
+
+Standard local saving uses an explicit file list, preserves the existing Git index and unfinished work, and records a commit only when selected content changes. It excludes the active `.taskcarry` database, runtime, downloaded packages and credentials. Working windows keep their real task/workspace bindings; a Git author name or a chat identifier alone does not establish these relationships. Original materials can stay in place, while large external outputs have versioned references and separately verified storage coverage.
+
+When you choose cloud storage, synchronize sealed static backup packages. Verify capture, local bytes, upload, download and isolated restore as separate steps. Writing into a local sync folder does not prove cloud upload or recovery on another machine. Do not place live `.taskcarry` or Git metadata under competing background synchronization. Keep any encryption key separate from its encrypted backup.
 
 Replace every `<...>` placeholder. Use the Python environment in which TaskCarry is installed. Save request files as UTF-8 JSON. Git pushes transmit data to the selected remote, so establish the destination, its readers and the authorized scope before uploading.
 
@@ -14,7 +18,7 @@ Replace every `<...>` placeholder. Use the Python environment in which TaskCarry
 
 ### 4.1 Know what each store contains
 
-[Ready-to-paste Windows example for this step](windows-example.md#private-git)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 | Content | Recommended location | What it can recover |
 |---|---|---|
@@ -29,7 +33,7 @@ Replace every `<...>` placeholder. Use the Python environment in which TaskCarry
 
 ### 4.2 Establish the private remote and one main writer
 
-[Ready-to-paste Windows example for this step](windows-example.md#private-git)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 1. Create a **private** repository with your Git hosting provider and review its members. For an existing project, avoid creating an unrelated remote README or initial commit.
 2. Designate one computer as the integration host. Its dedicated clean receiving workspace is the only place advancing remote `main`; other computers publish task branches.
@@ -60,7 +64,7 @@ The last two hashes should match. Investigate rejection instead of forcing a pus
 
 ### 4.3 Keep useful memory in ordinary project files
 
-[Ready-to-paste Windows example for this step](windows-example.md#private-git)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Use a registered documentation workspace to maintain, for example, `project-memory/current.md` with:
 
@@ -96,7 +100,7 @@ Prompt for Codex:
 
 ### 4.4 Create a verifiable, consistent backup
 
-[Ready-to-paste Windows example for this step](windows-example.md#private-git)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 **Pause writes for this project before capturing one consistent point.** TaskCarry does not currently provide a single coordinated backup command for Git, SQLite and file objects. Follow this order:
 
@@ -130,9 +134,9 @@ On other systems, use a local file-copy tool under the same stopped-writer condi
 
 ### 4.5 Separate recovery of material from re-enabling governance
 
-[Ready-to-paste Windows example for this step](windows-example.md#private-git)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
-**Do not copy an old `.taskcarry` to a new computer and execute its old reception/adoption plans.** Workspace identity includes absolute path, Git common directory and branch. The integration baseline also binds that identity. Version 0.2.0rc5 has no full cross-host state-migration API. Matching directory names do not prove the same execution state.
+**Do not copy an old `.taskcarry` to a new computer and execute its old reception/adoption plans.** Workspace identity includes absolute path, Git common directory and branch. The integration baseline also binds that identity. There is no full cross-host state-migration API. Matching directory names do not prove the same execution state.
 
 Recovery procedure:
 
@@ -182,7 +186,7 @@ Example `new-baseline.json`: `{"name":"baseline","path":"<NEW_BASELINE_ABSOLUTE_
 
 ### 5.1 Recommended topology and responsibilities
 
-[Ready-to-paste Windows example for this step](windows-example.md#multi-computer)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 ```text
 Computer B: independent clone → task branch → stable commit + handoff manifest
@@ -204,7 +208,7 @@ Each computer may use its own legitimately authorized Codex account and Git cred
 
 ### 5.2 Computer B: start a task from the published baseline
 
-[Ready-to-paste Windows example for this step](windows-example.md#multi-computer)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Confirm A has pushed the baseline B should use. For this example, task `form-export` is scoped to `forms/export.py` and `docs/export.md`; replace the names and paths with the actual agreement.
 
@@ -234,7 +238,7 @@ Confirm the index contains only the intended paths before committing. Record thi
 
 ### 5.3 Computer B: record a handoff and push its task branch
 
-[Ready-to-paste Windows example for this step](windows-example.md#multi-computer)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Create `handoffs/form-export-v1.json` **after** the output commit, avoiding a file trying to contain its own commit hash:
 
@@ -269,7 +273,7 @@ Check the index and the remote hash. The branch HEAD now contains the handoff an
 
 ### 5.4 Computer A: verify original evidence, then receive locally
 
-[Ready-to-paste Windows example for this step](windows-example.md#multi-computer)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Use a consistently named intake clone/workspace for this task, for example registration `intake-form-export`. If it already exists, inspect its identity binding and unfinished operations rather than recreating it or rewriting its history.
 
@@ -342,7 +346,7 @@ Confirm the stage is actually `COMMITTED`, its operations are complete and basel
 
 ### 5.5 Continuing on B, transferring the main role and known limits
 
-[Ready-to-paste Windows example for this step](windows-example.md#multi-computer)
+[Ready-to-paste Windows example for this step](manual-setup.md)
 
 After A confirms reception and push, B reads the current handoff. Preserve WIP in its old task workspace rather than resetting it to `main`. Start a clean next task branch from the published baseline when appropriate:
 

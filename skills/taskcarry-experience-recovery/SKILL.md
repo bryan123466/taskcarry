@@ -20,3 +20,5 @@ For a defect that needs continuing maintenance, use `taskcarry_issue` with a sta
 Keep fix development, reception, publication, installation, host reload and observed outcome as separate evidence. Record applicable version and actual adoption when available. Writing experience is not installing a fix. Public improvements remove private paths, transcripts and project-specific dependencies and reproduce the condition with synthetic material.
 
 中文：经验闭环应降低源头复现，也应帮助中断接续。条件经验不能扩大权限，不能把过期经验强套新任务。未知情况保留实际证据，形成可验证的修正候选，不让一个任务冻结全项目。
+
+Use `governance` to inspect package, managed-method and user-rule content identities before maintenance. Retain project customizations and tie the review to exact fingerprints; a saved review does not attest host loading. The official `update_check` and explicit `update_assess` distinguish an available release from an applicable repair. A new release, recorded fix, local install and resolved original condition each need their own evidence. A failed network check is unverified, not proof that the installed release is latest.

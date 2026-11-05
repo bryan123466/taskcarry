@@ -9,7 +9,8 @@ import sys
 ACTIONS = (
     "init", "status", "agenda", "task", "checkpoint", "restore", "artifact", "experience",
     "workspace", "submit", "reconcile", "adopt", "doctor", "setup", "mcp",
-    "upgrade", "observe", "run", "issue", "fix",
+    "upgrade", "observe", "run", "issue", "fix", "identify", "context", "governance", "connect",
+    "codex", "update_source", "update_check", "update_assess", "onboarding", "schedule_plan", "preserve",
 )
 
 

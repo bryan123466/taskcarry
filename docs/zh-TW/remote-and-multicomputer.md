@@ -1,10 +1,14 @@
-# 第 4、5 章：私有 Git、備份恢復與多電腦協作
+# 私有遠端、備份恢復與多電腦協作
 
-Windows 使用者可以直接跟隨[固定目錄完整示例](windows-example.md)，複製配套指令與提示詞；以下通用說明仍適用於自定義目錄。
+先完成[本機對話式接入](windows-example.md)。選擇私有遠端、檔案儲存或另一臺電腦時，再使用本參考；具體安裝指令保留在[手動後備](manual-setup.md)。
 
 [返回操作手冊](operation-manual.md) · [English](../en/remote-and-multicomputer.md) · [简体中文](../zh-CN/remote-and-multicomputer.md) · [指令參考](../COMMANDS.md)
 
-適用版本：0.2.0rc5。這兩章是按需要啟用的參考流程，不是安裝後每天必須執行的任務。下述跨電腦流程尚未經過兩臺實體電腦的端到端驗證；它組合了 Git 操作與現有本機 TaskCarry 介面，沒有新增跨機同步或自動恢復能力。
+本機治理 Git 儲存、原治理視窗的排程任務與官方更新檢查屬於標準接入。下述私有遠端與多電腦流程是按需擴充，尚未經過兩臺實體電腦的端到端驗證；它組合 Git 操作與現有本機 TaskCarry 介面，沒有新增跨機同步或自動恢復能力。
+
+標準本機儲存使用明確檔案清單，保全原 Git 暫存區與未完成工作，只有選定內容變更才形成提交；排除執行中的 `.taskcarry` 資料庫、runtime、下載套件與憑據。持續工作的視窗保留真實任務與工作區關聯，提交署名或對話 ID 本身不能證明這些關聯。原資料可留在原處，大型外部產物以版本化參照和分別核對的儲存涵蓋範圍銜接。
+
+選擇網路磁碟時，同步已封存的靜態備份套件；擷取、本機位元組核驗、上傳、下載與隔離恢復分別留證。寫入本機同步目錄不證明雲端已經上傳或另一臺電腦能夠恢復。不把活躍 `.taskcarry` 或 Git 中繼資料交給互相競爭的背景同步；加密金鑰與加密備份分開保管。
 
 所有 `<...>` 都是需要替換的預留位置符號。`python` 應指向已經安裝 TaskCarry 的 Python 環境。JSON 檔案儲存為 UTF-8；不要把示例中的預留位置符號直接執行。Git 推送會向所選遠端傳送資料，應先確認儲存庫、存取者和本次授權範圍。
 
@@ -14,7 +18,7 @@ Windows 使用者可以直接跟隨[固定目錄完整示例](windows-example.md
 
 ### 4.1 先分清哪些內容儲存在哪裡
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#private-git)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 | 內容 | 推薦儲存位置 | 恢復時能提供什麼 |
 |---|---|---|
@@ -29,7 +33,7 @@ Windows 使用者可以直接跟隨[固定目錄完整示例](windows-example.md
 
 ### 4.2 建立私有遠端，明確誰能推進主線
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#private-git)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 1. 在自己的 Git 託管服務建立**私有**儲存庫，檢查成員權限。接入已有專案時，不要讓新儲存庫自動生成與本機歷史無關的 README 或初始提交。
 2. 選定一臺電腦作為整合主機。其專用乾淨接收工作區是唯一推進遠端 `main` 的位置；其他電腦使用任務分支。
@@ -60,7 +64,7 @@ git -C "<A_BASELINE>" ls-remote origin refs/heads/main
 
 ### 4.3 把有用記憶儲存為普通專案檔案
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#private-git)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 在一個已登記、負責文件的專業工作區維護例如 `project-memory/current.md`，內容包括：
 
@@ -96,7 +100,7 @@ git -C "<MEMORY_WORKSPACE>" commit -m "Update current project handoff"
 
 ### 4.4 做一份可核對的一致備份
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#private-git)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 **先停止這一個專案的寫入，再備份同一時點。** 當前 TaskCarry 沒有跨儲存庫、SQLite 與檔案對象的一鍵一致備份指令。操作順序：
 
@@ -130,9 +134,9 @@ Get-ChildItem -LiteralPath "<SNAPSHOT>/.taskcarry" -Force
 
 ### 4.5 恢復時分成“找回資料”與“重新啟用治理”
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#private-git)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
-**不要把舊 `.taskcarry` 複製到新電腦後直接執行舊接收/採用計畫。** 工作區身分包含絕對路徑、Git 公共目錄和分支；整合基線還綁定原身分。0.2.0rc5 沒有完整的跨機狀態遷移 API。相同目錄名字不代表同一現場。
+**不要把舊 `.taskcarry` 複製到新電腦後直接執行舊接收/採用計畫。** 工作區身分包含絕對路徑、Git 公共目錄和分支；整合基線還綁定原身分。工具沒有完整的跨機狀態遷移 API。相同目錄名字不代表同一現場。
 
 恢復步驟：
 
@@ -182,7 +186,7 @@ python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" status
 
 ### 5.1 推薦拓撲與責任
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#multi-computer)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 ```text
 電腦 B：獨立 clone → 任務分支 → 穩定提交 + 交付 manifest
@@ -204,7 +208,7 @@ TaskCarry 的一個治理目錄由**一臺電腦上的本機 SQLite**管理。�
 
 ### 5.2 電腦 B：從已公布基線開始一個任務
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#multi-computer)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 確認 A 已推送允許 B 使用的基線，並約定任務 `form-export` 僅修改 `forms/export.py` 與 `docs/export.md`。以下目錄、任務名和檔案都是示例，應換成實際約定。
 
@@ -234,7 +238,7 @@ git -C "<B_REPOSITORY>" diff --no-renames --name-only "<SOURCE_BASE>" HEAD
 
 ### 5.3 電腦 B：另存交付說明並推送任務分支
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#multi-computer)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 在產物提交**之後**建立 `handoffs/form-export-v1.json`，避免“檔案裡寫它自身提交雜湊”的循環：
 
@@ -269,7 +273,7 @@ git -C "<B_REPOSITORY>" ls-remote origin refs/heads/codex/form-export
 
 ### 5.4 電腦 A：複核原始證據，再用本機介面接收
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#multi-computer)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 為這個任務建立名稱穩定的 intake 儲存庫副本或工作區（例如本機登記名 `intake-form-export`），從遠端取得原提交。已有對應 intake 時先查其綁定和未完狀態，不重複建立或改寫其歷史。
 
@@ -342,7 +346,7 @@ python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status
 
 ### 5.5 B 接續、主機換手和已知邊界
 
-[本步驟可直接複製的 Windows 示例](windows-example.md#multi-computer)
+[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 B 確認 A 接收並推送後，讀取最新接續說明。若舊任務工作區仍有 WIP，先保留，不直接把它重置到 `main`。可從已公布主線建立下一條乾淨任務支線：
 

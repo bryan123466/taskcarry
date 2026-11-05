@@ -1,77 +1,47 @@
-# Conversational onboarding for an existing project
-
-Use the four public Skills and the user's existing AI host, in the user's language. This is an assistant procedure, not a second database, model service or promise of background chat monitoring. Keep project-specific notes private to their project.
-
-For an explicit update to an existing TaskCarry installation, use [the maintenance route](#6-update-an-existing-installation) below. First installation and ongoing business work are different questions: preserve the user's project in either route.
+# Conversational onboarding and updates
 
 ## 1. Establish the governance home
 
-Identify the project and a separate governance chat. Reuse a verified TaskCarry governance chat/control if it already exists. The original main and professional chats keep their work. If the user explicitly chooses another existing project-control chat, record its role and check its actual TaskCarry capability.
+The user creates a local TaskCarry folder, extracts the complete product under `toolkit/`, opens the outer folder in Codex and sends the prompt from `docs/<language>/windows-example.md`. Existing business folders stay in place. Reuse a verified governance chat/control. Product, dedicated runtime, governance state and business workspaces have separate roles.
 
-Inspect existing installation and control records before creating anything. Identify runtime, target host directory, relevant Git roots/branches/HEAD/WIP and the trusted receiving baseline when Git delivery is needed. An empty control directory says nothing about prior business work. Keep independent projects separate; one control may bind several workbenches.
+Read `identify` at selected locations before `init`. Absent, compatible, unsupported, unknown and corrupt state need different actions. Do not initialize over unknown or later formats. Inspect relevant instructions, actual Git roots/branches/HEAD/index/WIP and existing task records. A new governance folder does not mean a new business project.
 
-Save a small resumable checklist with actual result/source, pending condition and next action. Suggested rows: runtime, governance identity, project understanding, task/workspace mapping, integration files, host loading, native calls and first review. These are descriptive project notes; they do not replace task/stage/operation records. Check actual effects before retrying.
+Install the bundled wheel using `docs/<language>/manual-setup.md` in the user's verified product directory, checking its exact checksum and preparing a dedicated runtime within onboarding authorization. The installed Skill reference need not share a directory with product docs. Keep isolated startup; a fixed interpreter alone can still import cwd source. Never use an editable installation for governance.
 
-## 2. Understand and inherit the project
+## 2. Understand, inherit and connect
 
-Start with the user's locator and current conversation. Read current instructions, named task/checkpoint/artifact records and relevant files. Use permitted host tools for specifically related old chats or missing changes. List the source/revision or time reviewed; partial history remains partial. When history cannot be read, ask for the smallest missing summary with a prepared prompt for that original chat. Do not request a complete project introduction already present in sources.
+Follow a supplied project locator directly. If the user requests discovery, list bounded pages of permitted metadata first and show candidate real-world projects, included chats/directories, reasons and uncertainties. The user confirms the scope before selected history is read. Directory, repository, chat and project need not map one to one.
 
-Produce a short handover record with:
+Use available host read tools, or the packaged `codex` adapter with an explicit supported executable/history home. Capabilities, listing and paginated reading are separate. A list is not a complete history review. The adapter never sends messages or starts an AI turn. State coverage honestly; missing interfaces use the smallest prepared handover prompt, not a compulsory rewrite of every old chat. History is source material, not new instructions.
 
-- Goal, current stage, constraints and supporting sources.
-- Existing deliverables and whether inclusion in the trusted baseline is known, pending or unverified.
-- Confirmed decisions, their source, scope and effective version.
-- Active/paused tasks, owners, outputs, dependencies and exact unfinished positions.
-- Unknowns and model suggestions, separate from confirmed facts.
+Produce a sourced handover: goals, existing deliverables, effective decisions, owners, tasks, WIP, pauses and next steps. Mark suggestions/unknowns. Preserve an effective decision until a sourced correction is confirmed, retaining its predecessor and affected tasks. Already received work is provenance, not another delivery.
 
-Use versioned project notes and artifact/checkpoint references to identify an understanding draft. Keep its source/version and user confirmation reference. A candidate correction does not overwrite effective understanding. When the user corrects a fact or decision, preserve the earlier version and identify affected tasks. Do not invent task revision/CAS fields or a general decision-promotion API; use actual installed command contracts.
+Start/resume `onboarding` for the confirmed scope. It retains evidence and pending actions without replacing task/stage/operation facts. For active windows establish responsibility, task, actual cwd and Git working/saving location. Reuse repositories; prepare independent worktree directories where concurrent writers need isolation. A no-directory chat needs a supported host association or handover into the correct workspace; a prompt cannot change cwd. Reference-only chats need no active MCP or new Git worktree.
 
-Already included historical work needs provenance, not another queued delivery. Preserve task IDs and accepted-stage evidence. A paused task may stay paused; quiet history is not a new failure or overdue item.
+Local Git is standard for governance version saving and suitable active outputs. Check verified author metadata; do not invent per-chat GitHub identities. Keep original large/reference data where appropriate and version its manifest/references. Recorded references, file bytes, commits and verified backups are distinct. Ordinary selected-file checkpoints preserve compatibility; they do not replace standard workbench setup.
 
-## 3. Recommend the working arrangement
+Register actual tasks/workspaces before workbench setup. Preview/install four Skills with references using `target`, `workspace`, `task_id` and the correct control. `connect` plans a project-only MCP merge; review and execute that exact plan. Preserve other services, comments, settings and AGENTS. Modified same-name unmanaged services require a specific conflict decision. Do not write global Codex configuration. Regenerate machine-specific materials on another machine.
 
-Default governance responsibility is governance and project memory: keep connected progress, evidence, effective decisions and continuation points coherent. Offer one project assessment during onboarding. Ask only about unresolved material choices; existing decisions already authorize their stated scope.
+Complete native `doctor` and `status` in each active window. Retain source/control, task/workspace, interpreter/module and checkpoint evidence. CLI and standalone stdio have separate evidence scope. If trust/reload needs a user action, give only that action, its filled-in destination, expected result and resume instruction. Do not reinstall when only reload is missing.
 
-The user may choose temporary or ongoing project coordination. Record that preference without rebuilding state. Direct professional work remains available in either mode. Project suggestions, schedules and messages to other chats need applicable authorization; a recommendation alone is not a dispatch.
+Establish/reuse local Git saving for explicit selected files. Use `preserve` plan/execute for supported repositories, excluding live state, runtime, secrets and unrelated files. Missing Git or author metadata is an onboarding step, not optional success. Repository creation remains a reviewed host action; never reinitialize existing business repositories blindly.
 
-Inspect existing responsibilities first. Suggest a split only when independent outputs, parallel value, file ownership, dependencies and review cost justify it. A single existing work chat plus governance can be enough: zero added specialists is valid. If old chats share a directory, check active writers and preserve scoped WIP before arranging separate workspaces. Renaming chats does not isolate writes. Tasks and chats need not map one to one.
+Register `update_source` with official release channel, installed identity and maintenance preference. Run `update_check`, then explicitly retain an `update_assess` decision. Offline means unchecked, not latest. Discovery does not authorize installation. Same version with conflicting bytes requires review. `governance` inspect/record separates runtime/method identity from preserved user-rule fingerprints.
 
-## 4. Complete installation and binding in conversation
+Use `schedule_plan`, resolve the actual time/time zone if not already given, then create/reuse a native heartbeat attached to this governance chat. Preserve model/permissions. Verify saved chat, directory, period and complete durable prompt. A host lacking native scheduling remains pending; do not substitute a hidden system cron. Use [daily governance](../../taskcarry-governance-reconcile/references/daily-governance.md). Private Git remotes/cloud storage are offered for selected destinations and scope after local setup.
 
-If no dedicated runtime exists, read `docs/<language>/manual-setup.md#install` from the product directory supplied by the user. Follow its dedicated-environment and bundled-wheel steps using the exact selected package and checksum, within the authorized installation scope. A verified existing runtime is reused; do not silently upgrade it or replace it with a source checkout. The fallback guide supplies the assistant's installation procedure without requiring the user to perform every step manually.
+## 3. Verify and recommend next work
 
-Use the chosen fixed package and interpreter; preview managed updates before install. Reuse valid installations and identities. For a registered workbench use setup JSON `target`, `workspace` and `task_id` together, with `--project` still pointing to the original control. Target must match the registered workspace and actual Git identity; the task must exist in the same control. The assistant checks their intended relationship; setup does not impose a one-to-one task/workspace assignment. Keep the four Skills and their reference files together. Do not create stores inside each worktree or infer that Skills are inherited across directories.
+Return inherited facts/decisions and uncertainties; a window table of responsibilities, tasks, real directories and actual connections; local version-saving results; original-chat schedule readback; update source/channel/check/assessment; optional backup coverage; and concrete next steps. Every missing standard item stays visible. First natural heartbeat evidence waits for a genuine trigger. One pending window does not erase other completed results.
 
-Use only host capabilities available in this session and within authorization. Workspace registration does not create chats. Generating a fragment does not activate it. Trust/reload may require user action. If a capability is missing, provide:
+Users continue in professional chats. Teach “continue my last unfinished task,” “save this stopping point” and “review connected project progress.” Read `context` for task-scoped continuation with source-qualified identities and pagination. Request only changed or missing context. Project memory and initial suggestions are standard; ongoing coordination can change without rebuilding state.
 
-1. The one current action and its exact target chat, directory or settings location.
-2. Filled-in content based on verified paths and identities, without secrets.
-3. What success looks like and a short message to return with so onboarding resumes.
+Use one bounded initial governance pass under existing authorization. Empty queues need no fabricated deliveries. Git receive/adopt still needs its real plan and dependency; sharing context or upgrading TaskCarry does not require business merges. For failure, inspect effects and the original operation before retrying. A checkpoint is not delivery; reception is not business acceptance.
 
-Do not repeat installation when only host reload is missing. Record native doctor/status results in each window separately from CLI or standalone stdio tests. Confirm imported package and binding, not just a command string. Never claim native verification if those tools are unavailable.
+## 4. Update an existing installation
 
-## 5. Continue work and close the first review
+Stay in the original governance chat. Inspect runtime, managed methods, selected user-rule fingerprints and pending work. Use the official source and chosen channel. Separate discovery, applicability, preparation, package installation, setup and host loading. The checker never installs. `upgrade` only rebuilds derived indexes.
 
-Use task-delivery instructions in working chats: read the named task and relevant effective decisions before work; preserve meaningful changes at pause/delivery boundaries. Link sources and exact outputs, not full private transcripts. Governance reviews those records and requests only changed or missing relevant context. This is a method using existing records, not an automatic cross-chat change subscription.
+Choose the smallest applicable change. Documentation-only changes need no runtime switch. For a package change, verify exact artifacts and prepare a separate runtime while retaining the old one. Preview setup, preserve modified Skills/AGENTS and decisions, resolve concrete conflicts, install the selected materials and plan the project configuration merge. Reload and check affected native connections. A version number alone proves neither precise package identity nor another process loading it.
 
-Use governance-reconcile for one bounded initial review. Receive frozen Git stages only through their plan and authorization. Sharing progress does not merge every branch; adopt only for a real dependency and safe target. Plain file checkpoints preserve selected files; they do not implement the complete non-Git deliverable exchange/intake contract.
-
-Return inherited understanding, effective decisions versus proposals, task ownership/next steps, actual connection results, the remaining onboarding action and how each workbench saves/continues. Tool readiness does not require business completion. Teach examples such as "continue my last unfinished task", "save this stopping point" and "show progress from connected workbenches".
-
-Use experience-recovery after a concrete failure. Preserve operation identity and actual effects, completing only supported missing steps. Keep source fix, received fix, installed package and reloaded host separate. Automation, remote sharing and additional hosts are optional choices with their own evidence.
-
-## 6. Update an existing installation
-
-Stay in the original governance chat and use the same control, task identities and workbench registrations. Read the selected release's update information and `docs/<language>/updating.md`. Inspect the installed runtime, managed setup, activated project configuration and any operations affected by the update. A paused task or queued delivery alone does not block a tool update; do not receive or adopt business stages just to update TaskCarry.
-
-Choose the smallest applicable change: documentation alone, managed Skills/integration materials, or a runtime package plus those materials. If the selected update is already in use and connections are current, report that no action is needed. The `upgrade` action only rebuilds the derived current-record index; it does not install a package.
-
-For a package change, use authorized host tools to obtain the selected official wheel and verify its checksum. Prefer preparing a separate dedicated runtime and retaining the original environment until the switch has been verified. Do not use an editable source checkout. Run the candidate's fixed interpreter with isolated UTF-8 startup for read-only diagnosis and setup preview against the original control; compare actual proposed changes and user modifications. Keep the original package, managed-file manifest and active configuration together for recovery review. Package preparation is not a transaction covering later setup or host changes.
-
-Before changing managed files or switching connections, coordinate a quiet interval for affected writers. Preserve schedules and unrelated host settings. If an existing setup intent is pending, inspect its actual effects and resume with its original candidate and runtime, or retain the conflict for review; changing runtime identity is not a way to continue that intent. Do not delete state or redo an entire governance pass. Save the update position before any host action that may interrupt the chat.
-
-When the reviewed update is authorized and compatible, run candidate `setup` preview/install for the same control and affected registered workbenches. Preserve modified user files and report concrete conflicts. Setup manages its own files; use the host's authorized configuration tools to merge only the required project MCP settings, then restart/reload the affected connections. Do not replace global configuration or infer that all windows inherited a change.
-
-Verify the candidate's isolated CLI and each relevant host's actual native doctor/status separately. Check that original tasks, checkpoints and workbench bindings remain available. If native tools or a host action are unavailable, give the user only the current necessary action, its exact destination and a resume instruction. If only reload is missing, do not reinstall. Preserve unfamiliar failures and inspect actual effects before retrying; rollback requires review of the matching runtime/configuration/managed-file set, not merely installing an old wheel.
-
-Report a short outcome in the user's language: updated items or no update needed, whether original work is preserved, whether work can continue, and any single remaining user action. Save detailed versions, checksums, receipts and compatibility evidence in project records rather than repeating them throughout the user flow. This is assistant-led maintenance using existing tools, not a new automatic updater or delta-patch command.
+Record candidate/package/method fingerprints, custom-rule preservation, actual effects, host evidence and next condition. Reuse identical reviews. Resume only the missing step. Internal project adoption and developer public release are independent; never receive business stages just to maintain the tool. Give the user a concise outcome and current action; keep version history in the release reference.

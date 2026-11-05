@@ -15,6 +15,17 @@ from .contracts import SCHEMAS, validate
 
 
 DESCRIPTIONS = {
+    "codex": "Use a selected supported Codex executable to inspect capabilities, list or read bounded chat history. No turns or messages; host startup may write its own caches.",
+    "update_source": "Explicitly register the official release channel and current artifact/method identities. Does not install or schedule.",
+    "update_check": "Read bounded official release metadata and compare the selected channel. No local record, installation or claim of host loading.",
+    "update_assess": "Explicitly save an applicability assessment for a content-bound release check; reuse unchanged input. Does not install.",
+    "onboarding": "Start, read or update a resumable onboarding checklist tied to actual local identities and qualified host evidence.",
+    "schedule_plan": "Prepare durable original-chat governance instructions. The host must create/read back its schedule; no scheduler execution here.",
+    "preserve": "Plan or execute exact local Git file saving, preserving unrelated staged and working changes. Not submission or remote backup.",
+    "connect": "Plan or apply the exact generated MCP block to a project configuration, preserving other settings. Host trust/reload and native acceptance remain separate.",
+    "identify": "Read the selected location's state format and source identity without initialization or migration.",
+    "context": "Read bounded, source-qualified context for a named task, with pagination and missing evidence. No acknowledgment or execution.",
+    "governance": "Inspect package, managed methods and user-rule identities, or explicitly record a content-bound review. No install or host reload.",
     "upgrade": "Explicitly build or repair the derived current-work index. Preserve original records and events; no package update.",
     "observe": "Save host-reviewed evidence references and relationships with revision checks. Does not read chats or grant permissions.",
     "run": "Freeze selected record identities, inspect them, or record their verified terminal state. No Git effects or claim that the whole project is complete.",
@@ -37,7 +48,8 @@ DESCRIPTIONS = {
 
 def tools_list():
     return [{"name": "taskcarry_" + action, "description": DESCRIPTIONS[action], "inputSchema": definition,
-             "annotations": {"readOnlyHint": action in {"status", "agenda", "doctor"}, "openWorldHint": False}}
+             "annotations": {"readOnlyHint": action in {"status", "agenda", "doctor", "identify", "context", "schedule_plan", "update_check"},
+                             "openWorldHint": action in {"codex", "update_check"}}}
             for action, definition in SCHEMAS.items()]
 
 

@@ -1,10 +1,14 @@
-# 第 4、5 章：私有 Git、备份恢复与多电脑协作
+# 私有远端、备份恢复与多电脑协作
 
-Windows 用户可以直接跟随[固定目录完整示例](windows-example.md)，复制配套命令与提示词；以下通用说明仍适用于自定义目录。
+先完成[本地对话式接入](windows-example.md)。选择私有远端、文件存储或另一台电脑时，再使用本参考；具体安装命令保留在[手动后备](manual-setup.md)。
 
 [返回操作手册](operation-manual.md) · [English](../en/remote-and-multicomputer.md) · [繁體中文](../zh-TW/remote-and-multicomputer.md) · [命令参考](../COMMANDS.md)
 
-适用版本：0.2.0rc5。这两章是按需要启用的参考流程，不是安装后每天必须执行的任务。下述跨电脑流程尚未经过两台实体电脑的端到端验证；它组合了 Git 操作与现有本地 TaskCarry 接口，没有新增跨机同步或自动恢复能力。
+本地治理 Git 保存、原治理窗口的定时任务和官方更新检查属于标准接入。下述私有远端与多电脑流程是按需扩展，尚未经过两台实体电脑的端到端验证；它组合 Git 操作与现有本地 TaskCarry 接口，没有新增跨机同步或自动恢复能力。
+
+标准本地保存使用明确文件清单，保全原 Git 暂存区与未完成工作，只有选定内容变化才形成提交；排除运行中的 `.taskcarry` 数据库、runtime、下载包和凭据。持续工作的窗口保留真实任务与工作区关联，提交署名或对话 ID 本身不能证明这些关联。原资料可留在原处，大型外部产物以版本化引用和分别核对的存储覆盖衔接。
+
+选择网盘时，同步已封存的静态备份包；捕获、本地字节核验、上传、下载和隔离恢复分别留证。写入本地同步目录不证明云端已经上传或另一台电脑能够恢复。不把活跃 `.taskcarry` 或 Git 元数据交给互相竞争的后台同步；加密密钥与加密备份分开保管。
 
 所有 `<...>` 都是需要替换的占位符。`python` 应指向已经安装 TaskCarry 的 Python 环境。JSON 文件保存为 UTF-8；不要把示例中的占位符直接执行。Git 推送会向所选远端传送资料，应先确认仓库、访问者和本次授权范围。
 
@@ -14,7 +18,7 @@ Windows 用户可以直接跟随[固定目录完整示例](windows-example.md)�
 
 ### 4.1 先分清哪些内容保存在哪里
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#private-git)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 | 内容 | 推荐保存位置 | 恢复时能提供什么 |
 |---|---|---|
@@ -29,7 +33,7 @@ Windows 用户可以直接跟随[固定目录完整示例](windows-example.md)�
 
 ### 4.2 建立私有远端，明确谁能推进主线
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#private-git)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 1. 在自己的 Git 托管服务创建**私有**仓库，检查成员权限。接入已有项目时，不要让新仓库自动生成与本地历史无关的 README 或初始提交。
 2. 选定一台电脑作为集成主机。其专用干净接收工作区是唯一推进远端 `main` 的位置；其他电脑使用任务分支。
@@ -60,7 +64,7 @@ git -C "<A_BASELINE>" ls-remote origin refs/heads/main
 
 ### 4.3 把有用记忆保存为普通项目文件
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#private-git)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 在一个已登记、负责文档的专业工作区维护例如 `project-memory/current.md`，内容包括：
 
@@ -96,7 +100,7 @@ git -C "<MEMORY_WORKSPACE>" commit -m "Update current project handoff"
 
 ### 4.4 做一份可核对的一致备份
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#private-git)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 **先停止这一个项目的写入，再备份同一时点。** 当前 TaskCarry 没有跨仓库、SQLite 与文件对象的一键一致备份命令。操作顺序：
 
@@ -130,9 +134,9 @@ Get-ChildItem -LiteralPath "<SNAPSHOT>/.taskcarry" -Force
 
 ### 4.5 恢复时分成“找回资料”与“重新启用治理”
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#private-git)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
-**不要把旧 `.taskcarry` 复制到新电脑后直接执行旧接收/采用计划。** 工作区身份包含绝对路径、Git 公共目录和分支；集成基线还绑定原身份。0.2.0rc5 没有完整的跨机状态迁移 API。相同目录名字不代表同一现场。
+**不要把旧 `.taskcarry` 复制到新电脑后直接执行旧接收/采用计划。** 工作区身份包含绝对路径、Git 公共目录和分支；集成基线还绑定原身份。工具没有完整的跨机状态迁移 API。相同目录名字不代表同一现场。
 
 恢复步骤：
 
@@ -182,7 +186,7 @@ python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" status
 
 ### 5.1 推荐拓扑与责任
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#multi-computer)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 ```text
 电脑 B：独立 clone → 任务分支 → 稳定提交 + 交付 manifest
@@ -204,7 +208,7 @@ TaskCarry 的一个治理目录由**一台电脑上的本地 SQLite**管理。�
 
 ### 5.2 电脑 B：从已公布基线开始一个任务
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#multi-computer)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 确认 A 已推送允许 B 使用的基线，并约定任务 `form-export` 仅修改 `forms/export.py` 与 `docs/export.md`。以下目录、任务名和文件都是示例，应换成实际约定。
 
@@ -234,7 +238,7 @@ git -C "<B_REPOSITORY>" diff --no-renames --name-only "<SOURCE_BASE>" HEAD
 
 ### 5.3 电脑 B：另存交付说明并推送任务分支
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#multi-computer)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 在产物提交**之后**创建 `handoffs/form-export-v1.json`，避免“文件里写它自身提交哈希”的循环：
 
@@ -269,7 +273,7 @@ git -C "<B_REPOSITORY>" ls-remote origin refs/heads/codex/form-export
 
 ### 5.4 电脑 A：复核原始证据，再用本地接口接收
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#multi-computer)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 为这个任务建立名称稳定的 intake 克隆/工作区（例如本地登记名 `intake-form-export`），从远端取得原提交。已有对应 intake 时先查其绑定和未完状态，不重复创建或改写其历史。
 
@@ -342,7 +346,7 @@ python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status
 
 ### 5.5 B 接续、主机换手和已知边界
 
-[本步骤可直接复制的 Windows 示例](windows-example.md#multi-computer)
+[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 B 确认 A 接收并推送后，读取最新接续说明。若旧任务工作区仍有 WIP，先保留，不直接把它重置到 `main`。可从已公布主线建立下一条干净任务支线：
 

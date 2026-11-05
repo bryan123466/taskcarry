@@ -291,7 +291,7 @@ class Integration:
         with self.store.guard():
             binding = self.store.get("settings", "integration_baseline")
             if binding and binding != identity(target):
-                raise GovernanceError("BASELINE_BOUND", "A governance project has one integration baseline; use a separate project for another baseline")
+                raise GovernanceError("BASELINE_BOUND", "This state source already has an integration baseline; route another baseline to its own state source without redefining the user's project")
             outstanding = [o for o in self.store.list("operations") if o.get("kind") == "reconcile" and o.get("baseline") == str(target) and o["status"] not in {"COMPLETED", "REVIEW_REQUIRED"}]
             if not execute:
                 selected_ops, stages, selection = self._receive_selection(outstanding, self._pending(), limit)

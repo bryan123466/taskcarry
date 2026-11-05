@@ -4,7 +4,7 @@
 
 TaskCarry keeps project records in the control directory while the installed toolkit provides the operations that use them. Updating the toolkit should help the next session continue the same work. It should not create a new project, resubmit past results, or merge business branches simply to refresh a Skill.
 
-This is a technical reference for the governance assistant. Users can start with the [update prompt](updating.md); the assistant consults these details when needed. Optional scheduling is covered in [scheduled governance](automation.md).
+This is a technical reference for the governance assistant. Users can start with the [update prompt](updating.md); the assistant consults these details when needed. Standard scheduling is covered in [scheduled governance](automation.md).
 
 ## Three updates with different purposes
 
@@ -58,9 +58,9 @@ While setup is changing its managed files, avoid editing those same files in ano
 
 ## Confirm which version is actually running
 
-RC6 preserves earlier checkpoints and can update an rc5 managed setup. Its managed file set adds public Skill references and, for workbenches, binding files. Although the manifest format number remains 1, rc5 setup does not understand these added paths and rejects the newer manifest. Forward upgrade compatibility is not an in-place downgrade promise. Before changing a runtime, retain the selected wheel and the matching managed files, manifest and activated host configuration. Any rollback needs review of that complete set and later user edits; simply installing an older wheel is insufficient. Keep control records and pending operations intact, and resume an rc6 restore or pending setup with a compatible package. There is no automatic rollback command.
+Keep the precise wheel, managed-file manifest and activated configuration before a package change. Forward compatibility does not guarantee downgrade compatibility; review the complete set and later user edits before recovery. Keep existing checkpoints and pending operations, and resume them with a compatible package. There is no automatic rollback command.
 
-A historical source snapshot describes what was used then; a current runtime observation or adoption receipt describes what is used now. Preserve both when software changes. This release does not import arbitrary legacy identifiers or discover every native chat.
+A historical source snapshot describes what was used then; a current runtime observation or adoption receipt describes what is used now. Preserve both when software changes. The selected Codex adapter reports its actual history coverage; it does not import arbitrary legacy identities or promise access to every native chat.
 
 `doctor.runtime` reports the package version, interpreter and module location imported by the process answering the request, together with managed setup information. A successful CLI check does not prove a previously opened MCP process has reloaded. After deliberately updating its configuration or restarting that connection, check through that connection too.
 
@@ -79,3 +79,24 @@ One control store still has one receiving baseline. A product with two independe
 After reviewing the result, use `mode: install` with the same name. The generated fragment still requires deliberate host configuration; it is not activated automatically. Do not assign two control stores to write the same receiver. This arrangement does not create a shared multi-repository transaction or a cross-computer lock.
 
 The same issue found by a local governance turn and by a user report should remain one product change. Fix the shared implementation once, validate it, then record which installations adopted it. A note about a fix and the installed fix are different parts of that work.
+
+
+## Standard local governance and task continuation
+
+Complete onboarding includes local governance Git, real task/workspace/Git bindings for ongoing windows, native per-window connection checks, original-chat schedule configuration/readback and an official update check. Private remotes and cloud storage remain optional. Historical-source chats do not need active workspaces. Large external files need explicit references and backup coverage; a file reference is not a saved copy.
+
+Use `context` for a selected task. It returns source-qualified identity, task state, latest checkpoint and next step, paginated related records, selected issue/fix references and missing evidence. Same local IDs from different sources stay distinct. Output and record payload reads are bounded; SQL still counts matching index entries, so this is not a fixed latency guarantee. Oversized records are explicitly omitted. Old state needs explicit `upgrade` for the derived task index; reading context never performs that migration. Regular SQLite reads may create coordination sidecars but do not publish records or events.
+
+A real project can span several directories, repositories and existing state sources. Keep their routes and local identities; one source still has one receiving baseline. Sharing context or maintaining the package does not merge business Git branches or create a multi-store transaction.
+
+## Identify, evaluate and preserve before changing anything
+
+Use `identify` on the selected location before initialization. Unknown, corrupt or unsupported state is preserved. A nonempty SQLite WAL makes this inspection report busy rather than ignoring pending data; let the existing writer close and retry without deleting its journal. Compatible state is reused.
+
+Register the official channel and installed identity with `update_source`. `update_check` performs a bounded read; `update_assess` explicitly retains the applicability decision. Keep discovery, evaluation, preparation, installation, setup and native host loading separate. `governance` records the package/method identity and selected custom-rule fingerprints; recording a fix is not proof it was adopted.
+
+Use `connect` plan/execute for supported project-only MCP merges, and `preserve` plan/execute for explicitly selected Git files. Preserve comments, unrelated services, custom AGENTS and Git index/worktree state. Repository preparation and Git author verification remain real setup work. Exclude live governance databases, runtime, downloads, secrets and unrelated files from version-saving selections.
+
+Backups report capture, local verification, upload, download and independent restoration separately. Existing checkpoint/artifact/restore tools cover their declared scope; an artifact registration does not snapshot a database. Static backups need matching content and recovery evidence before being described as available remotely or on another computer.
+
+The legacy `storage.upgrade_required` flag describes only the current-work index. Also check `storage.context_ready` and `storage.context_upgrade_required`: an older installation may have a valid agenda index but still need the explicit context-index upgrade.

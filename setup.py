@@ -11,7 +11,8 @@ SKILL_NAMES = (
     "taskcarry-governance-reconcile",
     "taskcarry-experience-recovery",
 )
-SKILL_REFERENCES = ("taskcarry-project-setup/references/onboarding.md",)
+SKILL_REFERENCES = ("taskcarry-project-setup/references/onboarding.md",
+                    "taskcarry-governance-reconcile/references/daily-governance.md")
 SOURCE_ROOT = Path(__file__).resolve().parent
 
 

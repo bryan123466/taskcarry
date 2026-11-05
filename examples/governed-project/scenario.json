@@ -1,0 +1,14 @@
+{
+  "name": "Synthetic appointment planner",
+  "governance_thread": "example-governance",
+  "channel": "rc",
+  "schedule": {"time": "09:00", "timezone": "UTC"},
+  "windows": [
+    {"thread_id": "example-app", "mode": "active", "task_id": "app", "workspace": "app-writer", "source_ref": "example:existing-app-chat", "responsibility": "Continue the existing booking application without consuming unfinished changes."},
+    {"thread_id": "example-guide", "mode": "active", "task_id": "guide", "workspace": "guide-writer", "source_ref": "example:previously-projectless-notes", "responsibility": "Write the user guide in its newly assigned Git workspace, retaining original notes."},
+    {"thread_id": "example-history", "mode": "reference", "source_ref": "example:earlier-decisions", "responsibility": "Historical decisions only; do not reopen this window as active work."}
+  ],
+  "confirmed_decision": "Keep the booking application and its guide in the same real-world project; retain separate writing locations.",
+  "next_steps": {"app": "Continue the unfinished validation change.", "guide": "Draft the cancellation section from the retained notes."},
+  "optional_storage": {"remote": "not_selected", "cloud": "not_selected"}
+}

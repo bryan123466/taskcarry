@@ -17,7 +17,7 @@
 
 ## 安装或核对固定运行时
 
-先检查已有安装与 control，有效时直接复用。确实首次安装工具时，创建 `C:/TaskCarry/control`，将选定产品 ZIP 解压到 `C:/TaskCarry/toolkit`。产品 ZIP 自带顶层目录 `taskcarry-0.2.0rc7/`，因此实际产品根是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc7`，其中包含 `START_HERE.md`、`packages/`、`docs/` 和 `skills/`。选用其他版本时按实际解压出的版本目录调整。原业务项目保留在原位置。需要 Python 3.11+；只有 Git 工作流需要 Git。
+先检查已有安装与 control，有效时直接复用。确实首次安装工具时，创建 `C:/TaskCarry`，将选定产品 ZIP 解压到 `C:/TaskCarry/toolkit`。产品 ZIP 自带顶层目录 `taskcarry-0.2.0rc7/`，因此实际产品根是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc7`，其中包含 `START_HERE.md`、`packages/`、`docs/` 和 `skills/`。选用其他版本时按实际解压出的版本目录调整。原业务项目保留在原位置。需要 Python 3.11+；本地 Git 是标准接入项；普通文件 API 仍保留无 Git 兼容。
 
 以下命令在 PowerShell 执行，**仅用于专用 runtime 尚不存在的情况**。安装工具不创建新的业务项目，也不意味着获准升级已有运行时。
 
@@ -26,7 +26,7 @@ py -3 -m venv 'C:/TaskCarry/runtime'
 $taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7/packages' -Filter '*.whl' -File
 if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
 & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' doctor
 ```
 
 control 尚未初始化时，doctor 返回 `NOT_INITIALIZED`，不含运行时细节；仅此结果不表示安装失败。治理按下节核实这个 control 确实没有状态并初始化后，再运行同一条 doctor 命令查看实际运行时与前提条件。Git 能力不可用时结合当前操作判断；不要为了清除提示重建已有状态。将输出交回治理窗口，继续同一次接入。
@@ -46,12 +46,12 @@ control 尚未初始化时，doctor 返回 `NOT_INITIALIZED`，不含运行时�
 将审阅后的 JSON 请求保存为 UTF-8 文件 `C:/TaskCarry/setup-request.json`，这是示例输入文件，不是数据库。治理目录的初始内容为 `{"mode":"preview"}`。执行：
 
 ```powershell
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' setup --input 'C:/TaskCarry/setup-request.json'
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' setup --input 'C:/TaskCarry/setup-request.json'
 ```
 
 检查拟变更文件和冲突。在已授权接入范围内，只将 `mode` 改为 `install`，再执行相同命令。中断续办保持原候选与参数；setup 保全用户改过的文件并报告冲突。
 
-生成的 `.taskcarry/codex.mcp.toml` 是**片段**。在 Codex 中，将选定的 `[mcp_servers.<name>]` 表合并到目标聊天的项目级 `.codex/config.toml`：治理目录为 `C:/TaskCarry/control/.codex/config.toml`，专业工作台为 `<已登记工作台>/.codex/config.toml`。保留其他设置与服务，不覆盖整份文件或修改全局配置。保留生成的 command/args：它们绑定固定解释器，使用隔离 UTF-8 启动并指定包来源。
+生成的 `.taskcarry/codex.mcp.toml` 是**片段**。在 Codex 中，将选定的 `[mcp_servers.<name>]` 表合并到目标聊天的项目级 `.codex/config.toml`：治理目录为 `C:/TaskCarry/.codex/config.toml`，专业工作台为 `<已登记工作台>/.codex/config.toml`。保留其他设置与服务，不覆盖整份文件或修改全局配置。保留生成的 command/args：它们绑定固定解释器，使用隔离 UTF-8 启动并指定包来源。
 
 让目标聊天打开或选用同一目录作为项目和工作目录，并在适当时完成该项目的信任提示；Codex 只加载受信任项目的配置。随后使用宿主支持的 MCP 重启/重载操作；官方桌面说明使用 **Settings → MCP servers → Restart**。当前聊天不能更换目录时，在配置所在目录打开的聊天中按保存清单接续，仍复用同一 control。把配置写在另一目录不会让当前聊天自动连接。setup 不选择宿主目录、不授予信任，也不重载宿主。依据见官方 [MCP 配置](https://learn.chatgpt.com/docs/extend/mcp?surface=app)和[配置层级](https://learn.chatgpt.com/docs/config-file/config-basic)。
 
@@ -80,8 +80,8 @@ Skills 位于 `.agents/skills/`，包括引用的方法文件；未被自动发�
 MCP 不可用时保留原始错误或工具缺失事实，可用固定隔离 CLI 继续已授权工作：
 
 ```powershell
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' doctor
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry/control' status
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' doctor
+& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' status
 ```
 
 这项证据标为 CLI，原生连接继续保留为待验收。更新工具时先预览并安装受管理文件，再检查实际宿主配置和重载；安装版本变化不代表运行中的服务已变化。卸载只移除未被用户改动的受管理文件，保留已修改文件、治理数据和手工合并的生效配置。
@@ -118,4 +118,10 @@ MCP 不可用时保留原始错误或工具缺失事实，可用固定隔离 CLI
 
 普通 checkpoint 首次恢复到独立空目录。若恢复已产生效果、最终回执失败，应由支持的恢复逻辑核验原效果并补缺失记录，不手动清空目标。具体以所安装版本的恢复 Skill 为准。
 
-定时任务、私有远端与多电脑仍是[可选操作](operation-manual.md)，缺少可选能力不妨碍继续原项目。
+## 手动一步完成后，补齐标准接入
+
+`init` 前先 `identify`，未知或不兼容状态保持原状。每完成一步都接续原 onboarding 清单；同一项目有多份状态来源时保持真实路由。
+
+助手可用 `connect` 预览并执行项目级 MCP 配置合并，保留其他服务和用户修改；宿主信任、重载及各窗口原生验收另做。持续工作的原对话缺少合适目录时，准备真实 Git 工作位置或交接到正确目录的窗口；历史参考对话无需激活。
+
+核对 Git 和真实作者配置，准备或复用本地治理仓库及专业工作仓库。用精确 `preserve` 计划保存选定文件，保全无关暂存和工作区。完成官方来源登记/检查/评估及原治理窗口的原生调度创建/回读；具体参数见[调用合同](../COMMANDS.md)和已安装 Skills。这些属于标准配置，私有远端与网盘才是可选项；首次自然触发在实际发生后补回执。

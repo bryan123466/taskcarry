@@ -11,9 +11,36 @@ def schema(properties=None, required=()):
 
 PATHS = {"type": "array", "items": string("Exact workspace-relative file path"), "minItems": 1, "uniqueItems": True}
 BOOL = {"type": "boolean"}
+OPEN_OBJECT = {"type": "object", "additionalProperties": True}
 SCHEMAS = {
+    "onboarding": schema({"onboarding_id": string(), "action": string(enum=["start", "update", "status"]),
+                          "scope": schema({"governance_thread": string(), "channel": string(enum=["rc", "stable"]),
+                                           "schedule": schema({"time": string(), "timezone": string()}, ["time", "timezone"]),
+                                           "windows": {"type": "array", "minItems": 1, "maxItems": 100,
+                                                       "items": schema({"thread_id": string(), "mode": string(enum=["active", "reference"]),
+                                                                        "task_id": string(), "workspace": string(), "source_ref": string(), "responsibility": string()},
+                                                                       ["thread_id", "mode", "source_ref", "responsibility"])}},
+                                          ["governance_thread", "channel", "schedule", "windows"]),
+                          "item": schema({"key": string(), "status": string(enum=["verified", "pending", "declined"]),
+                                          "evidence": OPEN_OBJECT, "next_step": string()}, ["key", "status", "evidence", "next_step"]),
+                          "expected_revision": {"type": "integer", "minimum": 1}}, ["onboarding_id"]),
+    "schedule_plan": schema({"onboarding_id": string()}, ["onboarding_id"]),
+    "preserve": schema({"action": string(enum=["plan", "execute", "status"]), "repository": string(),
+                        "paths": {**PATHS, "maxItems": 500}, "message": string(), "plan_id": string()}),
+    "connect": schema({"action": string(enum=["plan", "execute", "status"]),
+                       "target": string(), "workspace": string(), "task_id": string(), "plan_id": string()}),
+    "identify": schema(),
+    "context": schema({"task_id": string(), "limit": {"type": "integer", "minimum": 1, "maximum": 100},
+                       "cursor": string(), "previous_fingerprint": string(),
+                       "issue_ids": {"type": "array", "items": string(), "maxItems": 50, "uniqueItems": True},
+                       "fix_ids": {"type": "array", "items": string(), "maxItems": 50, "uniqueItems": True}}, ["task_id"]),
+    "governance": schema({"mode": string(enum=["inspect", "record"]),
+                          "rule_paths": {"type": "array", "items": string(), "maxItems": 100, "uniqueItems": True},
+                          "record_id": string(), "expected_fingerprint": string(),
+                          "evidence_refs": {"type": "array", "items": string(), "minItems": 1, "maxItems": 50, "uniqueItems": True},
+                          "expected_revision": {"type": "integer", "minimum": 0}}),
     "upgrade": schema(),
-    "observe": schema({"observation_id": string(), "workspace": string(), "task_id": string(),
+    "observe": schema({"observation_id": string(), "workspace": {"type": ["string", "null"]}, "task_id": string(),
                        "source_ref": string(), "source_revision": string(), "summary": string(),
                        "relations": {"type": "array", "items": schema({"kind": string(enum=["stage", "artifact"]), "id": string()}, ["kind", "id"])},
                        "expected_revision": {"type": "integer", "minimum": 1}},
@@ -44,21 +71,37 @@ SCHEMAS = {
     "reconcile": schema({"baseline": string(), "execute": BOOL, "plan_id": string(), "limit": {"type": "integer", "minimum": 1, "maximum": 100, "description": "Maximum distinct work items frozen into a new plan; execution uses its existing plan scope."}}, ["baseline"]),
     "adopt": schema({"workspace": string(), "baseline": string(), "execute": BOOL, "plan_id": string()}, ["workspace", "baseline"]),
 }
+
+from .adapter_contracts import SCHEMAS as ADAPTER_SCHEMAS
+SCHEMAS.update(ADAPTER_SCHEMAS)
 def validate(value, definition, location="arguments"):
     """Validate the deliberately small schema subset used by these public tools."""
     kind = definition.get("type")
+    if isinstance(kind, list):
+        for member in kind:
+            try:
+                validate(value, {**definition, 'type': member}, location)
+                return
+            except ValueError:
+                pass
+        raise ValueError(f"{location} has an unsupported type")
+    if kind == "null":
+        if value is not None:
+            raise ValueError(f"{location} must be null")
+        return
     if kind == "object":
         if not isinstance(value, dict):
             raise ValueError(f"{location} must be an object")
         props = definition.get("properties", {})
         extra = set(value) - set(props)
         missing = set(definition.get("required", [])) - set(value)
-        if extra:
+        if extra and definition.get("additionalProperties") is not True:
             raise ValueError(f"{location} has unknown fields: {', '.join(sorted(extra))}")
         if missing:
             raise ValueError(f"{location} lacks required fields: {', '.join(sorted(missing))}")
         for name, item in value.items():
-            validate(item, props[name], f"{location}.{name}")
+            if name in props:
+                validate(item, props[name], f"{location}.{name}")
     elif kind == "string" and not isinstance(value, str):
         raise ValueError(f"{location} must be a string")
     elif kind == "boolean" and not isinstance(value, bool):
@@ -71,8 +114,8 @@ def validate(value, definition, location="arguments"):
     elif kind == "array":
         if not isinstance(value, list):
             raise ValueError(f"{location} must be an array")
-        if len(value) < definition.get("minItems", 0):
-            raise ValueError(f"{location} requires at least one item")
+        if not definition.get("minItems", 0) <= len(value) <= definition.get("maxItems", len(value)):
+            raise ValueError(f"{location} has an unsupported item count")
         for index, item in enumerate(value):
             validate(item, definition["items"], f"{location}[{index}]")
         if definition.get("uniqueItems") and len(value) != len(set(value)):

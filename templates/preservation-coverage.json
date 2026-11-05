@@ -1,0 +1,22 @@
+{
+  "format": "taskcarry-preservation-coverage-v1",
+  "scope": "selected_objects_only",
+  "project_state_snapshot": {
+    "status": "not_captured",
+    "note": "File checkpoints and artifact references do not constitute a consistent full control backup."
+  },
+  "selected_objects": [
+    {
+      "source_ref": "artifact:synthetic-recording",
+      "sha256": null,
+      "size": null,
+      "local_capture": {"status": "pending", "receipt_ref": null},
+      "local_byte_verification": {"status": "pending", "receipt_ref": null},
+      "remote_upload": {"status": "not_selected", "receipt_ref": null},
+      "remote_download": {"status": "not_selected", "receipt_ref": null},
+      "isolated_restore": {"status": "pending", "receipt_ref": null}
+    }
+  ],
+  "excluded": ["unsaved editor buffers", "unselected project files", "live runtime", "credentials"],
+  "next_condition": "Choose explicit objects and destinations; record each real result separately."
+}

@@ -48,7 +48,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(reply["result"]["protocolVersion"], "2025-11-25")
         reply = self.server.handle(request("tools/list"))
         tools = reply["result"]["tools"]
-        self.assertEqual(len(tools), 17)
+        self.assertEqual(len(tools), 28)
         for tool in tools:
             self.assertFalse(tool["inputSchema"]["additionalProperties"])
             self.assertNotIn("project", tool["inputSchema"]["properties"])
@@ -144,7 +144,7 @@ class SetupTests(unittest.TestCase):
     def test_preview_is_read_only(self):
         result = configure(self.root)
         self.assertEqual(result["mode"], "preview")
-        self.assertEqual(len(result["files"]), 6)
+        self.assertEqual(len(result["files"]), 7)
         self.assertIn(".agents/skills/taskcarry-project-setup/references/onboarding.md",
                       [row["path"] for row in result["files"]])
         self.assertFalse(result["conflicts"])
@@ -198,7 +198,7 @@ class SetupTests(unittest.TestCase):
         self.assertEqual(process.returncode, 0, process.stderr)
         replies = [json.loads(line) for line in process.stdout.splitlines()]
         self.assertEqual(len(replies), 2)
-        self.assertEqual(len(replies[1]["result"]["tools"]), 17)
+        self.assertEqual(len(replies[1]["result"]["tools"]), 28)
         self.assertFalse((self.root / ".codex").exists())
 
     def test_symlinked_install_directory_is_refused(self):

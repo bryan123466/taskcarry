@@ -15,10 +15,30 @@ def invoke(project, action, arguments=None):
         raise GovernanceError("INVALID_ARGUMENT", str(exc)) from exc
     if action == "init":
         return Core.initialize(project, **args)
-    core_actions = {"status", "agenda", "task", "checkpoint", "restore", "artifact", "experience", "upgrade"}
+    if action == "identify":
+        return Core.identify(project)
+    if action == "codex":
+        from .codex_host import codex_read
+        return codex_read(**args)
+    if action in {"update_source", "update_check", "update_assess"}:
+        from .updates import Updates
+        return getattr(Updates(project), action)(**args)
+    if action in {"onboarding", "schedule_plan"}:
+        from .onboarding import Onboarding
+        return getattr(Onboarding(project), action)(**args)
+    if action == "preserve":
+        from .preservation import Preservation
+        return Preservation(project).preserve(**args)
+    core_actions = {"status", "agenda", "context", "task", "checkpoint", "restore", "artifact", "experience", "upgrade"}
     git_actions = {"workspace", "submit", "reconcile", "adopt", "doctor"}
     continuity_actions = {"observe", "run"}
     maintenance_actions = {"issue", "fix"}
+    if action == "governance":
+        from .governance import Governance
+        return Governance(project).governance(**args)
+    if action == "connect":
+        from .connection import Connection
+        return Connection(project).connect(**args)
     if action not in core_actions | git_actions | continuity_actions | maintenance_actions:
         raise GovernanceError("UNKNOWN_ACTION", f"Unknown action: {action}")
     if action in continuity_actions:

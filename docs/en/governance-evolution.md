@@ -8,6 +8,15 @@ This report explains the reusable design lessons and their synthetic verificatio
 
 ## What we simplified
 
+The current onboarding loop also carries these responsibilities:
+
+- **Understand the existing project.** Propose relationships between selected directories and conversations, retain source identities and confirmed decisions, and let the user confirm the actual project boundary. Keep reference-only history separate from working windows that need real task/workspace/Git and MCP bindings.
+- **Continue from useful context.** Read the named task's related records, checkpoint, next step and explicit evidence through a bounded context query. A read neither completes a task nor acknowledges a delivery.
+- **Maintain a local governance history.** Save selected rules and summaries in local Git while preserving the original index and unfinished work. External artifact references state what bytes were actually saved or recovered.
+- **Return to the original governance chat.** Standard setup configures the host schedule and its official release check. The AI reviews applicability, retains useful project rules and reports the next condition. No change means no invented version, empty commit or repeated reminder.
+
+Core, maintained Skills and user-specific rules have separate identities. An update can improve the reusable implementation without overwriting project decisions. Record source versions, actual package identity, setup results and host loading separately. A published repair or a remembered solution does not prove that the user's running environment has adopted it. See [maintenance](governance-maintenance.md) and [automation](automation.md).
+
 | Earlier pattern | Current approach | Practical effect |
 |---|---|---|
 | Revisit completed history to discover today's work | Read a derived index of current work; retrieve supporting history when needed | Unrelated completed history does not have to enter every agenda query |
@@ -74,10 +83,10 @@ Maintainers can reproduce the focused checks from a source checkout:
 python -m unittest tests.test_incremental_view tests.test_atomic_store tests.test_continuity -v
 ```
 
-The tests use disposable synthetic projects. See the source repository's [validation record](https://github.com/bryan123466/taskcarry/blob/main/docs/VALIDATION.md) for the tested version and remaining coverage. Installing the product does not require running this development suite.
+The tests use disposable synthetic projects. See the source repository's [validation record](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md) for the tested version and remaining coverage. Installing the product does not require running this development suite.
 
 ## What stays optional
 
-Local governance does not require a remote repository. GitHub publishing, broad source discovery, automatic package upgrades and physical multi-computer takeover are separate capabilities with their own requirements. They are not silently enabled by these changes.
+The standard local loop includes Git saving, an original-chat schedule and official update checks. Private remotes, cloud storage and ongoing project coordination remain optional. Project discovery follows the selected access scope; unsupported host access uses an explicit handoff. Publishing, package installation and physical multi-computer takeover have their own authorization and verification. An update check is not automatic installation.
 
 The design continues to use the host language model and the shared engine. It does not train model weights or start an additional resident governance model. The useful improvement is a more precise path from evidence to action, with durable records that let the next run continue.

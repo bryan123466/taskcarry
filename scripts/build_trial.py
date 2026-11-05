@@ -28,7 +28,8 @@ REVIEWED_BINARY_ASSETS = {
 }
 EXCLUDED = {"__pycache__", ".taskcarry", ".venv", ".git", "node_modules", "dist", "build", "local"}
 SKILLS = {"taskcarry-project-setup", "taskcarry-task-delivery", "taskcarry-governance-reconcile", "taskcarry-experience-recovery"}
-SKILL_REFERENCES = {"taskcarry-project-setup/references/onboarding.md"}
+SKILL_REFERENCES = {"taskcarry-project-setup/references/onboarding.md",
+                    "taskcarry-governance-reconcile/references/daily-governance.md"}
 REQUIRED = {"docs/VALIDATION.md", "docs/VALIDATION_RESULTS.json", "README.md", "README.zh-CN.md", "README.zh-TW.md", "LICENSE", "LICENSE_SCOPE.md", "pyproject.toml", "setup.py"}
 # Deliberately invalid path in a public traversal-rejection test fixture.
 SYNTHETIC_ABSOLUTE_LITERALS = {"C:/outside.txt"}
@@ -47,6 +48,7 @@ REQUIRED.update({"examples/quality_forms/fixture/requirements.md",
                  "examples/quality_forms/fixture/forms/inspection.csv",
                  "examples/quality_forms/fixture/quality/corrective-actions.csv",
                  "examples/quality_forms/fixture/review/review-checklist.md"})
+REQUIRED.update({"examples/governed-project/README.md", "examples/governed-project/scenario.json"})
 
 
 def sha(data):
@@ -148,7 +150,98 @@ def validate_download_entry(contents):
                 raise RuntimeError("The download entry needs both user routes in all three languages")
 
 
-def snapshot(deny_tokens=()):
+def _git_bytes(*arguments, input_bytes=None):
+    environment = {key: value for key, value in os.environ.items() if not key.startswith('GIT_')}
+    environment.update(GIT_OPTIONAL_LOCKS='0', GIT_TERMINAL_PROMPT='0')
+    result = subprocess.run(['git', '--no-replace-objects', '-C', str(ROOT), *arguments],
+                            input=input_bytes, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            env=environment, timeout=60, check=False)
+    if result.returncode:
+        raise RuntimeError('Cannot read the reviewed Git source: ' + result.stderr.decode('utf-8', 'replace')[:2000])
+    return result.stdout
+
+
+def _allowed_committed_path(name):
+    parts = name.split('/')
+    if (not parts or any(part in EXCLUDED or part.endswith('.egg-info') for part in parts)
+            or name.startswith('taskcarry/skill_data/')):
+        return False
+    return (name in ROOT_FILES or name in REVIEWED_BINARY_ASSETS
+            or (parts[0] in DIRECTORIES and Path(name).suffix.lower() in EXTENSIONS))
+
+
+def freeze_commit(contents, source_commit):
+    """Validate checkout parity, then return exact blob bytes, including skills.
+
+    CRLF checkout conversions are tolerated only for UTF-8 text. They never
+    become the packaged bytes. Membership comes from the committed tree too,
+    so deleted or newly untracked allowed files cannot silently change scope.
+    No checkout, index, ref, output directory or temporary file is written.
+    """
+    if not isinstance(source_commit, str) or not re.fullmatch(r'[0-9a-f]{40}', source_commit):
+        raise ValueError('Provide the full reviewed source commit')
+    if _git_bytes('cat-file', '-t', source_commit).strip() != b'commit':
+        raise RuntimeError('The reviewed source must identify a commit object')
+    entries = {}
+    for line in _git_bytes('ls-tree', '-r', '-z', '--full-tree', source_commit).split(b'\0'):
+        if not line:
+            continue
+        metadata, encoded_name = line.split(b'\t', 1)
+        name = encoded_name.decode('utf-8')
+        mode, kind, oid = metadata.decode('ascii').split()
+        if not _allowed_committed_path(name):
+            continue
+        if kind != 'blob' or mode not in ('100644', '100755'):
+            raise RuntimeError('Reviewed source contains a non-regular allowed path: ' + name)
+        entries[name] = oid
+    canonical = {name: data for name, data in contents.items() if not name.startswith('taskcarry/skill_data/')}
+    if set(canonical) != set(entries):
+        raise RuntimeError('Package source membership differs from reviewed commit: ' + json.dumps({
+            'missing_from_checkout': sorted(set(entries) - set(canonical)),
+            'not_in_commit': sorted(set(canonical) - set(entries))}))
+    objects = list(dict.fromkeys(entries.values()))
+    batch = _git_bytes('cat-file', '--batch', input_bytes=('\n'.join(objects) + '\n').encode('ascii')) if objects else b''
+    blobs, offset = {}, 0
+    for expected in objects:
+        end = batch.find(b'\n', offset)
+        if end == -1:
+            raise RuntimeError('Incomplete Git blob response')
+        oid, kind, size = batch[offset:end].decode('ascii').split()
+        size = int(size)
+        start, offset = end + 1, end + 2 + size
+        if oid != expected or kind != 'blob' or batch[offset - 1:offset] != b'\n':
+            raise RuntimeError('Unexpected Git blob response')
+        content = batch[start:start + size]
+        if hashlib.sha1(b'blob ' + str(size).encode('ascii') + b'\0' + content).hexdigest() != oid:
+            raise RuntimeError('The stored Git blob does not match its object identity')
+        blobs[oid] = content
+    if offset != len(batch):
+        raise RuntimeError('Unexpected trailing Git blob bytes')
+    frozen = {}
+    for name, oid in entries.items():
+        committed, checkout = blobs[oid], canonical[name]
+        if committed != checkout:
+            try:
+                committed.decode('utf-8')
+                checkout.decode('utf-8')
+            except UnicodeError:
+                raise RuntimeError('Package source differs from reviewed commit: ' + name)
+            if name in REVIEWED_BINARY_ASSETS or committed.replace(b'\r\n', b'\n') != checkout.replace(b'\r\n', b'\n'):
+                raise RuntimeError('Package source differs from reviewed commit: ' + name)
+        frozen[name] = committed
+    resources = [*(skill + '/SKILL.md' for skill in sorted(SKILLS)), *sorted(SKILL_REFERENCES)]
+    expected_generated = {'taskcarry/skill_data/' + resource for resource in resources}
+    if set(contents) - set(canonical) != expected_generated:
+        raise RuntimeError('Generated skill membership differs from the reviewed resources')
+    for resource in resources:
+        source_name = 'skills/' + resource
+        if source_name not in frozen:
+            raise RuntimeError('Reviewed source lacks a canonical skill resource: ' + source_name)
+        frozen['taskcarry/skill_data/' + resource] = frozen[source_name]
+    return frozen
+
+
+def snapshot(deny_tokens=(), source_commit=None):
     contents = {path.relative_to(ROOT).as_posix(): path.read_bytes() for path in files()}
     missing = sorted(REQUIRED - set(contents))
     if missing:
@@ -166,6 +259,8 @@ def snapshot(deny_tokens=()):
         contents[f"taskcarry/skill_data/{skill}/SKILL.md"] = contents[f"skills/{skill}/SKILL.md"]
     for resource in sorted(SKILL_REFERENCES):
         contents["taskcarry/skill_data/" + resource] = contents["skills/" + resource]
+    if source_commit is not None:
+        contents = freeze_commit(contents, source_commit)
     screening = screen_content(contents, deny_tokens)
     return contents, screening
 
@@ -238,9 +333,9 @@ def product_contents(contents):
     return result
 
 
-def build(destination, replace=False, deny_tokens=(), profile="source"):
+def build(destination, replace=False, deny_tokens=(), profile="source", source_commit=None):
     # No output or source mutation before the required evidence is present.
-    contents, screening = snapshot(deny_tokens)
+    contents, screening = snapshot(deny_tokens, source_commit)
     if profile not in {"source", "product"}:
         raise ValueError("Unknown release profile")
     if profile == "product":
@@ -270,7 +365,7 @@ def build(destination, replace=False, deny_tokens=(), profile="source"):
         if profile == "product":
             archive_contents["packages/" + wheels[0].name] = wheels[0].read_bytes()
             archive_contents["SHA256SUMS.txt"] = (sha(wheels[0].read_bytes()) + "  packages/" + wheels[0].name + "\n").encode("utf-8")
-        manifest = {"product": "TaskCarry", "version": __version__,
+        manifest = {"product": "TaskCarry", "version": __version__, "source_commit": source_commit,
                     "files": [{"path": name, "sha256": sha(content), "bytes": len(content)} for name, content in sorted(archive_contents.items())]}
         archive = output / (prefix + ("-product" if profile == "product" else "") + ".zip")
         with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as zipped:
@@ -287,9 +382,23 @@ def build(destination, replace=False, deny_tokens=(), profile="source"):
             if zipped.testzip() is not None or any(zipped.read(prefix + "/" + name) != data for name, data in payloads.items()):
                 raise RuntimeError("Source archive bytes do not match the frozen source")
         candidates = [archive, wheels[0]]
+        if source_commit is not None:
+            from taskcarry.updates import build_release_manifest, MANIFEST_NAME
+            release_manifest = build_release_manifest(__version__, source_commit,
+                [{'name': path.name, 'size': path.stat().st_size, 'sha256': sha(path.read_bytes())} for path in candidates],
+                required_actions=['Preserve the existing project and custom rules; use the existing-governance update guide.',
+                                  'Prepare a separate runtime, review setup/connect, then verify affected native windows.',
+                                  'Explicitly upgrade derived indexes when the installed tools report that context needs them.'])
+            release_path = output / MANIFEST_NAME
+            release_path.write_text(json.dumps(release_manifest, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+            candidates.append(release_path)
         summary = {"version": __version__, "profile": profile, "source_file_count": len(contents), "build_dependencies": dependencies,
+                   "source_commit": source_commit, "release_manifest_created": source_commit is not None,
                    "content_screening": screening, "wheel_verification": wheel_check,
-                   "source_verification": {"membership_and_hashes_match": True, "manifest_present": True},
+                   "source_verification": {"membership_and_hashes_match": True, "manifest_present": True,
+                                           "source_commit_verified": source_commit is not None,
+                                           "payload_origin": "git_blobs" if source_commit is not None else "checkout_snapshot",
+                                           "generated_skill_resources": len(SKILLS) + len(SKILL_REFERENCES)},
                    "archives": [{"name": path.name, "bytes": path.stat().st_size, "sha256": sha(path.read_bytes())} for path in candidates]}
         (output / "SHA256SUMS.txt").write_text("".join(sha(path.read_bytes()) + "  " + path.name + "\n" for path in candidates), encoding="utf-8")
         (output / "BUILD_RESULT.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
@@ -309,9 +418,10 @@ if __name__ == "__main__":
     parser.add_argument("--replace", action="store_true", help="Explicitly replace same-named artifacts after checks pass")
     parser.add_argument("--deny-token", action="append", default=[], help="Additional private term excluded from release")
     parser.add_argument("--profile", choices=["source", "product"], default="source", help="Product omits maintainer evidence and bundles the installable wheel")
+    parser.add_argument("--source-commit", help="Exact reviewed source SHA; verify all source bytes and emit the separate update manifest")
     arguments = parser.parse_args()
     if arguments.check:
-        content, screening = snapshot(arguments.deny_token)
+        content, screening = snapshot(arguments.deny_token, arguments.source_commit)
         if arguments.profile == "product":
             content = product_contents(content)
             screening = screen_content(content, arguments.deny_token)
@@ -319,4 +429,4 @@ if __name__ == "__main__":
     elif not arguments.out:
         parser.error("--out is required unless --check is used")
     else:
-        print(json.dumps(build(arguments.out, arguments.replace, arguments.deny_token, arguments.profile), indent=2))
+        print(json.dumps(build(arguments.out, arguments.replace, arguments.deny_token, arguments.profile, arguments.source_commit), indent=2))

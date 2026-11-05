@@ -14,6 +14,8 @@ A dedicated synthetic AI chat produced two turns of project decisions and next s
 
 Native folder trust, native MCP exposure and the first natural scheduled heartbeat require separate observed host receipts. A schedule plan is not a created schedule; a manual run is not a scheduled trigger. Remaining host or platform coverage is listed in the JSON. No earlier-commit CI, production adoption or independent-user acceptance is attributed to this candidate.
 
+A second, independent AI chat actually installed the frozen RC7 package in a synthetic existing project, prepared governance and two workbenches, saved selected Git files, checked official updates and retained a resumable checklist. Existing HEAD, index, unfinished files and all product payloads were preserved. Its report exposed documentation gaps in evidence fields, scope changes and pre-install checksum checks; these were corrected before the next candidate build. The report and exact original package identity remain separate from subsequent package checks. The chat was archived after retaining evidence. Its projectless directory was not the governance directory, so native acceptance and scheduling remain pending; this is AI-assisted experience evidence, not independent human acceptance.
+
 ## 简体中文
 
 Windows / Python 3.12.10 全套 **359 项，356 通过，3 跳过，0 失败或错误**；标准源码 wheel/sdist 构建已启用并通过，测试期间所测文件未变。两项跳过需要本机符号链接权限；另一项须在实际 wheel 上独立执行。最终包的回执与精确制品一起记录，不复用旧版本哈希。
@@ -26,6 +28,8 @@ Windows / Python 3.12.10 全套 **359 项，356 通过，3 跳过，0 失败或�
 
 文件夹信任、原生 MCP 和首次自然定时触发按真实结果验收；配置生成、CLI 或独立 stdio 成功不能替代原生窗口成功。JSON 列出当前结果与剩余限制。旧提交 CI、内部部署或独立用户体验未作为本候选的完成证据。
 
+另一个独立 AI 对话实际安装了冻结的 RC7 包，接手合成旧项目，准备治理及两个专业工作台，完成精确 Git 保存、官方更新检查和可续办清单。原 HEAD、暂存区、未完成文件和全部产品载荷均保留。报告找出的验收字段、范围变更续办及安装前哈希检查说明缺口已在下一候选构建前修正；原报告及对应包身份与后续包验证分别保留。证据收存后对话已归档。该对话实际目录不是治理目录，原生连接和调度仍待验；这属于 AI 体验证据，不是独立真人验收。
+
 ## 繁體中文
 
 Windows / Python 3.12.10 全套 **359 項，356 通過，3 跳過，0 失敗或錯誤**；標準原始碼 wheel/sdist 建置已啟用並通過，測試期間受測檔案未變。兩項跳過需要本機符號連結權限；另一項須在實際 wheel 上獨立執行。最終套件回執與精確製品一起記錄，不重用舊版本雜湊。
@@ -37,3 +41,5 @@ Windows / Python 3.12.10 全套 **359 項，356 通過，3 跳過，0 失敗或�
 專用合成 AI 對話已完成兩輪專案工作，介接器在隔離環境列出並分頁讀取經授權複製的歷史。保留報告後，對話已封存。此結果僅證明受測協定與這份合成歷史，不代表任意使用者對話、雲端歷史或全部宿主皆已覆蓋。啟動會產生宿主快取；唯讀協定方法不代表整個程序零寫入。
 
 資料夾信任、原生 MCP 與首次自然排程觸發須有實際宿主回執。設定產生、CLI 或獨立 stdio 成功不能替代原生視窗成功。JSON 列出目前結果與限制。舊提交 CI、內部部署或獨立使用者體驗均未作為本候選的完成證據。
+
+另一個獨立 AI 對話實際安裝凍結的 RC7 套件，接手合成既有專案，準備治理及兩個專業工作台，完成精確 Git 儲存、官方更新檢查與可接續清單。原 HEAD、暫存區、未完成檔案及全部產品載荷均保留。報告發現的驗收欄位、範圍變更續辦及安裝前雜湊檢查說明缺口已在下一候選建置前修正；原報告及其套件身分與後續套件驗證分別保留。收存證據後對話已封存。該對話實際目錄不是治理目錄，原生連線及排程仍待驗；這屬於 AI 體驗證據，不是獨立真人驗收。

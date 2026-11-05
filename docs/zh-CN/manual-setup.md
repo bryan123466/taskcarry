@@ -21,12 +21,27 @@
 
 以下命令在 PowerShell 执行，**仅用于专用 runtime 尚不存在的情况**。安装工具不创建新的业务项目，也不意味着获准升级已有运行时。
 
+命令块先将内置 wheel 与 `RELEASE_MANIFEST.json` 中的精确记录核对；记录缺失或不唯一、大小不符或 SHA-256 不符时，在创建 runtime 和安装之前立即停止。这只证明包内一致性。请另从所选官方 Release 单独取得 `SHA256SUMS.txt`，在解压前核对下载产品 ZIP 的 SHA-256。该外部校验文件提供 ZIP 之外的比对来源；两种校验值都不是数字签名，单凭它们不能证明发行者身份。
+
 ```powershell
-py -3 -m venv 'C:/TaskCarry/runtime'
-$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7/packages' -Filter '*.whl' -File
-if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' doctor
+& {
+    $ErrorActionPreference = 'Stop'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7'
+    $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
+    if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
+    $taskcarryWheel = $taskcarryWheels[0]
+    $taskcarryExpected = @($taskcarryManifest.files | Where-Object { $_.path -ceq ('packages/' + $taskcarryWheel.Name) })
+    if ($taskcarryExpected.Count -ne 1 -or $taskcarryExpected[0].sha256 -notmatch '\A[0-9a-fA-F]{64}\z') { throw 'Missing or invalid wheel checksum in RELEASE_MANIFEST.json.' }
+    $taskcarryActual = (Get-FileHash -LiteralPath $taskcarryWheel.FullName -Algorithm SHA256).Hash
+    if ($taskcarryExpected[0].bytes -ne $taskcarryWheel.Length -or $taskcarryActual -ne $taskcarryExpected[0].sha256) { throw 'Wheel verification failed. Stop and obtain the correct product package.' }
+    if (Test-Path -LiteralPath 'C:/TaskCarry/runtime') { throw 'Runtime already exists. Return to governance for inspection; do not reinstall.' }
+    py -3 -m venv 'C:/TaskCarry/runtime'
+    if ($LASTEXITCODE -ne 0) { throw 'Runtime creation failed. Inspect its actual state before continuing.' }
+    & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
+    if ($LASTEXITCODE -ne 0) { throw 'Package installation failed. Inspect its actual state before continuing.' }
+    & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' doctor
+}
 ```
 
 control 尚未初始化时，doctor 返回 `NOT_INITIALIZED`，不含运行时细节；仅此结果不表示安装失败。治理按下节核实这个 control 确实没有状态并初始化后，再运行同一条 doctor 命令查看实际运行时与前提条件。Git 能力不可用时结合当前操作判断；不要为了清除提示重建已有状态。将输出交回治理窗口，继续同一次接入。

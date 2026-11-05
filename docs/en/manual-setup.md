@@ -21,12 +21,27 @@ First check for an existing installation/control and keep it when valid. For a g
 
 Run these commands in PowerShell **only when the dedicated runtime does not already exist**. Installing the package does not create a new business project or authorize upgrading an existing runtime.
 
+The block first checks the included wheel against its exact entry in `RELEASE_MANIFEST.json`; a missing or ambiguous entry, wrong size or SHA-256 mismatch stops the block before creating a runtime or installing anything. This proves package-internal consistency only. Separately obtain `SHA256SUMS.txt` from the selected official Release and compare the downloaded product ZIP's SHA-256 before extraction. That external checksum is a comparison source outside the ZIP; neither checksum is a digital signature or, by itself, proof of the publisher's identity.
+
 ```powershell
-py -3 -m venv 'C:/TaskCarry/runtime'
-$taskcarryWheel = Get-ChildItem -LiteralPath 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7/packages' -Filter '*.whl' -File
-if (@($taskcarryWheel).Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
-& 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' doctor
+& {
+    $ErrorActionPreference = 'Stop'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7'
+    $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
+    if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }
+    $taskcarryWheel = $taskcarryWheels[0]
+    $taskcarryExpected = @($taskcarryManifest.files | Where-Object { $_.path -ceq ('packages/' + $taskcarryWheel.Name) })
+    if ($taskcarryExpected.Count -ne 1 -or $taskcarryExpected[0].sha256 -notmatch '\A[0-9a-fA-F]{64}\z') { throw 'Missing or invalid wheel checksum in RELEASE_MANIFEST.json.' }
+    $taskcarryActual = (Get-FileHash -LiteralPath $taskcarryWheel.FullName -Algorithm SHA256).Hash
+    if ($taskcarryExpected[0].bytes -ne $taskcarryWheel.Length -or $taskcarryActual -ne $taskcarryExpected[0].sha256) { throw 'Wheel verification failed. Stop and obtain the correct product package.' }
+    if (Test-Path -LiteralPath 'C:/TaskCarry/runtime') { throw 'Runtime already exists. Return to governance for inspection; do not reinstall.' }
+    py -3 -m venv 'C:/TaskCarry/runtime'
+    if ($LASTEXITCODE -ne 0) { throw 'Runtime creation failed. Inspect its actual state before continuing.' }
+    & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m pip install --no-index --no-deps $taskcarryWheel.FullName
+    if ($LASTEXITCODE -ne 0) { throw 'Package installation failed. Inspect its actual state before continuing.' }
+    & 'C:/TaskCarry/runtime/Scripts/python.exe' -I -X utf8 -m taskcarry --project 'C:/TaskCarry' doctor
+}
 ```
 
 Before control initialization, doctor returns `NOT_INITIALIZED` without runtime details; this alone does not mean installation failed. After governance verifies that this control genuinely has no state and initializes it as described below, repeat the same doctor command to inspect the actual runtime and prerequisites. Interpret unavailable Git capabilities for the operation being attempted; do not recreate an existing store to clear a warning. Return the output to the governance chat and continue the same onboarding prompt.

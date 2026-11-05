@@ -1473,7 +1473,18 @@
       "archived": true
     },
     "native_mcp": "pending_native_project_trust_and_target_window",
-    "natural_heartbeat": "not_verified"
+    "natural_heartbeat": "not_verified",
+    "independent_ai_onboarding": {
+      "status": "completed_with_explicit_native_pending",
+      "tested_source_commit": "172644140597e70b24450fd0219f6873a92c30f3",
+      "installed_python": "3.14.3",
+      "threads": 1,
+      "archived": true,
+      "existing_git_layers_and_product_files_preserved": true,
+      "native_mcp_verified": false,
+      "natural_trigger_verified": false,
+      "scope": "Actual synthetic package installation and configuration by an independent AI chat; its report led to documentation follow-up. Subsequent artifacts have separate exact verification."
+    }
   },
   "limitations": [
     "Windows native symlink creation requires unavailable host privileges; junction coverage is separate.",

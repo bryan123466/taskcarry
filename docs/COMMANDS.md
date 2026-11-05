@@ -86,6 +86,105 @@ For ordinary source material, `observe.workspace` may be JSON `null` with an exi
 
 Required evidence covers confirmed scope, governance native runtime, local Git preservation, official update assessment, saved native schedule and each active workbench's native calls. `standard_ready` concerns actual standard configuration; `closed_loop_verified` additionally needs a naturally delivered heartbeat. Supplied native receipts remain host-reviewed references, with local Git identities independently rechecked. No boolean field creates a host capability or proves a remote effect. Pending items remain actionable without erasing other completed setup.
 
+### Onboarding evidence fields / 接入证据字段
+
+Use the `required` keys returned by `onboarding start/status`. Every `update` contains exactly one `item` with `key`, `status`, `evidence` and `next_step`; `status` is `verified`, `pending` or `declined`. A changed item requires `expected_revision` from the latest `onboarding.revision`. For `pending`/`declined`, retain a structured evidence object and a nonempty concrete `next_step`. Declining a required item leaves standard onboarding incomplete; `remote` and `cloud` are optional. For `verified`, all rows below require a nonempty `receipt_ref` pointing to the actual retained evidence, plus the listed fields. Keep each item within 64 KiB.
+
+The table describes the engine's required fields, not permission to manufacture receipts. Read and retain the actual host results before filling native or scheduling fields. TaskCarry checks local bindings and selected saved records; it does not independently retrieve the referenced chat, schedule or receipt file. A string accepted as `thread_id` does not establish that a chat exists. CLI, standalone stdio and generated configuration must remain separate from native acceptance. Also check the governance chat's actual cwd in the host; setting a CLI `--project` does not change it.
+
+| Item key | Additional fields in `evidence` | Where the values come from / required meaning |
+|---|---|---|
+| `scope` | `user_confirmed: true`, `scope_fingerprint` | The user's confirmation of this exact scope; copy `onboarding.scope_fingerprint` from the current start/status result. |
+| `runtime` | `isolated: true`, `thread_id`, `transport: "native_mcp"`, `doctor_ok: true`, `status_ok: true`, `control`, `version`, `interpreter`, `module_root`, `identity_ref` | Native doctor/status in `scope.governance_thread`, the actual isolated launch configuration and retained runtime-identity evidence. `control` must resolve to this control. Copy runtime fields from that process's result, not a different CLI or window. |
+| `local_git` | `plan_id`, `commit` | Copy the exact result of a completed `preserve` operation. Its saved status must be `COMPLETED` and its `commit` must match. This is local preservation evidence, not remote backup. |
+| `update_check` | `channel`, `checked: true`, `source`, `result_fingerprint`, `assessment_ref` | `channel` equals the scope; `source` is `https://github.com/bryan123466/taskcarry/releases`. Save an assessment of the actual check first. Both fingerprint fields use that check's fingerprint as explained below. The source revision and channel must still match. |
+| `schedule_config` | `thread_id`, `time`, `timezone`, `frequency: "daily"`, `readback: true`, `active: true`, `kind: "heartbeat"`, `prompt_sha256`, `automation_id`, `cwd`, `runtime_ref` | Read back the actual native host schedule after creating/reusing it. Thread/time/timezone must equal the scope; `cwd` must resolve to this control; `prompt_sha256` must equal `schedule_plan.prompt_sha256`. `runtime_ref` points to verified fixed-runtime evidence. A returned plan has `execute: false` and is insufficient. |
+| `window:<thread_id>` | `thread_id`, `task_id`, `workspace`, `transport: "native_mcp"`, `doctor_ok: true`, `status_ok: true`, `cwd`, `control`, `runtime: {"version": "...", "interpreter": "...", "module_root": "..."}` | Native doctor/status in this selected active window. Thread/task/workspace must equal the scope, task must exist, cwd must equal the registered Git working-tree root and control must match. The engine rechecks the workspace's Git identity. Preserve the actual checkpoint/status result in the receipt. |
+| `schedule_trigger` | `thread_id`, `trigger: "natural_heartbeat"`, `automation_id`, `received_at`, `run_ref`, `update_check_ref`, `local_save_ref` | Actual natural delivery in the original governance chat and its resulting run, update-check and local-preservation evidence. Automation ID must match the saved `schedule_config`. Manual runs and a schedule's predicted next time are insufficient. |
+| `remote` | `coverage_ref`, `destination` | The user-selected remote and retained evidence distinguishing capture, upload, download and recovery coverage; a configured URL alone is insufficient. |
+| `cloud` | `coverage_ref`, `destination` | The user-selected cloud destination and actual coverage evidence; do not imply an untested restore or synchronization result. |
+
+`update_assess` has no separate `assessment_id`. Let `check` be the exact `result` returned by `update_check`; pass it unchanged to `update_assess`. On success, `result.assessment.check_fingerprint` equals `check.fingerprint` and is the saved assessment key. Use that value for **both** `evidence.result_fingerprint` and `evidence.assessment_ref`. Do not use a filename, the assessment revision or a made-up ID for `assessment_ref`; keep file/chat references in `receipt_ref`. `UNVERIFIED` checks remain pending even if a `wait` assessment was saved. A completed check can report a legacy release, identity conflict or no candidate; onboarding evidence of a check is not permission to install it.
+
+### Executable synthetic requests / 可执行合成请求
+
+The following three JSON objects are argument-only request files for `onboarding`, in order, in an already initialized **disposable synthetic control**. They exercise start, pending evidence and scope replacement without claiming native success or creating chats/schedules. The fixed revision numbers apply only to this fresh example; in real use reread `status` and supply the actual revision. The synthetic IDs below are labels, not real host IDs.
+
+`onboarding-start.json`:
+
+```json
+{
+  "onboarding_id": "example-onboarding",
+  "action": "start",
+  "scope": {
+    "governance_thread": "synthetic-governance-thread",
+    "channel": "rc",
+    "schedule": {"time": "10:00", "timezone": "UTC"},
+    "windows": [{
+      "thread_id": "pending:example-writer",
+      "mode": "active",
+      "task_id": "example-writing",
+      "workspace": "example-writing",
+      "source_ref": "synthetic-handover.md",
+      "responsibility": "Continue the selected writing task after the real window is bound."
+    }]
+  }
+}
+```
+
+`onboarding-pending.json`:
+
+```json
+{
+  "onboarding_id": "example-onboarding",
+  "action": "update",
+  "expected_revision": 1,
+  "item": {
+    "key": "window:pending:example-writer",
+    "status": "pending",
+    "evidence": {"reason": "No real host chat is bound; no native calls have been observed."},
+    "next_step": "Open the registered workspace in the host, obtain its actual thread ID and cwd, then replace the scope and verify native doctor/status there."
+  }
+}
+```
+
+`onboarding-rebind.json` (a second synthetic label illustrates the replacement; use an observed host ID for a real binding):
+
+```json
+{
+  "onboarding_id": "example-onboarding",
+  "action": "start",
+  "expected_revision": 2,
+  "scope": {
+    "governance_thread": "synthetic-governance-thread",
+    "channel": "rc",
+    "schedule": {"time": "10:00", "timezone": "UTC"},
+    "windows": [{
+      "thread_id": "synthetic-replacement-thread",
+      "mode": "active",
+      "task_id": "example-writing",
+      "workspace": "example-writing",
+      "source_ref": "synthetic-handover.md",
+      "responsibility": "Continue the selected writing task after the real window is bound."
+    }]
+  }
+}
+```
+
+Run each file through the fixed isolated interpreter using the command form at the top of this page. After the third request, the same onboarding has revision 3, the replacement scope and an empty `items` object; all required items are pending. No host action has occurred. A subsequent read request is `{"onboarding_id":"example-onboarding","action":"status"}`.
+
+### Scope changes and continuation / 范围变更与续办
+
+An item update cannot change `scope`. To replace a pending chat label, move governance into a real host chat, alter selected workspaces or change the schedule/channel, first retain the current status report, then call **`start` with the same `onboarding_id`, current `expected_revision` and the complete new scope**. This increments the revision and resets the current `items` to `{}`; earlier revisions remain in local onboarding history. It neither deletes task/checkpoint/connection records nor moves chats or recreates installations. Identical scope or item content is reused rather than recorded again.
+
+Reconfirm the new scope fingerprint. Review each old receipt against the new scope and live local state, then submit a new item update for evidence that remains applicable, using the latest revision after each change. Existing completed save/update records may be referenced again only when they still satisfy the checks. Recheck runtime/window/schedule receipts affected by a changed chat, cwd, channel or schedule. Leave unverifiable items pending with one concrete next step; do not bulk-copy old `verified` flags. The retained history is provenance, not automatic validation for the replacement scope.
+
+中文：每项 `verified` 都须有真实 `receipt_ref` 和上表字段；`assessment_ref` 使用实际更新检查的 fingerprint，不是文件路径。补齐真实聊天身份或改变范围，要以同一接入 ID、当前修订号和完整 scope 再执行 `start`；当前条目会清空，旧历史保留。逐项重新核对后可引用仍有效的旧回执，不重装、不重做已完成效果，也不伪造原生调用或自然定时成功。
+
+繁體中文：每項 `verified` 均須有實際 `receipt_ref` 與上表欄位；`assessment_ref` 使用實際更新檢查的 fingerprint。補齊對話身分或變更範圍，須以相同接入 ID、目前修訂號及完整 scope 再執行 `start`；目前項目清空，舊歷史保留。逐項重核仍適用的回執，只補缺步，不把舊驗證旗標直接搬到新範圍。
+
+### Configuration and local saving / 配置与本地保存
+
 `connect` requires completed setup materials. It retains existing user configuration bytes and adds only the generated service block; a previously managed block can be replaced only when unchanged. Same-name unmanaged changes, unsupported TOML layout, changed target or binding return specific conflicts without overwriting. Execution uses the saved plan. After an interrupted file effect, repeat that plan to verify bytes and repair only the receipt. `host_loading_verified` remains false until separately checked in the actual host. User-level configuration is not a supported target.
 
 `preserve` plans exact regular files in an existing Git working tree using verified author configuration. It creates no repository and performs no push. Selected already-staged paths require review; unrelated staged/unstaged content is retained. The content policy is raw file bytes, with no clean filters or hooks. No meaningful change creates no commit. Recovery checks the recorded ref/index effect before continuing; changed index conditions require review. A local commit does not automatically become a submitted stage, remote backup or business acceptance. Use the [coverage template](../templates/preservation-coverage.json) to keep capture, upload, download and recovery evidence separate.

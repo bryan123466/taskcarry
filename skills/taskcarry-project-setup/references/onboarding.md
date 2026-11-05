@@ -30,6 +30,31 @@ Register `update_source` with official release channel, installed identity and m
 
 Use `schedule_plan`, resolve the actual time/time zone if not already given, then create/reuse a native heartbeat attached to this governance chat. Preserve model/permissions. Verify saved chat, directory, period and complete durable prompt. A host lacking native scheduling remains pending; do not substitute a hidden system cron. Use [daily governance](../../taskcarry-governance-reconcile/references/daily-governance.md). Private Git remotes/cloud storage are offered for selected destinations and scope after local setup.
 
+### Save evidence without reading implementation code
+
+Read `onboarding status` and its `required` keys. To change one item, call `onboarding` with `action: "update"`, the same `onboarding_id`, current `expected_revision` and an `item` containing exactly `key`, `status`, `evidence`, `next_step`. Status is `verified`, `pending` or `declined`. Every verified item needs a real nonempty `receipt_ref` plus the fields below. Pending/declined items need an evidence object and a concrete nonempty next step; declining a standard item does not complete it. Keep each item within 64 KiB.
+
+| Key | Required additional evidence and source |
+|---|---|
+| `scope` | `user_confirmed: true`, `scope_fingerprint` copied from the current `onboarding.scope_fingerprint`, after the user confirms that exact scope. |
+| `runtime` | `isolated: true`, governance `thread_id`, `transport: "native_mcp"`, `doctor_ok: true`, `status_ok: true`, actual `control`, `version`, `interpreter`, `module_root`, and `identity_ref` to retained runtime evidence. Use native results from that governance chat. |
+| `local_git` | Exact `plan_id` and `commit` from the completed `preserve` record. The engine rechecks its `COMPLETED` state and commit. |
+| `update_check` | Scope `channel`, `checked: true`, `source: "https://github.com/bryan123466/taskcarry/releases"`, `result_fingerprint` and `assessment_ref`; both last values are the actual saved check fingerprint. |
+| `schedule_config` | Governance `thread_id`, selected `time`/`timezone`, `frequency: "daily"`, `readback: true`, `active: true`, `kind: "heartbeat"`, `prompt_sha256` copied from `schedule_plan.prompt_sha256`, actual `automation_id`, control as `cwd`, and `runtime_ref`. Read back a real native schedule; the plan alone is insufficient. |
+| `window:<thread_id>` | Exact scope `thread_id`, `task_id`, `workspace`, `transport: "native_mcp"`, `doctor_ok: true`, `status_ok: true`, actual `cwd`, `control`, and nested `runtime` containing `version`, `interpreter`, `module_root`. Obtain results in that window; cwd must equal its registered Git root. |
+| `schedule_trigger` | Governance `thread_id`, `trigger: "natural_heartbeat"`, actual `automation_id`, `received_at`, `run_ref`, `update_check_ref`, `local_save_ref`. The automation must match the saved schedule; manual execution is not natural delivery. |
+| `remote` / `cloud` | User-selected `destination` and `coverage_ref` distinguishing actual capture, upload, download and restoration coverage. These two items are optional. |
+
+Pass the exact `update_check` result as `check` to `update_assess`. Its successful response contains `assessment.check_fingerprint`; this equals the check's `fingerprint` and is the assessment's saved key. There is no separate `assessment_id`. Use it for both onboarding `result_fingerprint` and `assessment_ref`, while `receipt_ref` points to retained evidence. An offline/`UNVERIFIED` check remains pending even after recording a `wait` decision. Checking a conflicting or legacy release does not authorize installation.
+
+These are reviewed evidence references, not independent host access. The engine rechecks local workspace/save/update records; it cannot establish chat existence or native loading merely from accepted strings or booleans. Do not synthesize native receipts. A pending thread label is never proof of a real host ID; leave its window pending. Verify governance cwd in the actual host as well. Use the complete field table and executable synthetic start/pending/rebind JSON examples in `docs/COMMANDS.md` in the user's verified product directory; the installed Skill need not sit beside those docs.
+
+### Replace a scope or bind the real chat
+
+An `update` cannot replace `scope`. Before replacing a pending thread label, moving governance to an actual host chat or changing selected windows/channel/schedule, retain the current status report. Call `start` with the **same onboarding ID**, the **current `expected_revision`** and the **complete replacement scope**. This increments the revision and resets current `items` to an empty object; earlier revisions remain in local history. It does not erase task/checkpoint/connection records, move a chat or reinstall files. An identical scope reuses its existing record.
+
+Reconfirm the replacement scope's fingerprint. Review old receipts one by one against the new scope and current bindings. Submit still-valid evidence again with the latest revision after each update; changed chat/cwd/runtime/schedule/channel requires corresponding revalidation. Keep specific gaps pending. Do not bulk-copy old `verified` flags, and do not repeat completed setup or Git effects just because the checklist scope changed. Exact repeated item content is reused. A host-created replacement chat needs its actual identity and original-history references, not a claim that the old chat moved.
+
 ## 3. Verify and recommend next work
 
 Return inherited facts/decisions and uncertainties; a window table of responsibilities, tasks, real directories and actual connections; local version-saving results; original-chat schedule readback; update source/channel/check/assessment; optional backup coverage; and concrete next steps. Every missing standard item stays visible. First natural heartbeat evidence waits for a genuine trigger. One pending window does not erase other completed results.

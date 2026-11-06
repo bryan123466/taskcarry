@@ -9,9 +9,16 @@ import sqlite3
 from .store import GovernanceError, _linked
 
 
-def source(root):
+def source(root, config=None):
     root = str(Path(root).expanduser().resolve())
-    return {'source_id': 'local-' + hashlib.sha256(os.path.normcase(root).encode('utf-8')).hexdigest(),
+    legacy = 'local-' + hashlib.sha256(os.path.normcase(root).encode('utf-8')).hexdigest()
+    if config and config.get('project_id'):
+        return {'source_id': config['project_id'], 'control': root,
+                'identity_scope': 'persistent_project', 'replica_id': config.get('replica_id'),
+                'aliases': list(dict.fromkeys([*config.get('source_aliases', []), legacy])),
+                'record_identity': ['source_id', 'collection', 'local_id'],
+                'writer_state': config.get('recovery_writer_state', 'active')}
+    return {'source_id': legacy,
             'control': root, 'identity_scope': 'resolved_local_path',
             'record_identity': ['source_id', 'collection', 'local_id']}
 
@@ -79,6 +86,7 @@ def identify(project, initializing=False):
     after = (path.stat().st_ino, path.stat().st_size, path.stat().st_mtime_ns)
     if before != after or (wal.exists() and wal.stat().st_size):
         return finish('busy', reason='source_changed_during_inspection')
+    result['source'] = source(raw, config)
     return finish(state, schema_version=config['schema_version'], project_name=config.get('name'))
 
 

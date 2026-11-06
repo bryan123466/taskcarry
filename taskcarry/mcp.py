@@ -15,6 +15,7 @@ from .contracts import SCHEMAS, validate
 
 
 DESCRIPTIONS = {
+    "identity": "Read a portable project identity or explicitly plan and adopt one for legacy state. Retains previous source aliases; no package update.",
     "codex": "Use a selected supported Codex executable to inspect capabilities, list or read bounded chat history. No turns or messages; host startup may write its own caches.",
     "update_source": "Explicitly register the official release channel and current artifact/method identities. Does not install or schedule.",
     "update_check": "Read bounded official release metadata and compare the selected channel. No local record, installation or claim of host loading.",
@@ -44,6 +45,15 @@ DESCRIPTIONS = {
     "reconcile": "Plan delivery acceptance, or execute an existing plan with exact baseline conditions. No push.",
     "adopt": "Plan or execute an exact baseline adoption while retaining workspace work. No push.",
 }
+
+from .cycle_contracts import DESCRIPTIONS as CYCLE_DESCRIPTIONS
+from .workbench_contracts import DESCRIPTIONS as WORKBENCH_DESCRIPTIONS
+from .recovery_contracts import DESCRIPTIONS as RECOVERY_DESCRIPTIONS
+DESCRIPTIONS.update(CYCLE_DESCRIPTIONS)
+DESCRIPTIONS.update(WORKBENCH_DESCRIPTIONS)
+DESCRIPTIONS.update(RECOVERY_DESCRIPTIONS)
+from .transfer_contracts import DESCRIPTIONS as TRANSFER_DESCRIPTIONS
+DESCRIPTIONS.update(TRANSFER_DESCRIPTIONS)
 
 
 def tools_list():

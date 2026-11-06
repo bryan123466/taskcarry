@@ -6,6 +6,14 @@ TaskCarry helps several AI-assisted workspaces continue one project without maki
 
 This report explains the reusable design lessons and their synthetic verification. It contains no deployment history or data from a private project. New users follow the normal [operating walkthrough](windows-example.md); historical migration and cleanup are not installation requirements.
 
+## From current records to a continuing governance cycle
+
+The project brain now ties four observable stages together: selected source metadata is observed, the host AI records its understanding, exact guidance is published to affected workbenches, and those chats provide evidence of reading that version. A source scan never becomes a claim to understand unread contents. Source-qualified facts, aliases and revisions retain decisions without replacing history.
+
+The shared engine retains finite cycle ownership/resources, intended effects, actual results, delivery dates and evidence freshness. Immutable workbench views and exact publication plans preserve professional text, Git state and later edits, while separate consumption records prevent successful writes from being called host acceptance. Selected recovery sets preserve consistent state/objects, real Git history and layered WIP; restored replicas remain standby until an explicit sole-writer handoff.
+
+This does not require users to route every task through governance. Three-step onboarding establishes the complete checklist and a first cycle; one morning report and one or two absorption slots maintain it. Natural triggering, AI execution and actual delivery require separate receipts. See [architecture](architecture.md), [feedback examples](user-feedback-examples.md) and the exact [Governance API](../GOVERNANCE_API.md).
+
 ## What we simplified
 
 The current onboarding loop also carries these responsibilities:
@@ -25,7 +33,7 @@ Core, maintained Skills and user-specific rules have separate identities. An upd
 | Rely on a chat remembering which evidence it reviewed | Persist the reviewed source revision, task/workspace binding and explicit relationships | A later run can distinguish unchanged evidence from a changed source |
 | End with a broad success statement | Freeze a named run scope and check its recorded results | A finished batch is distinguishable from the project's remaining work |
 | Repeat the full workflow after a lost reply | Check the journal and actual Git effect, then finish only supported missing steps | Recovery avoids treating a missing acknowledgment as proof that nothing happened |
-| Merge every workspace whenever shared progress changes | Read common progress directly; adopt accepted code only for a task dependency | Ordinary reporting does not disturb local development |
+| Merge every workspace whenever shared progress changes | Read current records and publish affected workbench guidance; adopt business code only for a task dependency | Professional instructions and unrelated local WIP are preserved |
 
 These changes reduce repeated work and ambiguous handoffs. They do not eliminate the need to understand a task, resolve a real content conflict or obtain a business decision.
 
@@ -83,10 +91,10 @@ Maintainers can reproduce the focused checks from a source checkout:
 python -m unittest tests.test_incremental_view tests.test_atomic_store tests.test_continuity -v
 ```
 
-The tests use disposable synthetic projects. See the source repository's [validation record](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md) for the tested version and remaining coverage. Installing the product does not require running this development suite.
+The tests use disposable synthetic projects. See the source repository's [validation record](../RELEASE_0.2.0rc7.md) for the tested version and remaining coverage. Installing the product does not require running this development suite.
 
 ## What stays optional
 
-The standard local loop includes Git saving, an original-chat schedule and official update checks. Private remotes, cloud storage and ongoing project coordination remain optional. Project discovery follows the selected access scope; unsupported host access uses an explicit handoff. Publishing, package installation and physical multi-computer takeover have their own authorization and verification. An update check is not automatic installation.
+The complete local setup includes persistent identity, understood sources, Git saving, native workbench consumption, a first governance cycle, selected recovery rehearsal, official update checks, and one daily report plus one or two absorption slots. Private remotes, cloud storage and ongoing project coordination remain optional. Source discovery uses the selected access scope. Natural scheduling, actual AI execution, report delivery and physical multi-computer operation need their own evidence; update discovery does not authorize installation.
 
 The design continues to use the host language model and the shared engine. It does not train model weights or start an additional resident governance model. The useful improvement is a more precise path from evidence to action, with durable records that let the next run continue.

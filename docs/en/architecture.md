@@ -1,66 +1,60 @@
-# How the toolkit keeps a project moving
+# How Core, the capability layer and your project work together
 
-[简体中文](../zh-CN/architecture.md) · [繁體中文](../zh-TW/architecture.md) · [Home](../../README.md)
+[Home](../../README.md) · [Three-step setup](windows-example.md) · [Recovery and multiple computers](remote-and-multicomputer.md) · [简体中文](../zh-CN/architecture.md) · [繁體中文](../zh-TW/architecture.md)
 
-When several local AI workspaces advance a project, each needs to know what to do next without losing its earlier work. TaskCarry gives them shared task records and a governance chat that brings ready results together. Files and progress remain on your computer; the project does not depend on one chat remembering everything. Codex is the first documented host setup; other local AI tools can use the same CLI/MCP interfaces after their connection and capabilities are verified.
+TaskCarry gives existing AI work a continuing governance workflow. Your governance chat uses its AI to understand authorized sources, retain traceable facts and decisions, deliver current guidance to relevant workbenches, and check saving and recovery coverage. Core supplies verifiable operations and records; AI supplies interpretation and judgment; you retain project direction, business acceptance and authorization. Governance may coordinate the project without becoming a mandatory dispatch gate.
 
-## Project workflow governance
+## Three layers describe responsibilities, not three separate products
 
-TaskCarry combines project memory, workspace collaboration, and governance of the work people and AI produce together. Its focus is how a task keeps its current position, how a stage joins the shared project, and how an interrupted operation continues. This provides a practical workflow for a long-running project across multiple chats or Agents.
+| Layer | Contents | What updates and recovery must retain |
+|---|---|---|
+| **Core: shared engine** | One engine behind CLI/MCP; identities, tasks, checkpoints, exact Git reception/adoption, fact revisions, governance cycles, workbench publication and recovery sets. | Exact version, package hash and compatibility requirements. Reinstall from trusted packages; reinstalling does not restore project data or upgrade a running environment automatically. |
+| **Capability layer: how governance works** | Four packaged Skills and methods, plus host-provided chat reading, file access, native MCP, scheduling and delivery tools. Users can maintain their own methods. | Actual rules/Skills, source versions, customizations and required capability inventory. Verify host capabilities, connections and permissions again on a new machine. |
+| **User project layer: what is governed** | Project identity, source routes, evidence and judgments, tasks/decisions/relationships, database and objects, workspace Git history and WIP, materials, recovery coverage, workbench views and actual receipts. | This cannot be recovered by downloading the product again. Capture consistent state, objects, Git layers and necessary materials under an explicit selection; disclose exclusions. |
 
-The governance chat interprets supplied task information and reviews the proposed integration plan. The tools bind that plan to registered workspaces, specific versions, changed paths, and expected state. They record actual results, preserve supported unfinished work, and check applicable recovery methods before continuing missing steps. People retain project direction, priorities, business acceptance, and external-delivery decisions.
+One product can serve different projects. A public update offers changes to shared tools or methods; your governance evaluates applicability, compatibility and risk while preserving project rules and memory. Release discovery, recorded fixes, installation and host loading are separate stages. Your host supplies the AI model and account. TaskCarry does not train models or require a separate model API.
 
-Workspace identity here means the registered directory and repository, not authentication of an Agent or a person. Toolkit locks coordinate its own writes; other editors and Git commands still need to respect the workspace's writing responsibility. AI-platform permissions, identity security, and operating-system isolation remain with the host environment. See [security and project data](../../SECURITY.md) for that scope.
+## How one project brain absorbs progress from many chats
 
-## Who does what
+```mermaid
+flowchart LR
+  A[Selected chats and materials] --> B[AI understands source revisions]
+  B --> C[Project facts decisions and task relationships]
+  C --> D[Exact plans and actual effects]
+  D --> E[Workbench current pointers and immutable views]
+  E --> F[Working chats read and continue original tasks]
+  F --> A
+  D --> G[Git saving recovery sets and health evidence]
+```
 
-You set the direction, divide responsibilities, and decide whether a result meets your needs. Professional chats work in their own registered directories. The governance chat uses AI to interpret their task records and deliverables, then calls the tools to save state, collect stages, and update workspaces.
+One brain means maintained project identity, rules, relationships and governance records, not a copied model or identical context in every chat. Stable source/fact identities distinguish matching names; aliases and revisions preserve earlier facts. Observing a file, understanding its contents, publishing guidance and a working chat consuming it are separate evidence stages. Superseded decisions retain provenance; a new date does not revive completed history as backlog.
 
-| Part | What it does for you |
-|---|---|
-| Task records | Keep the goal, current position, decisions, saved progress, and next step together. |
-| Git workspaces | Give parallel tasks separate working files and retain their change history. |
-| Receiving baseline | Hold the stages already collected into the shared project. |
-| CLI and MCP | Offer two ways to call the same local tools and records. |
-| Project Skills | Explain when and how the chats should save progress, deliver work, and handle a known problem. |
-| Standard host scheduling | Wake the governance chat at configured times to perform the same workflow. |
+Core `source_scan` performs bounded metadata enumeration of an explicitly authorized local root, retaining pages, exclusions and incomplete states. Reading chat bodies or material contents requires the appropriate host tools and permission, followed by AI interpretation. A prompt cannot create missing access. Unread sources or incomplete directories do not justify claims that content is absent or finished.
 
-The toolkit keeps four things distinct: the installed package supplies tools and Skills; the control project's `.taskcarry` directory retains durable task state; shared progress is read from those records; and business deliverables remain in their Git workspaces. Updating the package or Skills, or reading `status`, does not merge business Git history or advance a workspace's `HEAD`. Bringing received business results into a working workspace is an explicit `adopt` operation. See [governance maintenance](governance-maintenance.md) for package updates and recovery.
+## A governance cycle has an owner, effects and a continuation point
 
-## From unfinished work to the next stage
+Each `cycle` binds the original task, owner and exact resources. The tools retain intended operations before actual-result evidence. Process locks coordinate cooperating local writers; durable reservations retain responsibility after interruption. Retry verifies completed effects and finishes missing supported receipts or steps. A local conflict preserves its work while independent work can continue.
 
-1. **Work on the task.** A professional chat uses its registered workspace and stable task record.
-2. **Save a useful pause point.** A checkpoint records selected files already saved to disk and where to continue. Within its selected scope, a Git checkpoint keeps the committed version, staged changes, working files, and new files distinguishable.
-3. **Offer a ready stage.** The chat identifies the Git commit, its starting commit, and the complete changed-path list. Later edits in that workspace do not silently change the offered stage.
-4. **Bring it into the shared project.** Governance prepares a plan against the current receiving baseline, checks its scope, and executes it. Before replacing a plan, it checks the actual effects of unfinished operations and continues supported missing steps. A new plan is needed when an external change invalidates the old plan and there is no existing operation that can safely continue.
-5. **Adopt business results where needed.** An explicit `adopt` plan brings received business changes into a selected workspace while preserving supported local work. Installing tools or Skills does not require every worktree to adopt business changes. A busy workspace or a concrete conflict keeps its own next step while other independent tasks continue.
-6. **Continue.** The records show what was collected, what is still in progress, and what should happen next. You still decide whether the result satisfies the business or professional requirements.
+Fact records separate source statements, evidence and AI judgments. Health has observation times and validity windows; absent or expired evidence is not healthy. Necessary questions record actual delivery and follow up on distinct dates, avoiding repeated same-day prompts. Use one daily report slot plus one or two absorption slots; no substantive changes can end quietly. Native scheduling wakes the original governance chat; Core is not a resident AI or scheduling service.
 
-## Keep history without repeating old work
+## Deliver guidance without replacing professional work
 
-A pause remains a pause; an unchanged task does not become new backlog on every run. Old stages remain traceable after a newer cumulative stage replaces them. Before replacing one, the tools require evidence that the newer stage belongs to the same task and registered workspace, descends from the earlier commit, and covers its changed paths. A newer filename or date alone is not enough; independent results remain separate.
+`workbench` freezes an immutable view with source revisions, then plans against registered workspaces, original tasks, Git identity and exact file hashes. A current pointer selects the published view; live task state remains in Core. Source drift is visible, so an old view is not presented as current truth.
 
-After an interrupted operation, governance checks what actually happened before continuing. It reuses valid records and completes only the missing steps supported by the tools, rather than assuming that a missing reply means the whole operation failed.
+The Codex adapter changes only its managed developer_instructions section, retaining professional text, other MCP services, model and permission settings. Default entries must be ignored private files, preventing local paths or project data from being written into tracked/staged public files. Navigation changes do not advance Git HEAD, rewrite the index or alter unrelated WIP. Publication receipts and consumption evidence remain separate; a successful write does not attest host loading, understanding or business acceptance.
 
-## Reuse experience where it applies
+## Business results retain exact delivery semantics
 
-An experience record describes a known problem and an available recovery action. The tools check its failure code, operation, version, task scope, and enabled state before applying it. This can help with a repeated problem under matching conditions. It does not turn a written note into a new repair capability or execute arbitrary scripts from that note.
+A checkpoint saves selected files and continuation context. A stable stage identifies original base/commit and the complete changed-path list. Governance reviews a reception plan; workspaces needing the business changes explicitly adopt them. Saving is not delivery; reception is not business acceptance; a governance-method update does not merge business code. Paused tasks remain paused, and independent stages are not overwritten because another file has a newer date.
 
-For an unfamiliar problem, governance explains the concrete obstacle and next step. A general prevention fix still requires a change to the shared software and verification before it is installed; recording experience alone does not install that fix or guarantee that the model will select it.
+Shared defects need shared implementation and regression verification, with experience linked to applicable versions and actual adoption. Unknown failures require effect inspection first. An experience or fix record does not install a correction. Source tests, standalone stdio, current-host native tools and natural scheduling are distinct evidence layers.
 
-## Where the records live
+## What must be backed up to restore the project
 
-The project's `.taskcarry` directory stores its task database, events, experience records, and selected-file snapshots. Keep these as project data, with suitable backups. Do not publish the database or edit it to make an incomplete operation look successful.
+Include the registered receiving repository when the project already has one. Recovery verifies and rebinds that repository and accepted-stage locations while retaining the original records. Later work uses new plans belonging to the restored replica. A missing receiving repository makes coverage incomplete; an old computer's path is not presented as a usable restored baseline.
 
-The tools run locally on one computer. Separate worktrees support parallel tasks; multi-computer work needs the explicit branch-based handoff described in the manual. The toolkit does not provide distributed locks, automatic remote push or deployment, or guaranteed recovery of effects in external services.
+**Core can be reinstalled; capabilities must be reproducible; your project layer needs actual backups.** A selected recovery set captures consistent database state, necessary objects, selected Git refs/history/index/WIP, explicit materials and capability versions. Ordinary project files and external large materials require explicit coverage. Unsaved editor buffers, private platform chats, credentials and host permissions are not captured automatically.
 
-AI comes from your chosen local AI tool. TaskCarry does not train a model or require a separate model API. Its current setup generates Codex project integration files. Other hosts need their own configuration and instruction-loading checks; MCP availability alone does not verify a host, grant file access or supply scheduling. Reports are produced in the governance chat from the same project records, without a separate reporting service or state page. See [practical capabilities and limits](../RELEASE_BOUNDARIES.md).
+An independently restored replica starts in `standby`. Verify bytes, path rebinding, tasks and workspaces, then regenerate local connections and verify native tools. Activate a new sole governance writer only after explicitly stopping the old writer and checking the exact handoff target. Host/Git controls must enforce an offline old writer's exclusion; a local lock cannot prove a remote process stopped.
 
-
-## Standard local governance and task continuation
-
-Complete onboarding includes local governance Git, real task/workspace/Git bindings for ongoing windows, native per-window connection checks, original-chat schedule configuration/readback and an official update check. Private remotes and cloud storage remain optional. Historical-source chats do not need active workspaces. Large external files need explicit references and backup coverage; a file reference is not a saved copy.
-
-Use `context` for a selected task. It returns source-qualified identity, task state, latest checkpoint and next step, paginated related records, selected issue/fix references and missing evidence. Same local IDs from different sources stay distinct. Output and record payload reads are bounded; SQL still counts matching index entries, so this is not a fixed latency guarantee. Oversized records are explicitly omitted. Old state needs explicit `upgrade` for the derived task index; reading context never performs that migration. Regular SQLite reads may create coordination sidecars but do not publish records or events.
-
-A real project can span several directories, repositories and existing state sources. Keep their routes and local identities; one source still has one receiving baseline. Sharing context or maintaining the package does not merge business Git branches or create a multi-store transaction.
+Parallel work on other computers uses separate task branches or exact file artifacts, returning source identities, versions, paths and continuation points to one governance writer. **Do not concurrently synchronize a live SQLite database or share `.git`.** Private remote/cloud transport is separate; local capture, upload, download and isolated restore each need evidence. See the [multi-computer reference](remote-and-multicomputer.md).

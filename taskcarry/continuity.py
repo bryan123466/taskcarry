@@ -248,6 +248,8 @@ class Continuity(Core):
         run_id = _id(run_id, 'Run ID')
         if mode not in ('start', 'finish', 'inspect'):
             raise GovernanceError('INVALID_RUN_MODE', 'Use start, finish or inspect.')
+        if mode != 'inspect' and run_id in (self.store.get('config', 'project') or {}).get('recovery_inert_run_ids', []):
+            raise GovernanceError('RESTORED_RUN_INERT', 'Historical runs cannot be replayed on a recovered replica.')
         if not isinstance(note, str) or len(note) > 8192 or '\x00' in note:
             raise GovernanceError('INVALID_NOTE', 'A run note must be text of at most 8192 characters.')
         supplied = (stage_ids, operation_ids, observation_ids)

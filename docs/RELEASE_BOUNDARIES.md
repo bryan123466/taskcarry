@@ -10,6 +10,8 @@ TaskCarry gives AI-assisted projects a local record of progress and results. It 
 
 ### Everyday use
 
+Complete setup uses the versioned `complete_v1` checklist: portable project identity, understood selected sources, current workbench views with individual consumption evidence, a completed first governance cycle, and an actual isolated recovery rehearsal. Existing legacy checklists remain readable and do not certify these additional capabilities. The daily rhythm uses one original-chat report slot and one or two absorption slots; configuration, natural trigger, AI execution and report delivery are verified separately.
+
 Use the three-step onboarding conversation with an existing Codex project. Establish or reuse its governance chat, inherit selected responsibilities and decisions, and choose whether it also coordinates the project. Standard setup includes real working-window directories and Git bindings, native MCP checks, local governance Git saving, a schedule returning to the original governance chat, and official release checks. A history-only conversation can remain a source without becoming an active workspace. Ordinary file checkpoints support continuity and recovery; they do not replace the standard Git setup.
 
 The shared Core and maintained Skills work alongside your own project rules. A real project can include several directories, conversations and existing state sources. Source-qualified records keep those identities distinct. The bounded task-context reader returns related decisions, checkpoints, next steps and evidence without treating a read as acceptance.
@@ -33,6 +35,9 @@ Private Git can hold selected committed and pushed results. Remote push and depl
 
 ### Practical limits to account for
 
+- Full project recovery is separate from a file checkpoint. It seals a consistent local state and referenced objects plus the selected Git history, refs, index, working changes and materials. Missing selected dependencies remain explicit. An independently restored copy keeps the project identity, receives a new replica identity and starts in standby; old executable plans become inert history. Host configuration is quarantined until reconnecting at the new location. Activating a new writer requires an explicit handoff; the tool cannot remotely stop an old computer.
+- Private Git publication plans pin an exact remote/ref/commit and verify the actual effect before retrying. Sealed recovery copies verify their selected payloads at a separate local destination. Neither operation by itself proves cloud upload, account access or a two-machine recovery.
+- Workbench execution isolates per-workspace publication conflicts. Planning validates the entire submitted batch; if one workspace cannot be planned, make a separate exact plan for the independent workspaces that can proceed.
 - Each control scope uses one local store and one receiving baseline. Toolkit locks serialize its own operations; other editors and Git commands must not write the same receiver or updating workspace at that time. Independent workspaces can continue their tasks.
 - Checkpoints allow 500 paths, 32 MiB per stored object, and 128 MiB total capture. Larger files can be recorded as artifact references, which are pointers rather than backups of their contents.
 - Restoring a checkpoint rebuilds the selected file layers on an identified synthetic Git baseline. Preserve a Git backup as well when you need the full repository history.
@@ -49,6 +54,8 @@ Private Git can hold selected committed and pushed results. Remote push and depl
 TaskCarry 为 AI 辅助项目提供本地进度与成果记录。它把任务记录、选定的已保存文件、Git 历史和治理聊天接起来，让工作可以暂停、按阶段贡献成果，再从原位置继续。当前操作手册使用 Codex 演示这套流程。
 
 ### 日常可以怎样用
+
+完整建制使用有版本的 `complete_v1` 清单：稳定项目身份、已理解的选定来源、带逐窗口消费证据的当前工作台、首次完整治理整轮，以及真实的独立恢复演练。旧清单继续可读，但不证明新增能力已经完成。日常节奏包含返回原治理窗口的一次报告和一至两次吸收时段；配置、自然触发、AI 执行和报告送达分别验证。
 
 通过三步对话接入已有 Codex 项目：建立或复用治理窗口，继承选定分工和决定，由用户选择是否兼任项目协调。标准配置包括持续工作窗口的真实目录和 Git 关联、原生 MCP 验收、本地治理 Git 保存、返回原治理窗口的定时任务，以及官方发行检查。仅作历史来源的对话不必变成活跃工作区。普通文件检查点用于接续与恢复，不替代标准 Git 配置。
 
@@ -73,6 +80,9 @@ MCP 要在你使用的 AI 宿主中接通，并实际调用工具确认。CLI �
 
 ### 使用时需要知道的范围
 
+- 完整项目恢复与文件检查点是不同能力。恢复集封存一致的本地状态、引用对象以及选定 Git 历史、refs、index、工作修改和材料；缺少的选定依赖会明确列出。独立恢复副本保留项目身份、取得新副本身份并从 standby 开始，旧执行计划保留为不可重放历史。宿主配置隔离后按新位置重新接入；启用新写入点需要明确移交，工具不能远程关闭旧电脑。
+- 私有 Git 发布计划固定准确的 remote/ref/commit，重试前先核对实际效果。恢复集复制会核对独立本地目的地的选定载荷；这些结果各自不能证明网盘上传、账号访问或真实双电脑恢复。
+- 工作台执行会分别处理各工作区的发布冲突；计划阶段仍整体验证本批输入。单台无法规划时，应为可独立推进的工作区另建准确计划。
 - 每个治理范围使用一个本地控制库和一条接收基线。工具锁只协调工具自身操作；更新期间，其他编辑器和 Git 命令不要写同一接收或更新工作区，独立工作区可以继续各自任务。
 - 检查点最多选择 500 条路径，单个存储对象上限 32 MiB，总量上限 128 MiB。较大文件可以记录材料引用；引用保存位置，不等于备份了文件内容。
 - 从检查点恢复时，会在明确标识的合成 Git 基线上重建选定的文件层。需要完整仓库历史时，也要保留 Git 备份。
@@ -89,6 +99,8 @@ MCP 要在你使用的 AI 宿主中接通，并实际调用工具确认。CLI �
 TaskCarry 為 AI 輔助專案提供本機進度與成果記錄。它把任務記錄、選定且已儲存的檔案、Git 歷史與治理對話接起來，讓工作可以暫停、按階段貢獻成果，再從原位置繼續。目前操作手冊使用 Codex 示範這套流程。
 
 ### 日常可以如何使用
+
+完整建制使用有版本的 `complete_v1` 清單：穩定專案身分、已理解的選定來源、帶逐視窗消費證據的目前工作台、首次完整治理整輪，以及真實的獨立恢復演練。舊清單繼續可讀，但不證明新增能力已經完成。日常節奏包含返回原治理視窗的一次報告與一至兩次吸收時段；設定、自然觸發、AI 執行及報告送達分別驗證。
 
 透過三步對話接入既有 Codex 專案：建立或重用治理視窗，繼承選定分工與決定，由使用者選擇是否兼任專案協調。標準設定包含持續工作視窗的真實目錄與 Git 關聯、原生 MCP 驗收、本機治理 Git 儲存、返回原治理視窗的排程任務，以及官方發行檢查。僅作歷史來源的對話不必變成活躍工作區。一般檔案檢查點用於接續與恢復，不替代標準 Git 設定。
 
@@ -113,6 +125,9 @@ MCP 要在你使用的 AI 宿主中接通，並實際呼叫工具確認。CLI �
 
 ### 使用時需要知道的範圍
 
+- 完整專案恢復與檔案檢查點是不同能力。恢復集封存一致的本機狀態、參照物件以及選定 Git 歷史、refs、index、工作修改與素材；缺少的選定依賴會明確列出。獨立恢復副本保留專案身分、取得新副本身分並從 standby 開始，舊執行計畫保留為不可重放歷史。宿主設定隔離後按新位置重新接入；啟用新寫入點需要明確移交，工具不能遠端關閉舊電腦。
+- 私有 Git 發布計畫固定精確的 remote/ref/commit，重試前先核對實際效果。恢復集複製會核對獨立本機目的地的選定載荷；這些結果各自不能證明網路磁碟上傳、帳號存取或真實雙電腦恢復。
+- 工作台執行會分別處理各工作區的發布衝突；計畫階段仍整體驗證本批輸入。單台無法規劃時，應為可獨立推進的工作區另建精確計畫。
 - 每個治理範圍使用一個本機控制庫和一條接收基線。工具鎖只協調工具自身操作；更新期間，其他編輯器和 Git 指令不要寫入同一接收或更新工作區，獨立工作區可以繼續各自任務。
 - 檢查點最多選擇 500 條路徑，單個儲存物件上限 32 MiB，總量上限 128 MiB。較大檔案可以記錄材料參照；參照儲存位置，不等於備份了檔案內容。
 - 從檢查點恢復時，會在明確標示的合成 Git 基線上重建選定的檔案層。需要完整儲存庫歷史時，也要保留 Git 備份。

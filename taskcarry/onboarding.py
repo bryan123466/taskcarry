@@ -68,6 +68,15 @@ class Onboarding(Core):
         return ['scope', 'runtime', 'local_git', 'update_check', 'schedule_config'] + [
             'window:' + item['thread_id'] for item in scope['windows'] if item['mode'] == 'active']
 
+    def _optional_keys(self, scope):
+        return ['schedule_trigger', 'remote', 'cloud']
+
+    def _verify_item_binding(self, prior, item):
+        if item['key'] == 'schedule_trigger':
+            cfg = prior['items'].get('schedule_config', {}).get('evidence', {})
+            if cfg.get('automation_id') != item['evidence']['automation_id']:
+                raise GovernanceError('ONBOARDING_BINDING', 'Natural trigger must match the configured automation.')
+
     def _verify(self, scope, key, evidence):
         if not isinstance(evidence, dict) or len(json.dumps(evidence)) > 65536:
             raise GovernanceError('ONBOARDING_EVIDENCE', 'Use bounded structured evidence.')
@@ -165,9 +174,10 @@ class Onboarding(Core):
                 continue
             try:
                 self._verify(scope, key, item['evidence'])
-            except GovernanceError as error:
+            except (GovernanceError, OSError) as error:
                 pending.append(key)
-                invalid[key] = {'code': error.code, 'message': error.message}
+                invalid[key] = {'code': getattr(error, 'code', 'ONBOARDING_EVIDENCE_UNAVAILABLE'),
+                                'message': getattr(error, 'message', str(error))}
         trigger = items.get('schedule_trigger', {})
         config = items.get('schedule_config', {})
         natural = (trigger.get('status') == 'verified' and config.get('status') == 'verified'
@@ -209,15 +219,12 @@ class Onboarding(Core):
                     raise GovernanceError('ONBOARDING_UNKNOWN', 'Start this onboarding first.')
                 if not isinstance(item, dict) or set(item) != {'key', 'status', 'evidence', 'next_step'}:
                     raise GovernanceError('ONBOARDING_EVIDENCE', 'Provide key, status, evidence and next_step.')
-                allowed = self._keys(prior['scope']) + ['schedule_trigger', 'remote', 'cloud']
+                allowed = self._keys(prior['scope']) + self._optional_keys(prior['scope'])
                 if item['key'] not in allowed or item['status'] not in ('verified', 'pending', 'declined'):
                     raise GovernanceError('ONBOARDING_EVIDENCE', 'Unknown item or status.')
                 if item['status'] == 'verified':
                     self._verify(prior['scope'], item['key'], item['evidence'])
-                    if item['key'] == 'schedule_trigger':
-                        cfg = prior['items'].get('schedule_config', {}).get('evidence', {})
-                        if cfg.get('automation_id') != item['evidence']['automation_id']:
-                            raise GovernanceError('ONBOARDING_BINDING', 'Natural trigger must match the configured automation.')
+                    self._verify_item_binding(prior, item)
                 else:
                     if not isinstance(item['evidence'], dict):
                         raise GovernanceError('ONBOARDING_EVIDENCE', 'Use a structured evidence object, including pending items.')

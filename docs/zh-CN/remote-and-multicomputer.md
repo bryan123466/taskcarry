@@ -4,7 +4,7 @@
 
 [返回操作手册](operation-manual.md) · [English](../en/remote-and-multicomputer.md) · [繁體中文](../zh-TW/remote-and-multicomputer.md) · [命令参考](../COMMANDS.md)
 
-本地治理 Git 保存、原治理窗口的定时任务和官方更新检查属于标准接入。下述私有远端与多电脑流程是按需扩展，尚未经过两台实体电脑的端到端验证；它组合 Git 操作与现有本地 TaskCarry 接口，没有新增跨机同步或自动恢复能力。
+本地治理 Git 保存、原治理窗口的定时任务和官方更新检查属于标准接入。下述私有远端与多电脑流程是按需扩展，尚未经过两台实体电脑的端到端验证；它组合 Git 操作与现有本地 TaskCarry 接口，已提供所选本地恢复集与 standby 移交能力；远端传输和真实第二宿主验收仍分别核对。
 
 标准本地保存使用明确文件清单，保全原 Git 暂存区与未完成工作，只有选定内容变化才形成提交；排除运行中的 `.taskcarry` 数据库、runtime、下载包和凭据。持续工作的窗口保留真实任务与工作区关联，提交署名或对话 ID 本身不能证明这些关联。原资料可留在原处，大型外部产物以版本化引用和分别核对的存储覆盖衔接。
 
@@ -98,87 +98,37 @@ git -C "<MEMORY_WORKSPACE>" commit -m "Update current project handoff"
 
 > 请为本项目维护一份精简、可接续的 project-memory/current.md。基于已授权的任务记录、提交和明确来源，写清当前事实、有效决定、暂停节点与下一步；旧决定只保留必要沿革，不把没有变化的任务列成新增积压。先检查现有文件及暂存区，只交付这次真实变化。不要导出私人聊天、凭据或整个 .taskcarry。按本地 TaskCarry 流程提交接收；只有我已授权上传的资料才推送到指定私有远端。
 
-### 4.4 做一份可核对的一致备份
+### 4.4 生成有明确覆盖范围的恢复集
 
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
+Core 可以从可信发行包重装；项目记忆不能靠重新下载恢复。治理先列清单，再调用 `recovery backup_plan` / `backup_execute`，保存数据库一致快照及引用对象，并选择实际需要的工作区与材料。源文件改变时保留具体差异，不能把跨时点的内容说成同一快照。
 
-**先停止这一个项目的写入，再备份同一时点。** 当前 TaskCarry 没有跨仓库、SQLite 与文件对象的一键一致备份命令。操作顺序：
+| 覆盖对象 | 应记录和验证的内容 |
+|---|---|
+| 项目状态 | `.taskcarry` 数据库的一致快照、实际引用对象、项目 source 身份和副本身份。读取副本不得被当作另一位活跃治理写入者。 |
+| Git 工作区 | 选定 refs 和可达提交历史、当前 HEAD、index、工作区修改及显式选择的未跟踪文件。只推送 commit 不会保存这些全部层次。 |
+| 普通文件与大材料 | 精确路径、内容哈希、大小和恢复目标；未纳入的材料或无法取得的来源必须列为排除/缺口。 |
+| 能力层 | 正在使用的规则、四 Skills 的精确版本及自定义内容、兼容 Core 版本与包哈希、宿主能力清单。安装目录不是用户记忆本身。 |
+| 本机接入材料 | 保留可重建的绑定说明；恢复后重新生成解释器路径、MCP 与工作台入口。凭证、登录和信任另行处理。 |
 
-1. 让相关任务保存文件。对有意义的未完成内容创建精确检查点，记录 `next_step`；检查点不是交付，也不要求把未完成工作提交为成果。当前检查点最多选择 500 个路径，单个文件对象上限 32 MiB、各层合计上限 128 MiB；超出或未选中的资料另行备份。
-2. 等当前 TaskCarry 操作结束，暂停此项目的定时写入与治理调用，保证备份期间没有 CLI/MCP/其他程序改动其 `.taskcarry`。需要捕获的 Git 工作区也暂停修改。保留未完成操作的真实状态，不为备份伪造终态或删除锁文件。
-3. 新建一个**不在源仓库、工作区或治理目录内部**的备份目录。保存工具版本、各工作区路径/分支/HEAD、检查点 ID、`status`、备份时间和暂停范围。
-4. 用 Git bundle 保存每个独立 Git 仓库的可达提交与引用；共享同一 Git 公共目录的 worktree 可由同一 bundle 覆盖相应引用。
+治理应主动选择可版本化的项目记忆和必要能力材料作为 payload；工具不会把整个电脑、聊天平台或所有忽略文件自动打包。保存编辑器缓冲后再纳入文件。恢复集含私有项目数据，不能提交公共仓库。
 
-```text
-git -C "<REPOSITORY>" bundle create "<SNAPSHOT>/project.bundle" --all
-git -C "<REPOSITORY>" bundle verify "<SNAPSHOT>/project.bundle"
-git -C "<REPOSITORY>" bundle list-heads "<SNAPSHOT>/project.bundle"
-```
+本地 `verify` 核对清单和实际对象。需要网盘或私有存储时，上传封存的静态恢复集，下载到独立位置再核对同一清单哈希。写入本地同步目录、看到文件名或收到上传指令成功，都不是下载与恢复证明。不要同步写入活跃 SQLite 或共享 `.git`；加密密钥与加密备份分开保管。
 
-Bundle 可用于离线传递提交。它不是工作目录、暂存区、未跟踪文件、配置和所有本地恢复信息的完整备份；这些需要检查点或另外保存。[Git bundle 官方说明](https://git-scm.com/docs/git-bundle)
+可以直接向治理说：
 
-5. 在所有相关写入仍停止时，完整复制治理目录中的 `.taskcarry`，包括 `state.sqlite3`、存在的 WAL/SHM 配套文件、`objects` 和其他状态文件。不要只挑数据库主文件，不要移动原件。另存尚未被检查点覆盖、确实需要保留的文件，以及经检查的项目配置；不包含登录令牌。
+> 请为当前项目准备明确恢复计划。包含必要治理状态与对象、选定 Git refs/历史/index/WIP、项目记忆、规则与 Skills 版本及必要材料，列明排除项。核对范围后生成本地恢复集并验证，在独立目录做恢复演练，保留原目录和原任务。副本保持 standby。若我已启用异地存储，再分别提供上传、重新下载哈希和恢复证据；未授权的传输不要执行。
 
-PowerShell 7 的冷备份示例（`<SNAPSHOT>` 是已经新建的空目录）：
+### 4.5 独立恢复，验证后再移交唯一写入权
 
-```powershell
-Copy-Item -LiteralPath "<A_CONTROL>/.taskcarry" -Destination "<SNAPSHOT>/.taskcarry" -Recurse -ErrorAction Stop
-Get-ChildItem -LiteralPath "<SNAPSHOT>/.taskcarry" -Force
-```
+`recovery restore_plan` / `restore_execute` 在空的独立目标恢复所选真实 Git 历史及分层工作、状态和材料。副本保留逻辑项目身份，获得明确副本身份，并默认处于 **standby**。路径映射与旧操作作为接续证据处理，不能在新位置重放旧接收/采用计划。
 
-其他系统可在同样停写条件下用本地文件复制工具，保留隐藏文件和完整目录结构。不要让同步盘在后台复制**运行中的** `.taskcarry` 或 `.git`。SQLite 在线备份 API 能处理数据库快照，但单独快照数据库仍不等于同时一致地保存 TaskCarry 的文件对象和 Git 状态。[SQLite 备份说明](https://www.sqlite.org/backup.html)
+1. 核对恢复集来源、清单哈希、精确覆盖和兼容版本；保留原备份不变。
+2. 在独立目录恢复并核对任务、对象、选定 Git refs/HEAD/index/WIP 和材料。缺失内容写入报告，不能称整台电脑已恢复。
+3. 根据新机器实际目录与解释器重新生成连接，保留专业配置。治理和工作窗口分别原生调用 doctor/status；核对项目/副本身份、任务与 checkpoint。本机文件恢复不证明宿主已连接。
+4. 需要接管时明确停止并隔离旧写入者。准备 `activation_plan`，核对原副本、新副本、交接授权和新宿主证据，再执行 `activate`。旧主机未确认停写时，副本继续 standby。
+5. 新写入点启用后再检查原生调度与送达；旧主机回来时作为协作端处理其独立成果，不自行恢复旧治理写入或旧调度。
 
-6. 核对文件清单、大小与 SHA-256；检查数据库副本及代表性检查点能否读取。至少确认 bundle 校验通过、对象目录已保存、没有复制错误，再恢复原项目正常运行。把完成的备份归档上传到所选存储，并在另一份下载副本上核对哈希，才称“异地备份已验证”。目录名或同步图标不构成这项证据。
-
-> 请给本项目做一次停写期间的一致备份到 [新备份目录]。先保存选定 WIP 检查点，等待当前治理动作结束，再协调暂停相关写入。保存每个独立仓库的 Git bundle、完整 .taskcarry、未被检查点覆盖的具名必要文件、版本与路径清单。只对副本做验证，不删除原文件或恢复用 stash。记录哪些内容不在备份中。完成并核验后恢复刚才暂停的本项目运行设置，不改变其他项目。
-
-### 4.5 恢复时分成“找回资料”与“重新启用治理”
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
-
-**不要把旧 `.taskcarry` 复制到新电脑后直接执行旧接收/采用计划。** 工作区身份包含绝对路径、Git 公共目录和分支；集成基线还绑定原身份。工具没有完整的跨机状态迁移 API。相同目录名字不代表同一现场。
-
-恢复步骤：
-
-1. 保持备份原件不动，在新位置创建恢复工作副本。确认旧主机不会同时继续写主线；若无法确认，先只恢复资料和独立任务分支，不启用第二个主线写入者。
-2. 从私有远端或 bundle 恢复到**不存在的新目录**：
-
-```text
-git clone "<PRIVATE_REPOSITORY_URL>" "<NEW_REPOSITORY>"
-```
-
-或离线恢复明确的分支：
-
-```text
-git clone --branch "<SAVED_BRANCH>" "<SNAPSHOT>/project.bundle" "<NEW_REPOSITORY>"
-```
-
-从 bundle 克隆时 `origin` 指向 bundle；之后若要上传，先明确配置正确私有远端，不能把它当成已连接在线仓库。
-
-3. 需要找回检查点时，把备份 `.taskcarry` **复制**到独立的 `<RECOVERY_CONTROL>/.taskcarry`，只把它当恢复工具的工作副本。使用与备份兼容的 TaskCarry 版本读取 `status`，核对检查点。创建 `restore.json`：
-
-```json
-{"checkpoint_id":"<SAVED_CHECKPOINT_ID>","destination":"<NEW_INDEPENDENT_RESTORED_FILES_DIRECTORY>"}
-```
-
-```text
-python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" status
-python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
-```
-
-目标必须为空或不存在，且独立于原工作区与恢复治理目录。`restore` 只恢复检查点选中的文件；Git 检查点会建立**合成恢复基线**以呈现原 HEAD/暂存/工作区层次，保留原 HEAD 的来源记录，但不是还原完整原仓库历史。它会在恢复工作副本登记恢复事件，不修改备份原件。先比对这些文件与克隆出的真实项目，再在具名任务分支中恢复工作，不能把合成提交冒充原始提交。
-
-4. 为继续工作创建新的 `<NEW_CONTROL>`，重新初始化、登记新路径的接收基线和工作区。根据原 `status`、成果哈希、远端/本地提交证据重新确认任务当前节点。旧收据作为来源保留，旧未完成操作逐项对账；已经实际发生的效果不要再执行。
-5. 重新生成本机 Skills/MCP 配置并做 `doctor`/`status` 检查。旧 MCP 片段含原 Python 和项目绝对路径，不直接复用。当前路径重绑定入口也不能绕过待处理阶段、未完操作或基线身份限制。
-
-```text
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" init
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" workspace --input new-baseline.json
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" doctor
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" status
-```
-
-`new-baseline.json` 示例：`{"name":"baseline","path":"<NEW_BASELINE_ABSOLUTE_PATH>"}`。其余登记与接入见[操作手册](operation-manual.md)。保留恢复记录里的旧 ID 与新登记 ID 的对应关系；这是一项明确的人工/Agent 辅助重建，不能称为自动延续了旧数据库的完整事务历史。
+工具核对明确交接声明及原生证据引用，不能远程证明旧机器已经停机，也不提供跨主机分布式锁。需要的账号权限、主线保护和实际停写由环境执行。若仅需找回一个检查点的选定文件，旧 `restore` 仍可使用；它的合成还原基线不同于 `recovery` 保存的原 Git 历史，二者不可冒充。
 
 <a id="multi-computer"></a>
 
@@ -362,7 +312,7 @@ git -C "<B_REPOSITORY>" worktree add -b codex/form-export-next "<B_NEXT_WORKSPAC
 | 两台电脑推进互不重叠的任务 | 各自分支和工作区，A 串行核对并推进接收基线 |
 | 同一任务拆成两个支线 | 明确接口、路径和集成顺序；同名任务并不能消除内容冲突 |
 | A 暂时离线，B 想继续工作 | B 可继续授权的任务分支，保留检查点；主线接收等待 A 或明确换手 |
-| A 无法恢复，需要 B 接管主线 | 明确停止/隔离旧主线写入权，按 4.5 恢复资料与新建治理；对账后让 B 成为唯一集成主机 |
+| A 无法恢复，需要 B 接管主线 | 明确停止/隔离旧主线写入权，按 4.5 独立恢复 standby 副本并完成明确移交；对账后让 B 成为唯一集成主机 |
 | A 恢复上线 | 先作为普通协作主机读取当前远端和接管记录，不恢复旧定时写入；核对其未推送成果后按任务分支交接 |
 | 推送被拒、源提交缺失、清单不符或内容冲突 | 保留成果与原始证据，解决具体差异；不强推、不改 hash 造成功、不把旧操作盲目重放 |
 

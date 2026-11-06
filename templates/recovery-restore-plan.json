@@ -1,0 +1,1 @@
+{"action":"restore_plan","manifest":"./reviewed-recovery-set/manifest.json","expected_sha256":"replace-with-trusted-manifest-sha256","destination":"./independent-standby-recovery"}

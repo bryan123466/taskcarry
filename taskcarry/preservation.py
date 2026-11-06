@@ -15,6 +15,7 @@ import tempfile
 from .core import Core, _id, _linked, digest_bytes, read_file_bytes, validate_relative_path
 from .gitops import repo, identity, pathsafe
 from .store import GovernanceError, now
+from .path_batches import path_batches
 
 
 def _git(root, *args, data=None, index=None, author=None, check=True):
@@ -94,15 +95,18 @@ class Preservation(Core):
     def _selection_clean(self, root, head, paths):
         # A saved stage has distinct intent from unstaged working content. Do not
         # silently consume it, even if only the same selected path is involved.
-        if head:
-            different = _git(root, 'diff', '--cached', '--quiet', head, '--', *paths, check=False)
-            if different.returncode != 0:
-                raise GovernanceError('PRESERVE_SELECTED_STAGED', 'Preserve or explicitly deliver selected staged work separately.')
-        elif _git(root, 'ls-files', '--stage', '-z', '--', *paths).stdout:
-            raise GovernanceError('PRESERVE_SELECTED_STAGED', 'Selected files are already staged.')
-        for line in _git(root, 'ls-files', '-v', '-z', '--', *paths).stdout.split(b'\0'):
-            if line and not line.startswith(b'H '):
-                raise GovernanceError('PRESERVE_INDEX_FLAGS', 'Selected skip-worktree/assume-unchanged paths need review.')
+        for selected in path_batches(paths):
+            if head:
+                different = _git(root, 'diff', '--cached', '--quiet', head, '--', *selected, check=False)
+                if different.returncode == 1:
+                    raise GovernanceError('PRESERVE_SELECTED_STAGED', 'Preserve or explicitly deliver selected staged work separately.')
+                if different.returncode:
+                    raise GovernanceError('PRESERVE_GIT_FAILED', different.stderr.decode('utf-8', 'replace'))
+            elif _git(root, 'ls-files', '--stage', '-z', '--', *selected).stdout:
+                raise GovernanceError('PRESERVE_SELECTED_STAGED', 'Selected files are already staged.')
+            for line in _git(root, 'ls-files', '-v', '-z', '--', *selected).stdout.split(b'\0'):
+                if line and not line.startswith(b'H '):
+                    raise GovernanceError('PRESERVE_INDEX_FLAGS', 'Selected skip-worktree/assume-unchanged paths need review.')
 
     def preserve(self, action='plan', repository=None, paths=None, message=None, plan_id=None):
         if action not in ('plan', 'execute', 'status'):

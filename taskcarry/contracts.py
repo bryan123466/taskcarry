@@ -13,6 +13,7 @@ PATHS = {"type": "array", "items": string("Exact workspace-relative file path"),
 BOOL = {"type": "boolean"}
 OPEN_OBJECT = {"type": "object", "additionalProperties": True}
 SCHEMAS = {
+    "identity": schema({"action": string(enum=["status", "plan", "execute"]), "plan_id": string()}),
     "onboarding": schema({"onboarding_id": string(), "action": string(enum=["start", "update", "status"]),
                           "scope": schema({"governance_thread": string(), "channel": string(enum=["rc", "stable"]),
                                            "schedule": schema({"time": string(), "timezone": string()}, ["time", "timezone"]),
@@ -74,6 +75,25 @@ SCHEMAS = {
 
 from .adapter_contracts import SCHEMAS as ADAPTER_SCHEMAS
 SCHEMAS.update(ADAPTER_SCHEMAS)
+from .cycle_contracts import SCHEMAS as CYCLE_SCHEMAS
+from .workbench_contracts import SCHEMAS as WORKBENCH_SCHEMAS
+from .recovery_contracts import SCHEMAS as RECOVERY_SCHEMAS
+SCHEMAS.update(CYCLE_SCHEMAS)
+SCHEMAS.update(WORKBENCH_SCHEMAS)
+SCHEMAS.update(RECOVERY_SCHEMAS)
+from .transfer_contracts import SCHEMAS as TRANSFER_SCHEMAS
+SCHEMAS.update(TRANSFER_SCHEMAS)
+
+# Missing profile retains the legacy receipt contract. New complete setup must
+# explicitly choose its versioned coverage rather than relabel old acceptance.
+_scope_properties = SCHEMAS['onboarding']['properties']['scope']['properties']
+_scope_properties['profile'] = string(enum=['complete_v1'])
+_schedule = _scope_properties['schedule']
+_schedule['required'] = ['timezone']
+_schedule['properties']['slots'] = {
+    'type': 'array', 'minItems': 2, 'maxItems': 3,
+    'items': schema({'slot_id': string(), 'purpose': string(enum=['report', 'absorb']), 'time': string()},
+                    ['slot_id', 'purpose', 'time'])}
 def validate(value, definition, location="arguments"):
     """Validate the deliberately small schema subset used by these public tools."""
     kind = definition.get("type")

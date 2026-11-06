@@ -106,6 +106,25 @@ class Store:
             connection.close()
 
     @contextmanager
+    def recovery_transition(self):
+        """Internal scoped write bypass for a verified restore/activation only."""
+        previous = getattr(self._local, 'recovery_transition', False)
+        self._local.recovery_transition = True
+        try:
+            yield self
+        finally:
+            self._local.recovery_transition = previous
+
+    def assert_writable(self):
+        if getattr(self._local, 'recovery_transition', False) or not self.path.exists():
+            return
+        config = self.get('config', 'project') or {}
+        if config.get('recovery_writer_state') == 'standby':
+            raise GovernanceError('RECOVERY_STANDBY',
+                                  'This restored replica is read-only until an explicit verified writer handoff.',
+                                  {'restore_id': config.get('recovery_restore_id')})
+
+    @contextmanager
     def transaction(self):
         """Atomically publish related local records and events.
 
@@ -114,6 +133,7 @@ class Store:
         are savepoints, so a caught inner failure cannot publish partial rows.
         """
         with self.guard():
+            self.assert_writable()
             current = getattr(self._local, 'connection', None)
             if current is not None:
                 depth = getattr(self._local, 'savepoint_depth', 0) + 1
@@ -194,6 +214,7 @@ class Store:
     def put(self, collection, key, value):
         serialized = json.dumps(value, ensure_ascii=False, sort_keys=True, allow_nan=False)
         with self.guard(), self._connect() as db:
+            self.assert_writable()
             if not db.in_transaction:
                 db.execute('BEGIN IMMEDIATE')
             projected = self._projection_ready(db)
@@ -429,6 +450,7 @@ class Store:
 
     def event(self, kind, payload):
         with self.guard(), self._connect() as db:
+            self.assert_writable()
             cursor = db.execute('INSERT INTO events(created_at,kind,payload) VALUES(?,?,?)',
                                 (now(), kind, json.dumps(payload, ensure_ascii=False, sort_keys=True, allow_nan=False)))
             return cursor.lastrowid

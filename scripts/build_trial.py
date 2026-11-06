@@ -49,6 +49,11 @@ REQUIRED.update({"examples/quality_forms/fixture/requirements.md",
                  "examples/quality_forms/fixture/quality/corrective-actions.csv",
                  "examples/quality_forms/fixture/review/review-checklist.md"})
 REQUIRED.update({"examples/governed-project/README.md", "examples/governed-project/scenario.json"})
+REQUIRED.update({"docs/GOVERNANCE_API.md", "examples/complete-governance/README.md",
+                 "examples/complete-governance/scenario.json"})
+REQUIRED.update({"examples/complete-governance/fixture/" + name for name in
+                 ("PROTOCOL.md", "normal_frames.txt", "expected.csv", "replay.py")})
+REQUIRED.update({f"docs/{language}/user-feedback-examples.md" for language in ("en", "zh-CN", "zh-TW")})
 
 
 def sha(data):

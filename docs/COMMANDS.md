@@ -1,5 +1,9 @@
 # CLI and MCP contract / 命令与 MCP 合同
 
+The [complete governance API](GOVERNANCE_API.md) documents `identity`, `facts`, `source_scan`, `cycle`, `workbench`, `recovery`, `transfer` and the versioned `complete_v1` onboarding profile. Existing unversioned onboarding examples below remain the legacy contract; new full setup uses the [complete scope fixture](../examples/complete-governance/scenario.json).
+
+完整治理新增接口、三步完整验收字段及恢复边界见[专用参考](GOVERNANCE_API.md)。下方旧版单时段接入示例保留兼容合同；新接入使用 `complete_v1`，不把旧验收直接改称完整闭环。
+
 All ordinary actions route through one dispatch API. Use JSON files to avoid shell-dependent quoting. 所有普通动作调用同一个分发 API；使用 JSON 文件避免不同终端的引号差异。
 
 ```text

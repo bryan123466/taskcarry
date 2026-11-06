@@ -15,6 +15,7 @@ import subprocess
 import uuid
 
 from .store import Store, GovernanceError, now, TERMINAL_STATES
+from .path_batches import path_batches
 
 MAX_FILE_BYTES = 32 * 1024 * 1024
 MAX_CHECKPOINT_BYTES = 128 * 1024 * 1024
@@ -166,7 +167,7 @@ class Core:
 
     def source(self):
         from .identification import source
-        return source(self.root)
+        return source(self.root, self.store.get('config', 'project'))
 
     def context(self, task_id, limit=20, cursor=None, previous_fingerprint=None,
                 issue_ids=None, fix_ids=None):
@@ -185,7 +186,11 @@ class Core:
                 if config is not None and (type(config.get('schema_version')) is not int or config.get('schema_version') != 1):
                     raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'Initialization cannot downgrade existing project state.')
                 if config is None:
-                    config = {'name': name, 'schema_version': 1, 'created_at': now(), 'synthetic': False}
+                    from .identification import source
+                    config = {'name': name, 'schema_version': 1, 'created_at': now(), 'synthetic': False,
+                              'project_id': 'project-' + uuid.uuid4().hex,
+                              'replica_id': 'replica-' + uuid.uuid4().hex,
+                              'source_aliases': [source(store.root)['source_id']]}
                     store.put('config', 'project', config)
                     store.put('experience', 'receipt-recovery-v1', {
                         'rule_id': 'receipt-recovery-v1', 'code': 'EFFECT_PRESENT_RECEIPT_MISSING',
@@ -482,7 +487,10 @@ class Core:
             if is_git and Path(git(workspace, 'rev-parse', '--show-toplevel').stdout.decode().strip()).resolve() != workspace:
                 raise GovernanceError('GIT_WORKSPACE_ROOT', 'Use the Git worktree root and paths relative to that root.')
             head = git(workspace, 'rev-parse', '--verify', 'HEAD', check=False).stdout.decode().strip() if is_git else None
-            index_before = git(workspace, 'ls-files', '--stage', '-z', '--', *paths).stdout if is_git else b''
+            def selected_index():
+                return b''.join(git(workspace, 'ls-files', '--stage', '-z', '--', *batch).stdout
+                                for batch in path_batches(paths))
+            index_before = selected_index() if is_git else b''
             files, total = [], 0
             index = {}
             for entry in index_before.split(b'\x00'):
@@ -515,7 +523,7 @@ class Core:
                     raise GovernanceError('CHECKPOINT_TOO_LARGE', 'The checkpoint exceeds its total snapshot limit.')
                 files.append(record)
             if is_git:
-                if index_before != git(workspace, 'ls-files', '--stage', '-z', '--', *paths).stdout or head != git(workspace, 'rev-parse', '--verify', 'HEAD', check=False).stdout.decode().strip():
+                if index_before != selected_index() or head != git(workspace, 'rev-parse', '--verify', 'HEAD', check=False).stdout.decode().strip():
                     raise GovernanceError('SOURCE_CHANGED', 'Git HEAD or selected index entries changed during capture.')
             for record in files:
                 source = validate_relative_path(workspace, record['path'])

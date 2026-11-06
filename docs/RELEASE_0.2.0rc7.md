@@ -1,10 +1,10 @@
 # TaskCarry 0.2.0rc7 — complete candidate / 完整候选 / 完整候選
 
-[Product entry / 使用入口 / 使用入口](../START_HERE.md) · [Capabilities and limits / 能力范围 / 能力範圍](RELEASE_BOUNDARIES.md) · [Validation / 验证 / 驗證](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
+[Product entry / 使用入口 / 使用入口](../START_HERE.md) · [Capabilities and limits / 能力范围 / 能力範圍](RELEASE_BOUNDARIES.md) · [Source validation / 源码验证 / 原始碼驗證](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
 
 ## 简体中文
 
-本页描述相对已发布 RC6 的完整 RC7 候选，包含此前整理的安装／更新双入口及本次治理内核增强。**本候选尚未公开发布，也未标为正式稳定版。** 具体源码、包和验证对象以最终复核报告为准；预定发行链接不表示已经能够下载。
+本页描述相对 RC6 的完整 RC7 内容，包含安装／更新双入口与治理内核增强。RC 表示供先行验证的发行候选版；实际可用下载以发行页的附件为准。源码提交、包哈希和各层验证结果与具体候选一起提供，安装与更新入口不要求先阅读版本历史。
 
 ### 新用户与已有用户分别怎么用
 
@@ -25,6 +25,17 @@
 9. **区分公共内核、通用方法与用户规则。** 新增治理运行身份与明确规则文件的核对记录，区分当前工具包、Skills、项目自定规则及来源。公共方法更新不覆盖用户决定；记录了修正版不等于用户已经安装。四项 Skills 统一采用“先核实际效果、定位原问题、验证修正、记录采用、续办原操作”的方法。
 10. **重新整理三语文档与包内资源。** 主手册保持三步、一条主提示词、完整交互示例和完成标准；手动命令与异常后备独立，已有用户更新独立。主入口、README、操作手册、四 Skills、示例及构建允许清单保持一致。私有远端和网盘按需配置，原有多电脑参考保留，未将其扩展为自动跨机治理。
 
+### 完整治理能力的进一步补齐
+
+11. **项目身份可以随恢复保留。** 新项目使用稳定项目身份和独立副本身份；旧项目经过明确计划才采用稳定身份，并保留原来源别名。只读查询不会暗中迁移，两个目录里同名任务不会被自动合并。
+12. **从记录进度扩展到可追溯的项目理解。** 事实、有效决定、材料和关系保留来源、修订、历史和独立的 AI 判断。限定资料扫描有条数和目录预算，可从游标接续；来源已列出、已理解、已发布和已消费分别记录。更正不抹去原决定，也不把安静历史变成积压。
+13. **治理整轮可以安全接续。** 一轮工作冻结负责者与资源范围，保存预期效果、实际结果、健康证据和下一步。进程锁与跨调用持久预留分别说明；崩溃后只续原轮次的缺步，不另造重复写入者。问题提醒按真实送达日期计数，默认两次不同日期后停止重复追问。
+14. **共同规则会送到工作台。** 版本化 view 和 current 入口经过精确计划发布，保全其他配置及专业指令。实际消费另留证；错误窗口、过期来源、缺失入口或未完成回执不能算接入完成。业务代码仍按实际依赖采用，某个工作台冲突不要求全部重来。
+15. **增加选定范围的完整恢复集。** 除文件检查点外，封存治理数据库及引用对象、选定 Git 历史/ref、暂存/工作文件、明确选定的新文件和材料。缺少工作台、材料实体或历史依赖会列为缺项。恢复到独立目录后核对效果，保留项目沿革并重绑路径；旧计划/轮次归为不可执行历史。旧宿主入口保留原字节并隔离，副本默认 standby，单写者交接需明确核对。
+16. **私有传输有自己的计划和回执。** 精确 Git ref 采用预期旧值检查；传输异常先读取远端实际效果，已经完成的只补回执，不改旧 tag。恢复集可封存复制到明确的本地同步目录；本地字节核对、云端上传、独立取回和恢复分别报告。
+17. **完整建制采用版本化验收。** 新清单覆盖理解来源、工作台消费、首次整轮和独立恢复，并配置一个报告时段及一到两个吸收时段。配置、自然触发、原聊天 AI 执行和实际报告送达各有依据。旧单时段接入回执保留旧范围，不会自动获得新增能力的验收结论。
+18. **修正大量精确路径在 Windows 保存失败的问题。** 选定路径按有界批次交给 Git，避免命令行超长；仍保留原选择范围，能发现末批暂存变更，不吞并其他暂存工作。
+
 ### 必要操作与兼容说明
 
 - 新用户按主提示词完成标准本地 Git、所选专业窗口接入、原治理窗口调度和官方更新检查。需要信任、重载或宿主确认时，助手只给当前操作。
@@ -34,13 +45,13 @@
 
 ### 验证与仍需如实报告的限制
 
-源码回归、合成资料、实际构建包、独立 App Server／stdio、原生 MCP 和自然定时触发分别列证据。本页不提供未形成的最终测试数字或包哈希。**本候选的原生 MCP 接入与自然 heartbeat 仍等待相应实际验收**，不能用命令行成功代替；最终状态由复核报告更新。
+源码回归、合成资料、实际构建包、独立 App Server／stdio、原生 MCP 和自然定时触发分别列证据。测试数字、精确包哈希与宿主覆盖见对应候选的验证报告；不能用命令行成功代替原生窗口或自然定时验收，也不能把另一提交的回执转记为本次通过。
 
-Codex 读取适配器只声明已核对协议范围；系统配置、索引完整性和实际宿主能力可能影响接入。正式更新查询的附件元数据校验不等于下载全部包的字节校验。完整治理库跨机迁移、分布式写入、任意云盘接口和通用自动回退引擎不在本次范围。公开发行、用户安装和实际采用分别确认。
+Codex 读取适配器只声明已核对协议范围；系统配置、索引完整性和实际宿主能力可能影响接入。正式更新查询的附件元数据校验不等于下载全部包的字节校验。选定治理范围的独立恢复由新恢复集提供；真实双电脑端到端验证、分布式活跃数据库写入、任意云盘接口及通用自动回退引擎尚不在已验收范围。公开发行、用户安装和实际采用分别确认。
 
 ## English
 
-This complete RC7 candidate is compared with published RC6. It includes the separate installation/update routes and the governance-core changes below. **It has not been publicly released or designated stable.** The final review identifies the exact source, artifacts and evidence; a planned release link is not an available download.
+This page describes RC7 relative to RC6, including separate installation/update routes and the governance-core changes below. RC means a release candidate for early validation; available downloads are the actual release attachments. Exact source, artifact hashes and evidence accompany each candidate. Installation and updating do not require reading version history first.
 
 ### New and existing users
 
@@ -61,6 +72,17 @@ Existing users return to their original governance chat with the [update prompt]
 9. **Core, maintained methods and custom rules.** Governance identity records distinguish package, Skills, explicit project-rule files and their sources. Shared-method updates preserve user decisions. Recording a fixed version does not prove installation. The four Skills use a common recovery sequence: verify effects, identify the original problem, test the fix, record adoption and continue the original operation.
 10. **Aligned three-language documentation and artifacts.** The main manual presents three steps, one prompt, a complete conversation example and acceptance criteria. Manual commands/fallbacks and existing-user updates are separate. Entrypoints, README files, manuals, four Skills, examples and package allowlists align. Private remotes and cloud storage remain optional; existing multi-computer guidance is retained without claiming automatic cross-host governance.
 
+### Further complete-governance changes
+
+11. **Portable project identity.** New projects have persistent lineage and separate replica IDs. Legacy adoption is explicit and retains prior source aliases; reads do not migrate state or merge equal task names.
+12. **Traceable project understanding.** Facts, decisions, artifacts and relations retain source revisions, history and separately labeled AI judgment. Bounded metadata scanning resumes from its cursor; observed, understood, published and consumed remain distinct.
+13. **Resumable whole cycles.** Owner/resource reservations, effect plans/results, fresh health and next steps survive interruption. Live OS locks and durable cross-call ownership are distinguished. Question limits count actual delivered dates, default two, rather than attempts.
+14. **Current workbench guidance.** Immutable views and exact publication plans preserve professional instructions and other configuration. Separate consumption evidence must match the actual task/chat and fresh sources. Missing entries and unfinished receipts remain pending; code adoption follows real dependencies.
+15. **Selected full recovery sets.** Capture coherent state plus referenced objects, selected Git history/refs, index/WIP, chosen new files and materials. Missing workspaces, artifact payloads and historical dependencies remain explicit. Independent restore rebinds paths, retains inert historical plans/cycles and verifies effects. Host entries retain original bytes in a disabled location; the new replica starts in standby until explicit single-writer handoff.
+16. **Planned private transport.** Single-ref Git publication checks the expected old value; ambiguous transport first reads the remote effect and repairs only missing receipts. Old tags are retained. Sealed media can be copied to selected local sync locations, with local bytes, cloud upload, retrieval and restore reported separately.
+17. **Versioned complete setup.** The new checklist covers understood sources, consumed entries, a first cycle, isolated recovery and one report plus one or two absorption slots. Configuration, natural trigger, original-chat AI execution and actual report delivery stay separate. Legacy single-slot receipts do not attest the expanded profile.
+18. **Large exact path selections on Windows.** Bounded argument batches avoid command-line length failures while retaining the same selection, detecting staged changes in the final batch and preserving unrelated staged work.
+
 ### Required actions and compatibility
 
 New users finish local Git, selected workbench connections, the original governance chat's schedule and official update checks through the guided setup. Host trust, reload or confirmation is requested at the relevant step.
@@ -69,13 +91,13 @@ Existing users review the exact update in their original governance chat, valida
 
 ### Verification and limits
 
-Source regressions, synthetic data, built artifacts, independent App Server/stdio, native MCP and natural scheduled triggers have separate evidence. Final test counts and hashes belong to the exact candidate review. **Native MCP acceptance and a natural heartbeat for this candidate still await their actual verification**; CLI success cannot substitute for either.
+Source regressions, synthetic data, built artifacts, independent App Server/stdio, native MCP and natural scheduled triggers have separate evidence. Test counts, exact hashes and host coverage belong to the matching candidate report. CLI success cannot substitute for native-window or scheduled acceptance, and receipts for another commit do not certify this candidate.
 
-Codex support is limited to the verified protocol and actual host configuration/index availability. Release asset-metadata checks are not full package-byte downloads. Full cross-host state migration, distributed writing, arbitrary cloud-storage integrations and a general automatic rollback engine are outside this candidate. Publication, installation and actual adoption remain distinct.
+Codex support is limited to the verified protocol and actual host configuration/index availability. Release asset-metadata checks are not full package-byte downloads. Selected independent project restoration is supported by the new recovery set. Physical two-computer end-to-end validation, distributed live-database writing, arbitrary cloud-storage integrations and a general automatic rollback engine remain outside verified coverage. Publication, installation and actual adoption remain distinct.
 
 ## 繁體中文
 
-本頁描述相較已發行 RC6 的完整 RC7 候選，包含此前整理的安裝／更新雙入口及本次治理核心增強。**本候選尚未公開發行，也未定為正式穩定版。** 具體原始碼、套件與驗證對象以最終複核報告為準；預定發行連結不表示已經能夠下載。
+本頁描述相較 RC6 的完整 RC7 內容，包含安裝／更新雙入口與治理核心增強。RC 表示供先行驗證的發行候選版；實際可用下載以發行頁附件為準。原始碼提交、套件雜湊及各層驗證結果與具體候選一起提供，安裝與更新入口不要求先閱讀版本歷史。
 
 ### 新使用者與既有使用者分別如何使用
 
@@ -96,6 +118,17 @@ Codex support is limited to the verified protocol and actual host configuration/
 9. **區分公共核心、通用方法與使用者規則。** 新增治理執行身分及明確規則檔案的核對記錄，區分目前工具套件、Skills、專案自訂規則與來源。公共方法更新不覆寫使用者決定；記錄修正版不等於使用者已經安裝。四項 Skills 統一採用「先核實際效果、定位原問題、驗證修正、記錄採用、續辦原操作」的方法。
 10. **重新整理三語文件與套件資源。** 主手冊保持三步、一段主提示詞、完整互動範例與完成標準；手動指令及異常後備獨立，既有使用者更新獨立。主入口、README、操作手冊、四 Skills、範例與建置允許清單一致。私有遠端及網路磁碟按需設定，原有多電腦參考保留，未擴充為自動跨機治理。
 
+### 完整治理能力的進一步補齊
+
+11. **可攜的專案身分。** 新專案具有穩定沿革和獨立副本身分；舊專案經明確計畫採用，保留原來源別名。唯讀查詢不暗中遷移，也不因任務同名而合併。
+12. **可追溯的專案理解。** 事實、決定、材料與關係保留來源修訂、歷史及獨立 AI 判斷。有界中繼資料掃描可接續游標；已觀察、已理解、已發布與已消費分別留證。
+13. **可接續的治理整輪。** 負責者/資源範圍、預期與實際效果、健康時效及下一步持久保留。程序鎖與跨呼叫預留分別說明。問題預設僅按兩個實際送達日期計次，不把重試算成通知。
+14. **更新共同工作台指引。** 不可變 view 與精確發布計畫保全專業指令及其他設定。消費回執須符合原任務/對話和有效來源；缺入口、過期內容及未完回執保留待辦。業務程式碼依實際依賴採用。
+15. **選定範圍的完整恢復集。** 封存一致狀態及引用物件、選定 Git 歷史/ref、暫存/WIP、新檔案和材料。未覆蓋工作台、材料實體及歷史依賴明列缺項。獨立恢復重綁路徑，舊計畫/輪次保留為不可執行歷史。宿主入口保留原位元組並隔離；新副本預設 standby，經明確單寫者交接才能啟用。
+16. **有計畫的私有傳輸。** 單一 Git ref 以預期舊值保護；傳輸不明先讀回真實效果，已完成只補回執，不改舊 tag。封存媒介可複製到選定同步目錄；本機位元組、雲端上傳、獨立取回與恢復分開驗收。
+17. **版本化完整建制驗收。** 新清單涵蓋來源理解、工作台消費、首次整輪、獨立恢復，以及一個報告和一到兩個吸收時段。設定、自然觸發、原聊天 AI 執行與實際送達分別留證。舊單時段回執保留原範圍。
+18. **修正 Windows 大量精確路徑儲存失敗。** Git 參數分批受限，避免命令列過長；仍維持原選擇範圍、偵測末批暫存變更並保全其他暫存工作。
+
 ### 必要操作與相容說明
 
 新使用者透過主提示詞完成標準本機 Git、選定專業視窗接入、原治理視窗排程及官方更新檢查。需要信任、重新載入或宿主確認時，助手只提供目前操作。
@@ -104,6 +137,6 @@ Codex support is limited to the verified protocol and actual host configuration/
 
 ### 驗證與仍須如實回報的限制
 
-原始碼回歸、合成資料、實際建置套件、獨立 App Server／stdio、原生 MCP 及自然排程觸發分別列證據。本頁不提供未形成的最終測試數字或套件雜湊。**本候選原生 MCP 接入與自然 heartbeat 仍等待相應實際驗收**，不能以命令列成功代替；最終狀態由複核報告更新。
+原始碼回歸、合成資料、實際建置套件、獨立 App Server／stdio、原生 MCP 與自然排程觸發分別列證據。測試數字、精確套件雜湊及宿主覆蓋見對應候選的驗證報告；不能以命令列成功代替原生視窗或自然排程驗收，也不能將另一提交的回執轉記為本次通過。
 
-Codex 讀取適配器僅聲明已核對協定範圍；系統設定、索引完整性與實際宿主能力可能影響接入。官方附件中繼資料校驗不等於下載全部套件的位元組校驗。完整治理庫跨機遷移、分散式寫入、任意網路磁碟介面及通用自動回退引擎不在本次範圍。公開發行、使用者安裝與實際採用分別確認。
+Codex 讀取適配器僅聲明已核對協定範圍；系統設定、索引完整性與實際宿主能力可能影響接入。官方附件中繼資料校驗不等於下載全部套件的位元組校驗。選定治理範圍的獨立恢復由新恢復集提供；真實雙電腦端到端驗證、分散式活躍資料庫寫入、任意網路磁碟介面及通用自動回退引擎仍不在已驗收範圍。公開發行、使用者安裝與實際採用分別確認。

@@ -10,8 +10,8 @@ This is a technical reference for the governance assistant. Users can start with
 
 | What changes | How to use it |
 |---|---|
-| Toolkit and project Skills | Install the chosen wheel in the dedicated runtime, preview project setup, then install the managed integration files. Keep the existing control state. |
-| Shared project progress | Read `status` or `agenda` from the same control directory. Reading progress does not require changing a worker's Git branch. |
+| Toolkit and project Skills | Evaluate an exact candidate; within authorization prepare a separate runtime, preview managed/configuration changes, preserve the old environment and verify native host loading. |
+| Shared project progress and rules | Read current Core context/facts, then publish a source-versioned workbench view only where guidance changed. Verify consumption without merging business Git branches. |
 | Accepted code or deliverables needed by a worker | Use an explicit `adopt` plan. This is a business/code update and keeps its existing conflict and WIP checks. |
 
 ## Start a governance turn with current work
@@ -81,13 +81,17 @@ After reviewing the result, use `mode: install` with the same name. The generate
 The same issue found by a local governance turn and by a user report should remain one product change. Fix the shared implementation once, validate it, then record which installations adopted it. A note about a fix and the installed fix are different parts of that work.
 
 
-## Standard local governance and task continuation
+## Complete governance and task continuation
 
-Complete onboarding includes local governance Git, real task/workspace/Git bindings for ongoing windows, native per-window connection checks, original-chat schedule configuration/readback and an official update check. Private remotes and cloud storage remain optional. Historical-source chats do not need active workspaces. Large external files need explicit references and backup coverage; a file reference is not a saved copy.
+The `complete_v1` checklist covers persistent project/replica identity, understood selected sources, real task/workspace/Git bindings, per-chat native connection and exact workbench consumption, local governance Git, the first bounded cycle, an independently verified recovery rehearsal, official update checking, and two or three daily original-chat slots. These are standard setup items. Private remotes, cloud storage and ongoing project coordination remain choices. Historical reference chats need source evidence, not artificial active workspaces.
 
-Use `context` for a selected task. It returns source-qualified identity, task state, latest checkpoint and next step, paginated related records, selected issue/fix references and missing evidence. Same local IDs from different sources stay distinct. Output and record payload reads are bounded; SQL still counts matching index entries, so this is not a fixed latency guarantee. Oversized records are explicitly omitted. Old state needs explicit `upgrade` for the derived task index; reading context never performs that migration. Regular SQLite reads may create coordination sidecars but do not publish records or events.
+Read `context` for the original task and current checkpoint; use `facts` for source-qualified decisions and relationships, keeping evidence distinct from AI judgments. Use `cycle` to retain the exact owner/resources, intended effects, actual receipts, source phases, health and next step. `source_scan` only enumerates authorized local metadata through bounded pages; the host separately reads selected bodies. Details and payloads are centralized in [Governance API](../GOVERNANCE_API.md).
 
-A real project can span several directories, repositories and existing state sources. Keep their routes and local identities; one source still has one receiving baseline. Sharing context or maintaining the package does not merge business Git branches or create a multi-store transaction.
+`workbench` freezes a source-versioned view, plans exact private entry changes and publishes them without modifying Git HEAD/index or unrelated WIP. Verify the current pointer, original task/thread and source freshness; publication, reviewed consumption and native doctor/status are separate evidence. An old view with changed sources is not current truth.
+
+`recovery` captures a selected consistent project set, verifies bytes and restores independently in standby. Its receipt lists `disabled_host_files`: preserved host-configuration evidence is kept out of active restored configuration until regenerated for the new machine. Original project identity and a new replica identity do not authorize two writers. Explicit handoff and actual native verification precede writer activation. [Recovery coverage](remote-and-multicomputer.md) distinguishes local capture, transport and real second-host evidence.
+
+Legacy records remain readable. `identity plan/execute` explicitly adopts a portable project identity while retaining the old source alias; it does not silently merge another project. `upgrade` separately maintains derived indexes. Older acceptance records retain their original profile; a new complete-governance review reuses applicable evidence and fills actual gaps instead of rewriting history.
 
 ## Identify, evaluate and preserve before changing anything
 
@@ -97,6 +101,6 @@ Register the official channel and installed identity with `update_source`. `upda
 
 Use `connect` plan/execute for supported project-only MCP merges, and `preserve` plan/execute for explicitly selected Git files. Preserve comments, unrelated services, custom AGENTS and Git index/worktree state. Repository preparation and Git author verification remain real setup work. Exclude live governance databases, runtime, downloads, secrets and unrelated files from version-saving selections.
 
-Backups report capture, local verification, upload, download and independent restoration separately. Existing checkpoint/artifact/restore tools cover their declared scope; an artifact registration does not snapshot a database. Static backups need matching content and recovery evidence before being described as available remotely or on another computer.
+Use selected `recovery` sets for consistent state, referenced objects, Git history/index/WIP and explicit materials; use checkpoint `restore` for its narrower selected-file scope. Report capture, local verification, upload, fresh download, independent restore and host activation separately. An artifact reference is not a database snapshot or proof of remote storage.
 
 The legacy `storage.upgrade_required` flag describes only the current-work index. Also check `storage.context_ready` and `storage.context_upgrade_required`: an older installation may have a valid agenda index but still need the explicit context-index upgrade.

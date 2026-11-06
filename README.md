@@ -6,7 +6,7 @@
 
 [Get TaskCarry](START_HERE.md#download) · [First-time setup](docs/en/windows-example.md) · [Update an existing installation](docs/en/updating.md)
 
-TaskCarry provides **project memory, workspace collaboration, and project workflow governance** for people working with AI tools. Bring ready stages into a shared project, preserve unfinished work, and resume supported interrupted operations from recorded and verified results. Task context, selected files, deliverable history, and next steps stay with the project across conversations and pauses.
+TaskCarry gives projects already advancing in AI chats **durable memory and a continuing governance workflow**. An independent governance chat inherits confirmed decisions, understands selected new progress, keeps task relationships current, delivers guidance to the relevant workbenches, and checks saving and recovery. Your existing chats keep doing their work; their outputs and unfinished positions stay connected beyond one conversation.
 
 Use it with a project already advancing in your AI chats, whether one long-running conversation or several parallel workstreams. Keep prior outputs, decisions and unfinished work. Your AI tool helps do the work; TaskCarry gives it a durable local record and a way to bring results together. An extra specialist chat is useful only when the work benefits from it.
 
@@ -41,11 +41,12 @@ Project workflow governance connects the work people and AI produce with clear p
 
 | Capability | What it helps you do |
 |---|---|
-| **Reviewable integration plans** | See which stages and files will join the project before carrying out the update. |
-| **Workspace binding and conflict checks** | Check the registered workspace and expected state, coordinate the toolkit's own writes, and identify concrete conflicts. |
-| **Work-in-progress preservation** | Retain supported local commits, staged changes, working files, and new files when adopting shared results. |
-| **Interrupted-operation recovery** | Check what actually happened, reuse a recovery method when its conditions match, and complete supported missing steps without blindly repeating finished work. |
-| **Durable review and maintenance evidence** | Reuse reviewed source relationships, track a selected round's receipts, and link a concrete defect to its tested fix and actual local setup. |
+| **Understand connected work** | Review selected source revisions, distinguish facts from judgments, and retain decisions and dependencies without reopening finished history. |
+| **Keep working chats aligned** | Publish versioned private workbench guidance, preserving professional instructions and Git WIP; distinguish publication from actual consumption. |
+| **Govern a complete cycle** | Retain ownership, intended effects, actual results and continuation points; use a morning report and quieter absorption slots. |
+| **Receive exact stages** | Review commits, changed paths and task relationships before receiving business results; adopt them into selected workspaces while preserving supported local work. |
+| **Recover selected project work** | Verify consistent state/objects, original Git history and layered WIP, explicit materials and standby recovery before a sole-writer handoff. |
+| **Maintain with evidence** | Link problems to verified fixes, distinguish update discovery from installation, and report source, native-host and natural-trigger evidence separately. |
 
 This governance focuses on project deliverables and their workflow. Host permissions and Agent authentication remain with your AI platform and operating environment; [the architecture](docs/en/architecture.md) explains how these responsibilities fit together.
 
@@ -57,13 +58,15 @@ Memory comes from the tasks, notes, files, and deliveries you or your AI assista
 
 Your independent **governance chat** maintains project memory and reviews connected progress. It uses the host AI to understand permitted sources, distinguish confirmed decisions from suggestions, and call TaskCarry tools. It can also coordinate project priorities if you choose. Keep giving work directly to your existing main or specialist chats; governance does not become a required dispatch gate.
 
-The product combines a shared **Core**, maintained governance **Skills**, and **your project's own rules and memory**. Keep your decisions and custom instructions when updating the shared tools. A real project may span several directories, repositories and conversations; governance proposes their relationships and you confirm the scope. Records retain their source identity so matching task names from different stores do not become the same task.
+The product has three responsibility layers: **Core** supplies verifiable shared operations; the **capability layer** combines packaged Skills, project methods and available host tools; the **user project layer** retains your facts, decisions, relationships, files and progress. Public updates preserve your project rules and memory. Core can be reinstalled, but restoring your project requires its actual state, objects, Git history/WIP, materials and capability versions. See [how the three layers work together](docs/en/architecture.md).
 
 TaskCarry stores records and performs the supported local operations. You retain decisions about project direction, priorities, business acceptance, and external delivery. The toolkit does not require a separate model API or train a model.
 
 For example, software may have a usable module while experiments are paused and documentation is still a draft. Governance can receive the software stage and retain the other two tasks at their current positions. Nobody needs to mark the entire project complete just to preserve useful progress.
 
 ## The everyday workflow
+
+Governance keeps decisions, dependencies and current guidance aligned while you work in your existing chats. The following flow applies when a stable set of Git changes is ready to join the shared project; an ordinary progress update does not require a delivery or code merge.
 
 ![Work on tasks, save progress, offer a stable stage, receive it into the shared project, update selected workspaces, and continue](docs/assets/governance-flow.en.svg)
 
@@ -84,8 +87,8 @@ A received stage can be part of an unfinished task. A paused task can stay pause
 [Get the complete product package](START_HERE.md#download), then follow the [three-step guide](docs/en/windows-example.md):
 
 1. **Establish governance.** Put the package under a local TaskCarry folder, open an independent Codex chat there and send the guide's single prompt.
-2. **Complete setup through conversation.** Governance inherits selected work and decisions, prepares real workspaces and local Git saving, connects the selected working chats, and configures its original-chat schedule and official release checks. It gives you the current action when host trust, login or reload needs your participation.
-3. **Review the evidence and continue.** Receive the window/role/task map, actual connection and saving results, any concrete remaining step, and project-specific next actions. Schedule configuration and its first natural trigger are reported separately.
+2. **Complete setup through conversation.** Governance inherits selected work, prepares task/workspace/Git bindings, verifies native MCP and current workbench views, performs the first governance cycle and an isolated recovery rehearsal, and configures the daily rhythm and official update checks. It gives you only the necessary trust, login or reload action.
+3. **Review the evidence and continue.** Receive the inherited decisions, chat/role/task map, connection, saving, recovery and update results, remaining conditions and next actions. Complete setup and verified natural scheduling are distinct; configuration, trigger, AI execution and report delivery each need evidence. See [the feedback you should receive](docs/en/user-feedback-examples.md).
 
 Keep working in your original chats. Governance maintains project memory; ongoing project coordination is optional, and you may need no additional specialist chats.
 
@@ -101,10 +104,10 @@ This is an organization example. Existing working chats remain useful. If they s
 
 ## Build on the local workflow
 
-- **Standard local loop:** guided setup includes local Git saving, a schedule returning to the original governance chat, and checks of official releases on your selected channel. Installing the wheel alone does not configure the host; incomplete host steps remain visible until verified. Finding a new version does not install it.
+- **Standard local governance:** local Git, workbench publication/consumption, a first complete cycle and recovery rehearsal, official release checking, and two or three daily original-chat slots: one report plus one or two absorption periods. Missing host steps stay explicit. A new release is evaluated before installation.
 - **Private Git:** configure your own remote repository for selected committed results. File references help locate materials, but copying, backup, and remote synchronization remain explicit operations.
 - **Additional AI tools:** CLI and MCP provide integration points around one engine. The Codex guide is the current concrete onboarding path; it does not establish that every MCP client, model, or AI platform has been verified.
-- **Multiple computers:** the [guide](docs/en/remote-and-multicomputer.md) describes separate task branches and one integration computer. Real two-computer operation has not completed end-to-end validation; start after the local workflow is established.
+- **Multiple computers:** selected recovery sets can rebuild an independent standby copy; separate task branches can return exact outputs to one governance writer. Transfer the writer role explicitly. [The guide](docs/en/remote-and-multicomputer.md) separates local recovery, remote transport and actual second-host evidence; real two-computer end-to-end validation remains a separate condition.
 
 TaskCarry uses Python 3.11+ and includes four project Skills for setup, task delivery, governance, and recovery. Standard onboarding prepares local Git; the lower-level ability to checkpoint ordinary files remains available for compatibility and recovery. Each control scope has one local store and one receiving baseline; a user-defined project can connect multiple existing sources without silently merging them. Installation updates tools and Skills; adopting received business changes into a workspace is a separate, reviewed action. See [maintenance](docs/en/governance-maintenance.md) and [capabilities and limits](docs/RELEASE_BOUNDARIES.md).
 
@@ -115,13 +118,14 @@ TaskCarry uses Python 3.11+ and includes four project Skills for setup, task del
 | Manual fallback | [Commands and handoffs](docs/en/manual-setup.md) | [手动后备](docs/zh-CN/manual-setup.md) | [手動後備](docs/zh-TW/manual-setup.md) |
 | User manual | [Start here](docs/en/windows-example.md) | [从这里开始](docs/zh-CN/windows-example.md) | [從這裡開始](docs/zh-TW/windows-example.md) |
 | Existing users | [Update TaskCarry](docs/en/updating.md) | [更新指南](docs/zh-CN/updating.md) | [更新指南](docs/zh-TW/updating.md) |
+| Feedback examples | [What users should hear](docs/en/user-feedback-examples.md) | [反馈示例](docs/zh-CN/user-feedback-examples.md) | [回饋範例](docs/zh-TW/user-feedback-examples.md) |
 | Architecture | [How it works](docs/en/architecture.md) | [架构说明](docs/zh-CN/architecture.md) | [架構說明](docs/zh-TW/architecture.md) |
 | Maintenance | [Maintain a project](docs/en/governance-maintenance.md) | [维护项目](docs/zh-CN/governance-maintenance.md) | [維護專案](docs/zh-TW/governance-maintenance.md) |
 | Private Git and multiple computers | [Guide](docs/en/remote-and-multicomputer.md) | [说明](docs/zh-CN/remote-and-multicomputer.md) | [說明](docs/zh-TW/remote-and-multicomputer.md) |
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0rc7.md)
 
 ## Join in
 

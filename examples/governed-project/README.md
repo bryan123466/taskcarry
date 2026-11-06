@@ -2,7 +2,9 @@
 
 [First-installation handbook](../../docs/en/windows-example.md) · [简体中文手册](../../docs/zh-CN/windows-example.md) · [繁體中文手冊](../../docs/zh-TW/windows-example.md) · [Manual fallback](../../docs/en/manual-setup.md)
 
-This fictional appointment planner already has a coding chat, an unfinished Git change, guide notes from a chat without a project folder, and an older decision discussion. All names and inputs in [scenario.json](scenario.json) are synthetic. Use the handbook's onboarding prompt with your own confirmed scope; running this example is not a prerequisite for using TaskCarry.
+This fictional USB acquisition viewer already has a coding chat, an unfinished CSV validation change, connection-guide notes from a chat without a project folder, and an older interface discussion. All names and inputs in [scenario.json](scenario.json) are synthetic; no real device is connected. Use the handbook's onboarding prompt with your own confirmed scope; running this example is not a prerequisite for using TaskCarry.
+
+This fixture preserves the older single-slot onboarding contract for compatibility testing. For current complete governance and a concrete firmware/software/simulation example, use [complete-governance](../complete-governance/README.md).
 
 ## 1. Establish governance and retain the existing work
 
@@ -35,7 +37,7 @@ A report should distinguish results such as:
 - **Materials connected:** each generated project MCP block points to the intended control. This proves file configuration, not host loading.
 - **Pending native acceptance:** until the actual window supplies doctor/status, that window remains pending. CLI or a separate stdio session cannot complete this item.
 - **Schedule configuration / first natural trigger:** these are separate results. A generated plan is not an active schedule, and a manual run is not a natural trigger.
-- **Next work:** continue application validation in its original worktree and draft the guide's cancellation section in the assigned guide worktree. The historical conversation stays reference-only.
+- **Next work:** validate CSV columns in the application's original worktree and document data replay and reconnect steps in the guide worktree. The historical interface discussion stays reference-only.
 
 The executable source test deliberately stops before real host activation. Its honest final report therefore has `standard_ready=false` and `natural_trigger_verified=false`, with specific host steps still pending. A real user's three-step setup continues through those steps; this synthetic test does not manufacture native evidence to make a complete-looking report.
 

@@ -287,17 +287,23 @@ class Integration:
         if type(limit) is not int or not 1 <= limit <= 100:
             raise GovernanceError("INVALID_ARGUMENT", "Reconciliation limit must be an integer from 1 to 100")
         self._check_fault(fault)
-        target = self._ws(baseline)
         with self.store.guard():
+            recovery_binding = self.store.get("settings", "integration_baseline_recovery") or {}
+            if recovery_binding.get("status") == "REBIND_REQUIRED":
+                raise GovernanceError("RECOVERY_BASELINE_REBIND_REQUIRED", "The restored set omitted the bound baseline or its unique source identity; restore a complete reviewed set before receiving stages", recovery_binding)
+            target = self._ws(baseline)
             binding = self.store.get("settings", "integration_baseline")
             if binding and binding != identity(target):
                 raise GovernanceError("BASELINE_BOUND", "This state source already has an integration baseline; route another baseline to its own state source without redefining the user's project")
-            outstanding = [o for o in self.store.list("operations") if o.get("kind") == "reconcile" and o.get("baseline") == str(target) and o["status"] not in {"COMPLETED", "REVIEW_REQUIRED"}]
+            outstanding = [o for o in self.store.list("operations") if o.get("kind") == "reconcile" and o.get("baseline") == str(target) and o["status"] not in {"COMPLETED", "REVIEW_REQUIRED", "SUPERSEDED"} and not o.get("recovery_inert")]
             if not execute:
                 selected_ops, stages, selection = self._receive_selection(outstanding, self._pending(), limit)
                 conflicts = [{"stage_id": s["stage_id"], "code": "CONTENT_CONFLICT"} for s in self.store.list("stages") if s["status"] == "CONFLICT"]
                 data = {"kind": "reconcile", "baseline": baseline, "head": commit(target, "HEAD"), "stage_ids": [s["stage_id"] for s in stages], "declarations": {s["stage_id"]: s["declaration_hash"] for s in stages}, "unresolved": conflicts,
                         "pending_operations": [o["operation_id"] for o in selected_ops], "selection": selection}
+                config = self.store.get("config", "project") or {}
+                if config.get("recovery_restore_id"):
+                    data["recovery_context"] = {"restore_id": config["recovery_restore_id"], "replica_id": config["replica_id"]}
                 pid = "plan-" + digest(data)[:24]
                 plan = self.store.get("plans", pid)
                 if plan is None:
@@ -561,6 +567,9 @@ class Integration:
         with self.store.guard():
             if not execute:
                 data = {"kind": "adopt", "workspace": workspace, "baseline": baseline, "baseline_head": commit(source, "HEAD"), "before": fingerprint(target)}
+                config = self.store.get("config", "project") or {}
+                if config.get("recovery_restore_id"):
+                    data["recovery_context"] = {"restore_id": config["recovery_restore_id"], "replica_id": config["replica_id"]}
                 failures = [o["operation_id"] for o in self.store.list("operations")
                             if o.get("kind") == "adopt" and o.get("workspace") == workspace and o.get("baseline") == baseline
                             and o.get("status") in {"PREPARING", "PREPARATION_FAILED"}

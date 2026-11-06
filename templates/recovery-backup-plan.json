@@ -1,0 +1,1 @@
+{"action":"backup_plan","destination":"./reviewed-independent-recovery-set","workspaces":[{"name":"registered-workbench","kind":"git","paths":["selected-untracked-draft.md"]}],"payloads":[{"name":"project-rules","path":"./reviewed-project-rules","kind":"files","paths":["PROJECT_RULES.md"]}]}

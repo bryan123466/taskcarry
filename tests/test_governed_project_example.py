@@ -31,7 +31,7 @@ class GovernedProjectExampleTests(unittest.TestCase):
                 _git(path, 'config', 'user.name', 'Synthetic Example Author')
                 _git(path, 'config', 'user.email', 'example@example.invalid')
                 _git(path, 'config', 'core.autocrlf', 'false')
-            (app / 'app.txt').write_bytes(b'initial booking application\n')
+            (app / 'app.txt').write_bytes(b'initial synthetic USB acquisition viewer\n')
             _git(app, 'add', '--', 'app.txt')
             _git(app, 'commit', '-m', 'Existing synthetic application')
             (app / 'app.txt').write_bytes(b'staged validation change\n')
@@ -65,7 +65,7 @@ class GovernedProjectExampleTests(unittest.TestCase):
             invoke(control, 'restore', {'checkpoint_id': checkpoint['checkpoint_id'], 'destination': str(restored)})
             self.assertEqual(original_notes, (restored / 'decisions.txt').read_bytes())
             self.assertFalse((notes / '.git').exists())
-            (guide / 'GUIDE.md').write_text('Draft: cancellation instructions.\n', encoding='utf-8')
+            (guide / 'GUIDE.md').write_text('Draft: simulated data replay and reconnect instructions.\n', encoding='utf-8')
             draft = invoke(control, 'preserve', {'repository': str(guide), 'paths': ['GUIDE.md'], 'message': 'Start the guide'})
             invoke(control, 'preserve', {'action': 'execute', 'plan_id': draft['plan_id']})
             for workspace, task, target in (('app-writer', 'app', app), ('guide-writer', 'guide', guide)):

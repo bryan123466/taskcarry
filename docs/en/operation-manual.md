@@ -40,7 +40,7 @@ Keep one main writer for each task/write scope. Others may review or own distinc
 
 Work chats read the named task, latest relevant checkpoint and effective decisions before continuing. At a meaningful result, decision change or pause, save selected task-owned files, findings, source references and next steps. Governance uses those records to maintain shared understanding, requesting only changed or missing related context. Host access to old chats is checked separately; there is no automatic full-history monitor.
 
-Keep a sourced, versioned understanding candidate until a correction is confirmed. Preserve the earlier effective version and identify affected tasks when updating it. This method uses existing project files and task/checkpoint/artifact records; it is not a separate decision database or a new task revision API.
+Keep source-qualified decisions and relationships through `facts`, retaining the original statement, evidence and separate AI judgment. Explicit revisions preserve earlier effective facts and identify affected work. This uses the same Core store; it does not create a competing database or silently change the original task identity.
 
 <a id="evidence"></a>
 
@@ -78,8 +78,14 @@ Registered workbench setup can put its four Skills and connection materials in t
 | More computers or hosts | [Multi-computer boundaries](remote-and-multicomputer.md#multi-computer). A real two-computer end-to-end workflow remains separately unverified. |
 | Tool maintenance and failure recovery | [Maintenance](governance-maintenance.md), the four [Skills](../../skills), and [commands](../COMMANDS.md). |
 
-## Standard local governance and task continuation
+## Complete governance and task continuation
 
-Complete onboarding includes local governance Git, real task/workspace/Git bindings for ongoing windows, native per-window connection checks, original-chat schedule configuration/readback and an official update check. Private remotes and cloud storage remain optional. Historical-source chats do not need active workspaces. Large external files need explicit references and backup coverage; a file reference is not a saved copy.
+The `complete_v1` checklist covers persistent project/replica identity, understood selected sources, real task/workspace/Git bindings, per-chat native connection and exact workbench consumption, local governance Git, the first bounded cycle, an independently verified recovery rehearsal, official update checking, and two or three daily original-chat slots. These are standard setup items. Private remotes, cloud storage and ongoing project coordination remain choices. Historical reference chats need source evidence, not artificial active workspaces.
 
-A real project can span several directories, repositories and existing state sources. Keep their routes and local identities; one source still has one receiving baseline. Sharing context or maintaining the package does not merge business Git branches or create a multi-store transaction.
+Read `context` for the original task and current checkpoint; use `facts` for source-qualified decisions and relationships, keeping evidence distinct from AI judgments. Use `cycle` to retain the exact owner/resources, intended effects, actual receipts, source phases, health and next step. `source_scan` only enumerates authorized local metadata through bounded pages; the host separately reads selected bodies. Details and payloads are centralized in [Governance API](../GOVERNANCE_API.md).
+
+`workbench` freezes a source-versioned view, plans exact private entry changes and publishes them without modifying Git HEAD/index or unrelated WIP. Verify the current pointer, original task/thread and source freshness; publication, reviewed consumption and native doctor/status are separate evidence. An old view with changed sources is not current truth.
+
+`recovery` captures a selected consistent project set, verifies bytes and restores independently in standby. Its receipt lists `disabled_host_files`: preserved host-configuration evidence is kept out of active restored configuration until regenerated for the new machine. Original project identity and a new replica identity do not authorize two writers. Explicit handoff and actual native verification precede writer activation. [Recovery coverage](remote-and-multicomputer.md) distinguishes local capture, transport and real second-host evidence.
+
+Legacy records remain readable. `identity plan/execute` explicitly adopts a portable project identity while retaining the old source alias; it does not silently merge another project. `upgrade` separately maintains derived indexes. Older acceptance records retain their original profile; a new complete-governance review reuses applicable evidence and fills actual gaps instead of rewriting history.

@@ -4,20 +4,22 @@
 <a id="if-you-stop-partway-through"></a>
 <a id="further-details"></a>
 
-# Update through your existing governance chat
+# Update in your existing governance chat
 
-[First installation](windows-example.md) · [Maintenance reference](governance-maintenance.md)
+[First installation](windows-example.md) · [Maintenance](governance-maintenance.md) · [Technical contracts](../GOVERNANCE_API.md)
 
-Send this to the project's original governance chat:
+Continue in the original governance home. Send:
 
-> Check the TaskCarry official release source using my chosen channel and maintenance preference. If I supplied a product package, verify its precise identity first. Read the selected update notes and compare them with the actual runtime, managed methods and my project rules. Explain applicability and the smallest useful change.
+> Check the registered official release source using my selected channel. If I supplied a package, verify its exact identity. Compare its notes with the actual runtime, installed Skills/methods and my project rules; explain applicable changes, compatibility and the smallest useful update. A discovered release is not permission to install it.
 >
-> Within this update's authorization, prepare and perform the applicable maintenance while preserving the original state sources, tasks, checkpoints, decisions, working chats, custom configuration and unfinished work. Use a separately prepared candidate runtime when changing the package; keep the old runtime available for reviewed recovery. Preview managed-file and project-configuration changes, preserve customizations, then verify the affected host connections. If a specific conflict or native action needs me, show only that action and its destination.
+> Within my authorized update scope, preserve original control/source identities, tasks, checkpoints, facts, decisions, chats, custom configuration, Git index and unfinished work. Prepare an independent candidate runtime for a package change and retain a recoverable old installation. Preview exact managed-file/configuration changes; preserve customizations and verify every affected native connection.
 >
-> Resume from verified effects after interruption. Finish with what changed, what was preserved, whether I can continue, and any remaining action. Do not reinstall, initialize another project or merge business branches just to refresh project memory.
+> Evaluate the complete_governance profile complete_v1 against existing evidence. Retain earlier acceptance records with their original meaning; do not relabel them as the new profile. Reuse applicable evidence and complete the missing identity, sources, workbench consumption, first cycle, recovery rehearsal and daily-slot configuration checks. For legacy local-path identity, show an explicit identity plan before adoption, preserving its source alias and records. Do not initialize another control or merge business branches to refresh memory.
+>
+> Before changing schedules, retain existing valid bindings and review the exact one-report plus one-or-two-absorption arrangement with me; do not create duplicates. Natural triggering, original-chat AI execution and actual report delivery remain separately verified. After interruption inspect existing effects and finish only missing steps. Report what changed, what remains usable, verification results, exclusions and the next necessary action.
 
-Daily governance already checks the registered official channel and evaluates updates. A check is not an installation. Offline means the remote status is unverified; an unchanged result needs no repeated maintenance. Release candidates and stable releases follow the channel you selected. A same-version package with different bytes needs identity review.
+Governance checks the registered official channel during its routine. Offline means remote status is unknown; unchanged content requires no repeated maintenance. Stable and release-candidate channels follow your explicit selection. Same-version packages with different hashes require identity review.
 
-The product contains the shared core and maintained methods; your project rules and memory remain yours. Public release, local package installation, managed-file setup and a running host loading those changes are separate steps. The assistant records the actual stage instead of asking you to compare version strings in every guide.
+Core updates, capability/method updates and user-project decisions are separate responsibilities. Public release, local installation, managed-file publication and a running host loading them are different receipts.
 
-To resume, say **“Continue the TaskCarry update; check what already completed and only finish the remaining steps.”** See [release details](../RELEASE_0.2.0rc7.md) for the full change history and [manual fallback](manual-setup.md) only when needed.
+To resume: **“Continue the original TaskCarry update; verify already completed effects and finish the remaining plan.”** Read [release details](../RELEASE_0.2.0rc7.md) for version differences, [feedback examples](user-feedback-examples.md) for expected results, and [manual fallback](manual-setup.md) only for the blocked step.

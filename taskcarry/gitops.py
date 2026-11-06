@@ -8,6 +8,7 @@ import tempfile
 
 from .store import GovernanceError
 from .core import _linked, validate_relative_path
+from .path_batches import path_batches
 
 MAX_DELIVERY_PATHS = 500
 MAX_BLOB_BYTES = 32 * 1024 * 1024
@@ -97,7 +98,8 @@ def assert_tree_types(path, ref, paths):
         raise GovernanceError("DELIVERY_TOO_LARGE", "Split stable stages with more than 500 paths")
     if not paths:
         return 0
-    data = git(path, "--literal-pathspecs", "ls-tree", "-z", "-l", ref, "--", *paths).stdout
+    data = b''.join(git(path, "--literal-pathspecs", "ls-tree", "-z", "-l", ref, "--", *batch).stdout
+                    for batch in path_batches(paths))
     total = 0
     for entry in data.split(b"\0"):
         if not entry:

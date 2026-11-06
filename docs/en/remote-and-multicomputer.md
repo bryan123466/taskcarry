@@ -4,7 +4,7 @@ Start with the [guided local setup](windows-example.md). Use this reference when
 
 [Operation manual](operation-manual.md) · [简体中文](../zh-CN/remote-and-multicomputer.md) · [繁體中文](../zh-TW/remote-and-multicomputer.md) · [Command reference](../COMMANDS.md)
 
-Local governance Git saving, the original-chat schedule and official release checks belong to standard onboarding. The private remote and multi-computer procedures below are optional extensions. The cross-computer procedure has not been validated end to end on two physical computers. It combines Git operations with the existing local TaskCarry interface; it does not add automatic cross-host synchronization or recovery.
+Local governance Git saving, the original-chat schedule and official release checks belong to standard onboarding. The private remote and multi-computer procedures below are optional extensions. The cross-computer procedure has not been validated end to end on two physical computers. It combines Git operations with the existing local TaskCarry interface; local selected recovery sets and standby handoff are available; network transport and real host acceptance remain separate checks.
 
 Standard local saving uses an explicit file list, preserves the existing Git index and unfinished work, and records a commit only when selected content changes. It excludes the active `.taskcarry` database, runtime, downloaded packages and credentials. Working windows keep their real task/workspace bindings; a Git author name or a chat identifier alone does not establish these relationships. Original materials can stay in place, while large external outputs have versioned references and separately verified storage coverage.
 
@@ -98,87 +98,37 @@ Prompt for Codex:
 
 > Maintain a concise project-memory/current.md for this project. Use authorized task records, commits and explicit sources to describe current facts, effective decisions, paused positions and next steps. Preserve necessary lineage without turning unchanged tasks into new backlog. Inspect existing files and the index, and deliver only actual changes. Do not export private chats, credentials or the whole .taskcarry directory. Use local TaskCarry reception; push only content already authorized for the specified private remote.
 
-### 4.4 Create a verifiable, consistent backup
+### 4.4 Capture a recovery set with explicit coverage
 
-[Ready-to-paste Windows example for this step](manual-setup.md)
+Core can be reinstalled from a trusted release; project memory cannot be recovered by downloading it again. Governance reviews a selection, then calls `recovery backup_plan` / `backup_execute` to capture consistent database state and referenced objects, with the selected workspaces and materials. Source changes remain concrete differences; mixed capture times must not be presented as a consistent point.
 
-**Pause writes for this project before capturing one consistent point.** TaskCarry does not currently provide a single coordinated backup command for Git, SQLite and file objects. Follow this order:
+| Component | What must be retained and checked |
+|---|---|
+| Project state | Consistent `.taskcarry` database snapshot, referenced objects, logical source identity and replica identity. A readable copy is not another active governance writer. |
+| Git workspaces | Selected refs and reachable history, current HEAD, index, worktree changes and explicitly selected untracked files. Pushing commits does not capture all these layers. |
+| Ordinary files and large materials | Exact paths, content hashes, sizes and restore targets; excluded or unavailable material remains a disclosed gap. |
+| Capability layer | Actual rules, exact versions of four Skills and custom methods, compatible Core version/package hash and host capability inventory. The installation directory is not project memory. |
+| Local connection materials | Reproducible binding instructions; regenerate interpreter paths, MCP and workbench entries after recovery. Credentials, sign-in and trust are separate. |
 
-1. Save task files. Capture precise checkpoints for meaningful unfinished work, including `next_step`. A checkpoint is not a delivery and does not require declaring unfinished work as a completed output. Current checkpoints allow at most 500 selected paths, 32 MiB per file object and 128 MiB across captured layers; back up omitted or larger material separately.
-2. Let current TaskCarry operations finish. Pause this project's scheduled mutations and governance calls; no CLI, MCP or other program may modify its `.taskcarry` during the copy. Pause edits to Git workspaces being captured as well. Retain the actual state of unfinished operations; do not manufacture completion or delete lock files for backup.
-3. Create a fresh backup directory **outside the source repositories, workspaces and control directory**. Record toolkit version, workspace paths/branches/HEADs, checkpoint IDs, `status`, capture time and the scope paused.
-4. Save reachable commits and references for every independent Git repository with a bundle. Worktrees sharing one Git common directory can have their references covered by the same bundle.
+Governance explicitly selects versionable memory and required capability materials as payloads. The tool does not automatically package the whole computer, chat platform or every ignored file. Save editor buffers before including files. Recovery sets contain private project data and do not belong in a public repository.
 
-```text
-git -C "<REPOSITORY>" bundle create "<SNAPSHOT>/project.bundle" --all
-git -C "<REPOSITORY>" bundle verify "<SNAPSHOT>/project.bundle"
-git -C "<REPOSITORY>" bundle list-heads "<SNAPSHOT>/project.bundle"
-```
+Local `verify` checks the manifest and actual objects. If you choose remote/cloud storage, transfer the sealed static set, download it independently and verify the same manifest hash. Writing to a local sync folder, seeing a filename or receiving a successful upload command does not prove download and recovery. Never concurrently synchronize live SQLite or shared `.git`; keep encryption keys separate from encrypted backups.
 
-A bundle can transport commits offline. It is not a complete backup of working files, index, untracked files, configuration or all local recovery information. Capture those separately or in checkpoints. [Official Git bundle documentation](https://git-scm.com/docs/git-bundle)
+You can ask governance:
 
-5. While all relevant writes remain stopped, copy the complete `.taskcarry` directory: `state.sqlite3`, accompanying WAL/SHM files if present, `objects` and other state files. Do not copy only the database's main file or move the originals. Save specifically needed files outside checkpoint coverage, plus reviewed project configuration; exclude login tokens.
+> Prepare an explicit recovery plan for this project: necessary governance state and objects, selected Git refs/history/index/WIP, project memory, rule and Skill versions, and required materials. List exclusions. After reviewing scope, capture and verify a local recovery set and rehearse restoration into an independent directory, retaining original directories and tasks. Leave the replica in standby. If I enabled offsite storage, report upload, fresh-download hashes and restore evidence separately. Do not perform unauthorized transport.
 
-PowerShell 7 cold-copy example, where `<SNAPSHOT>` is a newly created empty directory:
+### 4.5 Restore independently, then transfer the sole writer role
 
-```powershell
-Copy-Item -LiteralPath "<A_CONTROL>/.taskcarry" -Destination "<SNAPSHOT>/.taskcarry" -Recurse -ErrorAction Stop
-Get-ChildItem -LiteralPath "<SNAPSHOT>/.taskcarry" -Force
-```
+`recovery restore_plan` / `restore_execute` restore selected original Git history and working layers, state and materials into an empty independent destination. The replica retains logical project identity, receives an explicit replica identity and starts in **standby**. Path mappings and older operations remain continuation evidence; do not replay old reception/adoption plans at new locations.
 
-On other systems, use a local file-copy tool under the same stopped-writer condition, preserving hidden files and directory structure. Do not synchronize a **running** `.taskcarry` or `.git` directory through a background file-sync service. SQLite's online backup API can snapshot a database; that alone does not coordinate the TaskCarry file objects and Git state with it. [SQLite backup documentation](https://www.sqlite.org/backup.html)
+1. Verify recovery-set provenance, manifest hash, exact coverage and runtime compatibility. Preserve the original backup.
+2. Restore independently and verify tasks, objects, selected Git refs/HEAD/index/WIP and materials. Disclose missing content rather than claiming to recover the whole computer.
+3. Regenerate connections for actual new interpreter paths and directories, preserving professional configuration. Governance and working chats each call native doctor/status; verify project/replica identity, tasks and checkpoint. Recovered files do not prove host connection.
+4. To take over, explicitly stop and exclude the old writer. Prepare `activation_plan`, review old/new replica, handoff authorization and new-host evidence, then execute `activate`. Without confirmed old-writer cessation, keep the copy in standby.
+5. After activating the sole writer, verify native schedules and delivery. A returning old computer acts as a collaborator with separate outputs; it must not resume old governance writes or schedules automatically.
 
-6. Compare file inventories, sizes and SHA-256 hashes; check the database copy and representative checkpoint readability. At minimum verify the bundle, object directory and absence of copy errors before resuming the project. Archive the completed snapshot to your chosen storage and verify hashes on a downloaded copy before calling it a verified offsite backup. A directory name or sync icon is insufficient evidence.
-
-> Back up this project to [new backup directory] during a coordinated pause. First save selected WIP checkpoints and wait for current governance actions to finish. Pause relevant writers. Capture a Git bundle per independent repository, complete .taskcarry, specifically needed files outside checkpoint coverage, and version/path inventories. Validate copies only; do not delete originals or recovery stashes. Record exclusions. When the backup is verified, restore the project settings paused for this operation without changing other projects.
-
-### 4.5 Separate recovery of material from re-enabling governance
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
-
-**Do not copy an old `.taskcarry` to a new computer and execute its old reception/adoption plans.** Workspace identity includes absolute path, Git common directory and branch. The integration baseline also binds that identity. There is no full cross-host state-migration API. Matching directory names do not prove the same execution state.
-
-Recovery procedure:
-
-1. Keep the backup original unchanged and work from a copy in a new location. Confirm the old host cannot concurrently advance main. If that is uncertain, recover material and independent task branches first, without activating another main writer.
-2. Clone into a **new, nonexistent directory** from the private remote:
-
-```text
-git clone "<PRIVATE_REPOSITORY_URL>" "<NEW_REPOSITORY>"
-```
-
-Or recover a named branch offline:
-
-```text
-git clone --branch "<SAVED_BRANCH>" "<SNAPSHOT>/project.bundle" "<NEW_REPOSITORY>"
-```
-
-A bundle clone has the bundle as `origin`. Before uploading later, explicitly configure the intended private remote; do not assume it is already connected online.
-
-3. To retrieve checkpoint files, **copy** the backed-up `.taskcarry` into `<RECOVERY_CONTROL>/.taskcarry` as a separate recovery working copy. Use a compatible TaskCarry version to inspect `status` and identify the checkpoint. Create `restore.json`:
-
-```json
-{"checkpoint_id":"<SAVED_CHECKPOINT_ID>","destination":"<NEW_INDEPENDENT_RESTORED_FILES_DIRECTORY>"}
-```
-
-```text
-python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" status
-python -I -X utf8 -m taskcarry --project "<RECOVERY_CONTROL>" restore --input restore.json
-```
-
-The destination must be absent or empty, separate from the source workspace and recovery control directory. `restore` recovers only selected checkpoint files. A Git checkpoint creates a **synthetic restoration baseline** to represent HEAD/index/worktree layers and preserves the original HEAD as provenance; it does not restore the complete original repository history. It records a restoration event in the recovery working copy, leaving the backup original unchanged. Compare recovered files with the real cloned project before resuming on a named task branch. Never label the synthetic commit as the original commit.
-
-4. Create a fresh `<NEW_CONTROL>` for ongoing work. Initialize it and register the new receiving/workspace paths. Re-establish current task positions from the old `status`, artifact hashes and actual local/remote commits. Retain old receipts as provenance and reconcile incomplete operations individually; do not repeat effects that already occurred.
-5. Regenerate local Skills/MCP configuration and call `doctor`/`status`. Old MCP fragments contain the original Python executable and project paths. Do not reuse them unchanged. Workspace re-registration also cannot bypass pending stages, operations or the bound integration-baseline identity.
-
-```text
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" init
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" workspace --input new-baseline.json
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" doctor
-python -I -X utf8 -m taskcarry --project "<NEW_CONTROL>" status
-```
-
-Example `new-baseline.json`: `{"name":"baseline","path":"<NEW_BASELINE_ABSOLUTE_PATH>"}`. Follow the [operation manual](operation-manual.md) for other registrations and connection. Record the mapping from old IDs to new registrations. This is an explicit human/agent-assisted reconstruction, not automatic continuation of all transactions in the old database.
+Tools check explicit handoff declarations and native evidence references; they cannot remotely prove the old machine has stopped or provide distributed locks. Actual writer exclusion, account controls and protected branches belong to the environment. For selected checkpoint files alone, the older `restore` remains available; its synthetic restoration baseline differs from original Git history preserved by `recovery`.
 
 <a id="multi-computer"></a>
 
@@ -362,7 +312,7 @@ Continue with the appropriate task relationship and record the new base. Do not 
 | Two computers work on nonoverlapping tasks | Separate branches/workspaces; A receives and advances the baseline serially |
 | One task is split into two lines of work | Define interfaces, paths and integration order; a shared task name does not resolve conflicts |
 | A is temporarily offline | B can continue authorized task branches and checkpoints; main reception waits for A or an explicit handover |
-| A cannot recover and B must take over main | Stop or exclude the old main writer, recover material and create new governance as in 4.5, reconcile evidence, then designate B as sole integration host |
+| A cannot recover and B must take over main | Stop or exclude the old main writer, restore an independent standby replica and complete the explicit handoff in 4.5, reconcile evidence, then designate B as sole integration host |
 | A comes back online | First read current remote state and handover records as an ordinary collaborator; do not resume its old scheduled writes; transfer any unpushed work through task branches |
 | Push rejection, missing source commit, manifest mismatch or content conflict | Preserve work and original evidence; resolve the specific discrepancy without force-pushing, inventing hashes or blindly replaying old operations |
 

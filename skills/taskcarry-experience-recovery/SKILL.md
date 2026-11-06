@@ -5,6 +5,12 @@ description: Diagnose a concrete TaskCarry failure and apply or propose a condit
 
 # Conditional recovery / 条件经验恢复
 
+For a failed full governance cycle, inspect its exact owner/resource reservation and effect records; resume the same identity and verify effects before changing a receipt. Health is multidimensional and expires with its evidence. Unknown or stale is not healthy; one waiting item is not global failure. Question reminders count actual delivery receipts on distinct local dates, never retries or scan appearances. The default unanswered-date budget is two; preserve the question after the limit instead of repeatedly notifying.
+
+For project-level recovery, use the separate `recovery` plan/execute/verify interface. A selected-file `restore` is not a full project restore. Preserve state plus referenced objects, selected history/index/WIP and required external materials in a sealed set. Restore to an independent standby copy, retain the original, inspect disabled host entries and rebind native access. Old executable plans/cycles are historical evidence, not replay instructions. Activate one writer only with an explicit handoff and exact old-replica declaration; the tool cannot independently fence another computer. Keep encryption keys and credentials outside the portable set.
+
+For private publication or static media copying, use exact `transfer` plans. Verify remote effects after a transport failure before retrying; never force an old tag or expand to all refs. A verified copy into a sync folder proves local bytes only. Verify retrieval and isolated restoration before calling it offsite recovery. Tool/package rollback must use a compatible retained environment and current project state; do not restore an old database over decisions created after an update.
+
 Start with the current error code, operation journal and actual Git/file effects. If an effect already happened, preserve that fact and repair only missing bookkeeping. Do not infer absence from a missing receipt, erase old evidence, or repeat the complete workflow.
 
 For interrupted setup or restore, inspect that operation's saved intent and files, then use its own supported continuation contract. Receiving experience actions are not generic restore commands. Preserve user edits and candidate identity; a new package or changed target is not automatically the same retry. Missing host access is an onboarding gap until evidence shows a product failure.

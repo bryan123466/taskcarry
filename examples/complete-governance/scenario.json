@@ -1,0 +1,37 @@
+{
+  "name": "Synthetic USB acquisition and curve-display project",
+  "scope": {
+    "profile": "complete_v1",
+    "governance_thread": "synthetic-governance",
+    "channel": "rc",
+    "schedule": {
+      "timezone": "UTC",
+      "slots": [
+        {"slot_id": "morning", "purpose": "report", "time": "09:00"},
+        {"slot_id": "afternoon", "purpose": "absorb", "time": "15:00"}
+      ]
+    },
+    "windows": [
+      {"thread_id": "synthetic-firmware", "mode": "active", "task_id": "usb-firmware", "workspace": "firmware-protocol", "source_ref": "chat:synthetic-firmware", "responsibility": "Generate simulated measurements and define the USB serial text-frame protocol"},
+      {"thread_id": "synthetic-pc", "mode": "active", "task_id": "usb-pc", "workspace": "pc-software", "source_ref": "chat:synthetic-pc", "responsibility": "Parse the shared frames, display a live curve, and export CSV"},
+      {"thread_id": "synthetic-simulation", "mode": "active", "task_id": "usb-simulation", "workspace": "simulation-validation", "source_ref": "chat:synthetic-simulation", "responsibility": "Replay normal frames, disconnection, and reconnection using simulated data"},
+      {"thread_id": "synthetic-interface-notes", "mode": "reference", "source_ref": "chat:synthetic-interface-notes", "responsibility": "Retain the hardware and interface notes that define the first milestone"}
+    ]
+  },
+  "effective_decision": "First milestone uses USB serial and simulated measurements; firmware, PC software, and replay validation share one frame format.",
+  "deferred_scope": "Wireless support is outside the first milestone.",
+  "protocol_example": {
+    "encoding": "UTF-8",
+    "line_ending": "LF",
+    "fields": ["type", "sequence", "timestamp_ms", "measurement"],
+    "frame": "READ,42,1000,1.234\n",
+    "meaning": "READ identifies a measurement; 42 is its sequence, 1000 is simulated elapsed time in milliseconds, and 1.234 is a simulated value."
+  },
+  "simulation_cases": [
+    {"case": "normal", "review_target": "The PC parser receives the sample frame; the curve and CSV use the same sequence, timestamp, and value."},
+    {"case": "disconnect", "review_target": "The UI reports disconnection and does not invent new measurement points."},
+    {"case": "reconnect", "review_target": "Receiving resumes without duplicating prior points or treating an incomplete old frame as a new measurement."}
+  ],
+  "next_step": "Align the READ frame fields and sample with the firmware and PC parser chats, then replay normal, disconnect, and reconnect cases.",
+  "evidence_scope": "Synthetic fixture only. These chat IDs and frame inputs are examples, not real host receipts, completed firmware or PC software validation, or evidence from an actual board or USB device."
+}

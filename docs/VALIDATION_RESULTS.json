@@ -1,20 +1,23 @@
 {
   "product": "TaskCarry",
   "version": "0.2.0rc7",
-  "status": "local_source_validated_candidate_not_published",
-  "recorded_date": "2026-11-05",
-  "scope": "Synthetic projects only; source, artifact and host evidence are separate.",
+  "snapshot_scope": "Frozen source validation before exact artifact and publication receipts. This record does not attest an installation or host.",
+  "recorded_date": "2026-11-06",
   "source_suite": {
     "schema": "taskcarry.test-evidence.v1",
-    "recorded_at": "2026-11-05T13:09:01.690795+00:00",
+    "started_at": "2026-11-06T15:26:38.801380+00:00",
+    "recorded_at": "2026-11-06T15:37:52.076620+00:00",
     "platform": "Windows",
     "python": "3.12.10",
-    "tests_run": 359,
-    "passed": 356,
-    "skipped": 3,
+    "execution": "Three isolated processes, disjoint module assignments",
+    "module_count": 42,
+    "all_modules_assigned_once": true,
+    "unique_test_ids": true,
+    "tests_run": 482,
+    "passed": 477,
+    "skipped": 5,
     "failures": 0,
     "errors": 0,
-    "successful": true,
     "tests": [
       {
         "test": "test_adversarial.AdversarialGovernanceTests.test_adoption_does_not_overwrite_an_ignored_local_artifact",
@@ -202,6 +205,58 @@
       },
       {
         "test": "test_checkpoint_optional_git.OptionalGitCheckpointTests.test_split_metadata_with_commondir_cannot_be_saved_as_plain_files",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_complete_public_flow_retains_original_work_and_evidence_levels",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_consumption_in_another_thread_cannot_satisfy_selected_workbench",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_expired_health_invalidates_first_cycle_readiness",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_missing_artifact_payload_cannot_pass_complete_recovery_gate",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_missing_current_pointer_becomes_pending_instead_of_crashing_status",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_unrelated_understood_source_cannot_cover_selected_chats",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.CompleteGovernanceIntegrationTests.test_workbench_from_changed_governance_source_is_not_complete",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_governance_integration.PublishedScenarioGovernanceTests.test_published_example_reaches_setup_readiness_without_claiming_real_host_execution",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_onboarding.CompleteOnboardingTests.test_all_slots_readback_trigger_execution_and_report_delivery_are_separate",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_onboarding.CompleteOnboardingTests.test_complete_profile_requires_new_evidence_without_relabeling_legacy",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_onboarding.CompleteOnboardingTests.test_malformed_host_readback_preserves_pending_configuration",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_onboarding.CompleteOnboardingTests.test_new_observed_revision_stays_pending_until_all_selected_revisions_are_understood",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_complete_onboarding.CompleteOnboardingTests.test_scope_rejects_duplicate_times_or_missing_report_slot",
         "outcome": "PASS"
       },
       {
@@ -550,6 +605,103 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_actual_delivery_receipt_cannot_be_counted_again_on_another_date",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_contracts_match_public_signatures",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_delivery_dates_and_report_receipts_cannot_be_invented_or_overwritten",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_directory_change_invalidates_scan_without_missing_or_deletion_claim",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_effect_plan_receipt_finish_are_distinct_and_retry_is_idempotent",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_effect_scope_terminal_receipt_and_request_identity_are_enforced",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_exception_exits_session_without_fabricating_completion",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_fact_read_paths_do_not_mutate_and_reject_future_record",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_facts_cas_retains_history_and_separates_evidence_from_judgment",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_facts_identity_is_source_qualified_and_relations_require_existing_fact",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_future_cycle_schema_is_refused_without_writes",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_health_freshness_is_not_a_permanent_green_status",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_metadata_paging_is_durable_deterministic_and_source_zero_write",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_metadata_scan_excludes_subtrees_without_opening_file_bodies",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_process_crash_releases_os_lock_but_retains_exact_reservation",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_questions_count_real_distinct_dates_across_cycles_and_stop_after_response",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_real_os_session_blocks_same_resource_but_not_database_or_other_resource",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_receipts_and_event_rollback_together_on_failure",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_scan_budget_exhaustion_is_incomplete_not_restart_or_omission",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_scan_registration_cas_overlap_and_future_schema",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_source_phases_require_exact_revision_and_consuming_target",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_symlink_source_is_never_followed",
+        "outcome": "SKIP",
+        "reason": "Host does not grant synthetic symlink creation."
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_total_scan_budget_and_wrong_continuation_remain_explicit",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_cycle.GovernanceCycleTests.test_unfinished_reservation_survives_reopen_without_ttl_stealing",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_interrupted_effect_uses_existing_experience_without_duplicate_commit",
         "outcome": "PASS"
       },
@@ -559,6 +711,34 @@
       },
       {
         "test": "test_governance_lifecycle.GovernanceLifecycleTests.test_three_workspaces_keep_pause_and_receive_latest_plus_independent",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_activated_replica_keeps_old_cycles_and_publication_plans_inert",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_direct_cycle_engine_cannot_reanimate_historical_cycle_after_activation",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_legacy_identity_adoption_does_not_break_existing_workbench_reads",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_legacy_reads_are_nonmutating_and_identity_adoption_keeps_explicit_fact_source",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_prepared_legacy_checkpoint_restore_operation_cannot_replay_old_destination",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_recovery_copy_preserves_scope_declarations_without_treating_them_as_payload_objects",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_governance_recovery_boundary.GovernanceRecoveryBoundaryTests.test_standby_rejects_mutations_and_retains_original_evidence_for_review",
         "outcome": "PASS"
       },
       {
@@ -747,6 +927,10 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_long_path_selection.LongPathSelectionTests.test_large_selection_and_late_staged_change",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_maintenance.MaintenanceTests.test_changed_condition_cannot_reuse_old_resolution",
         "outcome": "PASS"
       },
@@ -864,6 +1048,118 @@
       },
       {
         "test": "test_onboarding_preservation.OnboardingPreservationTests.test_update_evidence_requires_stored_current_assessment",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_identity.ProjectIdentityTests.test_legacy_plan_rejects_changed_config_without_overwrite",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_identity.ProjectIdentityTests.test_legacy_read_is_stable_and_explicit_plan_retains_alias",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_identity.ProjectIdentityTests.test_new_identity_survives_location_change_with_same_lineage",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_identity.ProjectIdentityTests.test_standby_rejects_both_api_and_direct_writes_but_allows_read",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_capture_effect_without_receipt_reuses_original_batch",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_declared_state_objects_cannot_omit_a_referenced_object",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_future_actual_state_schema_is_rejected",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_future_schema_and_traversal_rejected",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_history_index_worktree_and_state_restore_to_other_directory",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_legacy_checkpoint_restore_without_plan_id_cannot_replay",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_mismatched_manifest_digest_rejected",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_missing_or_tampered_package_object_is_reported",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_missing_registered_workspace_or_artifact_is_an_explicit_gap",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_missing_state_object_fails_before_publication",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_old_runtime_reservations_and_key_only_plans_are_archived",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_omitted_bound_baseline_is_incomplete_and_cannot_receive_elsewhere",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_partial_atomic_file_cannot_become_a_final_object",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_plain_research_brain_recovery_does_not_require_git",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_plain_research_payload_and_legacy_identity",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_restore_effect_without_receipt_is_verified_before_finalizing",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_restore_interruption_before_publication_reuses_prepared_build",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_restored_bound_baseline_accepts_new_delivery_and_new_plans",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_second_generation_restore_preserves_prior_archived_history",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_selected_refs_report_uncovered_delivery_history",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_source_change_after_plan_does_not_get_new_capture_identity",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_standby_full_records_and_events_are_checked",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_standby_old_plans_and_activation_require_exact_handoff",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_project_recovery.ProjectRecoveryTests.test_tracked_and_untracked_native_configs_are_quarantined",
         "outcome": "PASS"
       },
       {
@@ -1176,6 +1472,78 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_remote_transfer.RemoteTransferTests.test_complete_copy_can_repair_missing_receipt_even_when_original_media_is_absent",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_conflicting_destination_bytes_are_preserved",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_contract_matches_the_shared_implementation_signature",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_copy_interruption_resumes_original_object_selection",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_crash_after_real_push_repairs_only_missing_receipt",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_existing_tag_cannot_be_replaced_and_follow_tags_never_expands_scope",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_fast_forward_only_with_current_reviewed_remote_ref",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_future_manifest_and_tampered_plan_are_rejected",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_identical_retry_reads_real_effect_and_writes_no_duplicate_receipt",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_lost_transport_response_is_resolved_by_remote_effect_not_replayed",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_multiple_push_urls_and_embedded_credentials_are_not_silently_transported",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_plan_freezes_single_ref_and_execute_preserves_dirty_index_and_worktree",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_race_between_inspection_and_push_is_stopped_by_exact_lease",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_remote_ref_changed_after_plan_is_preserved",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_sealed_media_copy_has_full_hash_verification_without_cloud_claims",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_standby_replicas_cannot_execute_external_transfer_even_with_valid_old_plan",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_url_and_local_wip_changes_require_a_new_plan",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_remote_transfer.RemoteTransferTests.test_verify_detects_later_remote_changes_and_does_not_replay_old_publication",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_restore_recovery.RestoreRecoveryTests.test_changed_checkpoint_cannot_reuse_existing_restore",
         "outcome": "PASS"
       },
@@ -1454,54 +1822,184 @@
       {
         "test": "test_windows_quickstart.WindowsQuickstartTests.test_optional_one_and_five_workers_need_explicit_task_registration",
         "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_atomic_write_failure_leaves_no_partial_final_object",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_config_adapter_preserves_comments_tables_and_custom_instructions",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_config_first_add_preserves_original_bytes_and_multiline_values",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_consumption_for_old_view_does_not_mark_new_view_consumed",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_consumption_requires_exact_publication_and_real_evidence_hash",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_content_and_io_failures_are_isolated_per_workspace",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_current_decision_cycle_and_registry_can_back_a_view",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_effect_before_receipt_retry_only_finishes_missing_steps",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_exact_writes_require_reviewed_original_hash",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_existing_connect_config_survives_and_intervening_change_conflicts",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_freeze_deduplicates_and_requires_provenance",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_index_or_head_changes_block_without_writing",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_legacy_identity_adoption_retains_publication_consumption_and_source_revision",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_managed_markers_are_not_guessed_or_nested",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_missing_view_mirror_resumes_from_durable_intent",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_old_plan_never_regresses_a_new_view_with_same_entry_bytes",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_original_setup_binding_must_match",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_os_lock_releases_after_process_exit_without_deleting_lock_file",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_partial_write_retries_remaining_file_and_preserves_modified_one",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_plan_file_tamper_is_refused",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_pointer_effect_before_index_finalize_has_truthful_status",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_preserves_head_index_business_wip_and_professional_section",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_receipt_and_pointer_failures_resume_without_rewriting_effect",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_receipt_does_not_hide_later_target_drift",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_record_sources_use_same_control_and_actual_revision",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_source_revision_drift_is_visible_and_does_not_rewrite_view",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_status_is_read_only_and_paginates_workspaces",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_symlink_target_refused_when_os_supports_it",
+        "outcome": "SKIP",
+        "reason": "OS denies synthetic symlink creation"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_tracked_and_unignored_targets_are_rejected",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_unknown_or_rebound_workspace_task_is_rejected",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_unsafe_paths_and_duplicate_workspace_are_refused",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_workbench.WorkbenchTests.test_view_tamper_and_future_schema_are_refused",
+        "outcome": "PASS"
       }
     ],
     "changed_during_run": [],
-    "standard_source_wheel_and_sdist_build": "enabled_and_passed",
-    "source_identity": "Code and tests were frozen throughout this run. Portable validation summaries were updated after the run."
+    "source_unchanged": true,
+    "standard_source_wheel_and_sdist_build": "enabled",
+    "processes": [
+      {
+        "shard": 0,
+        "exit_code": 0
+      },
+      {
+        "shard": 1,
+        "exit_code": 0
+      },
+      {
+        "shard": 2,
+        "exit_code": 0
+      }
+    ],
+    "successful": true
   },
-  "package_validation": {
-    "status": "post_build_receipts_are_separate",
-    "scope": "Exact ZIP/wheel build, fresh installation and RC5/RC6 upgrades are recorded against final artifact hashes in the candidate review; source tests alone are not package or native-host acceptance."
-  },
-  "host_validation": {
-    "synthetic_ai_history": {
-      "status": "passed",
-      "threads": 1,
-      "turns": 2,
-      "scope": "Authorized synthetic history copied to isolated Codex home; protocol version 0.166.0-alpha.6.",
-      "archived": true
-    },
-    "native_mcp": "pending_native_project_trust_and_target_window",
-    "natural_heartbeat": "not_verified",
-    "independent_ai_onboarding": {
-      "status": "completed_with_explicit_native_pending",
-      "tested_source_commit": "172644140597e70b24450fd0219f6873a92c30f3",
-      "installed_python": "3.14.3",
-      "threads": 1,
-      "archived": true,
-      "existing_git_layers_and_product_files_preserved": true,
-      "native_mcp_verified": false,
-      "natural_trigger_verified": false,
-      "scope": "Actual synthetic package installation and configuration by an independent AI chat; its report led to documentation follow-up. Subsequent artifacts have separate exact verification."
-    }
-  },
-  "limitations": [
-    "Windows native symlink creation requires unavailable host privileges; junction coverage is separate.",
-    "Candidate native MCP loading and natural scheduled delivery require actual host receipts.",
-    "Public CI for the final commit is pending authorized publication.",
-    "No production installation or independent-user usability acceptance."
-  ],
+  "tested_file_manifest_sha256": "2c4c67e36974680f5c93fa5845a6a22d268860594cfc2a0f75e534dcae96a0fd",
+  "source_identity": "All public code, tests, Skills, fixtures and documentation were unchanged during the run. These two portable validation summaries were updated afterwards.",
   "api_contract": {
-    "mcp_actions": 28,
+    "mcp_actions": 35,
     "public_skills": 4,
     "skill_references": 2
   },
+  "artifact_validation": {
+    "scope": "Exact Git-blob ZIP and wheel; separate fresh installation and RC5/RC6 upgrades, Skills parity and isolated entrypoints.",
+    "receipts": "Recorded against final artifact hashes in the candidate review; not inferred from source tests."
+  },
+  "host_validation": {
+    "scope": "Each active chat must call its native tools and read its exact current entry. Natural trigger, original-chat execution and delivery have separate receipts.",
+    "receipts": "Per-candidate report; earlier package receipts are historical evidence only.",
+    "engineering_example": "Synthetic USB text frames, replay and CSV data. No physical device or firmware acceptance is implied."
+  },
   "public_boundary": {
-    "allowlisted_source_files_including_generated_skills": 171,
-    "product_source_payloads": 113,
+    "allowlisted_source_files_including_generated_skills": 206,
+    "product_source_payloads": 139,
     "source_screen_findings": 0,
-    "new_reachable_history_screen_findings": 0,
     "private_inputs_included": false
-  }
+  },
+  "limitations": [
+    "Windows symlink cases requiring unavailable privileges remain individually listed as skips.",
+    "The built-wheel opt-in test is performed independently against an actual artifact.",
+    "Final-commit remote CI requires authorized public publication; earlier CI does not certify this candidate.",
+    "No two-physical-computer end-to-end or arbitrary cloud-provider validation.",
+    "A restored copy begins in standby; local tools cannot remotely fence an old writer.",
+    "No production installation or independent-human usability acceptance is inferred."
+  ]
 }

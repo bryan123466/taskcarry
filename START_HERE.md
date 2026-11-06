@@ -4,11 +4,11 @@
 
 <a id="download"></a>
 
-**0.2.0rc7 · Local candidate, not published / 本地候选，尚未发布 / 本機候選，尚未發行**
+**0.2.0rc7 · Release candidate / 发行候选版 / 發行候選版**
 
-[Planned release page / 预定发行页 / 預定發行頁](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc7) · [Candidate contents and verification / 候选内容与验证 / 候選內容與驗證](docs/RELEASE_0.2.0rc7.md)
+[Release downloads / 发行下载 / 發行下載](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc7) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0rc7.md)
 
-Public downloads open after candidate review. / 候选复核后才开放公开下载。/ 候選複核後才開放公開下載。
+If you already have the complete package, start below. Public availability is shown by the release page's actual attachments. / 已取得完整包可直接从下方开始；公开下载以发行页实际提供的附件为准。/ 已取得完整套件可直接從下方開始；公開下載以發行頁實際提供的附件為準。
 
 <a id="zh-CN"></a>
 
@@ -30,6 +30,8 @@ Public downloads open after candidate review. / 候选复核后才开放公开�
 
 [日常操作](docs/zh-CN/operation-manual.md) · [手动后备](docs/zh-CN/manual-setup.md) · [维护参考](docs/zh-CN/governance-maintenance.md)
 
+[你会收到哪些反馈](docs/zh-CN/user-feedback-examples.md) · [三层架构与项目记忆](docs/zh-CN/architecture.md) · [备份、异地恢复和并行工作](docs/zh-CN/remote-and-multicomputer.md)
+
 <a id="en"></a>
 
 ## English
@@ -50,6 +52,8 @@ Return to your original governance chat and send the prompt in the [update guide
 
 [Daily operations](docs/en/operation-manual.md) · [Manual fallback](docs/en/manual-setup.md) · [Maintenance reference](docs/en/governance-maintenance.md)
 
+[Feedback examples](docs/en/user-feedback-examples.md) · [Three layers and project memory](docs/en/architecture.md) · [Backup, recovery and parallel work](docs/en/remote-and-multicomputer.md)
+
 <a id="zh-TW"></a>
 
 ## 繁體中文
@@ -69,3 +73,5 @@ Return to your original governance chat and send the prompt in the [update guide
 回到原治理視窗，傳送[更新指南](docs/zh-TW/updating.md)中的提示詞。治理會檢查現況、保留專案與設定、完成適用的更新並驗證結果。
 
 [日常操作](docs/zh-TW/operation-manual.md) · [手動後備](docs/zh-TW/manual-setup.md) · [維護參考](docs/zh-TW/governance-maintenance.md)
+
+[你會收到哪些回饋](docs/zh-TW/user-feedback-examples.md) · [三層架構與專案記憶](docs/zh-TW/architecture.md) · [備份、異地恢復及並行工作](docs/zh-TW/remote-and-multicomputer.md)

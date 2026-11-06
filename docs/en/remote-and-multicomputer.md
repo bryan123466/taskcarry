@@ -18,8 +18,6 @@ Replace every `<...>` placeholder. Use the Python environment in which TaskCarry
 
 ### 4.1 Know what each store contains
 
-[Ready-to-paste Windows example for this step](manual-setup.md)
-
 | Content | Recommended location | What it can recover |
 |---|---|---|
 | Selected code, documents and stable outputs | A private Git repository, committed and pushed | Uploaded file versions and commit history |
@@ -32,8 +30,6 @@ Replace every `<...>` placeholder. Use the Python environment in which TaskCarry
 **Private Git is not an automatic mirror of a computer or the governance database.** Selected files reach it only after commit and push. Ignored files, unfinished uncommitted work and local chat history are not included automatically. GitHub blocks ordinary Git files larger than 100 MiB; use separately chosen storage or explicitly configure Git LFS for suitable large files. TaskCarry configures neither automatically. [GitHub file limits](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)
 
 ### 4.2 Establish the private remote and one main writer
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
 
 1. Create a **private** repository with your Git hosting provider and review its members. For an existing project, avoid creating an unrelated remote README or initial commit.
 2. Designate one computer as the integration host. Its dedicated clean receiving workspace is the only place advancing remote `main`; other computers publish task branches.
@@ -63,8 +59,6 @@ git -C "<A_BASELINE>" ls-remote origin refs/heads/main
 The last two hashes should match. Investigate rejection instead of forcing a push. If remote history differs or another writer advanced it, reconcile the evidence and responsibility first. **This is a native Git push, not TaskCarry `reconcile` or a built-in remote receipt.** Use the provider's branch protection/access controls where appropriate to enforce the main writer; a prompt alone cannot provide a cross-host lock.
 
 ### 4.3 Keep useful memory in ordinary project files
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Use a registered documentation workspace to maintain, for example, `project-memory/current.md` with:
 
@@ -136,8 +130,6 @@ Tools check explicit handoff declarations and native evidence references; they c
 
 ### 5.1 Recommended topology and responsibilities
 
-[Ready-to-paste Windows example for this step](manual-setup.md)
-
 ```text
 Computer B: independent clone → task branch → stable commit + handoff manifest
                                      │ push task branch
@@ -157,8 +149,6 @@ A business area may contain multiple task branches. Define deliverables, writabl
 Each computer may use its own legitimately authorized Codex account and Git credentials. **An account login is not a task lock and does not log another computer out.** Do not share session files, tokens or passwords. Configure Git access and main-writer restrictions separately. This starting arrangement does not require a custom login server and provides no automatic failover during network partitions.
 
 ### 5.2 Computer B: start a task from the published baseline
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Confirm A has pushed the baseline B should use. For this example, task `form-export` is scoped to `forms/export.py` and `docs/export.md`; replace the names and paths with the actual agreement.
 
@@ -187,8 +177,6 @@ git -C "<B_REPOSITORY>" diff --no-renames --name-only "<SOURCE_BASE>" HEAD
 Confirm the index contains only the intended paths before committing. Record this output commit as `<SOURCE_COMMIT>`. The final command's result must exactly match the declared delivery paths, including the actual paths involved in deletions or renames.
 
 ### 5.3 Computer B: record a handoff and push its task branch
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Create `handoffs/form-export-v1.json` **after** the output commit, avoiding a file trying to contain its own commit hash:
 
@@ -222,8 +210,6 @@ git -C "<B_REPOSITORY>" ls-remote origin refs/heads/codex/form-export
 Check the index and the remote hash. The branch HEAD now contains the handoff and usually **differs from** the delivered `<SOURCE_COMMIT>`; retain both identities. B's checkpoint objects and uncommitted files did not travel with this push.
 
 ### 5.4 Computer A: verify original evidence, then receive locally
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
 
 Use a consistently named intake clone/workspace for this task, for example registration `intake-form-export`. If it already exists, inspect its identity binding and unfinished operations rather than recreating it or rewriting its history.
 
@@ -295,8 +281,6 @@ Confirm the stage is actually `COMMITTED`, its operations are complete and basel
 > Receive computer B's form-export-v1. Read its remote handoff and original commits. Verify original base/commit, exact paths, actual checks, current baseline and task relationship. Use the consistently registered local intake workspace and TaskCarry submit, then planned reconcile. Do not claim a cross-host database import, rewrite source hashes or repeat completed effects. Check whether other stages in the plan are authorized too. Preserve B's unfinished-task notes and separate business acceptance. Push main only within existing authorization.
 
 ### 5.5 Continuing on B, transferring the main role and known limits
-
-[Ready-to-paste Windows example for this step](manual-setup.md)
 
 After A confirms reception and push, B reads the current handoff. Preserve WIP in its old task workspace rather than resetting it to `main`. Start a clean next task branch from the published baseline when appropriate:
 

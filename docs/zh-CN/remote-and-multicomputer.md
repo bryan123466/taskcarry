@@ -18,8 +18,6 @@
 
 ### 4.1 先分清哪些内容保存在哪里
 
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
-
 | 内容 | 推荐保存位置 | 恢复时能提供什么 |
 |---|---|---|
 | 选定的代码、文档、稳定成果 | 私有 Git 仓库，完成 commit 和 push | 已推送的文件版本与提交历史 |
@@ -32,8 +30,6 @@
 **私有 Git 不是整个电脑或治理数据库的自动镜像。** 只有已经提交并推送的选定文件才会到达远端；忽略文件、未提交成果和本机聊天历史不会因此自动保存。GitHub 普通 Git 文件超过 100 MiB 会被拒绝；大文件应另选存储或明确配置 Git LFS，TaskCarry 不自动配置它们。[GitHub 文件限制](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)
 
 ### 4.2 建立私有远端，明确谁能推进主线
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 1. 在自己的 Git 托管服务创建**私有**仓库，检查成员权限。接入已有项目时，不要让新仓库自动生成与本地历史无关的 README 或初始提交。
 2. 选定一台电脑作为集成主机。其专用干净接收工作区是唯一推进远端 `main` 的位置；其他电脑使用任务分支。
@@ -63,8 +59,6 @@ git -C "<A_BASELINE>" ls-remote origin refs/heads/main
 后两条的提交哈希应一致。被拒绝时先查原因，不强推。若远端已有不同历史或其他写入，先核对差异与写入责任。**这是原生 Git 推送，不是 TaskCarry 的 `reconcile` 或内建远端回执。** 建议使用托管平台的分支保护/权限限制来落实唯一主线写入者；仅在提示词里约定无法形成跨机锁。
 
 ### 4.3 把有用记忆保存为普通项目文件
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 在一个已登记、负责文档的专业工作区维护例如 `project-memory/current.md`，内容包括：
 
@@ -136,8 +130,6 @@ Core 可以从可信发行包重装；项目记忆不能靠重新下载恢复。
 
 ### 5.1 推荐拓扑与责任
 
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
-
 ```text
 电脑 B：独立 clone → 任务分支 → 稳定提交 + 交付 manifest
                          │ push 任务分支
@@ -157,8 +149,6 @@ TaskCarry 的一个治理目录由**一台电脑上的本地 SQLite**管理。�
 不同电脑可分别使用各自有权使用的 Codex 账户和 Git 凭据。**账户登录不构成任务锁，也不会自动登出另一电脑。** 不共享会话文件、登录令牌或密码；Git 权限与主线写入限制单独配置。初始方案不需要自己搭登录服务器，也不承诺网络分区期间的自动主机切换。
 
 ### 5.2 电脑 B：从已公布基线开始一个任务
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 确认 A 已推送允许 B 使用的基线，并约定任务 `form-export` 仅修改 `forms/export.py` 与 `docs/export.md`。以下目录、任务名和文件都是示例，应换成实际约定。
 
@@ -187,8 +177,6 @@ git -C "<B_REPOSITORY>" diff --no-renames --name-only "<SOURCE_BASE>" HEAD
 仍须在提交前确认暂存区只有本次路径。把产物提交记为 `<SOURCE_COMMIT>`；最后一条结果必须与交付清单完整相符。删除和重命名涉及的路径也需按实际 diff 核对。
 
 ### 5.3 电脑 B：另存交付说明并推送任务分支
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 在产物提交**之后**创建 `handoffs/form-export-v1.json`，避免“文件里写它自身提交哈希”的循环：
 
@@ -222,8 +210,6 @@ git -C "<B_REPOSITORY>" ls-remote origin refs/heads/codex/form-export
 检查暂存内容与远端哈希。远端分支 HEAD 现在包含交接说明，其哈希通常**不同于**被交付的 `<SOURCE_COMMIT>`，两者都应保留，不能混用。B 的 checkpoint 对象和未提交文件没有随此推送上传。
 
 ### 5.4 电脑 A：复核原始证据，再用本地接口接收
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 为这个任务建立名称稳定的 intake 克隆/工作区（例如本地登记名 `intake-form-export`），从远端取得原提交。已有对应 intake 时先查其绑定和未完状态，不重复创建或改写其历史。
 
@@ -295,8 +281,6 @@ python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status
 > 接收电脑 B 的 form-export-v1。先读取远端交接说明与原提交，核对原 base/commit、精确路径、已做检查、当前基线及任务关系。使用本机稳定登记的 intake 工作区，通过 TaskCarry submit 与先计划后执行的 reconcile 接收，不冒充跨机数据库导入，不重写来源哈希，不重复执行已完成效果。检查计划中的其他阶段是否也在授权范围。保留 B 的未完任务说明，业务验收单独判断；仅按已有授权推送主线。
 
 ### 5.5 B 接续、主机换手和已知边界
-
-[本步骤可直接复制的 Windows 示例](manual-setup.md)
 
 B 确认 A 接收并推送后，读取最新接续说明。若旧任务工作区仍有 WIP，先保留，不直接把它重置到 `main`。可从已公布主线建立下一条干净任务支线：
 

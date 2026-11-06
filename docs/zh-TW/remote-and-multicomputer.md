@@ -18,8 +18,6 @@
 
 ### 4.1 先分清哪些內容儲存在哪裡
 
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
-
 | 內容 | 推薦儲存位置 | 恢復時能提供什麼 |
 |---|---|---|
 | 選定的程式碼、文件、穩定成果 | 私有 Git 儲存庫，完成 commit 和 push | 已推送的檔案版本與提交歷史 |
@@ -32,8 +30,6 @@
 **私有 Git 不是整個電腦或治理資料庫的自動鏡像。** 只有已經提交並推送的選定檔案才會到達遠端；忽略檔案、未提交成果和本機對話歷史不會因此自動儲存。GitHub 普通 Git 檔案超過 100 MiB 會被拒絕；大檔案應另選儲存或明確設定 Git LFS，TaskCarry 不自動設定它們。[GitHub 檔案限制](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)
 
 ### 4.2 建立私有遠端，明確誰能推進主線
-
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 1. 在自己的 Git 託管服務建立**私有**儲存庫，檢查成員權限。接入已有專案時，不要讓新儲存庫自動生成與本機歷史無關的 README 或初始提交。
 2. 選定一臺電腦作為整合主機。其專用乾淨接收工作區是唯一推進遠端 `main` 的位置；其他電腦使用任務分支。
@@ -63,8 +59,6 @@ git -C "<A_BASELINE>" ls-remote origin refs/heads/main
 後兩條的提交雜湊應一致。被拒絕時先查原因，不強推。若遠端已有不同歷史或其他寫入，先核對差異與寫入責任。**這是原生 Git 推送，不是 TaskCarry 的 `reconcile` 或內建遠端回執。** 建議使用託管平台的分支保護/權限限制來落實唯一主線寫入者；僅在提示詞裡約定無法形成跨機鎖。
 
 ### 4.3 把有用記憶儲存為普通專案檔案
-
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 在一個已登記、負責文件的專業工作區維護例如 `project-memory/current.md`，內容包括：
 
@@ -136,8 +130,6 @@ Core 可以從可信發行包重裝；專案記憶不能靠重新下載恢復。
 
 ### 5.1 推薦拓撲與責任
 
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
-
 ```text
 電腦 B：獨立 clone → 任務分支 → 穩定提交 + 交付 manifest
                          │ push 任務分支
@@ -157,8 +149,6 @@ TaskCarry 的一個治理目錄由**一臺電腦上的本機 SQLite**管理。�
 不同電腦可分別使用各自有權使用的 Codex 帳號和 Git 憑據。**帳號登入不構成任務鎖，也不會自動登出另一電腦。** 不共享會話檔案、登入權杖或密碼；Git 權限與主線寫入限制單獨設定。初始方案不需要自己搭登入服務器，也不承諾網路分區期間的自動主機切換。
 
 ### 5.2 電腦 B：從已公布基線開始一個任務
-
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 確認 A 已推送允許 B 使用的基線，並約定任務 `form-export` 僅修改 `forms/export.py` 與 `docs/export.md`。以下目錄、任務名和檔案都是示例，應換成實際約定。
 
@@ -187,8 +177,6 @@ git -C "<B_REPOSITORY>" diff --no-renames --name-only "<SOURCE_BASE>" HEAD
 仍須在提交前確認暫存區只有本次路徑。把產物提交記為 `<SOURCE_COMMIT>`；最後一條結果必須與交付清單完整相符。刪除和重命名涉及的路徑也需按實際 diff 核對。
 
 ### 5.3 電腦 B：另存交付說明並推送任務分支
-
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 在產物提交**之後**建立 `handoffs/form-export-v1.json`，避免“檔案裡寫它自身提交雜湊”的循環：
 
@@ -222,8 +210,6 @@ git -C "<B_REPOSITORY>" ls-remote origin refs/heads/codex/form-export
 檢查暫存內容與遠端雜湊。遠端分支 HEAD 現在包含交接說明，其雜湊通常**不同於**被交付的 `<SOURCE_COMMIT>`，兩者都應保留，不能混用。B 的 checkpoint 對象和未提交檔案沒有隨此推送上傳。
 
 ### 5.4 電腦 A：複核原始證據，再用本機介面接收
-
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 為這個任務建立名稱穩定的 intake 儲存庫副本或工作區（例如本機登記名 `intake-form-export`），從遠端取得原提交。已有對應 intake 時先查其綁定和未完狀態，不重複建立或改寫其歷史。
 
@@ -295,8 +281,6 @@ python -I -X utf8 -m taskcarry --project "<A_CONTROL>" status
 > 接收電腦 B 的 form-export-v1。先讀取遠端交接說明與原提交，核對原 base/commit、精確路徑、已做檢查、當前基線及任務關係。使用本機穩定登記的 intake 工作區，通過 TaskCarry submit 與先計畫後執行的 reconcile 接收，不冒充跨機資料庫匯入，不重寫來源雜湊，不重複執行已完成效果。檢查計畫中的其他階段是否也在授權範圍。保留 B 的未完任務說明，業務驗收單獨判斷；僅按已有授權推送主線。
 
 ### 5.5 B 接續、主機換手和已知邊界
-
-[本步驟可直接複製的 Windows 示例](manual-setup.md)
 
 B 確認 A 接收並推送後，讀取最新接續說明。若舊任務工作區仍有 WIP，先保留，不直接把它重置到 `main`。可從已公布主線建立下一條乾淨任務支線：
 

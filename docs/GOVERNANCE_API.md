@@ -63,3 +63,11 @@ Read back every actual native schedule under `schedule_config`. Later record `sc
 Source coverage includes each selected revision observed within the referenced cycle. Understanding an older revision cannot hide a newly observed revision that still needs reading.
 
 Synthetic tests establish mechanisms. CLI/standalone stdio success is not native-host acceptance. Receipt strings and booleans do not independently establish their truth. Actual chat tools, natural triggers, cloud retrieval and physical multi-computer behavior each need their own evidence level.
+
+## Persistent state compatibility
+
+Program, project-state and derived-index versions are independent. Supported project schema 1 accepts the original SQLite application_id=0 as well as the current product marker, after checking the records/events layouts, project configuration and supported index versions. A different nonzero marker is foreign. Identification uses the same format reader as project snapshots; snapshots additionally require SQLite integrity checking. Recognition does not write markers, migrate evidence or create journals. Unknown/incomplete/corrupt snapshots return RECOVERY_STATE_CORRUPT; a recognized unsupported state/index format returns SCHEMA_VERSION_UNSUPPORTED. Failed backup publication never implies historical records were lost.
+
+Explicit upgrade rebuilds derived indexes without rewriting records or events. Project recovery retains source lineage, tasks, decisions, object identities and archived original bindings, while recording a new replica and relocated paths. Old executable plans are not automatically replayed on a different replica. Repeated backup/restore calls verify existing effects before completing missing receipts.
+
+Local governance-method adoption, a selected Core runtime change and public product publication have separate evidence. A local improvement may use the current verified engine or a verified isolated maintenance candidate; a public fix may be developed directly or extracted from local practice. Neither side requires the other's publication/acceptance, while real compatibility and recovery dependencies still apply to affected operations. Retain current facts when evaluating rollback; connection-file restoration alone does not establish full data-format downgrade support.

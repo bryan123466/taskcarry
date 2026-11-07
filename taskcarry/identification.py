@@ -1,12 +1,12 @@
 """Inspect a selected state location without creating SQLite journals or locks."""
 from contextlib import closing
 import hashlib
-import json
 import os
 from pathlib import Path
 import sqlite3
 
 from .store import GovernanceError, _linked
+from .state_format import inspect_state
 
 
 def source(root, config=None):
@@ -61,26 +61,10 @@ def identify(project, initializing=False):
     before = (path.stat().st_ino, path.stat().st_size, path.stat().st_mtime_ns)
     try:
         with closing(sqlite3.connect(path.as_uri() + '?mode=ro&immutable=1', uri=True, timeout=0)) as db:
-            tables = {row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-            if not {'records', 'events'}.issubset(tables):
-                return finish('unknown', reason='not_taskcarry_tables')
-            row = db.execute("SELECT value FROM records WHERE collection='config' AND key='project'").fetchone()
-            if row is None:
-                if db.execute('PRAGMA application_id').fetchone()[0] == 1413693785:
-                    return finish('incomplete', reason='initialization_not_published')
-                return finish('unknown', reason='missing_project_identity')
-            config = json.loads(row[0])
-            if not isinstance(config, dict) or type(config.get('schema_version')) is not int:
-                return finish('corrupt', reason='invalid_project_config')
-            state = 'compatible' if config['schema_version'] == 1 else 'unsupported'
-            if state == 'compatible' and 'store_schema' in tables:
-                projection = db.execute("SELECT version FROM store_schema WHERE name='current_records'").fetchone()
-                if projection and projection[0] != 1:
-                    state = 'unsupported'
-            if state == 'compatible' and 'context_schema' in tables:
-                context = db.execute('SELECT version FROM context_schema').fetchone()
-                if context is None or context[0] != 1:
-                    state = 'unsupported'
+            inspected = inspect_state(db)
+            if inspected['state'] not in ('compatible', 'unsupported'):
+                return finish(inspected['state'], reason=inspected['reason'])
+            config, state = inspected['config'], inspected['state']
     except (sqlite3.DatabaseError, ValueError, TypeError, UnicodeError):
         return finish('corrupt', reason='unreadable_state_format')
     after = (path.stat().st_ino, path.stat().st_size, path.stat().st_mtime_ns)

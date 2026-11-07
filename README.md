@@ -60,6 +60,8 @@ Your independent **governance chat** maintains project memory and reviews connec
 
 The product has three responsibility layers: **Core** supplies verifiable shared operations; the **capability layer** combines packaged Skills, project methods and available host tools; the **user project layer** retains your facts, decisions, relationships, files and progress. Public updates preserve your project rules and memory. Core can be reinstalled, but restoring your project requires its actual state, objects, Git history/WIP, materials and capability versions. See [how the three layers work together](docs/en/architecture.md).
 
+Engine code, governance methods and project data have separate lifecycles: supported engine updates retain original tasks and historical relationships, while your own governance methods can be validated and adopted independently of public releases.
+
 TaskCarry stores records and performs the supported local operations. You retain decisions about project direction, priorities, business acceptance, and external delivery. The toolkit does not require a separate model API or train a model.
 
 For example, software may have a usable module while experiments are paused and documentation is still a draft. Governance can receive the software stage and retain the other two tasks at their current positions. Nobody needs to mark the entire project complete just to preserve useful progress.

@@ -106,6 +106,8 @@ If required items are missing, report setup in progress with completed work, exa
 
 You can say “continue the original task,” “save this pause point,” or “which chats does this change affect?” After interruption: **“Continue from the original checklist and task, inspect actual effects, and finish only the missing steps.”**
 
+Existing users continue updating in the original governance chat, verify original tasks, decisions, sources and checkpoints, and exercise full backup and independent recovery on old-state copies. See the [existing-user update flow](updating.md).
+
 <details>
 <summary>Acceptance criteria and technical evidence</summary>
 

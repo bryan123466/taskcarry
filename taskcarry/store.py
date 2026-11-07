@@ -10,6 +10,8 @@ import sqlite3
 import threading
 import uuid
 
+from .state_format import APPLICATION_ID
+
 
 TERMINAL_STATES = frozenset(('accepted', 'committed', 'complete', 'completed', 'superseded',
                              'cancelled', 'dismissed', 'finalized', 'adopted'))
@@ -62,7 +64,7 @@ class Store:
                 if not fresh:
                     return
                 with closing(sqlite3.connect(self.path, timeout=0)) as db:
-                    db.execute('PRAGMA application_id=1413693785')
+                    db.execute('PRAGMA application_id=' + str(APPLICATION_ID))
                     db.execute('PRAGMA journal_mode=WAL')
                     db.execute('PRAGMA synchronous=FULL')
                     db.executescript('''

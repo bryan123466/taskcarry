@@ -58,3 +58,11 @@ Include the registered receiving repository when the project already has one. Re
 An independently restored replica starts in `standby`. Verify bytes, path rebinding, tasks and workspaces, then regenerate local connections and verify native tools. Activate a new sole governance writer only after explicitly stopping the old writer and checking the exact handoff target. Host/Git controls must enforce an offline old writer's exclusion; a local lock cannot prove a remote process stopped.
 
 Parallel work on other computers uses separate task branches or exact file artifacts, returning source identities, versions, paths and continuation points to one governance writer. **Do not concurrently synchronize a live SQLite database or share `.git`.** Private remote/cloud transport is separate; local capture, upload, download and isolated restore each need evidence. See the [multi-computer reference](remote-and-multicomputer.md).
+
+## Update and compatibility boundaries
+
+Core program versions and persistent data format versions have separate lifecycles. Supported schema 1 includes valid older databases without the newer product marker. Identification and project snapshots share structure, project-configuration and format-version checks; backup also checks database integrity. Recognizing a compatible old format does not stamp it, initialize another project or rewrite history. Foreign databases, corrupt state and unsupported future formats remain rejected.
+
+Capability-layer methods and project rules can evolve on the current reliable engine. Local governance may repair, validate and adopt improvements before feeding back a reusable solution; public Core development may also provide a candidate for local evaluation. Internal adoption and public publication have separate evidence and decisions. Neither requires the other's approval; actual technical dependencies restrict only affected operations and combinations.
+
+Retain original tasks, decisions, checkpoints, source aliases and revision relationships. A required data migration must declare scope and rollback conditions. Derived indexes can be explicitly rebuilt while original evidence remains. Restoration records relocated paths and a new replica identity; old execution plans become inert history. A new physical path does not create unrelated project history or reopen completed tasks.

@@ -23,3 +23,9 @@ Governance checks the registered official channel during its routine. Offline me
 Core updates, capability/method updates and user-project decisions are separate responsibilities. Public release, local installation, managed-file publication and a running host loading them are different receipts.
 
 To resume: **“Continue the original TaskCarry update; verify already completed effects and finish the remaining plan.”** Read [release details](../RELEASE_0.2.0rc7.md) for version differences, [feedback examples](user-feedback-examples.md) for expected results, and [manual fallback](manual-setup.md) only for the blocked step.
+
+## Verify continuity during an update
+
+Ask the original governance chat to verify existing tasks, decisions, sources and the latest checkpoint. In an independent candidate environment with authorized state copies, exercise project backup, manifest verification and restoration into a separate directory. Check selected artifacts and historical relationships; keep the restored replica in standby. If an explicit index upgrade is needed, verify preservation of original evidence. Users do not need to edit database markers or initialize another project.
+
+Evaluate governance methods, project rules and the Core package separately. If a candidate is unsuitable, keep the verified runtime combination and name affected capabilities and next conditions. Unrelated governance improvements and specialist work can continue. Report package installation, managed configuration, native loading and actual local resolution separately. Rollback must retain facts added after switching; do not overwrite current records with an old database.

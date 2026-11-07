@@ -16,6 +16,7 @@ import uuid
 from . import __version__
 from .core import Core, _id, read_file_bytes
 from .store import Store, GovernanceError, now
+from .state_format import inspect_state
 from . import recovery_git as rg
 from .recovery_files import (MAX_BYTES, MAX_FILE, MAX_FILES, SHA, atomic, digest, disjoint,
                              encoded, get, lock, normal, put, read_json, relative, safe, write_json)
@@ -62,18 +63,14 @@ def _state_rows(path):
         with closing(sqlite3.connect(normal(path).as_uri() + '?mode=ro&immutable=1', uri=True)) as db:
             if db.execute('PRAGMA integrity_check').fetchone()[0] != 'ok':
                 raise GovernanceError('RECOVERY_STATE_CORRUPT', 'The governance snapshot failed SQLite integrity checking.')
-            if db.execute('PRAGMA application_id').fetchone()[0] != 1413693785:
-                raise GovernanceError('RECOVERY_STATE_CORRUPT', 'The snapshot is not a TaskCarry state database.')
-            rows = [(c, k, json.loads(v)) for c, k, v in db.execute('SELECT collection,key,value FROM records')]
-            config = next((v for c, k, v in rows if (c, k) == ('config', 'project')), {})
-            if type(config.get('schema_version')) is not int or config['schema_version'] != 1:
+            inspected = inspect_state(db)
+            if inspected['state'] == 'unsupported':
                 raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'The snapshot governance schema is unsupported.')
-            tables = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-            for name in ('store_schema', 'context_schema'):
-                if name in tables and any(row[0] != 1 for row in db.execute('SELECT version FROM ' + name)):
-                    raise GovernanceError('SCHEMA_VERSION_UNSUPPORTED', 'The snapshot index schema is unsupported.')
-            return rows
-    except (sqlite3.Error, ValueError, TypeError) as exc:
+            if inspected['state'] != 'compatible':
+                raise GovernanceError('RECOVERY_STATE_CORRUPT', 'The snapshot is not a complete supported TaskCarry state database.',
+                                      {'reason': inspected['reason']})
+            return [(c, k, json.loads(v)) for c, k, v in db.execute('SELECT collection,key,value FROM records')]
+    except (sqlite3.Error, ValueError, TypeError, UnicodeError) as exc:
         raise GovernanceError('RECOVERY_STATE_CORRUPT', 'The governance snapshot cannot be read safely.') from exc
 
 

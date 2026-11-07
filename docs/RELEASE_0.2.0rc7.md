@@ -35,6 +35,7 @@
 16. **私有传输有自己的计划和回执。** 精确 Git ref 采用预期旧值检查；传输异常先读取远端实际效果，已经完成的只补回执，不改旧 tag。恢复集可封存复制到明确的本地同步目录；本地字节核对、云端上传、独立取回和恢复分别报告。
 17. **完整建制采用版本化验收。** 新清单覆盖理解来源、工作台消费、首次整轮和独立恢复，并配置一个报告时段及一到两个吸收时段。配置、自然触发、原聊天 AI 执行和实际报告送达各有依据。旧单时段接入回执保留旧范围，不会自动获得新增能力的验收结论。
 18. **修正大量精确路径在 Windows 保存失败的问题。** 选定路径按有界批次交给 Git，避免命令行超长；仍保留原选择范围，能发现末批暂存变更，不吞并其他暂存工作。
+19. **兼容旧状态的整项目备份。** 统一识别与快照格式判断，支持合法旧 schema 1 的默认数据库标记，保留原记录与历史关系；外来、损坏及未来格式仍拒绝。补齐旧状态、索引升级、原计划续办、缺回执恢复与独立待机恢复回归。内部治理方法采用与公共内核发行继续分别管理。
 
 ### 必要操作与兼容说明
 
@@ -82,6 +83,7 @@ Existing users return to their original governance chat with the [update prompt]
 16. **Planned private transport.** Single-ref Git publication checks the expected old value; ambiguous transport first reads the remote effect and repairs only missing receipts. Old tags are retained. Sealed media can be copied to selected local sync locations, with local bytes, cloud upload, retrieval and restore reported separately.
 17. **Versioned complete setup.** The new checklist covers understood sources, consumed entries, a first cycle, isolated recovery and one report plus one or two absorption slots. Configuration, natural trigger, original-chat AI execution and actual report delivery stay separate. Legacy single-slot receipts do not attest the expanded profile.
 18. **Large exact path selections on Windows.** Bounded argument batches avoid command-line length failures while retaining the same selection, detecting staged changes in the final batch and preserving unrelated staged work.
+19. **Whole-project backup compatibility for old state.** Shared identification/snapshot checks accept valid legacy schema-1 databases with the default marker while retaining records and relationships. Foreign, corrupt and future formats remain rejected. Regressions cover old state, index upgrade, original-plan continuation, missing receipts and independent standby recovery. Internal governance-method adoption and public Core publication remain separate.
 
 ### Required actions and compatibility
 
@@ -128,6 +130,7 @@ Codex support is limited to the verified protocol and actual host configuration/
 16. **有計畫的私有傳輸。** 單一 Git ref 以預期舊值保護；傳輸不明先讀回真實效果，已完成只補回執，不改舊 tag。封存媒介可複製到選定同步目錄；本機位元組、雲端上傳、獨立取回與恢復分開驗收。
 17. **版本化完整建制驗收。** 新清單涵蓋來源理解、工作台消費、首次整輪、獨立恢復，以及一個報告和一到兩個吸收時段。設定、自然觸發、原聊天 AI 執行與實際送達分別留證。舊單時段回執保留原範圍。
 18. **修正 Windows 大量精確路徑儲存失敗。** Git 參數分批受限，避免命令列過長；仍維持原選擇範圍、偵測末批暫存變更並保全其他暫存工作。
+19. **相容舊狀態的整專案備份。** 統一識別與快照格式判斷，支援合法舊 schema 1 的預設資料庫標記，保留原記錄與歷史關係；外來、損壞及未來格式仍拒絕。補齊舊狀態、索引升級、原計畫續辦、缺回執恢復與獨立待機恢復回歸。內部治理方法採用與公共內核發行繼續分別管理。
 
 ### 必要操作與相容說明
 

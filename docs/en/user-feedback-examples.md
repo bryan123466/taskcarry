@@ -110,3 +110,15 @@ The example uses `firmware-protocol / usb-firmware`, `pc-software / usb-pc`, and
 See [Governance API](../GOVERNANCE_API.md) for fields and calls, and the [complete governance fixture](../../examples/complete-governance/README.md) for synthetic inputs.
 
 </details>
+
+## Example feedback after updating an existing project
+
+This illustrates feedback for the USB acquisition project, assuming the listed checks actually passed. It is not a receipt from a real installation.
+
+> Candidate compatibility checks passed in an independent environment. The firmware/protocol, PC curve/CSV and simulation chats still map to their original tasks and latest checkpoints. The frame-format decision and its source remain. The task waiting for a device parameter remains paused; completed decoder checks have not become pending work again.
+>
+> Old-state project backup, manifest verification and independent restoration passed. The restored replica remains in standby; production state was not replaced. Next, switch the exact package within the authorized scope and check each native chat's loaded runtime. Without installation authorization, the verified current combination continues running.
+>
+> The improved project governance rules can be adopted separately. Public release, package installation and actual local resolution are recorded separately. Physical devices and another computer retain their own verification scopes.
+
+On failure, report the exact step, actual effects, retained original plan and next condition. Do not restart every chat's initial setup or interpret a backup rejection as evidence that history was lost.

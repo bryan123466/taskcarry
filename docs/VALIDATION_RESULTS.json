@@ -2,19 +2,19 @@
   "product": "TaskCarry",
   "version": "0.2.0rc7",
   "snapshot_scope": "Frozen source validation before exact artifact and publication receipts. This record does not attest an installation or host.",
-  "recorded_date": "2026-11-07",
+  "recorded_date": "2026-11-08",
   "source_suite": {
     "schema": "taskcarry.test-evidence.v1",
-    "started_at": "2026-11-07T11:45:57.429576+00:00",
-    "recorded_at": "2026-11-07T11:59:21.682649+00:00",
+    "started_at": "2026-11-08T02:16:15.755545+00:00",
+    "recorded_at": "2026-11-08T02:33:09.300799+00:00",
     "platform": "Windows",
     "python": "3.12.10",
-    "execution": "Three isolated source-suite processes; one source-build test retried in the dedicated build environment with unchanged inputs.",
-    "module_count": 43,
+    "execution": "Three isolated processes, disjoint module assignments",
+    "module_count": 44,
     "all_modules_assigned_once": true,
     "unique_test_ids": true,
-    "tests_run": 492,
-    "passed": 487,
+    "tests_run": 501,
+    "passed": 496,
     "skipped": 5,
     "failures": 0,
     "errors": 0,
@@ -1411,6 +1411,42 @@
         "outcome": "PASS"
       },
       {
+        "test": "test_recovery_metadata_budget.MetadataBudgetTests.test_change_beyond_examples_changes_full_source_digest",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataBudgetTests.test_large_unselected_lists_have_bounded_examples_and_full_digest",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataBudgetTests.test_legacy_metadata_above_old_limit_uses_finite_new_bound",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataBudgetTests.test_more_than_64_mib_is_rejected_before_reading",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataBudgetTests.test_small_inventory_keeps_existing_shape",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataRecoveryTests.test_frozen_legacy_plan_above_16_mib_resumes_without_rewriting",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataRecoveryTests.test_many_unselected_names_do_not_block_selected_backup_and_restore",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataRecoveryTests.test_tail_drift_before_capture_rejects_without_final_manifest",
+        "outcome": "PASS"
+      },
+      {
+        "test": "test_recovery_metadata_budget.MetadataRecoveryTests.test_tail_drift_during_capture_rejects_before_sealing_component",
+        "outcome": "PASS"
+      },
+      {
         "test": "test_release_contract.InstalledWheelContractTests.test_wheel_installs_four_skills_and_launches_project_bound_mcp",
         "outcome": "SKIP",
         "reason": "Set TASKCARRY_TEST_WHEEL to verify the actual built wheel"
@@ -1995,11 +2031,11 @@
     ],
     "changed_during_run": [],
     "source_unchanged": true,
-    "standard_source_wheel_and_sdist_build": "Passed in dedicated build-runtime retry; production runtime not modified.",
+    "standard_source_wheel_and_sdist_build": "enabled",
     "processes": [
       {
         "shard": 0,
-        "exit_code": 1
+        "exit_code": 0
       },
       {
         "shard": 1,
@@ -2010,47 +2046,9 @@
         "exit_code": 0
       }
     ],
-    "successful": true,
-    "initial_attempt": {
-      "tests_run": 492,
-      "passed": 486,
-      "skipped": 5,
-      "failures": 1,
-      "errors": 0,
-      "processes": [
-        {
-          "shard": 0,
-          "exit_code": 1
-        },
-        {
-          "shard": 1,
-          "exit_code": 0
-        },
-        {
-          "shard": 2,
-          "exit_code": 0
-        }
-      ]
-    },
-    "targeted_build_retry": {
-      "recorded_at": "2026-11-07T11:55:56.630679+00:00",
-      "python": "3.12.10",
-      "setuptools": "84.2.1",
-      "wheel": "0.48.0",
-      "tests": [
-        {
-          "test": "test_release_contract.StandardSourceBuildTests.test_plain_checkout_wheel_and_sdist_include_canonical_skills",
-          "outcome": "PASS"
-        }
-      ],
-      "tests_run": 1,
-      "successful": true,
-      "source_unchanged": true,
-      "reason": "Initial runtime lacked build-only setuptools. Only this check is repeated; no production dependency was installed."
-    },
-    "attempt_tests_run": 493
+    "successful": true
   },
-  "tested_file_manifest_sha256": "21a24e71edb3017350d3fbaab3397a50a5b5f83a1fc00c62010f1751bcd9c6de",
+  "tested_file_manifest_sha256": "1b8b6d848d75414c8ad73b58ee01601fb8296230a474736b573ea115d6764d02",
   "source_identity": "All public code, tests, Skills, fixtures and documentation were unchanged during the run. These two portable validation summaries were updated afterwards.",
   "api_contract": {
     "mcp_actions": 35,
@@ -2067,7 +2065,7 @@
     "engineering_example": "Synthetic USB text frames, replay and CSV data. No physical device or firmware acceptance is implied."
   },
   "public_boundary": {
-    "allowlisted_source_files_including_generated_skills": 208,
+    "allowlisted_source_files_including_generated_skills": 209,
     "product_source_payloads": 140,
     "source_screen_findings": 0,
     "private_inputs_included": false

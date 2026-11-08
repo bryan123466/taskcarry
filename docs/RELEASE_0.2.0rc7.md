@@ -36,6 +36,7 @@
 17. **完整建制采用版本化验收。** 新清单覆盖理解来源、工作台消费、首次整轮和独立恢复，并配置一个报告时段及一到两个吸收时段。配置、自然触发、原聊天 AI 执行和实际报告送达各有依据。旧单时段接入回执保留旧范围，不会自动获得新增能力的验收结论。
 18. **修正大量精确路径在 Windows 保存失败的问题。** 选定路径按有界批次交给 Git，避免命令行超长；仍保留原选择范围，能发现末批暂存变更，不吞并其他暂存工作。
 19. **兼容旧状态的整项目备份。** 统一识别与快照格式判断，支持合法旧 schema 1 的默认数据库标记，保留原记录与历史关系；外来、损坏及未来格式仍拒绝。补齐旧状态、索引升级、原计划续办、缺回执恢复与独立待机恢复回归。内部治理方法采用与公共内核发行继续分别管理。
+20. **大量未选路径不会再撑大备份计划而阻止执行。** 新计划对超过 1,000 项的未跟踪／未选入路径名单保存总数、完整摘要和有界示例，名单末尾变化仍会被检测。此前已生成的大计划在 64 MiB 元数据上限内保留原 ID、字节与选定范围续办，不要求重做；超过上限明确报告。选中文件、Git 暂存／工作层、历史和恢复范围不扩大，未选入的文件不会被隐式备份。
 
 ### 必要操作与兼容说明
 
@@ -84,6 +85,7 @@ Existing users return to their original governance chat with the [update prompt]
 17. **Versioned complete setup.** The new checklist covers understood sources, consumed entries, a first cycle, isolated recovery and one report plus one or two absorption slots. Configuration, natural trigger, original-chat AI execution and actual report delivery stay separate. Legacy single-slot receipts do not attest the expanded profile.
 18. **Large exact path selections on Windows.** Bounded argument batches avoid command-line length failures while retaining the same selection, detecting staged changes in the final batch and preserving unrelated staged work.
 19. **Whole-project backup compatibility for old state.** Shared identification/snapshot checks accept valid legacy schema-1 databases with the default marker while retaining records and relationships. Foreign, corrupt and future formats remain rejected. Regressions cover old state, index upgrade, original-plan continuation, missing receipts and independent standby recovery. Internal governance-method adoption and public Core publication remain separate.
+20. **Large excluded-path inventories no longer bloat a backup plan and block execution.** New plans retain full counts/digests and bounded examples for untracked/excluded lists above 1,000 entries; changes beyond the examples are still detected. Existing large plans within the finite 64 MiB metadata limit resume with their original IDs, bytes and selections. Larger metadata fails explicitly. Selected files, Git index/working layers, history and recovery scope are unchanged; excluded files are not implicitly captured.
 
 ### Required actions and compatibility
 
@@ -131,6 +133,7 @@ Codex support is limited to the verified protocol and actual host configuration/
 17. **版本化完整建制驗收。** 新清單涵蓋來源理解、工作台消費、首次整輪、獨立恢復，以及一個報告和一到兩個吸收時段。設定、自然觸發、原聊天 AI 執行與實際送達分別留證。舊單時段回執保留原範圍。
 18. **修正 Windows 大量精確路徑儲存失敗。** Git 參數分批受限，避免命令列過長；仍維持原選擇範圍、偵測末批暫存變更並保全其他暫存工作。
 19. **相容舊狀態的整專案備份。** 統一識別與快照格式判斷，支援合法舊 schema 1 的預設資料庫標記，保留原記錄與歷史關係；外來、損壞及未來格式仍拒絕。補齊舊狀態、索引升級、原計畫續辦、缺回執恢復與獨立待機恢復回歸。內部治理方法採用與公共內核發行繼續分別管理。
+20. **大量未選路徑不再撐大備份計畫而阻止執行。** 新計畫對超過 1,000 項的未追蹤／未選入路徑名單保留總數、完整摘要及有界範例，名單末端變更仍會被偵測。先前已產生的大計畫在 64 MiB 中繼資料上限內保留原 ID、位元組及選定範圍接續，不必重做；超過上限明確回報。選定檔案、Git 暫存／工作層、歷史及恢復範圍不擴大，未選檔案不會被隱含備份。
 
 ### 必要操作與相容說明
 

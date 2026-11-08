@@ -117,7 +117,7 @@ def files(root, paths):
     return result
 
 
-def inventory(root, kind, paths, refs=None):
+def inventory(root, kind, paths, refs=None, *, compact=True):
     result = {'kind': kind, 'source': str(normal(root))}
     if kind == 'git':
         observation = observe(root, refs)
@@ -126,8 +126,18 @@ def inventory(root, kind, paths, refs=None):
         selected = sorted(set(head_paths) | {i['path'] for i in observation['index']} | set(paths))
         if any(p.split('/')[0].casefold() == '.taskcarry-disabled-host' for p in selected):
             raise GovernanceError('RECOVERY_RESERVED_PATH', 'The host-quarantine namespace must not collide with selected user files.')
-        result.update(git=observation, files=files(root, selected),
-                      excluded_untracked=sorted(set(observation['untracked']) - set(paths)))
+        unknown = observation['untracked']
+        excluded = sorted(set(unknown) - set(paths))
+        result.update(git=observation, files=files(root, selected), excluded_untracked=excluded)
+        # Excluded names are evidence, not selected payloads. Preserve a stable
+        # full-list digest/count and bounded examples instead of serializing
+        # tens of thousands of names twice into every new plan and manifest.
+        if compact and len(unknown) > 1000:
+            observation.update(untracked=unknown[:1000], untracked_count=len(unknown),
+                               untracked_sha256=digest(encoded(unknown)), untracked_listing_truncated=True)
+        if compact and len(excluded) > 1000:
+            result.update(excluded_untracked=excluded[:1000], excluded_untracked_count=len(excluded),
+                          excluded_untracked_sha256=digest(encoded(excluded)), excluded_untracked_listing_truncated=True)
     else:
         if any(p.split('/')[0].casefold() == '.taskcarry-disabled-host' for p in paths):
             raise GovernanceError('RECOVERY_RESERVED_PATH', 'The host-quarantine namespace must not collide with selected user files.')
@@ -137,7 +147,13 @@ def inventory(root, kind, paths, refs=None):
 
 def capture(media, selected, scratch):
     root = normal(selected['source'])
-    before = inventory(root, selected['kind'], selected['selected_paths'], selected.get('selected_refs'))
+    # Resume an already frozen legacy plan without changing its bytes or scope.
+    # Its original full-name representation is compared exactly; new plans use
+    # compact metadata and still detect changes beyond the visible examples.
+    legacy = (selected['kind'] == 'git'
+              and len(selected.get('git', {}).get('untracked', [])) > 1000
+              and 'untracked_sha256' not in selected.get('git', {}))
+    before = inventory(root, selected['kind'], selected['selected_paths'], selected.get('selected_refs'), compact=not legacy)
     expected = {k: v for k, v in selected.items() if k not in ('name', 'target', 'selected_paths', 'selected_refs')}
     if before != expected:
         raise GovernanceError('RECOVERY_SOURCE_CHANGED', 'Selected source changed since planning; prepare a fresh plan.')
@@ -159,7 +175,7 @@ def capture(media, selected, scratch):
         git(root, 'bundle', 'create', str(bundle), *result['git']['refs'], 'HEAD')
         result['bundle'] = put(media, read_file_bytes(bundle, MAX_BYTES))
         git(root, 'bundle', 'verify', str(bundle))
-    if inventory(root, selected['kind'], selected['selected_paths'], selected.get('selected_refs')) != expected:
+    if inventory(root, selected['kind'], selected['selected_paths'], selected.get('selected_refs'), compact=not legacy) != expected:
         raise GovernanceError('RECOVERY_SOURCE_CHANGED', 'Source changed during capture; no component was sealed.')
     return result
 

@@ -57,7 +57,7 @@ def disjoint(a, b):
         raise GovernanceError('RECOVERY_NOT_INDEPENDENT', 'Recovery media and targets must be independent of their sources.')
 
 
-def read_json(path, limit=16 * 1024 * 1024):
+def read_json(path, limit=64 * 1024 * 1024):
     data = read_file_bytes(normal(path), limit)
     def pairs(items):
         result = {}

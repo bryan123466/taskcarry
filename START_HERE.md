@@ -6,9 +6,17 @@
 
 **0.2.0rc7 · Release candidate / 发行候选版 / 發行候選版**
 
-[Release downloads / 发行下载 / 發行下載](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc7) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0rc7.md)
+[**Download the complete product ZIP / 下载完整产品包 / 下載完整產品套件**](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc7/taskcarry-0.2.0rc7-product.zip)
 
-If you already have the complete package, start below. Public availability is shown by the release page's actual attachments. / 已取得完整包可直接从下方开始；公开下载以发行页实际提供的附件为准。/ 已取得完整套件可直接從下方開始；公開下載以發行頁實際提供的附件為準。
+`taskcarry-0.2.0rc7-product.zip`
+
+[Release page and checksums / 发行页与校验文件 / 發行頁與校驗檔案](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc7) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0rc7.md)
+
+Choose the complete product ZIP above; GitHub's automatically generated **Source code** archives are not the complete product package. If you already have the package, continue below.
+
+下载上方完整产品 ZIP；GitHub 自动生成的 **Source code** 压缩包不是完整产品包。已取得完整包可直接从下方开始。
+
+下載上方完整產品 ZIP；GitHub 自動產生的 **Source code** 壓縮檔不是完整產品套件。已取得完整套件可直接從下方開始。
 
 <a id="zh-CN"></a>
 

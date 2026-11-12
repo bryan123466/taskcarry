@@ -6,9 +6,9 @@
 
 [Get TaskCarry](START_HERE.md#download) · [First-time setup](docs/en/windows-example.md) · [Update an existing installation](docs/en/updating.md)
 
-TaskCarry gives projects already advancing in AI chats **durable memory and a continuing governance workflow**. An independent governance chat inherits confirmed decisions, understands selected new progress, keeps task relationships current, delivers guidance to the relevant workbenches, and checks saving and recovery. Your existing chats keep doing their work; their outputs and unfinished positions stay connected beyond one conversation.
+TaskCarry helps projects already advancing in AI chats **keep their memory and coordinate ongoing work**. It keeps confirmed decisions, task relationships, saved results and next steps in a durable local record, so work can continue beyond any one conversation.
 
-Use it with a project already advancing in your AI chats, whether one long-running conversation or several parallel workstreams. Keep prior outputs, decisions and unfinished work. Your AI tool helps do the work; TaskCarry gives it a durable local record and a way to bring results together. An extra specialist chat is useful only when the work benefits from it.
+Keep working in your existing main or specialist chats. A separate governance chat uses your existing AI tool to review the progress you connect, maintain shared guidance, and check saving and recovery through TaskCarry. Add specialist chats only when the work benefits from them.
 
 **The current step-by-step examples use Codex.** The toolkit exposes the same local engine through a command line and MCP, providing a foundation for other AI-tool integrations. Each host still needs its own connection and workflow verification.
 
@@ -44,7 +44,7 @@ Project workflow governance connects the work people and AI produce with clear p
 | **Understand connected work** | Review selected source revisions, distinguish facts from judgments, and retain decisions and dependencies without reopening finished history. |
 | **Keep working chats aligned** | Publish versioned private workbench guidance, preserving professional instructions and Git WIP; distinguish publication from actual consumption. |
 | **Govern a complete cycle** | Retain ownership, intended effects, actual results and continuation points; use a morning report and quieter absorption slots. |
-| **Receive exact stages** | Review commits, changed paths and task relationships before receiving business results; adopt them into selected workspaces while preserving supported local work. |
+| **Receive exact stages** | Review commits, changed paths and task relationships, then integrate the stage's files into the receiving baseline. Update selected workspaces through a separate plan that preserves supported local work. Business acceptance remains your decision. |
 | **Recover selected project work** | Verify consistent state/objects, original Git history and layered WIP, explicit materials and standby recovery before a sole-writer handoff. |
 | **Maintain with evidence** | Link problems to verified fixes, distinguish update discovery from installation, and report source, native-host and natural-trigger evidence separately. |
 

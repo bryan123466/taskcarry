@@ -1,10 +1,12 @@
+<a id="already-using-taskcarry"></a>
+
 # TaskCarry
 
 **Project memory and collaboration for AI tools.**
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[Get TaskCarry](START_HERE.md#download) · [First-time setup](docs/en/windows-example.md) · [Update an existing installation](docs/en/updating.md)
+[Get TaskCarry](START_HERE.md#download) · [First-time setup](docs/en/windows-example.md) · [Update or continue governance](docs/en/updating.md)
 
 TaskCarry helps projects already advancing in AI chats **keep their memory and coordinate ongoing work**. It keeps confirmed decisions, task relationships, saved results and next steps in a durable local record, so work can continue beyond any one conversation.
 
@@ -88,21 +90,23 @@ A received stage can be part of an unfinished task. A paused task can stay pause
 
 [Get the complete product package](START_HERE.md#download), then follow the [three-step guide](docs/en/windows-example.md):
 
-1. **Establish governance.** Put the package under a local TaskCarry folder, open an independent Codex chat there and send the guide's single prompt.
-2. **Complete setup through conversation.** Governance inherits selected work, prepares task/workspace/Git bindings, verifies native MCP and current workbench views, performs the first governance cycle and an isolated recovery rehearsal, and configures the daily rhythm and official update checks. It gives you only the necessary trust, login or reload action.
+1. **Establish governance.** Extract the package under `TaskCarry/toolkit/`, open the outer `TaskCarry` folder in Codex and send the guide's complete prompt. No product path needs filling in.
+2. **Choose a project and follow governance.** The assistant inventories accessible conversation indexes with their coverage, suggests project groups, then reads relevant history after your selection. It prepares each existing chat's complete connection prompt, recommends new roles when useful, and guides local Git, MCP, memory, the first cycle, recovery and daily official update checks. Host actions are given one necessary step at a time.
 3. **Review the evidence and continue.** Receive the inherited decisions, chat/role/task map, connection, saving, recovery and update results, remaining conditions and next actions. Complete setup and verified natural scheduling are distinct; configuration, trigger, AI execution and report delivery each need evidence. See [the feedback you should receive](docs/en/user-feedback-examples.md).
 
 Keep working in your original chats. Governance maintains project memory; ongoing project coordination is optional, and you may need no additional specialist chats.
 
-### Already using TaskCarry
+### Existing governance
 
-Return to your existing governance chat and send the prompt in the [update guide](docs/en/updating.md). It checks your installation, preserves project records and settings, carries out the applicable update, and verifies the result. Keep the same project and governance home.
+(If TaskCarry is installed, another governance tool is in use, or you already have a governance chat, start with [update and continuation](docs/en/updating.md).) It distinguishes package updates from inheriting existing governance, preserving original records, settings and unfinished work.
 
-If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [release notes](docs/RELEASE_0.2.0rc7.md).
+If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [release notes](docs/RELEASE_0.2.0rc8.md).
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="Example arrangement of governance and working chats; specialist count is optional" width="360">
 
 This is an organization example. Existing working chats remain useful. If they share a directory, inspect active writers and preserve scoped WIP before arranging independent write areas.
+
+For a concrete walkthrough, see the [vision-based obstacle-avoidance drone example](examples/vision-drone-governance/README.md): connect scattered software, algorithm and hardware work, add product communications when needed, and preserve shared decisions. The example separates illustrative replies from actual verification; it does not claim a completed or flight-tested drone.
 
 ## Build on the local workflow
 
@@ -119,7 +123,7 @@ TaskCarry uses Python 3.11+ and includes four project Skills for setup, task del
 |---|---|---|---|
 | Manual fallback | [Commands and handoffs](docs/en/manual-setup.md) | [手动后备](docs/zh-CN/manual-setup.md) | [手動後備](docs/zh-TW/manual-setup.md) |
 | User manual | [Start here](docs/en/windows-example.md) | [从这里开始](docs/zh-CN/windows-example.md) | [從這裡開始](docs/zh-TW/windows-example.md) |
-| Existing users | [Update TaskCarry](docs/en/updating.md) | [更新指南](docs/zh-CN/updating.md) | [更新指南](docs/zh-TW/updating.md) |
+| Existing governance | [Update and continuation](docs/en/updating.md) | [更新与接续](docs/zh-CN/updating.md) | [更新與接續](docs/zh-TW/updating.md) |
 | Feedback examples | [What users should hear](docs/en/user-feedback-examples.md) | [反馈示例](docs/zh-CN/user-feedback-examples.md) | [回饋範例](docs/zh-TW/user-feedback-examples.md) |
 | Architecture | [How it works](docs/en/architecture.md) | [架构说明](docs/zh-CN/architecture.md) | [架構說明](docs/zh-TW/architecture.md) |
 | Maintenance | [Maintain a project](docs/en/governance-maintenance.md) | [维护项目](docs/zh-CN/governance-maintenance.md) | [維護專案](docs/zh-TW/governance-maintenance.md) |
@@ -127,7 +131,7 @@ TaskCarry uses Python 3.11+ and includes four project Skills for setup, task del
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0rc7.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0rc8.md)
 
 ## Join in
 

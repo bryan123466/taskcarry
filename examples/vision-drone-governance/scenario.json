@@ -1,0 +1,24 @@
+{
+  "schema": "taskcarry.example.vision-drone.v1",
+  "name": "Vision obstacle-avoidance drone: from scattered discussions to shared project memory",
+  "synthetic": true,
+  "source_id": "example:drone-user",
+  "governance_task": "drone-governance",
+  "scope_initial": "Explore a vision obstacle-avoidance drone for indoor and outdoor use; feasibility remains open.",
+  "scope_current": "First milestone: an indoor fixed-obstacle offline demonstration using synthetic obstacle events.",
+  "decision_retained": "Retain frame_id as the cross-thread frame identity; an event is separate from a real flight command.",
+  "interface_agreed": "Reconcile software frame_id/label/region, algorithm confidence/timestamp_ms and hardware capture time into a timestamped event with normalized regions and an explicit synthetic source label.",
+  "deferred": ["Outdoor evaluation", "Training or validating a recognition model", "Real aircraft control or flight", "Hardware purchasing and integration"],
+  "existing_windows": [
+    {"workspace": "software", "task_id": "drone-software", "thread_id": "synthetic-software", "title": "Build the offline demonstration interface", "source": "initial/software.md", "next_step": "Connect the reviewed synthetic obstacle-event interface to the display."},
+    {"workspace": "algorithm", "task_id": "drone-algorithm", "thread_id": "synthetic-algorithm", "title": "Define obstacle events and evaluation cases", "source": "initial/algorithm.md", "next_step": "Review clear, fixed-obstacle and stale-frame synthetic cases."},
+    {"workspace": "hardware", "task_id": "drone-hardware", "thread_id": "synthetic-hardware", "title": "Define hardware boundaries and deferred integration", "source": "initial/hardware.md", "next_step": "Retain the camera/compute/flight-controller interface sketch; defer hardware selection."}
+  ],
+  "suggested_window": {"workspace": "product", "task_id": "drone-product", "thread_id": "synthetic-product", "title": "Explain the demonstration and its evidence", "source": "initial/product-brief.md", "next_step": "Prepare an accurate offline-demo introduction with verified and unverified capabilities separated."},
+  "evidence_scope": {
+    "fixture": "Authored synthetic inputs and executable Core integration replay.",
+    "native_chat_results": "Separate reviewed case evidence; the replay does not create or read Codex chats.",
+    "natural_schedule": "Not established by running the replay.",
+    "engineering": "No recognition accuracy, flight safety, hardware or market validation is claimed."
+  }
+}

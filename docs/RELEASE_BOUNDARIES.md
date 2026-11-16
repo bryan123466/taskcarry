@@ -45,7 +45,7 @@ Private Git can hold selected committed and pushed results. Remote push and depl
 - Installing or updating tools and Skills does not merge business Git history. Receiving results and adopting them into a selected workspace use their own reviewed plans. Saved setup diagnostics describe files on disk and do not prove that an existing host process loaded a newly installed version.
 - The toolkit does not repair the operating system, move AI-host accounts, send external messages, or guarantee recovery of arbitrary external effects. You decide professional or business acceptance and external sharing.
 
-[Start with the manual](en/windows-example.md) · [Working together over time](OPERATING_PRINCIPLES.md) · [Recorded validation](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
+[Start with the manual](en/windows-example.md) · [Working together over time](OPERATING_PRINCIPLES.md) · [Recorded validation](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc8/docs/VALIDATION.md)
 
 <a id="zh-CN"></a>
 
@@ -90,7 +90,7 @@ MCP 要在你使用的 AI 宿主中接通，并实际调用工具确认。CLI �
 - 安装或更新工具与技能不会合并业务 Git 历史。接收成果、将其更新到选定工作区，都使用各自需要检查的计划。安装诊断说明磁盘上的文件状态，不证明已有宿主进程已经加载新版本。
 - 工具不修复操作系统、不迁移 AI 宿主账号、不发送外部消息，也不保证恢复任意外部操作。专业或业务验收以及对外分享由你决定。
 
-[从手册开始](zh-CN/windows-example.md) · [持续协作](OPERATING_PRINCIPLES.md) · [验证记录](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
+[从手册开始](zh-CN/windows-example.md) · [持续协作](OPERATING_PRINCIPLES.md) · [验证记录](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc8/docs/VALIDATION.md)
 
 <a id="zh-TW"></a>
 
@@ -135,4 +135,4 @@ MCP 要在你使用的 AI 宿主中接通，並實際呼叫工具確認。CLI �
 - 安裝或更新工具與技能不會合併業務 Git 歷史。接收成果、將其更新到選定工作區，都使用各自需要檢查的計畫。安裝診斷說明磁碟上的檔案狀態，不證明既有宿主程序已經載入新版本。
 - 工具不修復作業系統、不遷移 AI 宿主帳號、不傳送外部訊息，也不保證恢復任意外部操作。專業或業務驗收以及對外分享由你決定。
 
-[從手冊開始](zh-TW/windows-example.md) · [持續協作](OPERATING_PRINCIPLES.md) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc7/docs/VALIDATION.md)
+[從手冊開始](zh-TW/windows-example.md) · [持續協作](OPERATING_PRINCIPLES.md) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc8/docs/VALIDATION.md)

@@ -32,89 +32,76 @@
 <a id="3-continue-in-your-usual-way"></a>
 <a id="what-successful-onboarding-looks-like"></a>
 <a id="optional-additions"></a>
+<a id="install"></a>
 
 # First installation: complete project governance in three steps
 
-[Existing-user update](updating.md) · [Manual fallback](manual-setup.md) · [Complete feedback examples](user-feedback-examples.md) · [简体中文](../zh-CN/windows-example.md) · [繁體中文](../zh-TW/windows-example.md)
+[Update or continue existing governance](updating.md) · [Manual fallback](manual-setup.md) · [Feedback examples](user-feedback-examples.md) · [Drone project example](../../examples/vision-drone-governance/README.md) · [简体中文](../zh-CN/windows-example.md) · [繁體中文](../zh-TW/windows-example.md)
 
-You already use Codex to advance a project. TaskCarry adds an independent governance chat: it retains valid decisions, understands progress, returns shared agreements to relevant chats, and saves recoverable project memory. Keep working in your existing chats. Ongoing project coordination is an optional governance responsibility.
-
-This guide uses a USB acquisition and curve-display tool: firmware supplies simulated readings, PC software parses, displays and exports CSV, and simulation checks normal input, disconnection and reconnection. Substitute your own project. Installation does not require a fixed number of professional chats.
+This guide is for people already advancing projects in Codex. A separate governance chat maintains project memory, connects existing work and guides setup. Keep working directly in your original chats; ongoing project coordination by governance is your choice.
 
 ## 1. Open the governance folder and send one prompt
 
-Create a local `TaskCarry` folder and extract the [complete product package](../../START_HERE.md#download) under `toolkit/`, retaining its versioned directory. Open the outer **TaskCarry folder** in Codex and start an independent governance chat. Business files stay where they are. Already governed projects use the [update entry](updating.md).
+Create a local `TaskCarry` folder and extract the [complete product package](../../START_HERE.md#download) under `toolkit/`, retaining the version directory inside the package. Open the **outer TaskCarry folder** in Codex and create a separate chat. Keep existing business files where they are.
+
+(If you already installed TaskCarry, use another governance tool or have a governance chat, see [update and continuation](updating.md).)
 
 ```text
-TaskCarry/                 Governance working directory opened in Codex
+TaskCarry/                 Governance working folder opened in Codex
   toolkit/                 Extracted product package
-  runtime/                 Separate runtime prepared by the assistant
-  .taskcarry/              Durable project state, objects and workbench entries
-  .agents/skills/          Governance methods used by this project
-  .codex/config.toml       Project connection; other settings preserved
 ```
 
-<a id="install"></a>
+**Copy this complete prompt. No product path needs filling in:**
 
-Replace the brackets and send this complete prompt. Governance guides the remaining setup:
+> Read the TaskCarry product entry and onboarding Skill under toolkit in the current working directory, then guide me through project governance setup. Inspect existing governance, installations and work first; preserve my rules, decisions, tasks and unfinished work.
+>
+> Start with a read-only inventory of conversation indexes available through the current tools. Show likely projects and their included chats for me to choose; read relevant history only after I select a scope. Prepare complete connection prompts for my existing chats and recommend new chats only where useful.
+>
+> Then help complete working locations, local Git, MCP, project memory, the first governance cycle and recovery verification. Confirm times and time zone with me before configuring daily governance and official update checks. When I need to act, give me only the necessary next step; resume missing steps after an interruption.
+>
+> Finish by telling me which chats are connected, their responsibilities, what remains incomplete and what to do next. I can still work directly in my original chats.
 
-> Establish this chat as the TaskCarry governance home for my existing project, responsible for project memory and governance. Product location: [extracted directory containing START_HERE.md and packages/]. Project clues: [existing directories, chats or a short goal; help propose candidates if scope is unclear].
->
-> Read the product entry, taskcarry-project-setup Skill and its references. Inspect existing installation, governance, tasks, directories and Git first. Inherit valid decisions, outputs, task relationships, pause points and uncommitted work. Reuse existing configuration rather than initializing an existing project again.
->
-> Explain your understanding of my goal, progress and proposed scope first. If scope is unclear, use only permitted indexes and directories visible through current tools to identify candidates; read relevant contents after scope selection, without scanning unrelated history. Separate confirmed facts from recommendations. If an original chat cannot be read, guide it to provide a minimal handoff instead of claiming understanding. Historical materials can remain references without becoming working chats.
->
-> Recommend responsibilities based on existing chats and retain original task identities. Establish each active chat's actual working directory, local Git working/saving location and writing boundary; reuse repositories and verified author settings. Connect MCP, Skills and current workbench guidance to the same governance, preserving specialist instructions and other settings. Each chat must verify its own real connection, original task, progress and shared agreements. I can continue directly in professional chats without routing every action through governance.
->
-> Save governance versions locally, register the official update source and check once. Evaluate new versions before proposing installation; do not install automatically. Suggest one morning report plus one or two daily progress-absorption slots. Confirm times and timezone with me, then create or reuse native schedules bound to this original governance chat without changing model or permissions.
->
-> Complete a first governance cycle: reconcile decisions, dependencies and unfinished work; review issues, fixes and actual effects; send changed shared agreements to relevant chats and verify what they read. Define recovery coverage for necessary state, objects, Git history and uncommitted changes, project materials and capability versions. Capture a local recovery set and verify an independent restore, leaving the copy in standby. Let me choose private remotes or cloud storage; verify upload, download and restore separately.
->
-> Complete the product's full governance acceptance checklist. When I must trust a directory, reload, sign in or choose scope, give only the current action and exact target, then verify and continue. Finish in plain language with project understanding, chat responsibilities, actual completed work and gaps, and next suggestions; retain technical evidence as a reviewable appendix. Distinguish configuration, natural scheduled triggering, actual AI execution and report delivery. After interruption, retain original identities, inspect actual effects and finish only missing steps. Ongoing project coordination remains my choice.
+The product directory means the TaskCarry package under `toolkit/`; the assistant locates it from this working folder. Reading it teaches the governance method. **Your project information comes from the chats and files you subsequently select.** The assistant asks about the package only when it is missing, incomplete or genuinely ambiguous.
 
 ## 2. Let governance complete connection and its first cycle
 
-Governance explains scope and understanding so you can correct omissions or grouping. One real project may span directories, repositories and historical chats; similar names do not establish the same task. This example produces concrete responsibilities:
+Follow the current step governance supplies. First it reports which conversation indexes it can access, whether archived chats are included, whether more pages remain and what it cannot see. It then groups candidate projects for your choice. Indexes provide clues such as titles and directories; relevant history is read after you confirm the scope. You can also name the project directly.
 
-| Existing work | Responsibility and next action |
+After selection, expect these results:
+
+| What you receive | What governance does |
 |---|---|
-| Firmware/protocol chat | Agree the fields and newline in `READ,42,1000,1.234`, then save three stable simulated input frames. |
-| PC software chat | Use that input to connect parsing, curve display and CSV; check each output. |
-| Simulation chat | Start with normal input, then replay disconnect/reconnect without inventing readings or duplicating points. |
-| Older hardware/interface notes | Retain valid agreements as sources without claiming an active chat or reopening finished work. |
+| Project understanding and a connection proposal | Preserve existing outputs, effective decisions, tasks and stopping points; distinguish facts from suggestions. Historical reference chats may remain references. |
+| Specific instructions for each chat | Supply a fully filled-in connection prompt for each original chat. Recommend a new role only when useful, with its working location, activation prompt and expected receipt. There is no required number of chats. |
+| The current action requiring you | Prepare real working locations, local Git, project settings and MCP. For host trust, login or reload, explain where to act and the expected result, then verify it. |
+| Connection and first-cycle results | Verify each window's actual connection, original task and current entry; establish shared memory, save selected files precisely, check official updates and rehearse local recovery. |
+| A proposed daily rhythm | Confirm times and time zone, create or reuse report and progress-review slots returning to this original governance chat, then read back the actual configuration. |
 
-Combine responsibilities to fit existing chats; three new chats are not required. Actual device tests remain separate because this example starts with simulation. Governance completes the following work, rather than merely handing you a checklist:
+For an old chat without a working folder, governance uses supported host association or a continuation that preserves its history. A prompt cannot change the chat's directory. If the host cannot read a needed conversation, governance supplies the smallest handover prompt. If connection or scheduling needs your action, it supplies the exact pending step and resume instruction, with [manual fallback](manual-setup.md) only where needed.
 
-- Preserve each chat's original task, progress, professional instructions and uncommitted work. Establish actual directories, Git saving locations and concurrent-writing boundaries. Where no suitable directory exists, guide real host association or continuation in the correct location. Each chat does not need a new GitHub account.
-- Prepare connections and entries for the same governance. Each active chat calls native tools and confirms its current agreement. Generated configuration, published entries and actual reading are checked separately.
-- Complete local Git saving, an official update check, the first cycle, explicit recovery coverage and an independent restore rehearsal. Ordinary files may stay in place, but necessary materials need recovery coverage; credentials are managed separately.
-- Configure and read back one morning report and one or two absorption slots. You confirm time and timezone; only necessary host trust, sign-in or similar actions are handed back to you.
-
-Local Git, schedule configuration, update checks and the first cycle are standard setup. Private remotes and cloud storage are optional locations, so declining them creates no artificial gap. When the host requires participation, governance identifies the current action. Detailed commands stay in the [manual fallback](manual-setup.md).
+Local version saving, working-window connections, recovery verification, daily governance configuration and official update checking are standard setup. Private Git remotes and cloud storage can follow if you choose them; they are not required for local governance. Finding an update leads to an applicability review, not an automatic runtime replacement.
 
 ## 3. Review the completion report and keep working
 
-No special completion phrase is required. Governance reports actual acceptance. The following illustration assumes required setup has passed; it is not a receipt from a real installation:
+Governance should return a readable report covering:
 
-> Governance setup for the USB acquisition project is complete. Existing firmware/protocol, PC software and simulation work is connected; older hardware notes remain references. The shared milestone uses simulated readings to connect the USB serial frame format, curve and CSV. Wireless and physical-device tests are outside this simulation.
->
-> Each working chat verified its real connection and current entry. Local version saving, the first governance cycle and independent recovery rehearsal passed; the restored copy remains in standby. The official update source was checked. Morning report and afternoon absorption slots are configured and read back; first natural triggers still await acceptance.
->
-> Next, return to PC software and check the curve and export with the three-frame input, then have simulation check normal, disconnect and reconnect behavior. Continue development directly; I will keep absorbing relevant progress. Governance is established, while engineering work continues.
+- **What it understood:** project goals, inherited decisions and outputs, and unresolved questions.
+- **Which chats are connected:** each responsibility, original task, real work location and connection result.
+- **What setup completed:** actual local saving, project memory, recovery, official update checking and daily schedule results.
+- **What remains:** concrete missing steps, their impact and the next necessary action. Pending work is not labeled complete.
+- **What to do next:** which original chats can continue which work, and which recommendations await your decision.
 
-If required items are missing, report setup in progress with completed work, exact gaps and next actions. **Setup complete** and **natural scheduled loop verified** are separate: the latter needs actual scheduled occurrence, AI execution in the original chat and delivery for the report slot. Manual execution cannot substitute.
+“Configuration complete” and “natural scheduled cycle verified” are reported separately. Reading back a schedule is followed by waiting for a real trigger, then checking the original AI's execution, saving and report delivery. A pending host action does not erase the other completed results.
 
-You can say “continue the original task,” “save this pause point,” or “which chats does this change affect?” After interruption: **“Continue from the original checklist and task, inspect actual effects, and finish only the missing steps.”**
+Continue with “resume my last unfinished task” in the working chat, or “review current project progress” in governance. After an interruption, say “retain completed results and continue the remaining setup”; no restart from step one is needed.
 
-Existing users continue updating in the original governance chat, verify original tasks, decisions, sources and checkpoints, and exercise full backup and independent recovery on old-state copies. See the [existing-user update flow](updating.md).
+[See feedback at each stage](user-feedback-examples.md) · [See the separate drone governance example and final layout](../../examples/vision-drone-governance/README.md)
 
 <details>
-<summary>Acceptance criteria and technical evidence</summary>
+<summary>Complete setup acceptance and technical references</summary>
 
-Complete setup uses `complete_v1`: selected sources and valid decisions, active identities and native connections, current entries and reading evidence, local Git, official update checks, first cycle, recovery and schedules must all satisfy the checklist. `complete_governance_ready` does not substitute for `natural_trigger_verified` or `closed_loop_verified`. Source drift, incomplete receipts and changed configuration are reported accurately.
+The assistant uses the `complete_v1` checklist for scope, native runtime, local Git, project identity, understood sources, workbench publication and consumption, the first cycle, recovery, official updates and original-chat scheduling. Natural triggers retain separate evidence. Older receipts retain their original meaning.
 
-Original task/chat, actual cwd/Git, checkpoint, view and consumption evidence for each chat remain reviewable alongside recovery manifests, package identity and schedule readback. Users do not need to copy these fields through the main flow. Calls are documented in [Governance API](../GOVERNANCE_API.md).
+[Daily operations](operation-manual.md) · [Three layers and project memory](architecture.md) · [Backup, recovery and parallel work](remote-and-multicomputer.md) · [CLI / MCP contracts](../COMMANDS.md)
 
 </details>
-
-[Complete feedback examples](user-feedback-examples.md) · [Core, capabilities and project layers](architecture.md) · [Recovery and parallel work](remote-and-multicomputer.md) · [Everyday operations](operation-manual.md)

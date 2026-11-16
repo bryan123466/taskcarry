@@ -26,7 +26,7 @@ REVIEWED_BINARY_ASSETS = {
     "docs/assets/workspace-sidebar-example.png": "dfc75af11cf1a2950f16479b70e95346b97fb0a06f73fc0fbdfca6dbacfaee22",
     "docs/assets/social-preview.png": "8763f806449c8aa1ee5cb7e4a3680bd2f4d3c96ba3c0a08e5bd107bf51b7db5a",
 }
-EXCLUDED = {"__pycache__", ".taskcarry", ".venv", ".git", "node_modules", "dist", "build", "local"}
+EXCLUDED = {"__pycache__", ".taskcarry", ".taskcarry-onboarding", ".venv", ".git", "node_modules", "dist", "build", "local"}
 SKILLS = {"taskcarry-project-setup", "taskcarry-task-delivery", "taskcarry-governance-reconcile", "taskcarry-experience-recovery"}
 SKILL_REFERENCES = {"taskcarry-project-setup/references/onboarding.md",
                     "taskcarry-governance-reconcile/references/daily-governance.md"}
@@ -54,6 +54,10 @@ REQUIRED.update({"docs/GOVERNANCE_API.md", "examples/complete-governance/README.
 REQUIRED.update({"examples/complete-governance/fixture/" + name for name in
                  ("PROTOCOL.md", "normal_frames.txt", "expected.csv", "replay.py")})
 REQUIRED.update({f"docs/{language}/user-feedback-examples.md" for language in ("en", "zh-CN", "zh-TW")})
+REQUIRED.update({"examples/vision-drone-governance/" + name for name in (
+    "README.md", "README.zh-CN.md", "README.zh-TW.md", "scenario.json", "replay.py",
+    "EVIDENCE.md", "NATIVE_CHAT_RUNBOOK.zh-CN.md", "initial/software.md", "initial/algorithm.md",
+    "initial/hardware.md", "initial/product-brief.md")})
 
 
 def sha(data):

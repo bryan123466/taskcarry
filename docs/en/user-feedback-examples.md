@@ -1,124 +1,96 @@
-# User feedback examples: a USB acquisition and curve-display tool
+<a id="user-feedback-examples-a-usb-acquisition-and-curve-display-tool"></a>
+<a id="make-the-project-understandable-first"></a>
+<a id="1-governance-explains-its-understanding-and-proposed-scope"></a>
+<a id="2-connection-produces-a-practical-continuation-plan"></a>
+<a id="3-the-complete-setup-report-in-step-three"></a>
+<a id="4-report-understandable-engineering-progress"></a>
+<a id="5-explain-gaps-interrupted-work-and-quiet-checks"></a>
+<a id="6-recovery-and-parallel-work-elsewhere"></a>
+<a id="example-feedback-after-updating-an-existing-project"></a>
 
-[Three-step guide](windows-example.md) · [Three-layer architecture](architecture.md) · [简体中文](../zh-CN/user-feedback-examples.md) · [繁體中文](../zh-TW/user-feedback-examples.md)
+# Feedback examples: from scattered chats to shared project memory
 
-Suppose you already use Codex to build a small tool: a device sends readings over USB serial, and a PC displays a curve and exports CSV. You have firmware, PC software and simulation chats, plus older hardware/interface notes. TaskCarry connects their work to shared project memory so each chat knows the agreed interface and its next task.
+[Three-step guide](windows-example.md) · [Drone governance example](../../examples/vision-drone-governance/README.md) · [Three layers](architecture.md) · [简体中文](../zh-CN/user-feedback-examples.md) · [繁體中文](../zh-TW/user-feedback-examples.md)
 
-**The conversations below are synthetic product feedback examples, not acceptance reports for your project or a particular host.** The included [executable fixture](../../examples/complete-governance/README.md) checks text parsing and replay. It does not connect a device, flash firmware or draw an actual application interface. A real report cites its own evidence instead of copying these success claims.
+These examples use a vision-based obstacle-avoidance drone project. Software, algorithm and hardware work already exists in separate chats. Governance connects it to shared decisions, adding product and communications responsibilities only where useful.
 
-## Make the project understandable first
+**The replies below illustrate a synthetic scenario; they are not successful installation receipts.** Actual answers must cite that run's reading, configuration and verification. The [separate example](../../examples/vision-drone-governance/README.md) contains project materials, the full process and its evidence scope. Establishing governance does not verify a physical drone, flight control, flight safety or market outcomes.
 
-The first milestone uses one UTF-8 measurement per line: `READ,42,1000,1.234`, followed by a newline. The fields mean measurement type, sequence 42, simulated device time 1000 ms, and simulated value 1.234. First connect data generation, parsing, curve display and CSV export; then test interruption and recovery. Wireless support is outside this milestone.
+## 1. See candidate projects before choosing history to read
 
-| Responsibility | Concrete work | Observable acceptance |
+> I have read the conversation indexes accessible through the current host. Active and archived coverage is reported separately, with remaining pages and access failures retained. This inventory covers only the listed sources, not other accounts, devices or inaccessible chats.
+>
+> Based on titles and directory clues, please choose:
+>
+> 1. **Vision-based obstacle-avoidance drone:** existing software, algorithm and hardware chats that may belong together; please confirm.
+> 2. **Custom scope:** choose only some of these chats or add a missing project.
+>
+> These are proposed groups. I have not read their conversation bodies yet. Which project should I connect?
+
+An explicitly supplied project scope can be confirmed directly without inventorying unrelated conversations. Similar titles are clues, not proof of a shared project.
+
+## 2. Receive a sourced project understanding after selection
+
+> You selected the drone project. I read the relevant history within that scope and linked findings to the original chats and materials.
+>
+> The current goal is a vision-based avoidance proposal and reproducible demonstration materials. Existing software, algorithm and hardware work continues. Unconfirmed parameters remain open questions.
+>
+> I recommend retaining the three working chats. When the boundaries are clear, a product and communications role can prepare target-user assumptions, a demonstration script and public wording. An existing chat may take that role; a fourth chat is not required.
+
+Real goals and decisions must come from the read sources or user confirmation. This is only an illustration of wording. Partial history reading must include its actual coverage and remaining pages.
+
+## 3. Connection instructions arrive filled in for each chat
+
+Governance supplies a **connection card** identifying the original chat, actual directory, responsibility, task, shared governance source, complete prompt and expected reply. It fills in verified details instead of asking you to transcribe task IDs, interpreter paths or configuration blocks.
+
+An existing algorithm chat might receive the following wording, accompanied by its actual connection location:
+
+> Continue this window's original drone vision algorithm task. Read its published current governance entry and verify the original task, latest checkpoint, working directory and native TaskCarry connection. Preserve the existing algorithm proposal, unfinished comparisons and local changes.
+>
+> This milestone shares the confirmed input and acceptance boundaries with software and hardware. Report the decisions you actually read, missing inputs and next step. If the entry or connection is not loaded, name the exact gap and continue unaffected work.
+
+A chat without a working directory needs supported host association or an explicit continuation arrangement. Governance reports whether the original remains in place, whether a continuation chat was created and how history is linked. A prompt cannot move the directory or replace a native MCP call in that window.
+
+## 4. Each responsibility receives the relevant effect of a shared decision
+
+Suppose the user confirms: “For the first milestone, use offline image replay and simulated avoidance decisions. Do not proceed to physical flight yet.”
+
+| Responsibility | Effect recorded by governance | Next work |
 |---|---|---|
-| Firmware and protocol | Agree the fields and supply repeatable simulated readings and frames | The same input produces results both sides can reproduce; this does not accept firmware on a board. |
-| PC software | Parse frames, supply the live curve, and export CSV | Three frames correspond to three points and matching sequence/time/value CSV rows; actual UI and file operations need their own checks. |
-| Simulation validation | Replay normal input, disconnection and reconnection | Normal values match; disconnection creates no measurements; reconnection duplicates neither old points nor an interrupted partial frame. |
+| Software | First-stage input is replay data; flight-controller integration is not claimed. | Specify image input, recognition output and decision-display interfaces. |
+| Algorithms | Compare results on the same replay samples. | Preserve comparisons and failure samples; describe simulation limits. |
+| Hardware | Supply constraints and verification requirements; flight integration stays outside this milestone. | Identify camera, computing and connection needs and unresolved choices. |
+| Product and communications | Demonstrations describe proposals and simulation capabilities. | Prepare product wording and a script without claiming flight verification. |
 
-These are three responsibilities, not a requirement for three professional chats. Existing chats may combine them. Older hardware notes are reference sources, not claimed active connections. Actual sampling, drivers, USB timing and measurement accuracy require physical-device tests.
-
-## 1. Governance explains its understanding and proposed scope
-
-> You are building a USB acquisition and curve-display tool. The first milestone uses simulated data: the firmware side supplies agreed frames, the PC parses, displays and exports them, and validation checks normal operation and interruption recovery.
+> I recorded your confirmed milestone and the earlier scope it replaces, retaining the discussion as provenance. Updated workbench entries show the change relevant to each role. Publication and actual reading by the original windows are separate receipts.
 >
-> I found existing firmware/protocol, PC software and simulation chats and suggest keeping them. If you currently have two chats, protocol and simulation can remain together; installation does not require splitting them. Older hardware/interface discussion stays a reference source. You choose the included chats and materials.
+> Continue directly in your working chats. Governance does not need to approve every action. New decisions affecting shared boundaries will be retained in project memory.
+
+## 5. Receive a completion report you can check
+
+A report uses actual results from the current run. Its shape should be:
+
+> **Project understanding:** goals, effective decisions, outputs and stopping points are organized; unresolved conditions remain visible.
 >
-> I will retain the decisions to simulate before connecting hardware and leave wireless support outside this milestone. Continue directly in your professional chats. I will record decisions, check dependencies and return shared protocol changes to the affected chats. Ongoing project coordination remains your choice.
-
-If only titles and directories were visible, governance must say this is a candidate grouping whose contents have not yet been read. After scope selection, read relevant contents. When the host cannot read another chat, use a minimal handoff from that chat; a directory scan is not project understanding.
-
-## 2. Connection produces a practical continuation plan
-
-> The selected working chats now use the same governance. Original tasks, files, uncommitted work and specialist instructions remain intact. Each chat checked its own actual connection and current workbench entry.
+> **Working chats:** list each original chat, responsibility, task, real directory and connection result. Mark connected only after that window's native receipt.
 >
-> The shared frame format is agreed, but the PC curve and CSV have not yet passed acceptance. Next, firmware/protocol saves a stable three-frame input; PC software uses it to connect parsing, display and export; simulation checks normal data before disconnection and reconnection. Old interface notes remain references rather than new work assignments.
-
-The user should understand who continues what, with which material, and how to check it. Establishing governance does not finish these engineering tasks.
-
-## 3. The complete setup report in step three
-
-This example assumes the required setup, first governance cycle and independent recovery rehearsal have actually passed:
-
-> **Governance setup for the USB acquisition project is complete.** Continue development in your existing chats. The first cycle aligned the simulation protocol, confirmed where each chat stopped, and retained the unfinished curve and export work.
-
-| Chat or source | Responsibility | Next useful work |
-|---|---|---|
-| Governance | Project memory, shared guidance, saving/recovery and scheduled governance | Check protocol/PC agreement and return meaningful changes to affected chats. |
-| Firmware and protocol | Simulated readings, frame format and field meanings | Save shared input; actual firmware and device testing remain separate. |
-| PC software | Parsing, live curve and CSV | Verify the interface and export using shared input. |
-| Simulation validation | Normal, disconnect and reconnect replay | Compare data and display results and report reproducible differences. |
-| Old hardware/interface notes | Reference source | Retain agreed constraints without claiming an active working chat. |
-
-> Each active chat passed its own native tool acceptance and read its workbench entry. Selected governance files are saved in local Git; existing repositories and uncommitted work remain. You can save progress first and form an exact version of selected files when appropriate; saved progress is not delivery or acceptance.
+> **Saving and recovery:** explain which files local Git saved and which state, outputs and history the recovery rehearsal covered. List reference-only materials separately.
 >
-> The recovery rehearsal covered selected project state, objects, protocol materials, validation scripts, Git history and staged/unstaged changes. The independently restored copy remains in standby. Unsaved editor buffers and private platform chat history are excluded; credentials are managed separately. This example declined cloud storage, so it claims no offsite upload.
+> **Daily governance:** show the confirmed report/progress-review slots, time zone and configuration readback. Report the official update check and applicability decision; offline access leaves the remote state unverified.
 >
-> The official update source was checked. New versions are evaluated before any proposed installation. In your confirmed timezone, one morning report and one afternoon absorption slot are configured for this original governance chat. Configuration was read back; first natural triggers are still pending. This manual execution does not establish the natural scheduled loop.
+> **Pending work:** if one window needs a reload, give only its reload and readback steps. Do not declare full setup while standard items remain incomplete.
 >
-> Next, return to PC software and connect the three-frame input to the curve and CSV. Governance is ready; engineering continues. No actual USB device has been tested.
-
-If a required connection, local save, schedule or recovery check is missing, report setup in progress with the exact gap and next action. Package installation alone cannot establish complete governance, and completed work does not need to be restarted.
-
-## 4. Report understandable engineering progress
-
-The shared input is:
-
-```text
-READ,42,1000,1.234
-READ,43,1100,1.250
-READ,44,1200,1.220
-```
-
-The following feedback is appropriate only after its corresponding checks:
-
-> The three simulated frames produced matching sequence, time and value fields. Parsing/replay passed, giving the curve three input points at 1000, 1100 and 1200 ms. Reference CSV rows match those values. This validates the data path; actual curve UI and file-export interactions retain separate evidence.
+> **Natural trigger:** before the scheduled time, say “configuration read back; first natural execution pending.” Add original-AI execution, saving and delivery evidence after a genuine trigger.
 >
-> Disconnection created no new measurements and discarded the incomplete frame. Reconnection accepted continuing sequence numbers without duplicating old ones. Next, PC software checks the actual interface's offline indication and display recovery. Hardware connection remains a later stage.
+> **Next work:** software continues the replay interface, algorithms prepare comparisons, hardware clarifies constraints, and product communications uses claims supported by evidence. Return directly to the relevant chats.
 
-The packaged replay program checks these simulated parsing, disconnect/reconnect and CSV numeric round-trip outcomes; it is not a complete PC application. A real device that resets sequence numbering needs an explicit session/epoch agreement rather than this continuing-sequence assumption. Real reports cite exact inputs, outputs and checks. A static plot also does not establish live interface interaction.
+Creating several files is not proof of complete governance. Waiting for the first genuine scheduled trigger is not a reason to reinstall.
 
-## 5. Explain gaps, interrupted work and quiet checks
+## 6. Continue or update by stating the current goal
 
-> The PC chat's configuration is written, but its current tools do not expose native TaskCarry yet. Trust and reload the exact directory in the report. I will verify that chat's actual connection afterward. The completed protocol configuration stays; no reinstall or task re-registration is needed.
+- **After interruption:** “Continue the remaining setup.” Governance checks existing plans and actual effects before filling gaps.
+- **At a stopping point:** “Save here so we can resume.” The original task retains a checkpoint, artifact locations and next step.
+- **When an update appears:** “Assess whether this update helps my project.” Governance compares Core, methods and project rules, then recommends applicable changes.
+- **From another governance tool:** “Continue these rules and decisions.” Governance identifies the source and scope while preserving the existing system; inheriting content does not upgrade that tool.
 
-> The protocol entry was written before interruption and only its receipt was missing. I inspected the effect and completed that receipt. You later changed another chat's file; I retained it and will plan against the new contents. Independent work can continue.
-
-> The sources read in this absorption check contain no substantive changes. Original progress and next actions remain, with no new delivery, installation or reopened completed task. Unread sources are listed separately for follow-up.
-
-An absorption slot can save a quiet result for the morning report. An unread source is not evidence of no change; neither success nor failure should be invented.
-
-## 6. Recovery and parallel work elsewhere
-
-> Selected protocol files, scripts, project memory and Git changes were restored independently and checked against the manifest. This is still the same logical project, but the copy is in standby. Connections at the new location still need acceptance.
->
-> To continue PC development on another computer, use an independent task branch and return exact versions, changed files, results and next steps to the same governance. Moving governance itself requires stopping the old writer, checking the new host, and an explicit handoff. Two replicas must not concurrently write the same governance state.
-
-Report local independent restore, upload, offsite download, actual second-computer acceptance and writer transfer separately. A same-machine rehearsal does not prove a two-computer workflow. None of these checks proves physical USB behavior.
-
-<details>
-<summary>Technical evidence mapping for reviewers</summary>
-
-The example uses `firmware-protocol / usb-firmware`, `pc-software / usb-pc`, and `simulation-validation / usb-simulation`; `synthetic-interface-notes` is reference-only. Do not copy these demonstration identities into a real user's governance.
-
-- Source evidence records selected scope, revisions, reading and understanding. Each working chat retains its original task/chat, actual directory/Git identity, checkpoint and current `view_id`.
-- `PUBLISHED`, `REVIEWED_EVIDENCE_RECORDED`, `finalization_pending=false` and matching source freshness are separate checks. Actual native doctor/status and reading evidence from that chat are still required.
-- `profile=complete_v1` can report `complete_governance_ready=true` only after every required item passes. Before actual scheduled occurrence, `natural_trigger_verified=false` and `closed_loop_verified=false`. Configuration, natural trigger, original-chat AI execution and report delivery have separate evidence.
-- Engineering evidence preserves exact versions, frame inputs, parsing/CSV outputs and disconnect/reconnect results. UI, firmware and device acceptance remain separate.
-- Recovery evidence includes the manifest, coverage/exclusions, independent restore and standby state. Transfer, host acceptance and single-writer handoff are distinct.
-
-See [Governance API](../GOVERNANCE_API.md) for fields and calls, and the [complete governance fixture](../../examples/complete-governance/README.md) for synthetic inputs.
-
-</details>
-
-## Example feedback after updating an existing project
-
-This illustrates feedback for the USB acquisition project, assuming the listed checks actually passed. It is not a receipt from a real installation.
-
-> Candidate compatibility checks passed in an independent environment. The firmware/protocol, PC curve/CSV and simulation chats still map to their original tasks and latest checkpoints. The frame-format decision and its source remain. The task waiting for a device parameter remains paused; completed decoder checks have not become pending work again.
->
-> Old-state project backup, manifest verification and independent restoration passed. The restored replica remains in standby; production state was not replaced. Next, switch the exact package within the authorized scope and check each native chat's loaded runtime. Without installation authorization, the verified current combination continues running.
->
-> The improved project governance rules can be adopted separately. Public release, package installation and actual local resolution are recorded separately. Physical devices and another computer retain their own verification scopes.
-
-On failure, report the exact step, actual effects, retained original plan and next condition. Do not restart every chat's initial setup or interpret a backup rejection as evidence that history was lost.
+[Return to the three-step guide](windows-example.md) · [Update and continuation](updating.md) · [Separate example and actual evidence scope](../../examples/vision-drone-governance/README.md)

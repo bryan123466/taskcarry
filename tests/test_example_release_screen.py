@@ -11,6 +11,21 @@ from scripts.build_trial import ROOT, __version__, build, reviewed_example_path,
 
 
 class ExampleReleaseScreenTests(unittest.TestCase):
+    def test_private_discovery_inventory_never_enters_release_membership(self):
+        from scripts import build_trial as release
+        with tempfile.TemporaryDirectory(prefix='taskcarry-private-discovery-') as temporary:
+            root = Path(temporary)
+            public = root / 'docs/guide.md'
+            public.parent.mkdir()
+            public.write_text('Public guide\n', encoding='utf-8')
+            for parent in (root, root / 'docs', root / 'examples/demo'):
+                inventory = parent / '.taskcarry-onboarding/discovery/private/00000001.json'
+                inventory.parent.mkdir(parents=True)
+                inventory.write_text('{"private_title":"synthetic private inventory"}', encoding='utf-8')
+            with patch.object(release, 'ROOT', root):
+                selected = {path.relative_to(root).as_posix() for path in release.files()}
+            self.assertEqual(selected, {'docs/guide.md'})
+
     def test_old_download_link_stops_build_before_creating_artifacts(self):
         read_bytes = Path.read_bytes
         def stale_entry(path):

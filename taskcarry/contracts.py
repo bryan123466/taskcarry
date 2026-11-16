@@ -83,6 +83,8 @@ SCHEMAS.update(WORKBENCH_SCHEMAS)
 SCHEMAS.update(RECOVERY_SCHEMAS)
 from .transfer_contracts import SCHEMAS as TRANSFER_SCHEMAS
 SCHEMAS.update(TRANSFER_SCHEMAS)
+from .discovery_contracts import SCHEMAS as DISCOVERY_SCHEMAS
+SCHEMAS.update(DISCOVERY_SCHEMAS)
 
 # Missing profile retains the legacy receipt contract. New complete setup must
 # explicitly choose its versioned coverage rather than relabel old acceptance.

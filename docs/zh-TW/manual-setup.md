@@ -17,7 +17,7 @@
 
 ## 安裝或核對固定執行環境
 
-先檢查既有安裝與 control，有效時直接重用。確實首次安裝工具時，建立 `C:/TaskCarry`，將選定產品 ZIP 解壓縮到 `C:/TaskCarry/toolkit`。產品 ZIP 自帶頂層目錄 `taskcarry-0.2.0rc7/`，因此實際產品根目錄是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc7`，其中包含 `START_HERE.md`、`packages/`、`docs/` 與 `skills/`。選用其他版本時依實際解壓縮出的版本目錄調整。原業務專案保留在原位置。需要 Python 3.11+；本機 Git 是標準接入項；普通檔案 API 仍保留無 Git 相容。
+先檢查既有安裝與 control，有效時直接重用。確實首次安裝工具時，建立 `C:/TaskCarry`，將選定產品 ZIP 解壓縮到 `C:/TaskCarry/toolkit`。產品 ZIP 自帶頂層目錄 `taskcarry-0.2.0rc8/`，因此實際產品根目錄是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc8`，其中包含 `START_HERE.md`、`packages/`、`docs/` 與 `skills/`。選用其他版本時依實際解壓縮出的版本目錄調整。原業務專案保留在原位置。需要 Python 3.11+；本機 Git 是標準接入項；普通檔案 API 仍保留無 Git 相容。
 
 以下指令在 PowerShell 執行，**僅用於專用 runtime 尚不存在的情況**。安裝工具不建立新的業務專案，也不表示獲准升級既有執行環境。
 
@@ -26,7 +26,7 @@
 ```powershell
 & {
     $ErrorActionPreference = 'Stop'
-    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc8'
     $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
     if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }

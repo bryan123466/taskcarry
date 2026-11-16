@@ -1,10 +1,12 @@
+<a id="已經在使用-taskcarry"></a>
+
 # TaskCarry
 
 **為 AI 工具提供專案記憶與協作能力。**
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[取得 TaskCarry](START_HERE.md#download) · [首次安裝](docs/zh-TW/windows-example.md) · [既有使用者更新](docs/zh-TW/updating.md)
+[取得 TaskCarry](START_HERE.md#download) · [首次安裝](docs/zh-TW/windows-example.md) · [更新與接續](docs/zh-TW/updating.md)
 
 TaskCarry 協助已經在 AI 對話中推進的專案**記住決定、接續工作、協調成果**。它把已確認決定、任務關係、已儲存成果和下一步留在持久的本機記錄中，讓工作能夠跨越單個對話繼續推進。
 
@@ -88,21 +90,23 @@ TaskCarry 儲存記錄並執行已支援的本機操作。你保留專案方向�
 
 [取得完整產品套件](START_HERE.md#download)，再依[三步上手手冊](docs/zh-TW/windows-example.md)完成：
 
-1. **建立治理視窗。** 在本機 TaskCarry 資料夾內放好產品套件，用該目錄開啟獨立 Codex 對話，傳送手冊中的一段主提示詞。
-2. **跟著總控完成建制。** 總控繼承選定工作，準備任務/工作區/Git 綁定，驗收原生 MCP 和工作台入口，完成首次治理整輪與獨立恢復演練，並設定日常節奏和官方更新檢查。需要信任、登入或重載時，只給目前必要操作。
+1. **建立治理視窗。** 將產品套件解壓縮到 `TaskCarry/toolkit/`，在 Codex 中開啟外層 `TaskCarry` 目錄，傳送手冊中的完整提示詞，無需填寫產品路徑。
+2. **選擇專案，跟隨治理。** 助手先整理可存取的對話索引及涵蓋範圍，建議專案分組；你選定後再讀取相關歷史。它準備各原視窗的完整接入提示詞，按需建議新增職責，並帶你完成本機 Git、MCP、記憶、首次治理、恢復及日常官方更新檢查。需要宿主操作時，只給目前必要一步。
 3. **查看證據，繼續工作。** 取得繼承決定、視窗/職責/任務表、連線、儲存、恢復和更新結果、真實缺步及下一步建議。建制完成與自然定時閉環已驗證分別說明；設定、觸發、AI 執行和報告送達各有證據。[查看使用者應收到的回饋](docs/zh-TW/user-feedback-examples.md)。
 
 繼續在原來的工作視窗推進。治理負責專案記憶，是否長期兼任專案協調由你選擇，新增專業視窗可以為零。
 
-### 已經在使用 TaskCarry
+### 既有治理
 
-回到原治理視窗，傳送[更新指南](docs/zh-TW/updating.md)中的提示詞。治理會檢查既有安裝，保留專案記錄與設定，執行適用的更新並驗證結果。繼續使用原專案與原治理目錄。
+（如果已安裝 TaskCarry、使用其他治理工具或已有治理對話，需要更新或接續，請參閱[更新與接續入口](docs/zh-TW/updating.md)。）入口區分套件更新與既有治理繼承，保留原記錄、設定及未完成工作。
 
-需要你完成宿主操作時，助手只提供目前這一步。具體指令放在[手動後備](docs/zh-TW/manual-setup.md)，每次迭代變更了什麼集中在[版本說明](docs/RELEASE_0.2.0rc7.md)。
+需要你完成宿主操作時，助手只提供目前這一步。具體指令放在[手動後備](docs/zh-TW/manual-setup.md)，每次迭代變更了什麼集中在[版本說明](docs/RELEASE_0.2.0rc8.md)。
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="治理與工作對話的組織範例，專業視窗數量按需決定" width="360">
 
 這是一種組織範例，既有工作對話繼續有效。若它們共用目錄，先檢查活躍寫入者並保全相應 WIP，再安排獨立寫入範圍。
+
+透過[圖像辨識避障無人機實例](examples/vision-drone-governance/README.md)，可以看到零散的軟體、演算法、硬體討論如何接續為共同專案記憶，並按需增加產品與推廣職責。實例將回饋示意與實際驗證分開，不代表無人機已完成開發或實飛。
 
 ## 從本機工作逐步擴充
 
@@ -119,7 +123,7 @@ TaskCarry 使用 Python 3.11+，包含安裝接入、任務交付、治理與恢
 |---|---|---|---|
 | 手動後備 | [Commands and handoffs](docs/en/manual-setup.md) | [手动后备](docs/zh-CN/manual-setup.md) | [手動後備](docs/zh-TW/manual-setup.md) |
 | 操作手冊 | [Start here](docs/en/windows-example.md) | [从这里开始](docs/zh-CN/windows-example.md) | [從這裡開始](docs/zh-TW/windows-example.md) |
-| 既有使用者更新 | [Update TaskCarry](docs/en/updating.md) | [更新指南](docs/zh-CN/updating.md) | [更新指南](docs/zh-TW/updating.md) |
+| 更新與接續 | [Update and continuation](docs/en/updating.md) | [更新与接续](docs/zh-CN/updating.md) | [更新與接續](docs/zh-TW/updating.md) |
 | 使用者回饋範例 | [What users should hear](docs/en/user-feedback-examples.md) | [反馈示例](docs/zh-CN/user-feedback-examples.md) | [回饋範例](docs/zh-TW/user-feedback-examples.md) |
 | 架構 | [How it works](docs/en/architecture.md) | [架构说明](docs/zh-CN/architecture.md) | [架構說明](docs/zh-TW/architecture.md) |
 | 維護 | [Maintain a project](docs/en/governance-maintenance.md) | [维护项目](docs/zh-CN/governance-maintenance.md) | [維護專案](docs/zh-TW/governance-maintenance.md) |
@@ -127,7 +131,7 @@ TaskCarry 使用 Python 3.11+，包含安裝接入、任務交付、治理與恢
 
 [治理閉環如何變得更簡潔](docs/zh-TW/governance-evolution.md)
 
-[CLI / MCP 參考](docs/COMMANDS.md) · [公開技能](skills) · [驗證記錄](docs/RELEASE_0.2.0rc7.md)
+[CLI / MCP 參考](docs/COMMANDS.md) · [公開技能](skills) · [驗證記錄](docs/RELEASE_0.2.0rc8.md)
 
 ## 一起改進
 

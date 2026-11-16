@@ -20,6 +20,9 @@ def invoke(project, action, arguments=None):
     if action == "codex":
         from .codex_host import codex_read
         return codex_read(**args)
+    if action == "discovery":
+        from .discovery import Discovery
+        return Discovery(project).discovery(**args)
     if action == "recovery":
         from .project_recovery import ProjectRecovery
         return ProjectRecovery(project).recovery(**args)

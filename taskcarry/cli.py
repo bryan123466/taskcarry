@@ -11,7 +11,7 @@ ACTIONS = (
     "workspace", "submit", "reconcile", "adopt", "doctor", "setup", "mcp",
     "upgrade", "observe", "run", "issue", "fix", "identify", "context", "governance", "connect",
     "codex", "update_source", "update_check", "update_assess", "onboarding", "schedule_plan", "preserve",
-    "identity", "cycle", "facts", "source_scan", "workbench", "recovery", "transfer",
+    "identity", "cycle", "facts", "source_scan", "workbench", "recovery", "transfer", "discovery",
 )
 
 

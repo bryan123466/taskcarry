@@ -19,6 +19,7 @@ Success: `{"ok":true,"result":{...}}`. Failure: `{"ok":false,"error":{"code":"..
 | Action / 动作 | Main fields / 主要字段 | Meaning / 含义 |
 |---|---|---|
 | `identify` | none / 无 | Read selected state format/source before initialization; no migration / 初始化前只读识别状态格式与来源 |
+| `discovery` | `discovery_id`, `action` status/plan/execute; plan `draft`, `expected_revision` (initially 0); execute complete returned `plan` | Keep bounded metadata pages, AI project proposals and reviewed selection before initialization; no chat-body scan or acceptance / 初始化前保存有界索引分页、AI 项目候选与用户选择，不读取正文或代替验收 |
 | `context` | `task_id`; optional `limit` 1–100, `cursor`, `previous_fingerprint`, `issue_ids`, `fix_ids` | Bounded task context with source-qualified references and omitted/missing evidence / 有界任务上下文与来源身份 |
 | `connect` | `action` plan/execute/status; plan `target`, `workspace`, `task_id` for a workbench; execution `plan_id` | Preserve and merge the generated project MCP block; no host reload / 保全合并项目 MCP 配置，不代宿主重载 |
 | `onboarding` | `onboarding_id`, `action` start/update/status; `scope`, `item`, `expected_revision` | Resume standard onboarding from verified local bindings and reviewed native evidence / 可接续接入清单 |

@@ -2,6 +2,77 @@
 
 This reference supports the assistant-led [three-step setup](en/windows-example.md). API, CLI and MCP use the same typed contracts. Reading does not migrate state. Mutation tools require exact scope and applicable authorization; tool availability grants no access to unrelated files or chats.
 
+## Project discovery before initialization
+
+`discovery` / `taskcarry_discovery` supports `status/plan/execute` in an existing governance working directory, including before it has a control database. The AI obtains authorized index metadata from the current host, proposes project groups and asks the user which project to connect. Core stores that bounded review; it does not scan Codex, read conversation bodies, group projects itself or execute text found in titles. A title, directory or AI grouping remains a clue until the selected history has been read.
+
+Use `status` with `discovery_id` to resume. `plan` takes the complete next `draft` and the observed `expected_revision` (zero initially), and performs no filesystem write. Review its result, then pass the entire returned `plan` unchanged to `execute`. Before MCP is connected, use the same CLI with the explicitly selected installed interpreter in isolated mode; no additional control is needed. Input files use the normal `--input` option.
+
+For example, a first plan input can contain one inspected active index and explicitly unknown archived coverage:
+
+```json
+{
+  "discovery_id": "first-use",
+  "action": "plan",
+  "expected_revision": 0,
+  "draft": {
+    "sources": [
+      {
+        "source_id": "selected-host-active",
+        "label": "Current host active conversation index",
+        "archive_scope": "active",
+        "coverage": "exhausted",
+        "pages": [{
+          "cursor": null,
+          "next_cursor": null,
+          "receipt_ref": "synthetic-index:active-page-1",
+          "threads": [{"thread_id": "drone-software", "title": "Obstacle recognition drone software"}]
+        }]
+      },
+      {
+        "source_id": "selected-host-archive",
+        "label": "Archived conversations not yet inspected",
+        "archive_scope": "archived",
+        "coverage": "unknown",
+        "pages": []
+      }
+    ],
+    "candidates": [{
+      "candidate_id": "drone",
+      "label": "Image recognition and obstacle avoidance drone",
+      "reason": "AI proposal from the visible title; confirm scope before reading history.",
+      "members": [{"source_id": "selected-host-active", "thread_id": "drone-software"}]
+    }]
+  }
+}
+```
+
+Execute with `{"discovery_id":"first-use","action":"execute","plan":...}` where `...` is the exact returned plan object. After the user chooses, include `selection: {"candidate_id":"drone","confirmation_ref":"user-turn:project-selection"}` in a new complete draft, then plan and execute the next revision. The reference records the actual user choice; supplying text does not create user authorization. The result supplies a content-bound `selection_fingerprint`. Continue by reading only the chosen sources and preparing their actual onboarding; newly suggested professional windows are created through the host's authorized workflow.
+
+Sources use distinct IDs for a selected host/index scope and scan. Each source declares `archive_scope` (`active`, `archived` or `unknown`), `coverage` (`partial`, `exhausted`, `unavailable` or `unknown`) and its saved pages. Pages begin at a null `cursor` and follow the previous `next_cursor`. Repeat pages with identical cursor/content reuse their metadata; conflicting repeats are rejected. Resume a partial source at its last non-null `next_cursor`. Preserve earlier pages and sources in the complete next draft. When refreshing a changed index, retain its old scan under the old source ID and add a new source ID. Equal titles never merge identities: candidate members name both `source_id` and `thread_id`.
+
+`exhausted` means only that the explicitly selected active or archived index reached a null next cursor. It does not mean every local account, another device, cloud history or conversation body was inspected. Mark unavailable or unknown coverage explicitly. The limits are 20 sources, 50 pages per source, 100 metadata entries per page, 500 distinct source-qualified threads, 100 candidates, 100 members per candidate, 2048 characters per string and 512 KiB per complete draft. Thread metadata accepts only `thread_id`, `title` and optional `cwd`; content/messages fields are rejected. Reaching a limit requires a scoped continuation rather than claiming complete inventory.
+
+Revisions live privately under `.taskcarry-onboarding/discovery/<discovery_id>/`, separate from `.taskcarry/state.sqlite3`. They are local discovery drafts, not another control or a published project memory. Execution checks the precise root, local root identity, existing project/replica binding, expected revision and previous content fingerprint, then uses a real OS lock and atomic no-replace publication. Symlinks, reparse points and conflicting files are preserved and rejected. Existing standby replicas cannot save revisions. Inspect status after an uncertain failure: retrying the exact plan reuses its actual saved revision; a newer revision requires a new plan. Keep these machine-specific drafts out of public repositories and release archives.
+
+After the real `onboarding` exists, an optional `onboarding` object in the draft can link the selected scope to its current receipt:
+
+```json
+{
+  "onboarding_id": "drone-setup",
+  "scope_fingerprint": "the-actual-onboarding-scope-fingerprint",
+  "selection_fingerprint": "the-discovery-selection-fingerprint",
+  "windows": [{
+    "source_id": "selected-host-active",
+    "thread_id": "drone-software",
+    "window_thread_id": "the-retained-original-thread-id",
+    "source_ref": "the-actual-onboarding-window-source-reference"
+  }]
+}
+```
+
+Each selected source/thread must map exactly once to a distinct actual onboarding window and its actual `source_ref`. Additional newly proposed windows may appear in onboarding. The link checks the actual local scope and reports `binding_current`; it does not transfer acceptance or modify onboarding records. Changed selected candidates require a new user confirmation reference. Changed selection fingerprints or onboarding scope invalidate an old link. Copied drafts require a fresh local selection and binding review. All discovery reports keep `chat_bodies_read`, `all_chats_verified`, `acceptance_inherited` and `native_acceptance_verified` false. Configuration, native connection, completed governance and natural scheduled execution retain their separate evidence.
+
 ## Portable identity and sourced facts
 
 New projects receive a persistent `project_id` and a local `replica_id`. `identify`, `status` and `context` expose source-qualified identity. A legacy project retains its path identity until an explicit `identity` plan and execute; its previous identity becomes an alias. Initialization is not an update workflow. A copied database is not an independently authorized writer.

@@ -3,6 +3,7 @@ __pycache__/
 *.egg-info/
 .venv/
 .taskcarry/
+.taskcarry-onboarding/
 build/
 dist/
 .pytest_cache/

@@ -5,7 +5,13 @@ description: Connect an existing Codex project and its work chats to TaskCarry, 
 
 # Project onboarding and maintenance
 
-A first installation follows the three-step [onboarding method](references/onboarding.md); an update starts in the existing governance chat using its maintenance section. Inspect `identify` before initializing state. Unknown or incompatible state is preserved for review. Reuse verified installations, task identities, decisions and WIP.
+A first installation follows the three-step [onboarding method](references/onboarding.md). Start from the outer TaskCarry working folder and inspect its `toolkit/` for the complete product entry, package metadata and this method. Keep the extracted version directory. Resolve this locally; do not ask the user to fill in product paths. Ask only about a concrete missing, incomplete or ambiguous package. Reading the toolkit supplies the TaskCarry method, not the user's project contents.
+
+Route existing governance first: installed TaskCarry uses its original governance chat/control and maintenance path; another governance tool needs read-only inheritance and a scoped continuation plan; a governance chat without tools needs its effective decisions and stopping points preserved while filling setup gaps. Do not upgrade, uninstall or migrate another tool as an incidental TaskCarry action. Inspect `identify` before initializing state. Unknown or incompatible state is preserved for review. Reuse verified installations, task identities, decisions and WIP.
+
+Unless the user already selected a project, inventory current permitted host conversation indexes before reading conversation bodies. Use supported native listing or the packaged adapter, paginate active and archived sources separately, and report source/cursor/remaining-page coverage. An exhausted index is only that source's coverage, not all accounts, devices or cloud conversations. Let AI propose project groups from metadata, then ask the user to select a scope before reading related history. Do not infer business identity from a directory or title alone.
+
+Retain the inventory, AI candidate groups and the user's exact selection with `discovery` plan/execute in the selected governance home, including before control initialization. Read status before resuming. The bounded draft uses `.taskcarry-onboarding/discovery` and does not create a control database. A plan is read-only; execute only the reviewed returned plan. Its receipts are inventory/selection evidence, not history understanding or a native connection. Follow the reference for re-selection and later onboarding mapping.
 
 Default to an independent governance chat for project memory and continuity. Give one initial project assessment and work-division suggestion; ongoing project coordination is the user's choice. A real project may span several directories and existing state sources. Keep routing explicit; do not merge stores, duplicate tasks or redefine projects from folder names. Historical reference chats need not become active workbenches.
 
@@ -17,6 +23,6 @@ Preview `setup` before `mode: install`. A workbench supplies `target`, `workspac
 
 Use `onboarding` for the selected scope, actual evidence and next missing action. `schedule_plan` prepares one report slot and one or two absorption slots; the host creates/reuses these original-chat schedules. Do not edit scheduler files or silently create a system job. Record configuration, natural trigger, original AI execution and actual delivery separately. Reuse matching schedules; do not multiply writers.
 
-When a host action is unavailable, give one exact destination, filled-in content, expected result and resume instruction. Never substitute governance's MCP result for another window's acceptance. Continue only the missing step. Removal uses setup uninstall and retains modified files, project data and separately activated configuration.
+Prepare a filled-in connection card for every selected active chat: original chat, real working location, responsibility/task, governance source, complete activation prompt and expected receipt. Suggest additional roles only where useful; there is no required chat count. When a host action is unavailable, give one exact destination, filled-in content, expected result and resume instruction. Never substitute governance's MCP result for another window's acceptance. Continue only the missing step. Removal uses setup uninstall and retains modified files, project data and separately activated configuration.
 
-中文：三步完成标准接入，由治理协助配置真实工作位置、版本保存、连接与原聊天定时治理。保留原窗口职责；项目理解和分工建议不替代用户决定。检查、安装、宿主加载和自然触发分别留证。
+中文：直接读取当前目录 toolkit，无需用户填产品路径。先盘点当前宿主可见索引并说明覆盖，用户选择后再读相关历史。三步完成标准接入，由治理协助配置真实工作位置、版本保存、连接与原聊天定时治理。保留原窗口职责；项目理解和分工建议不替代用户决定。检查、安装、宿主加载和自然触发分别留证。

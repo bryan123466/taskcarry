@@ -17,7 +17,7 @@ Use this fallback only for the step your governance assistant cannot complete. F
 
 ## Install or inspect the fixed runtime
 
-First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry` and extract the selected product ZIP into `C:/TaskCarry/toolkit`. The product ZIP includes a top-level `taskcarry-0.2.0rc7/` directory: the extracted product root is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc7`, containing `START_HERE.md`, `packages/`, `docs/` and `skills/`. Use the actual extracted version directory if selecting another package. Keep the existing business project in place. Python 3.11+ is required; Local Git is a standard onboarding requirement; ordinary file APIs retain compatibility without it.
+First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry` and extract the selected product ZIP into `C:/TaskCarry/toolkit`. The product ZIP includes a top-level `taskcarry-0.2.0rc8/` directory: the extracted product root is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc8`, containing `START_HERE.md`, `packages/`, `docs/` and `skills/`. Use the actual extracted version directory if selecting another package. Keep the existing business project in place. Python 3.11+ is required; Local Git is a standard onboarding requirement; ordinary file APIs retain compatibility without it.
 
 Run these commands in PowerShell **only when the dedicated runtime does not already exist**. Installing the package does not create a new business project or authorize upgrading an existing runtime.
 
@@ -26,7 +26,7 @@ The block first checks the included wheel against its exact entry in `RELEASE_MA
 ```powershell
 & {
     $ErrorActionPreference = 'Stop'
-    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc7'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc8'
     $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
     if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }

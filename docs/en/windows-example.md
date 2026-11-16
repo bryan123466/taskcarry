@@ -77,6 +77,8 @@ After selection, expect these results:
 | Connection and first-cycle results | Verify each window's actual connection, original task and current entry; establish shared memory, save selected files precisely, check official updates and rehearse local recovery. |
 | A proposed daily rhythm | Confirm times and time zone, create or reuse report and progress-review slots returning to this original governance chat, then read back the actual configuration. |
 
+**Keep existing chats; you do not need to recreate them.** If an original chat already uses the correct working directory, continue there. If the host requires directory trust or a service reload, governance identifies that original directory and the next necessary action. An existing chat, a written configuration and loaded native tools are verified separately; restarting the app alone does not establish directory trust.
+
 For an old chat without a working folder, governance uses supported host association or a continuation that preserves its history. A prompt cannot change the chat's directory. If the host cannot read a needed conversation, governance supplies the smallest handover prompt. If connection or scheduling needs your action, it supplies the exact pending step and resume instruction, with [manual fallback](manual-setup.md) only where needed.
 
 Local version saving, working-window connections, recovery verification, daily governance configuration and official update checking are standard setup. Private Git remotes and cloud storage can follow if you choose them; they are not required for local governance. Finding an update leads to an applicability review, not an automatic runtime replacement.

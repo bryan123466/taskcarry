@@ -68,7 +68,9 @@ control 尚未初始化時，doctor 回傳 `NOT_INITIALIZED`，不含執行環�
 
 產生的 `.taskcarry/codex.mcp.toml` 是**片段**。在 Codex 中，將選定的 `[mcp_servers.<name>]` 表合併到目標聊天的專案級 `.codex/config.toml`：治理目錄為 `C:/TaskCarry/.codex/config.toml`，專業工作台為 `<已登記工作台>/.codex/config.toml`。保留其他設定與服務，不覆蓋整份檔案或修改全域設定。保留產生的 command/args：它們綁定固定解譯器，使用隔離 UTF-8 啟動並指定套件來源。
 
-讓目標聊天開啟或選用同一目錄作為專案與工作目錄，並在適當時完成該專案的信任提示；Codex 只載入受信任專案的設定。隨後使用宿主支援的 MCP 重新啟動/載入操作；官方桌面說明使用 **Settings → MCP servers → Restart**。目前聊天不能更換目錄時，在設定所在目錄開啟的聊天中依儲存清單接續，仍重用同一 control。把設定寫在另一目錄不會讓目前聊天自動連線。setup 不選擇宿主目錄、不授予信任，也不重新載入宿主。依據見官方 [MCP 設定](https://learn.chatgpt.com/docs/extend/mcp?surface=app)與[設定層級](https://learn.chatgpt.com/docs/config-file/config-basic)。
+先核對原對話的實際工作目錄與設定所在目錄一致。已在正確目錄的原對話直接沿用，保留歷史和原任務身分，無需重新建立視窗。依宿主要求開啟或選用該原目錄、完成專案的信任提示，再使用宿主支援的 MCP 重新啟動或重載操作。重新啟動應用程式本身不證明目錄已受信任；隨後仍須在原視窗呼叫原生工具驗收。
+
+目錄不相符時，先由治理核對宿主支援的關聯或保留歷史的接續方式，仍使用同一 control。把設定寫在另一目錄不會讓目前對話自動連線。setup 不選擇宿主目錄、不授予信任，也不重載宿主。操作入口以目前宿主為準，參考官方 [MCP 設定](https://learn.chatgpt.com/docs/extend/mcp?surface=app)與[設定層級](https://learn.chatgpt.com/docs/config-file/config-basic)。
 
 Skills 位於 `.agents/skills/`，包括引用的方法檔案；未被自動發現時，明確讀取該目錄下需要的 `SKILL.md` 及引用。新 worktree 不會自動繼承另一目錄的設定。每個目標視窗依下節分別驗收，設定檔案或獨立 stdio 程序成功均不證明原生宿主已載入。
 

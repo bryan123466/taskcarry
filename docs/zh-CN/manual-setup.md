@@ -68,7 +68,9 @@ control 尚未初始化时，doctor 返回 `NOT_INITIALIZED`，不含运行时�
 
 生成的 `.taskcarry/codex.mcp.toml` 是**片段**。在 Codex 中，将选定的 `[mcp_servers.<name>]` 表合并到目标聊天的项目级 `.codex/config.toml`：治理目录为 `C:/TaskCarry/.codex/config.toml`，专业工作台为 `<已登记工作台>/.codex/config.toml`。保留其他设置与服务，不覆盖整份文件或修改全局配置。保留生成的 command/args：它们绑定固定解释器，使用隔离 UTF-8 启动并指定包来源。
 
-让目标聊天打开或选用同一目录作为项目和工作目录，并在适当时完成该项目的信任提示；Codex 只加载受信任项目的配置。随后使用宿主支持的 MCP 重启/重载操作；官方桌面说明使用 **Settings → MCP servers → Restart**。当前聊天不能更换目录时，在配置所在目录打开的聊天中按保存清单接续，仍复用同一 control。把配置写在另一目录不会让当前聊天自动连接。setup 不选择宿主目录、不授予信任，也不重载宿主。依据见官方 [MCP 配置](https://learn.chatgpt.com/docs/extend/mcp?surface=app)和[配置层级](https://learn.chatgpt.com/docs/config-file/config-basic)。
+先核对原聊天的实际工作目录与配置所在目录一致。已在正确目录的原聊天直接沿用，保留历史和原任务身份，无需重新建立窗口。按宿主要求打开或选用该原目录、完成项目的信任提示，再使用宿主支持的 MCP 重启或重载操作。重启应用本身不证明目录已受信任；随后仍须在原窗口调用原生工具验收。
+
+目录不匹配时，先由治理核对宿主支持的关联或保留历史的接续方式，仍使用同一 control。把配置写在另一目录不会让当前聊天自动连接。setup 不选择宿主目录、不授予信任，也不重载宿主。操作入口以当前宿主为准，参考官方 [MCP 配置](https://learn.chatgpt.com/docs/extend/mcp?surface=app)和[配置层级](https://learn.chatgpt.com/docs/config-file/config-basic)。
 
 Skills 位于 `.agents/skills/`，包括引用的方法文件；未被自动发现时，明确读取该目录下需要的 `SKILL.md` 及引用。新 worktree 不会自动继承另一目录的配置。每个目标窗口按下节单独验收，配置文件或独立 stdio 进程成功均不证明原生宿主已经加载。
 

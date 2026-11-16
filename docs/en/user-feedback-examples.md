@@ -51,6 +51,33 @@ An existing algorithm chat might receive the following wording, accompanied by i
 
 For an active chat not attached to a project, check its actual directory and tools first, retaining its original chat and history and preferring supported association with the same directory. The label alone does not establish MCP availability. If trust or loading is still missing, governance gives only the necessary next action, then returns to the original chat for verification. A prompt cannot change cwd or replace a real MCP call.
 
+<a id="open-existing-project"></a>
+
+### When you need to open the original directory and restart Codex
+
+Suppose governance has verified that the original algorithm chat uses the synthetic directory `C:/TaskCarry/workspaces/drone`, and its connection configuration is ready. **This is a filled-in example, not a request to create that directory.** Your actual connection card must contain your original directory:
+
+> I prepared the connection for the original “Drone vision algorithms” chat. Codex now needs to open and trust its existing directory so it can load the MCP configuration there:
+>
+> 1. Press **Ctrl+O** in the current Windows Codex app; in other interfaces, use **Open / Add project folder**.
+> 2. In the folder picker, select `C:/TaskCarry/workspaces/drone` and open this existing directory. **Do not create a new chat, copy files or create another governance store.**
+> 3. If a trust prompt appears, check that it names the directory above and allow it.
+> 4. Return here and reply, “I opened the specified directory and confirmed the trust prompt.” Tell me if no trust prompt appeared.
+>
+> I will then use the host's supported method to associate the original chat with this project, preserve its history and task, and check that its actual working directory is unchanged. Once configuration and associations are ready for every directory in this batch, I will tell you when to restart once; you do not need a restart for each directory.
+
+If the new connections are not loaded, governance confirms readiness and continues:
+
+> I have checked the original chat's project association, and configuration is ready. Codex now needs to reload the connection:
+>
+> 1. Save ongoing work, then **quit Codex and reopen the application**.
+> 2. Return to this **original governance chat** in the sidebar and reply, “I restarted Codex.” Do not reinstall or create a new chat.
+> 3. Return to the original “Drone vision algorithms” chat and send: **“Use this chat's native TaskCarry MCP to call doctor and status. Check the actual version, runtime paths, control, original algorithm task and latest checkpoint. Read and verify the current workbench entry and return the actual receipts to governance. Continue with the original identity, history and outputs.”**
+>
+> I will check the actual receipts from each original chat, confirming that each reads its own task from the same governance memory. Connections already verified will not require another restart.
+
+These actions associate the original chat with its project and load the connection, retaining the same governance store and original task. Governance checks the association and actual working directory, then obtains native `taskcarry_doctor` and `taskcarry_status` receipts from the original chat. It reports the chat as connected only when version, source, control, original task and checkpoint match; a chat appearing under a project or a completed restart is not an acceptance receipt. Other chats sharing the directory still verify their own tasks and entries, without recreating the project.
+
 ### When several original chats share one directory
 
 This is still an **expected feedback example, not a report of observed acceptance**. Suppose verification shows that three original chats use the same existing business directory, shown here as `drone/`:
@@ -108,5 +135,21 @@ Creating several files is not proof of complete governance. Waiting for the firs
 - **At a stopping point:** “Save here so we can resume.” The original task retains a checkpoint, artifact locations and next step.
 - **When an update appears:** “Assess whether this update helps my project.” Governance compares Core, methods and project rules, then recommends applicable changes.
 - **From another governance tool:** “Continue these rules and decisions.” Governance identifies the source and scope while preserving the existing system; inheriting content does not upgrade that tool.
+
+<a id="chat-continuation"></a>
+
+## 7. A new window continues the original algorithm task
+
+This is an **expected feedback example**. Suppose the original algorithm chat repeatedly errors, project files remain available, empty-frame handling is verified, and comparing multiple targets in one frame is still unfinished. Governance first checks actual effects and whether the old window is still writing, then provides a continuation such as:
+
+> The saved algorithm proposal, empty-frame test results and original task checkpoint are available. I checked the files affected before the interruption and confirmed that the old window is no longer writing. The multiple-target comparison remains unfinished, so completed empty-frame work will not be repeated.
+>
+> No spare window needed to be prepared in advance. We can now create a continuation chat in the original algorithm project and same working directory. I will supply a prompt filled with the original task, entry and next step, and record the new chat's actual identity. The original chat and history remain available as references.
+>
+> The new window first calls native MCP itself to check the same governance source, original algorithm task and latest checkpoint. It then reads project decisions and related outputs and reports what it inherited, what is missing and what comes next. After these checks match, it continues only the multiple-target comparison.
+>
+> If the old window becomes usable again, have it read this handoff decision first and retain it as a historical reference, avoiding concurrent changes to the original task. Unreadable old content and unsaved ideas remain explicit gaps; they are not claimed as recovered.
+
+An actual report needs evidence that the old writer stopped, the new window's native reading receipts, and its continued outputs. Creating a new chat alone is not successful continuation. This preserves project work; it does not claim to repair Codex compaction or chat failures.
 
 [Return to the three-step guide](windows-example.md) · [Update and continuation](updating.md) · [Separate example and actual evidence scope](../../examples/vision-drone-governance/README.md)

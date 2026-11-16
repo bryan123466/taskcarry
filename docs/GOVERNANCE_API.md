@@ -105,6 +105,31 @@ The default `binding_mode: "task"` and saved v1 plans retain their existing cont
 
 Publication and consumption have separate receipts. A consumer supplies the matching view/plan/task/source/chat/turn and a hashed evidence file. This records reviewed evidence, not independent host access. Native tools still need actual calls in each chat. Complete setup requires matching tasks/chats, fresh source revisions, verified publication, no pending finalization and consumption. Code adoption follows a separate dependency. One workbench's conflict does not force others to restart.
 
+After the target chat has read its exact current view, retain a small review record in an authorized private directory under the control. Record the actual view, observed responsibilities and next step, host chat/turn, review time and any missing context. Hash that file's actual bytes. A professional workspace path is not automatically a control-relative evidence path. If the chat cannot save such a file under the control within its scope, retain the read result and ask governance to provide the permitted evidence location; do not manufacture a successful consumption.
+
+The `taskcarry_workbench` consume request has the following shape. Replace every angle-bracket value from the actual publication, host and retained evidence; this is a contract example, not an executable acceptance receipt.
+
+```json
+{
+  "action": "consume",
+  "proof": {
+    "workspace": "<registered-workspace>",
+    "plan_id": "<published-plan-sha256>",
+    "view_id": "<published-view-id>",
+    "task_id": "<original-task-id>",
+    "source_id": "<published-source-id>",
+    "thread_id": "<actual-host-chat-id>",
+    "turn_id": "<actual-reading-turn-id>",
+    "evidence_path": "evidence/window-reading.json",
+    "evidence_sha256": "<sha256-of-that-file>",
+    "reviewer": "<actual-reviewing-agent-or-person>",
+    "observed_at": "<actual-observation-time>"
+  }
+}
+```
+
+`proof` accepts exactly these eleven nonempty string fields. Do not add a top-level `routing` selector to `consume` or `execute`: the saved plan determines the v1 or shared contract. After success, query `status` for the actual chat and check the current view and consumption ID. `REVIEWED_EVIDENCE_RECORDED` means the referenced review evidence was retained; the response's `native_acceptance_verified: false` remains distinct from the real `doctor`/`status` calls captured by that chat. Invalid arguments are not a reason to republish the view or redo installation; inspect effects and correct only the rejected request.
+
 In `complete_v1`, workbench evidence has one entry for every selected active `(workspace, task_id, thread_id)`. A workspace-level receipt cannot cover another chat. Legacy entries lacking task/chat fields are accepted only when that workspace has exactly one selected active chat and the live publication matches it; stored historical evidence is not rewritten. Reference-only source chats do not require a native workbench connection.
 
 ## Selected recovery sets and one writer

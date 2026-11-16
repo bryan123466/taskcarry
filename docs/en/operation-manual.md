@@ -42,6 +42,16 @@ Work chats read the named task, latest relevant checkpoint and effective decisio
 
 Keep source-qualified decisions and relationships through `facts`, retaining the original statement, evidence and separate AI judgment. Explicit revisions preserve earlier effective facts and identify affected work. This uses the same Core store; it does not create a competing database or silently change the original task identity.
 
+<a id="chat-continuation"></a>
+
+### When the original chat cannot continue
+
+You do not need an empty spare chat in advance. If a window repeatedly errors or cannot resume, governance first checks the original task, saved decisions, checkpoint, outputs and uncommitted changes. It inspects the effects of the interrupted operation and confirms that the old window and its background writers have stopped. If that cannot be confirmed, the new chat remains read-only.
+
+When a replacement is needed, governance supplies a continuation prompt for a new chat in the same project and actual working directory. It retains the original control and `task_id` and records the new chat's real identity. The new window calls native MCP itself, reads the current task and workbench entry, and explains completed work, gaps and next steps before continuing only what remains. Retain the old chat as history; if it becomes usable again, read the handoff decision before working to avoid two writers on the same task. Replacing governance itself also requires checking the schedule's original-chat binding; do not duplicate schedules automatically.
+
+This continues saved, verifiable project work. It does not repair host compaction errors or promise to recover unsaved or inaccessible content. See the [chat-failure feedback example](user-feedback-examples.md#chat-continuation).
+
 <a id="evidence"></a>
 
 ### Understand what a result proves
@@ -64,7 +74,9 @@ The map and notes describe the project; engine records and actual files establis
 
 MCP exposes engine actions directly to the host AI. The isolated fixed-runtime CLI uses the same control when native tools are unavailable. Neither requires a separate model service. Generated connection files, host loading and native doctor/status calls are separate evidence. Each workbench must verify its own actual imported package and binding.
 
-Registered workbench setup can put its four Skills and connection materials in the host directory while binding the original control. `target`, `workspace` and `task_id` are provided together and checked against existing registration. No second control is initialized. The generated fragment pins the selected package with isolated UTF-8 startup; preserve it when merging active configuration. See [manual binding and verification](manual-setup.md#mcp).
+For new connections in Windows Codex, use **Ctrl+O / Open project folder** to open and trust the exact original directory governance supplies. After governance checks configuration and the original chat's project association, save work, **quit and reopen Codex once**, then return to each original chat to verify version, control, original task and latest checkpoint. Skip the restart for connections already verified through native calls; other hosts use their supported loading method. See [connection and restart steps](manual-setup.md#mcp).
+
+Registered workbench setup can put its four Skills and connection materials in the host directory while binding the original control. Shared directories use `binding_mode: "directory"` with `target` and `workspace`, omitting `task_id`; existing single-task bindings retain the default `task` mode with all three fields. Both modes check existing registration and initialize no second control. The generated fragment pins the selected package with isolated UTF-8 startup; preserve it when merging active configuration. See [manual binding and verification](manual-setup.md#mcp).
 
 <a id="options"></a>
 

@@ -1,0 +1,76 @@
+{
+  "requests": [
+    {
+      "url": "case-source://governance/testing/recorded/package/app/index.html",
+      "method": "GET",
+      "type": "Document"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/styles.css",
+      "method": "GET",
+      "type": "Stylesheet"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/detector.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/controller.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/simulation.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/monitor.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/index.html",
+      "method": "GET",
+      "type": "Document"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/styles.css",
+      "method": "GET",
+      "type": "Stylesheet"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/detector.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/controller.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/simulation.js",
+      "method": "GET",
+      "type": "Script"
+    },
+    {
+      "url": "case-source://governance/testing/recorded/package/app/monitor.js",
+      "method": "GET",
+      "type": "Script"
+    }
+  ],
+  "failures": [],
+  "external": [],
+  "exceptions": [],
+  "export_metadata": {
+    "scope": "Sanitized published evidence, not original receipt bytes",
+    "transformations": [
+      "Host paths and host conversation identifiers removed or replaced with descriptive source aliases",
+      "Numerical observations, check results and application hashes preserved"
+    ],
+    "source_identity_map": "Retained privately by the maintainer",
+    "non_exported_binary_evidence": "Recorded binary names are historical references. Browser verifier regenerates pixel buffers and screenshots in its local run directory."
+  }
+}

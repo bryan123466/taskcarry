@@ -1,0 +1,100 @@
+{
+  "contract_id": "rc8-drone-sim-v2",
+  "schema_version": 2,
+  "scene_id": "fixed-obstacle",
+  "start": {
+    "x": 4,
+    "y": 6
+  },
+  "goal": {
+    "x": 4,
+    "y": 2
+  },
+  "route": [
+    {
+      "x": 4,
+      "y": 6
+    }
+  ],
+  "records": [
+    {
+      "tick": 0,
+      "sim_time_ms": 0,
+      "frame_digest": "90315085",
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "fixed-obstacle",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "fixed-obstacle:0",
+        "detections": [
+          {
+            "label": "wall",
+            "region": {
+              "x_min": 0.0125,
+              "y_min": 0.016666666666666666,
+              "x_max": 0.1875,
+              "y_max": 0.18333333333333332
+            },
+            "cell": {
+              "dx": -2,
+              "dy": -2
+            },
+            "pixel_count": 560
+          },
+          {
+            "label": "column",
+            "region": {
+              "x_min": 0.8125,
+              "y_min": 0.016666666666666666,
+              "x_max": 0.9875,
+              "y_max": 0.18333333333333332
+            },
+            "cell": {
+              "dx": 2,
+              "dy": -2
+            },
+            "pixel_count": 560
+          },
+          {
+            "label": "box",
+            "region": {
+              "x_min": 0.4125,
+              "y_min": 0.21666666666666667,
+              "x_max": 0.5875,
+              "y_max": 0.38333333333333336
+            },
+            "cell": {
+              "dx": 0,
+              "dy": -1
+            },
+            "pixel_count": 560
+          }
+        ],
+        "status": "ok",
+        "error": null
+      },
+      "link_state": "connected",
+      "consecutive_unusable": 0,
+      "link_event": "connected",
+      "command": {
+        "tick": 0,
+        "source_frame_id": "fixed-obstacle:0",
+        "action": "MOVE_N",
+        "reason": "toward_goal"
+      },
+      "run_state": "collision",
+      "collision": true,
+      "arrived": false
+    }
+  ],
+  "run_state": "collision",
+  "clock_ms": 100
+}

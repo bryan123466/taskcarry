@@ -1,0 +1,687 @@
+{
+  "observations": [
+    {
+      "record": {
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_digest": "90315085",
+        "pose_before": {
+          "x": 4,
+          "y": 6
+        },
+        "pose_after": {
+          "x": 5,
+          "y": 6
+        },
+        "detection": {
+          "scene_id": "drop-and-recover",
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_id": "drop-and-recover:0",
+          "detections": [
+            {
+              "label": "wall",
+              "region": {
+                "x_min": 0.0125,
+                "y_min": 0.016666666666666666,
+                "x_max": 0.1875,
+                "y_max": 0.18333333333333332
+              },
+              "cell": {
+                "dx": -2,
+                "dy": -2
+              },
+              "pixel_count": 560
+            },
+            {
+              "label": "column",
+              "region": {
+                "x_min": 0.8125,
+                "y_min": 0.016666666666666666,
+                "x_max": 0.9875,
+                "y_max": 0.18333333333333332
+              },
+              "cell": {
+                "dx": 2,
+                "dy": -2
+              },
+              "pixel_count": 560
+            },
+            {
+              "label": "box",
+              "region": {
+                "x_min": 0.4125,
+                "y_min": 0.21666666666666667,
+                "x_max": 0.5875,
+                "y_max": 0.38333333333333336
+              },
+              "cell": {
+                "dx": 0,
+                "dy": -1
+              },
+              "pixel_count": 560
+            }
+          ],
+          "status": "ok",
+          "error": null
+        },
+        "link_state": "connected",
+        "consecutive_unusable": 0,
+        "link_event": "connected",
+        "command": {
+          "tick": 0,
+          "source_frame_id": "drop-and-recover:0",
+          "action": "MOVE_E",
+          "reason": "detour"
+        },
+        "run_state": "running",
+        "collision": false,
+        "arrived": false
+      },
+      "visits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "id": "drop-and-recover:0",
+        "byte_length": 76800
+      },
+      "repeated_detection": {
+        "scene_id": "drop-and-recover",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "drop-and-recover:0",
+        "detections": [
+          {
+            "label": "wall",
+            "region": {
+              "x_min": 0.0125,
+              "y_min": 0.016666666666666666,
+              "x_max": 0.1875,
+              "y_max": 0.18333333333333332
+            },
+            "cell": {
+              "dx": -2,
+              "dy": -2
+            },
+            "pixel_count": 560
+          },
+          {
+            "label": "column",
+            "region": {
+              "x_min": 0.8125,
+              "y_min": 0.016666666666666666,
+              "x_max": 0.9875,
+              "y_max": 0.18333333333333332
+            },
+            "cell": {
+              "dx": 2,
+              "dy": -2
+            },
+            "pixel_count": 560
+          },
+          {
+            "label": "box",
+            "region": {
+              "x_min": 0.4125,
+              "y_min": 0.21666666666666667,
+              "x_max": 0.5875,
+              "y_max": 0.38333333333333336
+            },
+            "cell": {
+              "dx": 0,
+              "dy": -1
+            },
+            "pixel_count": 560
+          }
+        ],
+        "status": "ok",
+        "error": null
+      },
+      "frame_status": "有效帧",
+      "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)"
+    },
+    {
+      "record": {
+        "tick": 1,
+        "sim_time_ms": 100,
+        "frame_digest": null,
+        "pose_before": {
+          "x": 5,
+          "y": 6
+        },
+        "pose_after": {
+          "x": 5,
+          "y": 6
+        },
+        "detection": {
+          "scene_id": "drop-and-recover",
+          "tick": 1,
+          "sim_time_ms": 100,
+          "frame_id": null,
+          "detections": [],
+          "status": "missing",
+          "error": null
+        },
+        "link_state": "connected",
+        "consecutive_unusable": 1,
+        "link_event": null,
+        "command": {
+          "tick": 1,
+          "source_frame_id": null,
+          "action": "HOLD",
+          "reason": "frame_missing"
+        },
+        "run_state": "running",
+        "collision": false,
+        "arrived": false
+      },
+      "visits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": null,
+      "repeated_detection": {
+        "scene_id": "drop-and-recover",
+        "tick": 1,
+        "sim_time_ms": 100,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "frame_status": "本拍缺帧",
+      "detections_text": ""
+    },
+    {
+      "record": {
+        "tick": 2,
+        "sim_time_ms": 200,
+        "frame_digest": null,
+        "pose_before": {
+          "x": 5,
+          "y": 6
+        },
+        "pose_after": {
+          "x": 5,
+          "y": 6
+        },
+        "detection": {
+          "scene_id": "drop-and-recover",
+          "tick": 2,
+          "sim_time_ms": 200,
+          "frame_id": null,
+          "detections": [],
+          "status": "missing",
+          "error": null
+        },
+        "link_state": "disconnected",
+        "consecutive_unusable": 2,
+        "link_event": "disconnected",
+        "command": {
+          "tick": 2,
+          "source_frame_id": null,
+          "action": "HOLD",
+          "reason": "link_disconnected"
+        },
+        "run_state": "running",
+        "collision": false,
+        "arrived": false
+      },
+      "visits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": null,
+      "repeated_detection": {
+        "scene_id": "drop-and-recover",
+        "tick": 2,
+        "sim_time_ms": 200,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "frame_status": "本拍缺帧",
+      "detections_text": ""
+    },
+    {
+      "record": {
+        "tick": 3,
+        "sim_time_ms": 300,
+        "frame_digest": "d1946605",
+        "pose_before": {
+          "x": 5,
+          "y": 6
+        },
+        "pose_after": {
+          "x": 5,
+          "y": 5
+        },
+        "detection": {
+          "scene_id": "drop-and-recover",
+          "tick": 3,
+          "sim_time_ms": 300,
+          "frame_id": "drop-and-recover:3",
+          "detections": [
+            {
+              "label": "column",
+              "region": {
+                "x_min": 0.6125,
+                "y_min": 0.016666666666666666,
+                "x_max": 0.7875,
+                "y_max": 0.18333333333333332
+              },
+              "cell": {
+                "dx": 1,
+                "dy": -2
+              },
+              "pixel_count": 560
+            },
+            {
+              "label": "box",
+              "region": {
+                "x_min": 0.2125,
+                "y_min": 0.21666666666666667,
+                "x_max": 0.3875,
+                "y_max": 0.38333333333333336
+              },
+              "cell": {
+                "dx": -1,
+                "dy": -1
+              },
+              "pixel_count": 560
+            }
+          ],
+          "status": "ok",
+          "error": null
+        },
+        "link_state": "connected",
+        "consecutive_unusable": 0,
+        "link_event": "reconnected",
+        "command": {
+          "tick": 3,
+          "source_frame_id": "drop-and-recover:3",
+          "action": "MOVE_N",
+          "reason": "toward_goal"
+        },
+        "run_state": "running",
+        "collision": false,
+        "arrived": false
+      },
+      "visits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "id": "drop-and-recover:3",
+        "byte_length": 76800
+      },
+      "repeated_detection": {
+        "scene_id": "drop-and-recover",
+        "tick": 3,
+        "sim_time_ms": 300,
+        "frame_id": "drop-and-recover:3",
+        "detections": [
+          {
+            "label": "column",
+            "region": {
+              "x_min": 0.6125,
+              "y_min": 0.016666666666666666,
+              "x_max": 0.7875,
+              "y_max": 0.18333333333333332
+            },
+            "cell": {
+              "dx": 1,
+              "dy": -2
+            },
+            "pixel_count": 560
+          },
+          {
+            "label": "box",
+            "region": {
+              "x_min": 0.2125,
+              "y_min": 0.21666666666666667,
+              "x_max": 0.3875,
+              "y_max": 0.38333333333333336
+            },
+            "cell": {
+              "dx": -1,
+              "dy": -1
+            },
+            "pixel_count": 560
+          }
+        ],
+        "status": "ok",
+        "error": null
+      },
+      "frame_status": "有效帧",
+      "detections_text": "立柱 (1, -2) · 箱体 (-1, -1)"
+    }
+  ],
+  "export_metadata": {
+    "scope": "Sanitized published evidence, not original receipt bytes",
+    "transformations": [
+      "Host paths and host conversation identifiers removed or replaced with descriptive source aliases",
+      "Numerical observations, check results and application hashes preserved"
+    ],
+    "source_identity_map": "Retained privately by the maintainer",
+    "non_exported_binary_evidence": "Recorded binary names are historical references. Browser verifier regenerates pixel buffers and screenshots in its local run directory."
+  }
+}

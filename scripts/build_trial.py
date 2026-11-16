@@ -38,6 +38,7 @@ SYNTHETIC_ABSOLUTE_LITERALS = {"C:/outside.txt"}
 SYNTHETIC_EXAMPLE_FILES = {
     "docs/en/windows-example.md", "docs/zh-CN/windows-example.md", "docs/zh-TW/windows-example.md",
     "docs/en/manual-setup.md", "docs/zh-CN/manual-setup.md", "docs/zh-TW/manual-setup.md",
+    "docs/en/user-feedback-examples.md", "docs/zh-CN/user-feedback-examples.md", "docs/zh-TW/user-feedback-examples.md",
     "examples/windows_quickstart/bootstrap.py",
 }
 REQUIRED.update({f"docs/{language}/manual-setup.md" for language in ("en", "zh-CN", "zh-TW")})
@@ -102,6 +103,77 @@ REQUIRED.update({"examples/vision-drone-governance/native-case/" + name for name
 )})
 
 
+# Reviewed runnable simulation; preserve its exact reproduction and evidence files.
+SIMULATION_FILES = {"examples/vision-drone-governance/simulation/" + name for name in (
+    ".gitignore",
+    "INTERFACE_CONTRACT.json",
+    "README.md",
+    "README.zh-CN.md",
+    "README.zh-TW.md",
+    "SOFTWARE_RUN.md",
+    "algorithm/ALGORITHM_BASELINE.md",
+    "algorithm/algorithm-evidence.json",
+    "algorithm/verify-algorithm.cjs",
+    "app/controller.js",
+    "app/detector.js",
+    "app/index.html",
+    "app/monitor.js",
+    "app/simulation.js",
+    "app/styles.css",
+    "evidence/native-acceptance.json",
+    "continuity/README.md",
+    "continuity/README.zh-CN.md",
+    "continuity/README.zh-TW.md",
+    "continuity/verify-boundary.cjs",
+    "continuity/boundary-evidence.json",
+    "continuity/native-acceptance.json",
+    "continuity/continuity-evidence.json",
+    "case-manifest.json",
+    "governance/ACCEPTANCE_PLAN.md",
+    "governance/PROJECT_PLAN.md",
+    "hardware/HARDWARE_ENGINEERING.md",
+    "hardware/INTERFACE_WIRING_PLAN.md",
+    "hardware/RESOURCE_BUDGET.csv",
+    "hardware/hardware-evidence.json",
+    "product/DEMO_ROUTE.md",
+    "product/PRODUCT_INTRO.md",
+    "product/USER_GUIDE.md",
+    "product/product-claims.json",
+    "product/product-replay-evidence.json",
+    "software-evidence.json",
+    "testing/TEST_REPORT.md",
+    "testing/chrome.mjs",
+    "testing/prepare-public-handoff.mjs",
+    "testing/recorded/browser-activity-complete.json",
+    "testing/recorded/browser-exports.json",
+    "testing/recorded/collision-export/rc8-drone-sim-v2-fixed-obstacle.json",
+    "testing/recorded/drop-first-steps.json",
+    "testing/recorded/pixel-ab.json",
+    "testing/recorded/round-1-clear-room/rc8-drone-sim-v2-clear-room.json",
+    "testing/recorded/round-1-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json",
+    "testing/recorded/round-1-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json",
+    "testing/recorded/round-2-clear-room/rc8-drone-sim-v2-clear-room.json",
+    "testing/recorded/round-2-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json",
+    "testing/recorded/round-2-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json",
+    "testing/recorded/run-evidence.json",
+    "testing/recorded/timeout-export/rc8-drone-sim-v2-clear-room.json",
+    "testing/recorded/timeout-inputs.json",
+    "testing/recorded/timeout-reset-replay/rc8-drone-sim-v2-clear-room.json",
+    "testing/test-evidence.json",
+    "testing/public-product-review.json",
+    "testing/public-product-review.md",
+    "testing/verify-independent.mjs",
+    "verify-software.mjs",
+)}
+REQUIRED.update(SIMULATION_FILES)
+# Explicit exceptions for these portable verifiers and their local-output ignore file.
+# Do not enable executable-module suffixes or nested dotfiles repository-wide.
+REVIEWED_EXAMPLE_RESOURCES = {"examples/vision-drone-governance/simulation/" + name for name in (
+    ".gitignore", "verify-software.mjs", "algorithm/verify-algorithm.cjs",
+    "continuity/verify-boundary.cjs",
+    "testing/chrome.mjs", "testing/verify-independent.mjs", "testing/prepare-public-handoff.mjs",
+)}
+
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -149,6 +221,7 @@ def files():
                 continue
             relative = path.relative_to(ROOT)
             if (relative.as_posix() in ROOT_FILES or relative.as_posix() in REVIEWED_BINARY_ASSETS
+                    or relative.as_posix() in REVIEWED_EXAMPLE_RESOURCES
                     or (relative.parts[0] in DIRECTORIES and path.suffix.lower() in EXTENSIONS)):
                 selected.append(path)
     return sorted(selected)
@@ -217,7 +290,7 @@ def _allowed_committed_path(name):
     if (not parts or any(part in EXCLUDED or part.endswith('.egg-info') for part in parts)
             or name.startswith('taskcarry/skill_data/')):
         return False
-    return (name in ROOT_FILES or name in REVIEWED_BINARY_ASSETS
+    return (name in ROOT_FILES or name in REVIEWED_BINARY_ASSETS or name in REVIEWED_EXAMPLE_RESOURCES
             or (parts[0] in DIRECTORIES and Path(name).suffix.lower() in EXTENSIONS))
 
 
@@ -292,6 +365,22 @@ def freeze_commit(contents, source_commit):
     return frozen
 
 
+def validate_simulation_manifest(contents):
+    """Check the runnable case against the actual bytes selected for packaging."""
+    prefix = "examples/vision-drone-governance/simulation/"
+    manifest_name = prefix + "case-manifest.json"
+    manifest = json.loads(contents[manifest_name].decode("utf-8"))
+    rows = manifest["files"]
+    names = [prefix + row["path"] for row in rows]
+    expected = {name for name in contents if name.startswith(prefix)} - {manifest_name}
+    if len(names) != len(set(names)) or set(names) != expected:
+        raise RuntimeError("Simulation manifest membership differs from packaged files")
+    for name, row in zip(names, rows):
+        data = contents[name]
+        if row["bytes"] != len(data) or row["sha256"] != hashlib.sha256(data).hexdigest():
+            raise RuntimeError("Simulation manifest differs from packaged bytes: " + name)
+
+
 def snapshot(deny_tokens=(), source_commit=None):
     contents = {path.relative_to(ROOT).as_posix(): path.read_bytes() for path in files()}
     missing = sorted(REQUIRED - set(contents))
@@ -312,6 +401,7 @@ def snapshot(deny_tokens=(), source_commit=None):
         contents["taskcarry/skill_data/" + resource] = contents["skills/" + resource]
     if source_commit is not None:
         contents = freeze_commit(contents, source_commit)
+    validate_simulation_manifest(contents)
     screening = screen_content(contents, deny_tokens)
     return contents, screening
 

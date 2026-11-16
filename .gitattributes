@@ -6,3 +6,5 @@
 *.yaml text eol=lf
 *.yml text eol=lf
 *.html text eol=lf
+# Reproducible example manifests refer to exact file bytes on every checkout.
+examples/vision-drone-governance/simulation/** text eol=lf

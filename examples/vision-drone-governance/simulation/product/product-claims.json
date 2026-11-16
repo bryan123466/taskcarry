@@ -1,0 +1,1242 @@
+{
+  "schema_version": 1,
+  "contract_id": "rc8-drone-sim-v2",
+  "status": "SUPPORTED",
+  "draft": false,
+  "intended_scope": "室内固定障碍的确定性二维合成仿真和工程资料",
+  "design_sources": [
+    {
+      "file": "governance/PROJECT_PLAN.md",
+      "sha256": "1f3fcc203bf5de327a159090e0062b52e422563318054a1107b290849a3d6c55",
+      "source_artifact_sha256": "852419e2d94eadb81f12fce8fcdc1eeac057f2b964d38699cfbf786a3378339c",
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "INTERFACE_CONTRACT.json",
+      "sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "governance/ACCEPTANCE_PLAN.md",
+      "sha256": "da98089ebe36896466279e05d8418112a312ebd88db2b92b314b1c97c1ffe65d",
+      "source_artifact_sha256": "9d0b53022ff3a33e5148477c14128e75d0ad4547cb57ed60e097fb1c04863caa",
+      "hash_scope": "public_file_bytes"
+    }
+  ],
+  "release_inputs": [
+    {
+      "file": "app/index.html",
+      "availability": "present",
+      "sha256": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+      "bytes": 3732,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "software-evidence.json",
+      "availability": "present",
+      "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+      "bytes": 90219,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "algorithm/algorithm-evidence.json",
+      "availability": "present",
+      "sha256": "bac0b35672d988cf166884e6d0ad283c62658ddfea14c9e1ea4627c763a173e0",
+      "bytes": 48247,
+      "source_artifact_sha256": "21dca0692a1618676047019615459ff35098ea15d341ade97c09035d7ee9fb9c",
+      "source_artifact_bytes": 54436,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "hardware/HARDWARE_ENGINEERING.md",
+      "availability": "present",
+      "sha256": "6e31ec82ae69a2eca4560acf8fea09c83b4cf96f4459a5f9fdd489c1241cc032",
+      "bytes": 7321,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "hardware/INTERFACE_WIRING_PLAN.md",
+      "availability": "present",
+      "sha256": "95ef9e5964835dabf651b8168b22b8d24601a0648f95e9646d8489b28862f7ef",
+      "bytes": 4528,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "hardware/RESOURCE_BUDGET.csv",
+      "availability": "present",
+      "sha256": "374e31f3a39e8c4d2ac3e4b60b78115aa90a94c49dd95eb497b1aa417215b55d",
+      "bytes": 1872,
+      "source_artifact_sha256": "6a9ac9858b6b35b83fd9bebab4a1da3b6b545464c3be75f488c2262c6aa48e5f",
+      "source_artifact_bytes": 1875,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "hardware/hardware-evidence.json",
+      "availability": "present",
+      "sha256": "b1b3943adb161975b4f6d6332e66d5db9d5c7eb1c547f8f5a559fc0c55cd1dff",
+      "bytes": 3327,
+      "source_artifact_sha256": "0605aaeca23713693feb7165b5244ebd1abfc17e141d5ebed7733e7eaecfa02a",
+      "source_artifact_bytes": 5993,
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "file": "testing/test-evidence.json",
+      "availability": "present",
+      "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+      "hash_scope": "public_file_bytes"
+    },
+    {
+      "availability": "present",
+      "file": "SOFTWARE_RUN.md",
+      "sha256": "aac1685d53dac72bfdb4c114e38afe736339b3e15885bd49c161a4a074ff0905",
+      "bytes": 5690,
+      "source_artifact_sha256": "3e14d7b0528b1030841c4eddf17dd71c8bdfeea792553648af6088394f361783",
+      "source_artifact_bytes": 5823,
+      "hash_scope": "public_file_bytes"
+    }
+  ],
+  "tested_package": {
+    "version": "rc8-drone-sim-v2",
+    "entry": "app/index.html",
+    "scope": "本窗口复演的正式软件包",
+    "files": [
+      {
+        "file": "INTERFACE_CONTRACT.json",
+        "sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+        "bytes": 13412,
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/index.html",
+        "sha256": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+        "bytes": 3732,
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/styles.css",
+        "sha256": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e",
+        "bytes": 3846,
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/detector.js",
+        "sha256": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+        "bytes": 4883,
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/controller.js",
+        "sha256": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+        "bytes": 2049,
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/simulation.js",
+        "sha256": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+        "bytes": 10846,
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/monitor.js",
+        "sha256": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74",
+        "bytes": 8100,
+        "hash_scope": "public_file_bytes"
+      }
+    ],
+    "independent_match": true
+  },
+  "independent_checks": [
+    {
+      "id": "SIM-OFFLINE",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/0"
+      }
+    },
+    {
+      "id": "SIM-CLEAR",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/1"
+      }
+    },
+    {
+      "id": "SIM-DETOUR",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/2"
+      }
+    },
+    {
+      "id": "SIM-DROP",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/3"
+      }
+    },
+    {
+      "id": "SIM-PIXELS",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/4"
+      }
+    },
+    {
+      "id": "SIM-COLLISION",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/5"
+      }
+    },
+    {
+      "id": "SIM-INVALID",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/6"
+      }
+    },
+    {
+      "id": "SIM-TIMEOUT",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/7"
+      }
+    },
+    {
+      "id": "SIM-EXPORT",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/8"
+      }
+    },
+    {
+      "id": "ENG-DOCS",
+      "status": "PASS",
+      "observed": "实际输入、预期与观察见稳定独立技术快照的对应检查。",
+      "evidence": {
+        "file": "testing/test-evidence.json",
+        "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+        "hash_scope": "public_file_bytes",
+        "json_pointer": "/checks/9"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "proposed_text": "桌面 Chrome 能本地打开 app/index.html，页面运行无外部请求和页面异常。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-OFFLINE"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-OFFLINE",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "本地加载和三场景选择可用，运行期间无外部请求或页面错误。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "PRODUCT-REPLAY-CONTROLS",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "暂停期间拍号和日志保持，继续后推进，重置回起点且日志清空。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/0"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "可切换并启动空房间到达、固定障碍绕行和缺帧等待与恢复三个场景。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-OFFLINE"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-OFFLINE",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "本地加载和三场景选择可用，运行期间无外部请求或页面错误。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "PRODUCT-REPLAY-CONTROLS",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "暂停期间拍号和日志保持，继续后推进，重置回起点且日志清空。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/0"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "页面显示 160 × 120 RGBA8 合成相机像素、对应的检测框及软件地图路线。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-PIXELS",
+        "SIM-DETOUR"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-DETOUR",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "首帧出现三个检测框，首步向东，拍 5 到达。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-PIXELS",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-DETOUR",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-PIXELS",
+          "file": "algorithm/algorithm-evidence.json",
+          "sha256": "bac0b35672d988cf166884e6d0ad283c62658ddfea14c9e1ea4627c763a173e0",
+          "status": "PASS",
+          "observed": {
+            "status": "PASS",
+            "input_match": true,
+            "difference": {
+              "changed_pixels": 560,
+              "changed_bytes": 1680,
+              "pixels_outside_rectangle": 0,
+              "pixels_with_box_color": 560,
+              "bounds_px": {
+                "x_min": 66,
+                "y_min": 26,
+                "x_max": 94,
+                "y_max": 46
+              }
+            },
+            "a": {
+              "digest": {
+                "byte_length": 76800,
+                "fnv1a32": "2c6c1dc5",
+                "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+              },
+              "labels": [],
+              "command": "MOVE_N"
+            },
+            "b": {
+              "digest": {
+                "byte_length": 76800,
+                "fnv1a32": "a925d965",
+                "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+              },
+              "labels": [
+                "box"
+              ],
+              "command": "MOVE_E"
+            }
+          },
+          "tested_files": "#/professional_evidence/algorithm/integrated_files",
+          "scope": "算法窗口自测",
+          "source_artifact_sha256": "21dca0692a1618676047019615459ff35098ea15d341ade97c09035d7ee9fb9c",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-PIXELS",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/4"
+        },
+        {
+          "id": "SIM-DETOUR",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/2"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "同一帧只改前方格像素后，检测由空变为箱体，实际命令由 MOVE_N 变为 MOVE_E。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md"
+      ],
+      "required_checks": [
+        "SIM-PIXELS"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "SIM-PIXELS",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-PIXELS",
+          "file": "algorithm/algorithm-evidence.json",
+          "sha256": "bac0b35672d988cf166884e6d0ad283c62658ddfea14c9e1ea4627c763a173e0",
+          "status": "PASS",
+          "observed": {
+            "status": "PASS",
+            "input_match": true,
+            "difference": {
+              "changed_pixels": 560,
+              "changed_bytes": 1680,
+              "pixels_outside_rectangle": 0,
+              "pixels_with_box_color": 560,
+              "bounds_px": {
+                "x_min": 66,
+                "y_min": 26,
+                "x_max": 94,
+                "y_max": 46
+              }
+            },
+            "a": {
+              "digest": {
+                "byte_length": 76800,
+                "fnv1a32": "2c6c1dc5",
+                "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+              },
+              "labels": [],
+              "command": "MOVE_N"
+            },
+            "b": {
+              "digest": {
+                "byte_length": 76800,
+                "fnv1a32": "a925d965",
+                "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+              },
+              "labels": [
+                "box"
+              ],
+              "command": "MOVE_E"
+            }
+          },
+          "tested_files": "#/professional_evidence/algorithm/integrated_files",
+          "scope": "算法窗口自测",
+          "source_artifact_sha256": "21dca0692a1618676047019615459ff35098ea15d341ade97c09035d7ee9fb9c",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-PIXELS",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/4"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "空房间首帧有效且检测为空，四步向北，在拍 3 到达目标。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-CLEAR"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-CLEAR",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "有效空帧和四步向北，拍 3 到达。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-CLEAR",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-CLEAR",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/1"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "固定障碍首帧检出墙面、立柱与箱体，第一步绕向东，拍 5 到达。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md"
+      ],
+      "required_checks": [
+        "SIM-DETOUR"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-DETOUR",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "首帧出现三个检测框，首步向东，拍 5 到达。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-DETOUR",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-DETOUR",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/2"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "缺帧场景拍 1、2 保持位置，拍 2 模拟断流，拍 3 以有效帧恢复，拍 7 到达。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-DROP"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-DROP",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "两次缺帧 HOLD，拍 2 模拟断流，拍 3 恢复，拍 7 到达。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-DROP",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-DROP",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/3"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "独立碰撞探针触发可辨认的仿真碰撞终态，位置不前进，拍与日志停止。",
+      "documents": [
+        "PRODUCT_INTRO.md"
+      ],
+      "required_checks": [
+        "SIM-COLLISION"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "SIM-COLLISION",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-COLLISION",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/5"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "暂停期间拍号与日志稳定，恢复从原逻辑拍继续，重置回场景起点和空日志。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-OFFLINE"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-OFFLINE",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "本地加载和三场景选择可用，运行期间无外部请求或页面错误。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "PRODUCT-REPLAY-CONTROLS",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "暂停期间拍号和日志保持，继续后推进，重置回起点且日志清空。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/0"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "可导出逐拍 JSON，时标按 100 ms 逻辑间隔推进，包含场景、帧摘要、检测、动作、路线和结果。",
+      "documents": [
+        "PRODUCT_INTRO.md",
+        "DEMO_ROUTE.md",
+        "USER_GUIDE.md"
+      ],
+      "required_checks": [
+        "SIM-EXPORT"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "PRODUCT-REPLAY-EXPORT",
+          "file": "product/product-replay-evidence.json",
+          "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+          "status": "PASS",
+          "observed": "逐拍 JSON 可解析。同一场景的本轮下载与软件两轮下载的摘要一致。",
+          "tested_files": "#/tested_package/files",
+          "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-EXPORT",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-EXPORT",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/8"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "工程资料包含模块、数据方向、接口时序、资源预算、接线规划及待实测清单。",
+      "documents": [
+        "PRODUCT_INTRO.md"
+      ],
+      "required_checks": [
+        "ENG-DOCS"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "ENG-DOCS",
+          "file": "hardware/hardware-evidence.json",
+          "sha256": "b1b3943adb161975b4f6d6332e66d5db9d5c7eb1c547f8f5a559fc0c55cd1dff",
+          "status": "PASS",
+          "observed": {
+            "bytes_per_pixel": 4,
+            "row_stride_bytes": 640,
+            "bytes_per_frame": 76800,
+            "ticks_per_second": 10,
+            "assumed_valid_frames_per_tick": 1,
+            "nominal_raw_bytes_per_second": 768000,
+            "assumed_frame_buffers": 2,
+            "two_buffers_raw_bytes": 153600
+          },
+          "tested_files": "#/professional_evidence/hardware/observed_files",
+          "scope": "文档和算术自查",
+          "source_artifact_sha256": "0605aaeca23713693feb7165b5244ebd1abfc17e141d5ebed7733e7eaecfa02a",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "ENG-DOCS",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/9"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    },
+    {
+      "proposed_text": "独立超时探针在拍 11 进入拍数上限终态，重置可按同场景正常运行。",
+      "documents": [
+        "PRODUCT_INTRO.md"
+      ],
+      "required_checks": [
+        "SIM-TIMEOUT"
+      ],
+      "status": "SUPPORTED",
+      "evidence": [
+        {
+          "id": "SIM-TIMEOUT",
+          "file": "software-evidence.json",
+          "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+          "status": "PASS",
+          "observed": null,
+          "tested_files": "#/professional_evidence/software/file_sha256",
+          "scope": "软件窗口自测",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "id": "SIM-TIMEOUT",
+          "file": "testing/test-evidence.json",
+          "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+          "hash_scope": "public_file_bytes",
+          "status": "PASS",
+          "scope": "Independent technical snapshot",
+          "json_pointer": "/checks/7"
+        }
+      ],
+      "publication_condition": "Technical claim supported. Publication acceptance is decided by the separate independent review of the exact public object."
+    }
+  ],
+  "product_replay": {
+    "status": "PASS",
+    "transport": "browser_file",
+    "browser": "Chrome/155.0.8059.39",
+    "file": "product/product-replay-evidence.json",
+    "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+    "tested_file_sha256": {
+      "INTERFACE_CONTRACT.json": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+      "app/index.html": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+      "app/styles.css": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e",
+      "app/detector.js": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+      "app/controller.js": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+      "app/simulation.js": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+      "app/monitor.js": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74"
+    },
+    "observed": {
+      "end_ticks": {
+        "clear-room": 3,
+        "fixed-obstacle": 5,
+        "drop-and-recover": 7
+      },
+      "pause_wall_ms": 861,
+      "export_sha256": {
+        "clear-room": "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+        "fixed-obstacle": "66ac34a8126a8e5f83afaae3c069472bfca0eb567a93d0b9b540c9bad503e894",
+        "drop-and-recover": "14a8b9da5571d678665571578b710fde32859f30111660cb6c8c4378a9776425"
+      }
+    },
+    "pending_on": [],
+    "source_artifact_sha256": "edc7b249434f3cd8a3f5284844b8b01b3bdc3032bd8fe604c59fc523c64c5f66",
+    "hash_scope": "public_file_bytes",
+    "remaining_scope": "The separate independent public-product review determines acceptance of the exact public documentation and references this frozen register."
+  },
+  "checks": [
+    {
+      "id": "PRODUCT-EVIDENCE",
+      "status": "EXTERNAL_REVIEW_REQUIRED",
+      "expected": "每条发布表述关联实际通过的检查、观察和同一受验包的文件 SHA-256，产品窗口按该包复演。",
+      "observed": "稳定独立技术快照支持九项浏览器检查、工程文档检查及12条表述；公开副本三场景已复演且下载逐字节一致。此登记只固定技术支持与公开文件引用，后续独立公开内容审阅以单向引用本登记的回执为准，不在这里回写可变审核结论。",
+      "reproduce": "核对受验文件摘要后，以桌面 Chrome 本地打开同一入口，运行三个场景、暂停、恢复、重置和导出。"
+    }
+  ],
+  "pending_claims_for_real_system": [
+    "真实识别表现",
+    "模型训练与评估",
+    "真实硬件采集、时延、资源与接线",
+    "真实飞行表现"
+  ],
+  "software_candidate": {
+    "entry": "app/index.html",
+    "status": "PASS",
+    "files": [
+      {
+        "file": "app/index.html",
+        "bytes": 3732,
+        "sha256": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/styles.css",
+        "bytes": 3846,
+        "sha256": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e",
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/simulation.js",
+        "bytes": 10846,
+        "sha256": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/monitor.js",
+        "bytes": 8100,
+        "sha256": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74",
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/detector.js",
+        "bytes": 4883,
+        "sha256": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+        "hash_scope": "public_file_bytes"
+      },
+      {
+        "file": "app/controller.js",
+        "bytes": 2049,
+        "sha256": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+        "hash_scope": "public_file_bytes"
+      }
+    ]
+  },
+  "professional_evidence": {
+    "algorithm": {
+      "file": "algorithm/algorithm-evidence.json",
+      "sha256": "bac0b35672d988cf166884e6d0ad283c62658ddfea14c9e1ea4627c763a173e0",
+      "scope": "算法窗口自测",
+      "contract_sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+      "integrated_files": [
+        {
+          "file": "app/detector.js",
+          "bytes": 4883,
+          "sha256": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "file": "app/controller.js",
+          "bytes": 2049,
+          "sha256": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+          "hash_scope": "public_file_bytes"
+        }
+      ],
+      "integrated_files_match": true,
+      "checks": [
+        {
+          "id": "SIM-PIXELS",
+          "status": "PASS"
+        },
+        {
+          "id": "ALG-FRAME-STATES",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-INVALID",
+          "status": "PASS"
+        },
+        {
+          "id": "ALG-COMPONENTS",
+          "status": "PASS"
+        },
+        {
+          "id": "ALG-CONTROL-ORDER",
+          "status": "PASS"
+        }
+      ],
+      "pixel_observation": {
+        "status": "PASS",
+        "input_match": true,
+        "difference": {
+          "changed_pixels": 560,
+          "changed_bytes": 1680,
+          "pixels_outside_rectangle": 0,
+          "pixels_with_box_color": 560,
+          "bounds_px": {
+            "x_min": 66,
+            "y_min": 26,
+            "x_max": 94,
+            "y_max": 46
+          }
+        },
+        "a": {
+          "digest": {
+            "byte_length": 76800,
+            "fnv1a32": "2c6c1dc5",
+            "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+          },
+          "labels": [],
+          "command": "MOVE_N"
+        },
+        "b": {
+          "digest": {
+            "byte_length": 76800,
+            "fnv1a32": "a925d965",
+            "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+          },
+          "labels": [
+            "box"
+          ],
+          "command": "MOVE_E"
+        }
+      },
+      "source_artifact_sha256": "21dca0692a1618676047019615459ff35098ea15d341ade97c09035d7ee9fb9c",
+      "hash_scope": "public_file_bytes"
+    },
+    "hardware": {
+      "file": "hardware/hardware-evidence.json",
+      "sha256": "b1b3943adb161975b4f6d6332e66d5db9d5c7eb1c547f8f5a559fc0c55cd1dff",
+      "scope": "工程资料及算术自查",
+      "observed_files": [
+        {
+          "file": "hardware/HARDWARE_ENGINEERING.md",
+          "bytes": 7321,
+          "sha256": "6e31ec82ae69a2eca4560acf8fea09c83b4cf96f4459a5f9fdd489c1241cc032",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "file": "hardware/INTERFACE_WIRING_PLAN.md",
+          "bytes": 4528,
+          "sha256": "95ef9e5964835dabf651b8168b22b8d24601a0648f95e9646d8489b28862f7ef",
+          "hash_scope": "public_file_bytes"
+        },
+        {
+          "file": "hardware/RESOURCE_BUDGET.csv",
+          "bytes": 1872,
+          "sha256": "374e31f3a39e8c4d2ac3e4b60b78115aa90a94c49dd95eb497b1aa417215b55d",
+          "source_artifact_sha256": "6a9ac9858b6b35b83fd9bebab4a1da3b6b545464c3be75f488c2262c6aa48e5f",
+          "source_artifact_bytes": 1875,
+          "hash_scope": "public_file_bytes"
+        }
+      ],
+      "files_match": true,
+      "checks": [
+        {
+          "id": "ENG-DOCS",
+          "status": "PASS",
+          "scope": "硬件窗口文档与预算自查",
+          "observed": {
+            "bytes_per_pixel": 4,
+            "row_stride_bytes": 640,
+            "bytes_per_frame": 76800,
+            "ticks_per_second": 10,
+            "assumed_valid_frames_per_tick": 1,
+            "nominal_raw_bytes_per_second": 768000,
+            "assumed_frame_buffers": 2,
+            "two_buffers_raw_bytes": 153600
+          }
+        },
+        {
+          "id": "HARDWARE-BENCH",
+          "status": "PENDING",
+          "observed": null
+        }
+      ],
+      "source_artifact_sha256": "0605aaeca23713693feb7165b5244ebd1abfc17e141d5ebed7733e7eaecfa02a",
+      "hash_scope": "public_file_bytes"
+    },
+    "software": {
+      "file": "software-evidence.json",
+      "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+      "scope": "软件窗口 Chrome 自测",
+      "browser": "Chrome/155.0.8059.39",
+      "checks": [
+        {
+          "id": "SIM-PACKAGE",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-OFFLINE",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-CLEAR",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-DETOUR",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-DROP",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-PIXELS",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-COLLISION",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-INVALID",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-TIMEOUT",
+          "status": "PASS"
+        },
+        {
+          "id": "SIM-EXPORT",
+          "status": "PASS"
+        }
+      ],
+      "contract_sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+      "file_sha256": {
+        "INTERFACE_CONTRACT.json": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+        "app/controller.js": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+        "app/detector.js": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+        "app/index.html": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+        "app/monitor.js": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74",
+        "app/simulation.js": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+        "app/styles.css": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e"
+      },
+      "candidate_hashes_match": true,
+      "scene_observations": [
+        {
+          "id": "SIM-CLEAR",
+          "status": "PASS",
+          "observed": {
+            "first_frame": "有效空帧",
+            "first_frame_digest": "2c6c1dc5",
+            "first_detections": "",
+            "first_camera_bytes": 76800,
+            "terminal_tick": 3,
+            "terminal_state": "arrived",
+            "collisions": 0,
+            "route_text": "(4, 6) → (4, 5) → (4, 4) → (4, 3) → (4, 2)"
+          }
+        },
+        {
+          "id": "SIM-DETOUR",
+          "status": "PASS",
+          "observed": {
+            "first_frame": "有效帧",
+            "first_frame_digest": "90315085",
+            "first_detections": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+            "first_camera_bytes": 76800,
+            "terminal_tick": 5,
+            "terminal_state": "arrived",
+            "collisions": 0,
+            "route_text": "(4, 6) → (5, 6) → (5, 5) → (5, 4) → (5, 3) → (5, 2) → (4, 2)"
+          }
+        },
+        {
+          "id": "SIM-DROP",
+          "status": "PASS",
+          "observed": {
+            "first_frame": "有效帧",
+            "first_frame_digest": "90315085",
+            "first_detections": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+            "first_camera_bytes": 76800,
+            "terminal_tick": 7,
+            "terminal_state": "arrived",
+            "collisions": 0,
+            "route_text": "(4, 6) → (5, 6) → (5, 5) → (5, 4) → (5, 3) → (5, 2) → (4, 2)"
+          }
+        }
+      ],
+      "hash_scope": "public_file_bytes"
+    }
+  },
+  "export_metadata": {
+    "scope": "Sanitized published evidence, not original receipt bytes",
+    "transformations": [
+      "Host paths and host conversation identifiers removed or replaced with descriptive source aliases",
+      "Numerical observations, check results and application hashes preserved"
+    ],
+    "source_identity_map": "Retained privately by the maintainer",
+    "non_exported_binary_evidence": "Recorded binary names are historical references. Browser verifier regenerates pixel buffers and screenshots in its local run directory.",
+    "hash_semantics": "sha256 beside file identifies current public file bytes. source_artifact_sha256/source_artifact_bytes retain original producer references when public export differs. The technical snapshot is fixed; this claim register does not embed a hash of a later report that will reference this register."
+  },
+  "reference_base": "simulation/ case root; all file fields use paths relative to that root",
+  "publication_review": {
+    "status": "EXTERNAL_REVIEW_REQUIRED",
+    "scope": "The final independent public-product review separately references this frozen register and technical snapshot. Its receipt is the authority for the exact public object; this register does not repeat mutable review status or the later receipt hash.",
+    "technical_checks_passed": 10,
+    "supported_claims": 12,
+    "result_location": "Separate independent public-product review receipt supplied with the final case. This register does not imply that receipt exists."
+  },
+  "status_scope": "Technical support for the twelve declared prototype claims, not approval to publish a new release."
+}

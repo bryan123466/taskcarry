@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "exercise": "16-pixel minimum for a 4-connected synthetic box component",
+  "result": "PASS",
+  "node_version": "v24.14.1",
+  "detector_invocation": "node:vm classic script, globalThis.RC8DroneSimV2.detectFrame",
+  "fixture": {
+    "scene_id": "clear-room",
+    "tick": 0,
+    "sim_time_ms": 0,
+    "frame_id": "clear-room:0",
+    "width_px": 160,
+    "height_px": 120,
+    "pixel_format": "RGBA8",
+    "background_rgba": [
+      24,
+      32,
+      40,
+      255
+    ],
+    "box_rgba": [
+      230,
+      180,
+      60,
+      255
+    ],
+    "base_box_half_open_px": {
+      "x_min": 64,
+      "x_max": 67,
+      "y_min": 32,
+      "y_max": 37
+    }
+  },
+  "frames": [
+    {
+      "id": "A",
+      "expected_box_pixels": 15,
+      "actual_box_pixels": 15,
+      "raw_rgba": {
+        "bytes": 76800,
+        "sha256": "6c1734ca364113a1d8f53ee64fe097e18ed3c2a9e57ab04bcf84ee355874d0a8",
+        "fnv1a32": "62fde0d7"
+      },
+      "changed_pixels_from_A": [],
+      "expected": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "clear-room:0",
+        "status": "ok",
+        "detections": [],
+        "error": null
+      },
+      "actual": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "clear-room:0",
+        "detections": [],
+        "status": "ok",
+        "error": null
+      },
+      "passed": true,
+      "failure": null
+    },
+    {
+      "id": "B",
+      "expected_box_pixels": 16,
+      "actual_box_pixels": 16,
+      "raw_rgba": {
+        "bytes": 76800,
+        "sha256": "d00a7a43f049b85b11180b1d62285747033ba1f44b24c4c2257ea2538fefdd9e",
+        "fnv1a32": "584241cd"
+      },
+      "changed_pixels_from_A": [
+        {
+          "x": 67,
+          "y": 36,
+          "before_rgba": [
+            24,
+            32,
+            40,
+            255
+          ],
+          "after_rgba": [
+            230,
+            180,
+            60,
+            255
+          ]
+        }
+      ],
+      "expected": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "clear-room:0",
+        "status": "ok",
+        "detections": [
+          {
+            "label": "box",
+            "region": {
+              "x_min": 0.4,
+              "y_min": 0.26666666666666666,
+              "x_max": 0.425,
+              "y_max": 0.30833333333333335
+            },
+            "cell": {
+              "dx": 0,
+              "dy": -1
+            },
+            "pixel_count": 16
+          }
+        ],
+        "error": null
+      },
+      "actual": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "clear-room:0",
+        "detections": [
+          {
+            "label": "box",
+            "region": {
+              "x_min": 0.4,
+              "y_min": 0.26666666666666666,
+              "x_max": 0.425,
+              "y_max": 0.30833333333333335
+            },
+            "cell": {
+              "dx": 0,
+              "dy": -1
+            },
+            "pixel_count": 16
+          }
+        ],
+        "status": "ok",
+        "error": null
+      },
+      "passed": true,
+      "failure": null
+    },
+    {
+      "id": "C",
+      "expected_box_pixels": 16,
+      "actual_box_pixels": 16,
+      "raw_rgba": {
+        "bytes": 76800,
+        "sha256": "cd5135de8da2abbf7a63f43c94bc32a7969aec4a2aed475a77ca67d9c974718f",
+        "fnv1a32": "530e17cd"
+      },
+      "changed_pixels_from_A": [
+        {
+          "x": 67,
+          "y": 37,
+          "before_rgba": [
+            24,
+            32,
+            40,
+            255
+          ],
+          "after_rgba": [
+            230,
+            180,
+            60,
+            255
+          ]
+        }
+      ],
+      "expected": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "clear-room:0",
+        "status": "ok",
+        "detections": [],
+        "error": null
+      },
+      "actual": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": "clear-room:0",
+        "detections": [],
+        "status": "ok",
+        "error": null
+      },
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "run": {
+    "started_at": "2026-11-16T22:27:28.4775052+08:00",
+    "finished_at": "2026-11-16T22:27:28.5645409+08:00",
+    "exit_code": 0,
+    "source_artifact_sha256": "be70e17229c20bc9821021878788ce4cdd27388c242ea00b7c0c6cab963e08f9",
+    "scope": "Actual original continuation-chat run. The public portable script has separate bytes and is validated separately."
+  },
+  "file_integrity": {
+    "matches_frozen_manifest_before_and_after": true,
+    "detector_byte_comparison_before_and_after": true,
+    "failure": null
+  },
+  "git_preservation": {
+    "status": "PASS",
+    "same_repository_branch_head_and_tree": true,
+    "same_index_bytes": true,
+    "same_staged_diff": true,
+    "same_unstaged_diff": true,
+    "same_existing_file_digests": true,
+    "exact_added_untracked_paths": true,
+    "prior_tracked_and_git_visible_untracked_files": 25,
+    "added_public_artifact_roles": [
+      "boundary verification script",
+      "actual three-frame evidence",
+      "native connection and own-consumption receipt"
+    ]
+  },
+  "inputs": {
+    "contract": {
+      "file": "INTERFACE_CONTRACT.json",
+      "sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130"
+    },
+    "detector": {
+      "file": "app/detector.js",
+      "sha256": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7"
+    }
+  },
+  "export_metadata": {
+    "scope": "Sanitized actual continuation run; not original receipt bytes",
+    "removed": [
+      "Real host paths and executable locations",
+      "Real chat, turn and checkpoint IDs",
+      "Private Git and original state identities"
+    ],
+    "reference_base": "simulation/ case root",
+    "source_evidence_map": "Maintainer private evidence",
+    "application_changed": false
+  }
+}

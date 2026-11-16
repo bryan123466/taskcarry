@@ -35,6 +35,8 @@ For a short task in one chat, your existing tools may be enough. TaskCarry becom
 
 Keep task goals, recorded decisions, current position, and next steps outside chat context. Save selected files and continuation notes when a task pauses, and read a focused agenda without losing paused work or completed history. Material references record where larger files live and whether a specified backup matches, so every file need not go into Git.
 
+**A chat can stop without the project starting over.** Governance can guide a replacement chat to the original task, saved decisions and results, without requiring a spare chat in advance. First stop the old writer and verify the new chat's connection and task; continuation depends on saved work and cannot repair the host or recover unsaved context. See [the continuation workflow](docs/en/operation-manual.md).
+
 ### Coordinate results
 
 Give parallel tasks independent workspaces, then bring ready results into a shared project version. A useful stage can be delivered while its task continues. Explicit version relationships and matching change history show when a later stage replaces an earlier one, while keeping independent results available.
@@ -108,7 +110,7 @@ If the host needs you to complete an action, the assistant supplies that one ste
 
 This is an organization example. Existing working chats remain useful. If they share a directory, inspect active writers and preserve scoped WIP before arranging independent write areas.
 
-For a concrete walkthrough, see the [vision-based obstacle-avoidance drone example](examples/vision-drone-governance/README.md): connect scattered software, algorithm and hardware work, add product communications when needed, and preserve shared decisions. The example separates illustrative replies from actual verification; it does not claim a completed or flight-tested drone.
+For a concrete walkthrough, explore the [drone simulation and governance example](examples/vision-drone-governance/simulation/README.md). It connects scattered chats into software, algorithms, hardware engineering documents, independent testing and a product demonstration. Open the offline interface to see a rule-based detector read generated image pixels and guide movement through a 9 × 9 discrete 2D world. The example links its shared decisions, deliverables and verification evidence; it is a simulation prototype, with no real aircraft, flight testing or trained vision model.
 
 ## Build on the local workflow
 

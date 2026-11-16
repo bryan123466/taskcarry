@@ -1,0 +1,1953 @@
+{
+  "role": "algorithm",
+  "contract_id": "rc8-drone-sim-v2",
+  "schema_version": 2,
+  "contract": {
+    "path": "INTERFACE_CONTRACT.json",
+    "byte_length": 13412,
+    "sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130"
+  },
+  "runtime": {
+    "platform": "win32",
+    "node": "v24.14.1",
+    "script_loader": "node:vm classic scripts"
+  },
+  "signatures": [
+    "globalThis.RC8DroneSimV2.detectFrame(frameEnvelope)",
+    "globalThis.RC8DroneSimV2.chooseCommand(controlInput)"
+  ],
+  "files": {
+    "detector.js": {
+      "path": "app/detector.js",
+      "sha256": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7"
+    },
+    "controller.js": {
+      "path": "app/controller.js",
+      "sha256": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967"
+    },
+    "verify-algorithm.cjs": {
+      "path": "algorithm/verify-algorithm.cjs",
+      "sha256": "95d82261d6be7f91dce5d17483a61db2708b40a5d034295c2d0238029c344202"
+    }
+  },
+  "checks": [
+    {
+      "id": "SIM-PIXELS",
+      "status": "PASS",
+      "expected": {
+        "same_nonpixel_input": true,
+        "input_pixels_unchanged_by_algorithm": true,
+        "difference": {
+          "changed_pixels": 560,
+          "changed_bytes": 1680,
+          "pixels_outside_rectangle": 0,
+          "pixels_with_box_color": 560,
+          "bounds_px": {
+            "x_min": 66,
+            "y_min": 26,
+            "x_max": 94,
+            "y_max": 46
+          }
+        },
+        "a": {
+          "status": "ok",
+          "detections": [],
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        "b": {
+          "status": "ok",
+          "detections": [
+            {
+              "label": "box",
+              "region": {
+                "x_min": 0.4125,
+                "y_min": 0.21666666666666667,
+                "x_max": 0.5875,
+                "y_max": 0.38333333333333336
+              },
+              "cell": {
+                "dx": 0,
+                "dy": -1
+              },
+              "pixel_count": 560
+            }
+          ],
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_E",
+            "reason": "detour"
+          }
+        }
+      },
+      "observed": {
+        "same_nonpixel_input": true,
+        "input_pixels_unchanged_by_algorithm": true,
+        "nonpixel_input": {
+          "envelope": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8"
+            }
+          },
+          "control": {
+            "link_state": "connected",
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "rectangle_px": {
+          "x_min": 66,
+          "y_min": 26,
+          "x_max": 94,
+          "y_max": 46
+        },
+        "difference": {
+          "changed_pixels": 560,
+          "changed_bytes": 1680,
+          "pixels_outside_rectangle": 0,
+          "pixels_with_box_color": 560,
+          "bounds_px": {
+            "x_min": 66,
+            "y_min": 26,
+            "x_max": 94,
+            "y_max": 46
+          }
+        },
+        "a": {
+          "pixel_digests": {
+            "byte_length": 76800,
+            "fnv1a32": "2c6c1dc5",
+            "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        "b": {
+          "pixel_digests": {
+            "byte_length": 76800,
+            "fnv1a32": "a925d965",
+            "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.21666666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.38333333333333336
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": -1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_E",
+            "reason": "detour"
+          }
+        }
+      },
+      "reproduce": "Run the verification script with the contract path and inspect SIM-PIXELS. Both calls share the same control state and identical frame metadata."
+    },
+    {
+      "id": "ALG-FRAME-STATES",
+      "status": "PASS",
+      "expected": {
+        "empty": {
+          "status": "ok",
+          "detections": [],
+          "frame_id": "clear-room:0",
+          "action": "MOVE_N"
+        },
+        "missing": {
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "missing",
+            "error": null
+          },
+          "cases": [
+            {
+              "link_state": "connected",
+              "command": {
+                "tick": 0,
+                "source_frame_id": null,
+                "action": "HOLD",
+                "reason": "frame_missing"
+              }
+            },
+            {
+              "link_state": "disconnected",
+              "command": {
+                "tick": 0,
+                "source_frame_id": null,
+                "action": "HOLD",
+                "reason": "link_disconnected"
+              }
+            }
+          ]
+        }
+      },
+      "observed": {
+        "empty": {
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        "missing_input": {
+          "scene_id": "clear-room",
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame": null
+        },
+        "missing": [
+          {
+            "link_state": "connected",
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": null,
+              "detections": [],
+              "status": "missing",
+              "error": null
+            },
+            "command": {
+              "tick": 0,
+              "source_frame_id": null,
+              "action": "HOLD",
+              "reason": "frame_missing"
+            }
+          },
+          {
+            "link_state": "disconnected",
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": null,
+              "detections": [],
+              "status": "missing",
+              "error": null
+            },
+            "command": {
+              "tick": 0,
+              "source_frame_id": null,
+              "action": "HOLD",
+              "reason": "link_disconnected"
+            }
+          }
+        ]
+      },
+      "reproduce": "After the box frame, send frame=null with valid tick metadata and exercise both link states. Compare with the empty valid frame."
+    },
+    {
+      "id": "SIM-INVALID",
+      "status": "PASS",
+      "expected": {
+        "status": "invalid",
+        "frame_id": null,
+        "detections": [],
+        "command": {
+          "tick": 0,
+          "source_frame_id": null,
+          "action": "HOLD",
+          "reason": "invalid_frame"
+        }
+      },
+      "observed": [
+        {
+          "name": "frame_id",
+          "expected_error_fragment": "frame_id",
+          "input": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "wrong:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8"
+            },
+            "link_state": "connected",
+            "pixels_type": "Uint8ClampedArray",
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "a925d965",
+              "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "invalid",
+            "error": "frame_id must match scene_id and tick."
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": null,
+            "action": "HOLD",
+            "reason": "invalid_frame"
+          }
+        },
+        {
+          "name": "width_px",
+          "expected_error_fragment": "dimensions",
+          "input": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 159,
+              "height_px": 120,
+              "pixel_format": "RGBA8"
+            },
+            "link_state": "connected",
+            "pixels_type": "Uint8ClampedArray",
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "a925d965",
+              "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "invalid",
+            "error": "Frame dimensions must be 160 × 120 pixels."
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": null,
+            "action": "HOLD",
+            "reason": "invalid_frame"
+          }
+        },
+        {
+          "name": "pixel_format",
+          "expected_error_fragment": "pixel_format",
+          "input": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGB24"
+            },
+            "link_state": "connected",
+            "pixels_type": "Uint8ClampedArray",
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "a925d965",
+              "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "invalid",
+            "error": "pixel_format must be RGBA8."
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": null,
+            "action": "HOLD",
+            "reason": "invalid_frame"
+          }
+        },
+        {
+          "name": "pixel_length",
+          "expected_error_fragment": "76800 bytes",
+          "input": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8"
+            },
+            "link_state": "disconnected",
+            "pixels_type": "Uint8ClampedArray",
+            "pixel_digests": {
+              "byte_length": 76799,
+              "fnv1a32": "da3574d8",
+              "sha256": "db3611e5847e192f582d6c49abc4d21a45aa7cac9c43e507868715c1341ebe4f"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "invalid",
+            "error": "pixels must be a Uint8ClampedArray containing 76800 bytes."
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": null,
+            "action": "HOLD",
+            "reason": "invalid_frame"
+          }
+        },
+        {
+          "name": "pixel_type",
+          "expected_error_fragment": "Uint8ClampedArray",
+          "input": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8"
+            },
+            "link_state": "connected",
+            "pixels_type": "Uint8Array",
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "a925d965",
+              "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "invalid",
+            "error": "pixels must be a Uint8ClampedArray containing 76800 bytes."
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": null,
+            "action": "HOLD",
+            "reason": "invalid_frame"
+          }
+        }
+      ],
+      "reproduce": "Apply each listed frame mutation to the box frame, call both entry points, and compare the status, empty candidates and HOLD reason."
+    },
+    {
+      "id": "ALG-COMPONENTS",
+      "status": "PASS",
+      "expected": {
+        "status": "ok",
+        "detections": [
+          {
+            "label": "box",
+            "region": {
+              "x_min": 0.5,
+              "y_min": 0,
+              "x_max": 0.525,
+              "y_max": 0.03333333333333333
+            },
+            "cell": {
+              "dx": 0,
+              "dy": -2
+            },
+            "pixel_count": 16
+          },
+          {
+            "label": "wall",
+            "region": {
+              "x_min": 0.975,
+              "y_min": 0,
+              "x_max": 1,
+              "y_max": 0.03333333333333333
+            },
+            "cell": {
+              "dx": 2,
+              "dy": -2
+            },
+            "pixel_count": 16
+          },
+          {
+            "label": "wall",
+            "region": {
+              "x_min": 0.95,
+              "y_min": 0.03333333333333333,
+              "x_max": 0.975,
+              "y_max": 0.06666666666666667
+            },
+            "cell": {
+              "dx": 2,
+              "dy": -2
+            },
+            "pixel_count": 16
+          },
+          {
+            "label": "column",
+            "region": {
+              "x_min": 0.1875,
+              "y_min": 0.18333333333333332,
+              "x_max": 0.2125,
+              "y_max": 0.21666666666666667
+            },
+            "cell": {
+              "dx": -1,
+              "dy": -1
+            },
+            "pixel_count": 16
+          }
+        ]
+      },
+      "observed": {
+        "drawn_components": [
+          {
+            "label": "box",
+            "rect": {
+              "x_min": 80,
+              "y_min": 0,
+              "x_max": 84,
+              "y_max": 4
+            },
+            "cell": {
+              "dx": 0,
+              "dy": -2
+            }
+          },
+          {
+            "label": "wall",
+            "rect": {
+              "x_min": 156,
+              "y_min": 0,
+              "x_max": 160,
+              "y_max": 4
+            },
+            "cell": {
+              "dx": 2,
+              "dy": -2
+            }
+          },
+          {
+            "label": "wall",
+            "rect": {
+              "x_min": 152,
+              "y_min": 4,
+              "x_max": 156,
+              "y_max": 8
+            },
+            "cell": {
+              "dx": 2,
+              "dy": -2
+            }
+          },
+          {
+            "label": "column",
+            "rect": {
+              "x_min": 30,
+              "y_min": 22,
+              "x_max": 34,
+              "y_max": 26
+            },
+            "cell": {
+              "dx": -1,
+              "dy": -1
+            }
+          }
+        ],
+        "additionally_painted_rectangles": [
+          {
+            "rect": {
+              "x_min": 0,
+              "y_min": 0,
+              "x_max": 5,
+              "y_max": 3
+            },
+            "rgba": [
+              230,
+              180,
+              60,
+              255
+            ]
+          },
+          {
+            "rect": {
+              "x_min": 16,
+              "y_min": 0,
+              "x_max": 20,
+              "y_max": 4
+            },
+            "rgba": [
+              96,
+              112,
+              128,
+              254
+            ]
+          },
+          {
+            "rect": {
+              "x_min": 152,
+              "y_min": 50,
+              "x_max": 160,
+              "y_max": 51
+            },
+            "rgba": [
+              96,
+              112,
+              128,
+              255
+            ]
+          },
+          {
+            "rect": {
+              "x_min": 0,
+              "y_min": 51,
+              "x_max": 8,
+              "y_max": 52
+            },
+            "rgba": [
+              96,
+              112,
+              128,
+              255
+            ]
+          }
+        ],
+        "pixel_digests": {
+          "byte_length": 76800,
+          "fnv1a32": "05bb24db",
+          "sha256": "79524d5eeb5d8b7900b6724f1fd8cf5f03de38159b9faf4911e16746348f3a68"
+        },
+        "detection": {
+          "scene_id": "clear-room",
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_id": "clear-room:0",
+          "detections": [
+            {
+              "label": "box",
+              "region": {
+                "x_min": 0.5,
+                "y_min": 0,
+                "x_max": 0.525,
+                "y_max": 0.03333333333333333
+              },
+              "cell": {
+                "dx": 0,
+                "dy": -2
+              },
+              "pixel_count": 16
+            },
+            {
+              "label": "wall",
+              "region": {
+                "x_min": 0.975,
+                "y_min": 0,
+                "x_max": 1,
+                "y_max": 0.03333333333333333
+              },
+              "cell": {
+                "dx": 2,
+                "dy": -2
+              },
+              "pixel_count": 16
+            },
+            {
+              "label": "wall",
+              "region": {
+                "x_min": 0.95,
+                "y_min": 0.03333333333333333,
+                "x_max": 0.975,
+                "y_max": 0.06666666666666667
+              },
+              "cell": {
+                "dx": 2,
+                "dy": -2
+              },
+              "pixel_count": 16
+            },
+            {
+              "label": "column",
+              "region": {
+                "x_min": 0.1875,
+                "y_min": 0.18333333333333332,
+                "x_max": 0.2125,
+                "y_max": 0.21666666666666667
+              },
+              "cell": {
+                "dx": -1,
+                "dy": -1
+              },
+              "pixel_count": 16
+            }
+          ],
+          "status": "ok",
+          "error": null
+        }
+      },
+      "reproduce": "Render the documented rectangles. Verify 4-connectivity across diagonal and row edges, exact RGBA, the 15/16 threshold, sorting, half-open image edges and exact cell boundaries."
+    },
+    {
+      "id": "ALG-CONTROL-ORDER",
+      "status": "PASS",
+      "expected": [
+        {
+          "name": "reduce_before_visits",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        {
+          "name": "equal_distance_visit_count",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_E",
+            "reason": "toward_goal"
+          }
+        },
+        {
+          "name": "north_before_east_when_tied",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        {
+          "name": "detour_visit_count",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_W",
+            "reason": "detour"
+          }
+        },
+        {
+          "name": "world_boundary_exclusion",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_E",
+            "reason": "detour"
+          }
+        },
+        {
+          "name": "no_safe_neighbor",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "HOLD",
+            "reason": "no_safe_neighbor"
+          }
+        },
+        {
+          "name": "at_goal",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "HOLD",
+            "reason": "at_goal"
+          }
+        }
+      ],
+      "observed": [
+        {
+          "name": "reduce_before_visits",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 4,
+                "y": 2
+              },
+              "visit_counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                8,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "2c6c1dc5",
+              "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        {
+          "name": "equal_distance_visit_count",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 5,
+                "y": 5
+              },
+              "visit_counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "2c6c1dc5",
+              "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_E",
+            "reason": "toward_goal"
+          }
+        },
+        {
+          "name": "north_before_east_when_tied",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 5,
+                "y": 5
+              },
+              "visit_counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "2c6c1dc5",
+              "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          }
+        },
+        {
+          "name": "detour_visit_count",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 4,
+                "y": 2
+              },
+              "visit_counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [
+              [
+                0,
+                -1
+              ]
+            ],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "a925d965",
+              "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.21666666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.38333333333333336
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": -1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_W",
+            "reason": "detour"
+          }
+        },
+        {
+          "name": "world_boundary_exclusion",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 0,
+                "y": 0
+              },
+              "goal": {
+                "x": 0,
+                "y": 1
+              },
+              "visit_counts": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [
+              [
+                0,
+                1
+              ]
+            ],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "a87bd965",
+              "sha256": "89bd74d830fe6ae198c4f01170bb9526e3a8b18cde00b50f7028c8ce24e57a62"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.6166666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.7833333333333333
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": 1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_E",
+            "reason": "detour"
+          }
+        },
+        {
+          "name": "no_safe_neighbor",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 4,
+                "y": 2
+              },
+              "visit_counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [
+              [
+                0,
+                -1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "250eb745",
+              "sha256": "4b12ba440f0b61c49f111b636ea381e99cbf00cba3c792aac97693603bae3405"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.21666666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.38333333333333336
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": -1
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.2125,
+                  "y_min": 0.4166666666666667,
+                  "x_max": 0.3875,
+                  "y_max": 0.5833333333333334
+                },
+                "cell": {
+                  "dx": -1,
+                  "dy": 0
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.6125,
+                  "y_min": 0.4166666666666667,
+                  "x_max": 0.7875,
+                  "y_max": 0.5833333333333334
+                },
+                "cell": {
+                  "dx": 1,
+                  "dy": 0
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.6166666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.7833333333333333
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": 1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "HOLD",
+            "reason": "no_safe_neighbor"
+          }
+        },
+        {
+          "name": "at_goal",
+          "input": {
+            "frame": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": {
+                "frame_id": "clear-room:0",
+                "width_px": 160,
+                "height_px": 120,
+                "pixel_format": "RGBA8"
+              }
+            },
+            "control": {
+              "link_state": "connected",
+              "pose": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 4,
+                "y": 6
+              },
+              "visit_counts": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "box_cells": [],
+            "pixel_digests": {
+              "byte_length": 76800,
+              "fnv1a32": "2c6c1dc5",
+              "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8"
+            }
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "HOLD",
+            "reason": "at_goal"
+          }
+        }
+      ],
+      "reproduce": "Run the verification script and inspect the named cases for distance preference, visit counts, movement order, boundary exclusion and valid-frame HOLD reasons."
+    }
+  ],
+  "evidence_scope": "研发自测在 Node 的同一全局上下文载入两份经典脚本，运行实际合成 RGBA 字节和控制入口。浏览器仿真应用与独立技术验收依照主工作台的验收计划接续。",
+  "export_metadata": {
+    "scope": "Sanitized published evidence, not original receipt bytes",
+    "transformations": [
+      "Host paths and host conversation identifiers removed or replaced with descriptive source aliases",
+      "Numerical observations, check results and application hashes preserved"
+    ],
+    "source_identity_map": "Retained privately by the maintainer",
+    "non_exported_binary_evidence": "Recorded binary names are historical references. Browser verifier regenerates pixel buffers and screenshots in its local run directory."
+  }
+}

@@ -1,0 +1,3629 @@
+{
+  "contract_id": "rc8-drone-sim-v2",
+  "schema_version": 2,
+  "started_at": "2026-11-16T13:45:58.426Z",
+  "environment": {
+    "node": "v24.14.1",
+    "platform": "win32",
+    "arch": "x64",
+    "chrome": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/155.0.8059.39",
+      "revision": "@3ff7ac5a9224be9156d7f8703a06e22890aafd34",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "jsVersion": "15.5.35.20"
+    }
+  },
+  "source_app": "source-software/app",
+  "isolated_app": "source-governance/testing/recorded/package/app",
+  "package_sha256": {
+    "INTERFACE_CONTRACT.json": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+    "app/controller.js": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+    "app/detector.js": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+    "app/index.html": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+    "app/monitor.js": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74",
+    "app/simulation.js": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+    "app/styles.css": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e",
+    "SOFTWARE_RUN.md": "3e14d7b0528b1030841c4eddf17dd71c8bdfeea792553648af6088394f361783",
+    "verify-software.mjs": "ca4816b5a2b7680c700d407ed7deac03f90bdf4f17f0cbd4a00b963db6000c21",
+    "software-evidence.json": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3"
+  },
+  "algorithm_evidence": {
+    "path": "source-algorithm/algorithm-evidence.json",
+    "sha256": "21dca0692a1618676047019615459ff35098ea15d341ade97c09035d7ee9fb9c"
+  },
+  "checks": [
+    {
+      "id": "SIM-OFFLINE",
+      "status": "PASS",
+      "expected": {
+        "protocol": "file:",
+        "scenes": [
+          "clear-room",
+          "fixed-obstacle",
+          "drop-and-recover"
+        ],
+        "pause_min_ms": 200,
+        "local_only": true,
+        "exceptions": 0
+      },
+      "reproduce": "打开独立副本入口，通过场景菜单和按钮启动、暂停、继续及重置。",
+      "observed": {
+        "first": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html",
+          "scene_id": "clear-room",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "ready",
+          "link": "waiting",
+          "state_label": "就绪",
+          "tick": "—",
+          "time": "—",
+          "log_rows": 0,
+          "pose_label": "当前位置 (4, 6)",
+          "start_disabled": false,
+          "frame_status": "等待首帧",
+          "detections_text": "",
+          "error": null
+        },
+        "started": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html",
+          "scene_id": "drop-and-recover",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "running",
+          "link": "connected",
+          "state_label": "运行中",
+          "tick": "拍 0",
+          "time": "0 ms",
+          "log_rows": 1,
+          "pose_label": "当前位置 (5, 6)",
+          "start_disabled": true,
+          "frame_status": "有效帧",
+          "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+          "error": null
+        },
+        "paused": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html",
+          "scene_id": "drop-and-recover",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "paused",
+          "link": "connected",
+          "state_label": "已暂停",
+          "tick": "拍 0",
+          "time": "0 ms",
+          "log_rows": 1,
+          "pose_label": "当前位置 (5, 6)",
+          "start_disabled": false,
+          "frame_status": "有效帧",
+          "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+          "error": null
+        },
+        "paused_later": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html",
+          "scene_id": "drop-and-recover",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "paused",
+          "link": "connected",
+          "state_label": "已暂停",
+          "tick": "拍 0",
+          "time": "0 ms",
+          "log_rows": 1,
+          "pose_label": "当前位置 (5, 6)",
+          "start_disabled": false,
+          "frame_status": "有效帧",
+          "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+          "error": null
+        },
+        "resumed": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html",
+          "scene_id": "drop-and-recover",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "running",
+          "link": "connected",
+          "state_label": "运行中",
+          "tick": "拍 1",
+          "time": "100 ms",
+          "log_rows": 2,
+          "pose_label": "当前位置 (5, 6)",
+          "start_disabled": true,
+          "frame_status": "本拍缺帧",
+          "detections_text": "",
+          "error": null
+        },
+        "reset": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html",
+          "scene_id": "drop-and-recover",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "ready",
+          "link": "waiting",
+          "state_label": "就绪",
+          "tick": "—",
+          "time": "—",
+          "log_rows": 0,
+          "pose_label": "当前位置 (4, 6)",
+          "start_disabled": false,
+          "frame_status": "等待首帧",
+          "detections_text": "",
+          "error": null
+        },
+        "pause_wait_ms": 758,
+        "requests": 6,
+        "external_requests": 0,
+        "exceptions": 0,
+        "screenshots": [
+          "paused.png"
+        ]
+      }
+    },
+    {
+      "id": "SIM-CLEAR",
+      "status": "PASS",
+      "expected": {
+        "first_detection_count": 0,
+        "actions": [
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "terminal_tick": 3,
+        "terminal_state": "arrived",
+        "collisions": 0
+      },
+      "reproduce": "场景菜单选中 clear-room 后重置、启动并导出，必要时逐拍读取 #test。",
+      "observed": {
+        "export_path": "round-1-clear-room/rc8-drone-sim-v2-clear-room.json",
+        "export_sha256": "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+        "terminal": "arrived",
+        "terminal_tick": 3,
+        "actions": [
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "collisions": 0,
+        "first_record": {
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_digest": "2c6c1dc5",
+          "pose_before": {
+            "x": 4,
+            "y": 6
+          },
+          "pose_after": {
+            "x": 4,
+            "y": 5
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "clear-room:0",
+            "detections": [],
+            "status": "ok",
+            "error": null
+          },
+          "link_state": "connected",
+          "consecutive_unusable": 0,
+          "link_event": "connected",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "clear-room:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          },
+          "run_state": "running",
+          "collision": false,
+          "arrived": false
+        }
+      }
+    },
+    {
+      "id": "SIM-DETOUR",
+      "status": "PASS",
+      "expected": {
+        "first_detection_count": 3,
+        "first_blocked_cell": {
+          "dx": 0,
+          "dy": -1
+        },
+        "actions": [
+          "MOVE_E",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_W"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "terminal_tick": 5,
+        "terminal_state": "arrived",
+        "collisions": 0
+      },
+      "reproduce": "场景菜单选中 fixed-obstacle 后重置、启动并导出，必要时逐拍读取 #test。",
+      "observed": {
+        "export_path": "round-1-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json",
+        "export_sha256": "66ac34a8126a8e5f83afaae3c069472bfca0eb567a93d0b9b540c9bad503e894",
+        "terminal": "arrived",
+        "terminal_tick": 5,
+        "actions": [
+          "MOVE_E",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_W"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "collisions": 0,
+        "first_record": {
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_digest": "90315085",
+          "pose_before": {
+            "x": 4,
+            "y": 6
+          },
+          "pose_after": {
+            "x": 5,
+            "y": 6
+          },
+          "detection": {
+            "scene_id": "fixed-obstacle",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "fixed-obstacle:0",
+            "detections": [
+              {
+                "label": "wall",
+                "region": {
+                  "x_min": 0.0125,
+                  "y_min": 0.016666666666666666,
+                  "x_max": 0.1875,
+                  "y_max": 0.18333333333333332
+                },
+                "cell": {
+                  "dx": -2,
+                  "dy": -2
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "column",
+                "region": {
+                  "x_min": 0.8125,
+                  "y_min": 0.016666666666666666,
+                  "x_max": 0.9875,
+                  "y_max": 0.18333333333333332
+                },
+                "cell": {
+                  "dx": 2,
+                  "dy": -2
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.21666666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.38333333333333336
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": -1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "link_state": "connected",
+          "consecutive_unusable": 0,
+          "link_event": "connected",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "fixed-obstacle:0",
+            "action": "MOVE_E",
+            "reason": "detour"
+          },
+          "run_state": "running",
+          "collision": false,
+          "arrived": false
+        },
+        "frame": {
+          "file": "detour-first.rgba",
+          "sha256": "b4ed312bd5d33d1cf9fe204c44a698cf0a8ccb53d3410875e1b144f8e60da14e",
+          "frame_digest": "90315085",
+          "screenshot": "detour-first.png",
+          "before": {
+            "contract_id": "rc8-drone-sim-v2",
+            "schema_version": 2,
+            "scene_id": "fixed-obstacle",
+            "start": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "route": [
+              {
+                "x": 4,
+                "y": 6
+              }
+            ],
+            "records": [],
+            "run_state": "ready",
+            "clock_ms": 100,
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "link_state": "waiting",
+            "consecutive_unusable": 0,
+            "next_tick": 0,
+            "grid": {
+              "width": 9,
+              "height": 9
+            }
+          },
+          "envelope": {
+            "scene_id": "fixed-obstacle",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "fixed-obstacle:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8",
+              "byte_length": 76800
+            }
+          },
+          "controlInput": {
+            "detection": {
+              "scene_id": "fixed-obstacle",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "fixed-obstacle:0",
+              "detections": [
+                {
+                  "label": "wall",
+                  "region": {
+                    "x_min": 0.0125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.1875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": -2,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "column",
+                  "region": {
+                    "x_min": 0.8125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.9875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": 2,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "box",
+                  "region": {
+                    "x_min": 0.4125,
+                    "y_min": 0.21666666666666667,
+                    "x_max": 0.5875,
+                    "y_max": 0.38333333333333336
+                  },
+                  "cell": {
+                    "dx": 0,
+                    "dy": -1
+                  },
+                  "pixel_count": 560
+                }
+              ],
+              "status": "ok",
+              "error": null
+            },
+            "link_state": "connected",
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "record": {
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_digest": "90315085",
+            "pose_before": {
+              "x": 4,
+              "y": 6
+            },
+            "pose_after": {
+              "x": 5,
+              "y": 6
+            },
+            "detection": {
+              "scene_id": "fixed-obstacle",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "fixed-obstacle:0",
+              "detections": [
+                {
+                  "label": "wall",
+                  "region": {
+                    "x_min": 0.0125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.1875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": -2,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "column",
+                  "region": {
+                    "x_min": 0.8125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.9875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": 2,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "box",
+                  "region": {
+                    "x_min": 0.4125,
+                    "y_min": 0.21666666666666667,
+                    "x_max": 0.5875,
+                    "y_max": 0.38333333333333336
+                  },
+                  "cell": {
+                    "dx": 0,
+                    "dy": -1
+                  },
+                  "pixel_count": 560
+                }
+              ],
+              "status": "ok",
+              "error": null
+            },
+            "link_state": "connected",
+            "consecutive_unusable": 0,
+            "link_event": "connected",
+            "command": {
+              "tick": 0,
+              "source_frame_id": "fixed-obstacle:0",
+              "action": "MOVE_E",
+              "reason": "detour"
+            },
+            "run_state": "running",
+            "collision": false,
+            "arrived": false
+          },
+          "canvas_matches_delivered": true,
+          "retained_frame_matches_delivered": true
+        }
+      }
+    },
+    {
+      "id": "SIM-DROP",
+      "status": "PASS",
+      "expected": {
+        "first_detection_count": 3,
+        "actions": [
+          "MOVE_E",
+          "HOLD",
+          "HOLD",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_W"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "link_events": {
+          "connected": 0,
+          "disconnected": 2,
+          "reconnected": 3
+        },
+        "terminal_tick": 7,
+        "terminal_state": "arrived",
+        "collisions": 0
+      },
+      "reproduce": "场景菜单选中 drop-and-recover 后重置、启动并导出，必要时逐拍读取 #test。",
+      "observed": {
+        "export_path": "round-1-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json",
+        "export_sha256": "14a8b9da5571d678665571578b710fde32859f30111660cb6c8c4378a9776425",
+        "terminal": "arrived",
+        "terminal_tick": 7,
+        "actions": [
+          "MOVE_E",
+          "HOLD",
+          "HOLD",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_W"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "collisions": 0,
+        "first_record": {
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_digest": "90315085",
+          "pose_before": {
+            "x": 4,
+            "y": 6
+          },
+          "pose_after": {
+            "x": 5,
+            "y": 6
+          },
+          "detection": {
+            "scene_id": "drop-and-recover",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "drop-and-recover:0",
+            "detections": [
+              {
+                "label": "wall",
+                "region": {
+                  "x_min": 0.0125,
+                  "y_min": 0.016666666666666666,
+                  "x_max": 0.1875,
+                  "y_max": 0.18333333333333332
+                },
+                "cell": {
+                  "dx": -2,
+                  "dy": -2
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "column",
+                "region": {
+                  "x_min": 0.8125,
+                  "y_min": 0.016666666666666666,
+                  "x_max": 0.9875,
+                  "y_max": 0.18333333333333332
+                },
+                "cell": {
+                  "dx": 2,
+                  "dy": -2
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.21666666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.38333333333333336
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": -1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "link_state": "connected",
+          "consecutive_unusable": 0,
+          "link_event": "connected",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "drop-and-recover:0",
+            "action": "MOVE_E",
+            "reason": "detour"
+          },
+          "run_state": "running",
+          "collision": false,
+          "arrived": false
+        },
+        "first_steps": [
+          {
+            "record": {
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_digest": "90315085",
+              "pose_before": {
+                "x": 4,
+                "y": 6
+              },
+              "pose_after": {
+                "x": 5,
+                "y": 6
+              },
+              "detection": {
+                "scene_id": "drop-and-recover",
+                "tick": 0,
+                "sim_time_ms": 0,
+                "frame_id": "drop-and-recover:0",
+                "detections": [
+                  {
+                    "label": "wall",
+                    "region": {
+                      "x_min": 0.0125,
+                      "y_min": 0.016666666666666666,
+                      "x_max": 0.1875,
+                      "y_max": 0.18333333333333332
+                    },
+                    "cell": {
+                      "dx": -2,
+                      "dy": -2
+                    },
+                    "pixel_count": 560
+                  },
+                  {
+                    "label": "column",
+                    "region": {
+                      "x_min": 0.8125,
+                      "y_min": 0.016666666666666666,
+                      "x_max": 0.9875,
+                      "y_max": 0.18333333333333332
+                    },
+                    "cell": {
+                      "dx": 2,
+                      "dy": -2
+                    },
+                    "pixel_count": 560
+                  },
+                  {
+                    "label": "box",
+                    "region": {
+                      "x_min": 0.4125,
+                      "y_min": 0.21666666666666667,
+                      "x_max": 0.5875,
+                      "y_max": 0.38333333333333336
+                    },
+                    "cell": {
+                      "dx": 0,
+                      "dy": -1
+                    },
+                    "pixel_count": 560
+                  }
+                ],
+                "status": "ok",
+                "error": null
+              },
+              "link_state": "connected",
+              "consecutive_unusable": 0,
+              "link_event": "connected",
+              "command": {
+                "tick": 0,
+                "source_frame_id": "drop-and-recover:0",
+                "action": "MOVE_E",
+                "reason": "detour"
+              },
+              "run_state": "running",
+              "collision": false,
+              "arrived": false
+            },
+            "visits": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame": {
+              "id": "drop-and-recover:0",
+              "byte_length": 76800
+            },
+            "repeated_detection": {
+              "scene_id": "drop-and-recover",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "drop-and-recover:0",
+              "detections": [
+                {
+                  "label": "wall",
+                  "region": {
+                    "x_min": 0.0125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.1875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": -2,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "column",
+                  "region": {
+                    "x_min": 0.8125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.9875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": 2,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "box",
+                  "region": {
+                    "x_min": 0.4125,
+                    "y_min": 0.21666666666666667,
+                    "x_max": 0.5875,
+                    "y_max": 0.38333333333333336
+                  },
+                  "cell": {
+                    "dx": 0,
+                    "dy": -1
+                  },
+                  "pixel_count": 560
+                }
+              ],
+              "status": "ok",
+              "error": null
+            },
+            "frame_status": "有效帧",
+            "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)"
+          },
+          {
+            "record": {
+              "tick": 1,
+              "sim_time_ms": 100,
+              "frame_digest": null,
+              "pose_before": {
+                "x": 5,
+                "y": 6
+              },
+              "pose_after": {
+                "x": 5,
+                "y": 6
+              },
+              "detection": {
+                "scene_id": "drop-and-recover",
+                "tick": 1,
+                "sim_time_ms": 100,
+                "frame_id": null,
+                "detections": [],
+                "status": "missing",
+                "error": null
+              },
+              "link_state": "connected",
+              "consecutive_unusable": 1,
+              "link_event": null,
+              "command": {
+                "tick": 1,
+                "source_frame_id": null,
+                "action": "HOLD",
+                "reason": "frame_missing"
+              },
+              "run_state": "running",
+              "collision": false,
+              "arrived": false
+            },
+            "visits": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame": null,
+            "repeated_detection": {
+              "scene_id": "drop-and-recover",
+              "tick": 1,
+              "sim_time_ms": 100,
+              "frame_id": null,
+              "detections": [],
+              "status": "missing",
+              "error": null
+            },
+            "frame_status": "本拍缺帧",
+            "detections_text": ""
+          },
+          {
+            "record": {
+              "tick": 2,
+              "sim_time_ms": 200,
+              "frame_digest": null,
+              "pose_before": {
+                "x": 5,
+                "y": 6
+              },
+              "pose_after": {
+                "x": 5,
+                "y": 6
+              },
+              "detection": {
+                "scene_id": "drop-and-recover",
+                "tick": 2,
+                "sim_time_ms": 200,
+                "frame_id": null,
+                "detections": [],
+                "status": "missing",
+                "error": null
+              },
+              "link_state": "disconnected",
+              "consecutive_unusable": 2,
+              "link_event": "disconnected",
+              "command": {
+                "tick": 2,
+                "source_frame_id": null,
+                "action": "HOLD",
+                "reason": "link_disconnected"
+              },
+              "run_state": "running",
+              "collision": false,
+              "arrived": false
+            },
+            "visits": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame": null,
+            "repeated_detection": {
+              "scene_id": "drop-and-recover",
+              "tick": 2,
+              "sim_time_ms": 200,
+              "frame_id": null,
+              "detections": [],
+              "status": "missing",
+              "error": null
+            },
+            "frame_status": "本拍缺帧",
+            "detections_text": ""
+          },
+          {
+            "record": {
+              "tick": 3,
+              "sim_time_ms": 300,
+              "frame_digest": "d1946605",
+              "pose_before": {
+                "x": 5,
+                "y": 6
+              },
+              "pose_after": {
+                "x": 5,
+                "y": 5
+              },
+              "detection": {
+                "scene_id": "drop-and-recover",
+                "tick": 3,
+                "sim_time_ms": 300,
+                "frame_id": "drop-and-recover:3",
+                "detections": [
+                  {
+                    "label": "column",
+                    "region": {
+                      "x_min": 0.6125,
+                      "y_min": 0.016666666666666666,
+                      "x_max": 0.7875,
+                      "y_max": 0.18333333333333332
+                    },
+                    "cell": {
+                      "dx": 1,
+                      "dy": -2
+                    },
+                    "pixel_count": 560
+                  },
+                  {
+                    "label": "box",
+                    "region": {
+                      "x_min": 0.2125,
+                      "y_min": 0.21666666666666667,
+                      "x_max": 0.3875,
+                      "y_max": 0.38333333333333336
+                    },
+                    "cell": {
+                      "dx": -1,
+                      "dy": -1
+                    },
+                    "pixel_count": 560
+                  }
+                ],
+                "status": "ok",
+                "error": null
+              },
+              "link_state": "connected",
+              "consecutive_unusable": 0,
+              "link_event": "reconnected",
+              "command": {
+                "tick": 3,
+                "source_frame_id": "drop-and-recover:3",
+                "action": "MOVE_N",
+                "reason": "toward_goal"
+              },
+              "run_state": "running",
+              "collision": false,
+              "arrived": false
+            },
+            "visits": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "frame": {
+              "id": "drop-and-recover:3",
+              "byte_length": 76800
+            },
+            "repeated_detection": {
+              "scene_id": "drop-and-recover",
+              "tick": 3,
+              "sim_time_ms": 300,
+              "frame_id": "drop-and-recover:3",
+              "detections": [
+                {
+                  "label": "column",
+                  "region": {
+                    "x_min": 0.6125,
+                    "y_min": 0.016666666666666666,
+                    "x_max": 0.7875,
+                    "y_max": 0.18333333333333332
+                  },
+                  "cell": {
+                    "dx": 1,
+                    "dy": -2
+                  },
+                  "pixel_count": 560
+                },
+                {
+                  "label": "box",
+                  "region": {
+                    "x_min": 0.2125,
+                    "y_min": 0.21666666666666667,
+                    "x_max": 0.3875,
+                    "y_max": 0.38333333333333336
+                  },
+                  "cell": {
+                    "dx": -1,
+                    "dy": -1
+                  },
+                  "pixel_count": 560
+                }
+              ],
+              "status": "ok",
+              "error": null
+            },
+            "frame_status": "有效帧",
+            "detections_text": "立柱 (1, -2) · 箱体 (-1, -1)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "SIM-PIXELS",
+      "status": "PASS",
+      "expected": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "pose": {
+          "x": 4,
+          "y": 6
+        },
+        "goal": {
+          "x": 4,
+          "y": 2
+        },
+        "identical_metadata": true,
+        "intervention": "以同一帧元数据重新运行。只将相机 col=2,row=1 的单元格内缩矩形换为 box 色。",
+        "baseline": {
+          "detections": 0,
+          "command": "MOVE_N"
+        },
+        "changed": {
+          "label": "box",
+          "cell": {
+            "dx": 0,
+            "dy": -1
+          },
+          "command": "MOVE_E"
+        }
+      },
+      "reproduce": "在 #test 重置同一个 clear-room，各推进首拍。通过 replacePixels 仅改变前方矩形并核对算法实际入参。",
+      "observed": {
+        "changed_pixels": 560,
+        "changed_bytes": 1680,
+        "changed_rectangle": {
+          "x0": 66,
+          "y0": 26,
+          "x1": 94,
+          "y1": 46
+        },
+        "screenshot": "pixel-B.png",
+        "baseline": {
+          "sha256": "c0415e4bc24dcc109a973acd6952f4ef3fd7cb2334e60ea67d54cc6e8a0a45c8",
+          "fnv1a": "2c6c1dc5",
+          "file": "pixel-A.rgba",
+          "before": {
+            "contract_id": "rc8-drone-sim-v2",
+            "schema_version": 2,
+            "scene_id": "clear-room",
+            "start": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "route": [
+              {
+                "x": 4,
+                "y": 6
+              }
+            ],
+            "records": [],
+            "run_state": "ready",
+            "clock_ms": 100,
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "link_state": "waiting",
+            "consecutive_unusable": 0,
+            "next_tick": 0,
+            "grid": {
+              "width": 9,
+              "height": 9
+            }
+          },
+          "envelope": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8",
+              "byte_length": 76800
+            }
+          },
+          "controlInput": {
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "clear-room:0",
+              "detections": [],
+              "status": "ok",
+              "error": null
+            },
+            "link_state": "connected",
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "record": {
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_digest": "2c6c1dc5",
+            "pose_before": {
+              "x": 4,
+              "y": 6
+            },
+            "pose_after": {
+              "x": 4,
+              "y": 5
+            },
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "clear-room:0",
+              "detections": [],
+              "status": "ok",
+              "error": null
+            },
+            "link_state": "connected",
+            "consecutive_unusable": 0,
+            "link_event": "connected",
+            "command": {
+              "tick": 0,
+              "source_frame_id": "clear-room:0",
+              "action": "MOVE_N",
+              "reason": "toward_goal"
+            },
+            "run_state": "running",
+            "collision": false,
+            "arrived": false
+          },
+          "canvas_matches_delivered": true,
+          "retained_frame_matches_delivered": true
+        },
+        "changed": {
+          "sha256": "567bc05fd7edd767314abe5e581da0dbb8016826b7299ecdf76bb35b65681967",
+          "fnv1a": "a925d965",
+          "file": "pixel-B.rgba",
+          "before": {
+            "contract_id": "rc8-drone-sim-v2",
+            "schema_version": 2,
+            "scene_id": "clear-room",
+            "start": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "route": [
+              {
+                "x": 4,
+                "y": 6
+              }
+            ],
+            "records": [],
+            "run_state": "ready",
+            "clock_ms": 100,
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "link_state": "waiting",
+            "consecutive_unusable": 0,
+            "next_tick": 0,
+            "grid": {
+              "width": 9,
+              "height": 9
+            }
+          },
+          "envelope": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8",
+              "byte_length": 76800
+            }
+          },
+          "controlInput": {
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "clear-room:0",
+              "detections": [
+                {
+                  "label": "box",
+                  "region": {
+                    "x_min": 0.4125,
+                    "y_min": 0.21666666666666667,
+                    "x_max": 0.5875,
+                    "y_max": 0.38333333333333336
+                  },
+                  "cell": {
+                    "dx": 0,
+                    "dy": -1
+                  },
+                  "pixel_count": 560
+                }
+              ],
+              "status": "ok",
+              "error": null
+            },
+            "link_state": "connected",
+            "pose": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "visit_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "record": {
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_digest": "a925d965",
+            "pose_before": {
+              "x": 4,
+              "y": 6
+            },
+            "pose_after": {
+              "x": 5,
+              "y": 6
+            },
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": "clear-room:0",
+              "detections": [
+                {
+                  "label": "box",
+                  "region": {
+                    "x_min": 0.4125,
+                    "y_min": 0.21666666666666667,
+                    "x_max": 0.5875,
+                    "y_max": 0.38333333333333336
+                  },
+                  "cell": {
+                    "dx": 0,
+                    "dy": -1
+                  },
+                  "pixel_count": 560
+                }
+              ],
+              "status": "ok",
+              "error": null
+            },
+            "link_state": "connected",
+            "consecutive_unusable": 0,
+            "link_event": "connected",
+            "command": {
+              "tick": 0,
+              "source_frame_id": "clear-room:0",
+              "action": "MOVE_E",
+              "reason": "detour"
+            },
+            "run_state": "running",
+            "collision": false,
+            "arrived": false
+          },
+          "canvas_matches_delivered": true,
+          "retained_frame_matches_delivered": true
+        }
+      }
+    },
+    {
+      "id": "SIM-COLLISION",
+      "status": "PASS",
+      "expected": {
+        "purpose": "以内部测试专用输入使仿真器处理一个会撞上场景固定障碍的命令，检验碰撞与停止。",
+        "scene_id": "fixed-obstacle",
+        "pose": {
+          "x": 4,
+          "y": 6
+        },
+        "command": "MOVE_N",
+        "expected": {
+          "pose_after": {
+            "x": 4,
+            "y": 6
+          },
+          "run_state": "collision",
+          "collision": true
+        }
+      },
+      "reproduce": "在 #test 选择固定障碍，使用合同的 commandOverride 驱动仿真器并验证实际终态、日志及再推进。",
+      "observed": {
+        "record": {
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_digest": "90315085",
+          "pose_before": {
+            "x": 4,
+            "y": 6
+          },
+          "pose_after": {
+            "x": 4,
+            "y": 6
+          },
+          "detection": {
+            "scene_id": "fixed-obstacle",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": "fixed-obstacle:0",
+            "detections": [
+              {
+                "label": "wall",
+                "region": {
+                  "x_min": 0.0125,
+                  "y_min": 0.016666666666666666,
+                  "x_max": 0.1875,
+                  "y_max": 0.18333333333333332
+                },
+                "cell": {
+                  "dx": -2,
+                  "dy": -2
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "column",
+                "region": {
+                  "x_min": 0.8125,
+                  "y_min": 0.016666666666666666,
+                  "x_max": 0.9875,
+                  "y_max": 0.18333333333333332
+                },
+                "cell": {
+                  "dx": 2,
+                  "dy": -2
+                },
+                "pixel_count": 560
+              },
+              {
+                "label": "box",
+                "region": {
+                  "x_min": 0.4125,
+                  "y_min": 0.21666666666666667,
+                  "x_max": 0.5875,
+                  "y_max": 0.38333333333333336
+                },
+                "cell": {
+                  "dx": 0,
+                  "dy": -1
+                },
+                "pixel_count": 560
+              }
+            ],
+            "status": "ok",
+            "error": null
+          },
+          "link_state": "connected",
+          "consecutive_unusable": 0,
+          "link_event": "connected",
+          "command": {
+            "tick": 0,
+            "source_frame_id": "fixed-obstacle:0",
+            "action": "MOVE_N",
+            "reason": "toward_goal"
+          },
+          "run_state": "collision",
+          "collision": true,
+          "arrived": false
+        },
+        "screenshot": "collision.png",
+        "before": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+          "scene_id": "fixed-obstacle",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "collision",
+          "link": "connected",
+          "state_label": "模拟碰撞",
+          "tick": "拍 0",
+          "time": "0 ms",
+          "log_rows": 1,
+          "pose_label": "当前位置 (4, 6)",
+          "start_disabled": true,
+          "frame_status": "有效帧",
+          "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+          "error": null
+        },
+        "after": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+          "scene_id": "fixed-obstacle",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "collision",
+          "link": "connected",
+          "state_label": "模拟碰撞",
+          "tick": "拍 0",
+          "time": "0 ms",
+          "log_rows": 1,
+          "pose_label": "当前位置 (4, 6)",
+          "start_disabled": true,
+          "frame_status": "有效帧",
+          "detections_text": "墙面 (-2, -2) · 立柱 (2, -2) · 箱体 (0, -1)",
+          "error": null
+        },
+        "after_step": null,
+        "wait_ms": 750,
+        "downloaded": {
+          "path": "collision-export/rc8-drone-sim-v2-fixed-obstacle.json",
+          "sha256": "07d652ab14c25e839747430408a7fcd257e5a96622fea276b6c590f8ed9459e6",
+          "log": {
+            "contract_id": "rc8-drone-sim-v2",
+            "schema_version": 2,
+            "scene_id": "fixed-obstacle",
+            "start": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "route": [
+              {
+                "x": 4,
+                "y": 6
+              }
+            ],
+            "records": [
+              {
+                "tick": 0,
+                "sim_time_ms": 0,
+                "frame_digest": "90315085",
+                "pose_before": {
+                  "x": 4,
+                  "y": 6
+                },
+                "pose_after": {
+                  "x": 4,
+                  "y": 6
+                },
+                "detection": {
+                  "scene_id": "fixed-obstacle",
+                  "tick": 0,
+                  "sim_time_ms": 0,
+                  "frame_id": "fixed-obstacle:0",
+                  "detections": [
+                    {
+                      "label": "wall",
+                      "region": {
+                        "x_min": 0.0125,
+                        "y_min": 0.016666666666666666,
+                        "x_max": 0.1875,
+                        "y_max": 0.18333333333333332
+                      },
+                      "cell": {
+                        "dx": -2,
+                        "dy": -2
+                      },
+                      "pixel_count": 560
+                    },
+                    {
+                      "label": "column",
+                      "region": {
+                        "x_min": 0.8125,
+                        "y_min": 0.016666666666666666,
+                        "x_max": 0.9875,
+                        "y_max": 0.18333333333333332
+                      },
+                      "cell": {
+                        "dx": 2,
+                        "dy": -2
+                      },
+                      "pixel_count": 560
+                    },
+                    {
+                      "label": "box",
+                      "region": {
+                        "x_min": 0.4125,
+                        "y_min": 0.21666666666666667,
+                        "x_max": 0.5875,
+                        "y_max": 0.38333333333333336
+                      },
+                      "cell": {
+                        "dx": 0,
+                        "dy": -1
+                      },
+                      "pixel_count": 560
+                    }
+                  ],
+                  "status": "ok",
+                  "error": null
+                },
+                "link_state": "connected",
+                "consecutive_unusable": 0,
+                "link_event": "connected",
+                "command": {
+                  "tick": 0,
+                  "source_frame_id": "fixed-obstacle:0",
+                  "action": "MOVE_N",
+                  "reason": "toward_goal"
+                },
+                "run_state": "collision",
+                "collision": true,
+                "arrived": false
+              }
+            ],
+            "run_state": "collision",
+            "clock_ms": 100
+          }
+        }
+      }
+    },
+    {
+      "id": "SIM-INVALID",
+      "status": "PASS",
+      "expected": {
+        "status": "invalid",
+        "detections": [],
+        "action": "HOLD",
+        "reason": "invalid_frame"
+      },
+      "reproduce": "从同一首帧派生坏宽度、坏长度和坏帧号，调用原检测与控制。通过 #test 推进坏长度帧查看界面。",
+      "observed": {
+        "cases": [
+          {
+            "id": "width",
+            "input": {
+              "frame_id": "clear-room:0",
+              "width_px": 159,
+              "height_px": 120,
+              "pixel_format": "RGBA8",
+              "byte_length": 76800
+            },
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": null,
+              "detections": [],
+              "status": "invalid",
+              "error": "Frame dimensions must be 160 × 120 pixels."
+            },
+            "command": {
+              "tick": 0,
+              "source_frame_id": null,
+              "action": "HOLD",
+              "reason": "invalid_frame"
+            }
+          },
+          {
+            "id": "length",
+            "input": {
+              "frame_id": "clear-room:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8",
+              "byte_length": 76799
+            },
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": null,
+              "detections": [],
+              "status": "invalid",
+              "error": "pixels must be a Uint8ClampedArray containing 76800 bytes."
+            },
+            "command": {
+              "tick": 0,
+              "source_frame_id": null,
+              "action": "HOLD",
+              "reason": "invalid_frame"
+            }
+          },
+          {
+            "id": "frame_id",
+            "input": {
+              "frame_id": "invalid:0",
+              "width_px": 160,
+              "height_px": 120,
+              "pixel_format": "RGBA8",
+              "byte_length": 76800
+            },
+            "detection": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame_id": null,
+              "detections": [],
+              "status": "invalid",
+              "error": "frame_id must match scene_id and tick."
+            },
+            "command": {
+              "tick": 0,
+              "source_frame_id": null,
+              "action": "HOLD",
+              "reason": "invalid_frame"
+            }
+          }
+        ],
+        "record": {
+          "tick": 0,
+          "sim_time_ms": 0,
+          "frame_digest": null,
+          "pose_before": {
+            "x": 4,
+            "y": 6
+          },
+          "pose_after": {
+            "x": 4,
+            "y": 6
+          },
+          "detection": {
+            "scene_id": "clear-room",
+            "tick": 0,
+            "sim_time_ms": 0,
+            "frame_id": null,
+            "detections": [],
+            "status": "invalid",
+            "error": "pixels must be a Uint8ClampedArray containing 76800 bytes."
+          },
+          "link_state": "waiting",
+          "consecutive_unusable": 1,
+          "link_event": null,
+          "command": {
+            "tick": 0,
+            "source_frame_id": null,
+            "action": "HOLD",
+            "reason": "invalid_frame"
+          },
+          "run_state": "running",
+          "collision": false,
+          "arrived": false
+        },
+        "ui": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+          "scene_id": "clear-room",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "running",
+          "link": "waiting",
+          "state_label": "运行中",
+          "tick": "拍 0",
+          "time": "0 ms",
+          "log_rows": 1,
+          "pose_label": "当前位置 (4, 6)",
+          "start_disabled": true,
+          "frame_status": "输入帧无效",
+          "detections_text": "",
+          "error": null
+        },
+        "screenshot": "invalid.png"
+      }
+    },
+    {
+      "id": "SIM-TIMEOUT",
+      "status": "PASS",
+      "expected": {
+        "records": 12,
+        "last_tick": 11,
+        "delivered_frame": null,
+        "action": "HOLD",
+        "final": "timeout"
+      },
+      "reproduce": "用 #test 逐拍触发，在原 detectFrame 的调用边界将每拍 envelope.frame 置为 null。恢复入口后通过原控件重置并重跑。",
+      "observed": {
+        "input_path": "timeout-inputs.json",
+        "inputs": [
+          {
+            "original_frame_id": "clear-room:0",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 0,
+              "sim_time_ms": 0,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:1",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 1,
+              "sim_time_ms": 100,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:2",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 2,
+              "sim_time_ms": 200,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:3",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 3,
+              "sim_time_ms": 300,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:4",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 4,
+              "sim_time_ms": 400,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:5",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 5,
+              "sim_time_ms": 500,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:6",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 6,
+              "sim_time_ms": 600,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:7",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 7,
+              "sim_time_ms": 700,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:8",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 8,
+              "sim_time_ms": 800,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:9",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 9,
+              "sim_time_ms": 900,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:10",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 10,
+              "sim_time_ms": 1000,
+              "frame": null
+            }
+          },
+          {
+            "original_frame_id": "clear-room:11",
+            "original_pixel_bytes": 76800,
+            "delivered": {
+              "scene_id": "clear-room",
+              "tick": 11,
+              "sim_time_ms": 1100,
+              "frame": null
+            }
+          }
+        ],
+        "stopped": {
+          "before": {
+            "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+            "scene_id": "clear-room",
+            "scenes": [
+              "clear-room",
+              "fixed-obstacle",
+              "drop-and-recover"
+            ],
+            "state": "timeout",
+            "link": "disconnected",
+            "state_label": "达到拍数上限",
+            "tick": "拍 11",
+            "time": "1100 ms",
+            "log_rows": 12,
+            "pose_label": "当前位置 (4, 6)",
+            "start_disabled": true,
+            "frame_status": "本拍缺帧",
+            "detections_text": "",
+            "error": null
+          },
+          "after": {
+            "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+            "scene_id": "clear-room",
+            "scenes": [
+              "clear-room",
+              "fixed-obstacle",
+              "drop-and-recover"
+            ],
+            "state": "timeout",
+            "link": "disconnected",
+            "state_label": "达到拍数上限",
+            "tick": "拍 11",
+            "time": "1100 ms",
+            "log_rows": 12,
+            "pose_label": "当前位置 (4, 6)",
+            "start_disabled": true,
+            "frame_status": "本拍缺帧",
+            "detections_text": "",
+            "error": null
+          },
+          "after_step": null,
+          "wait_ms": 750,
+          "downloaded": {
+            "path": "timeout-export/rc8-drone-sim-v2-clear-room.json",
+            "sha256": "f537200bd3042522fb723cf6aaa6ab90b20d044c69cdc6c1d938b64bc12ced54",
+            "log": {
+              "contract_id": "rc8-drone-sim-v2",
+              "schema_version": 2,
+              "scene_id": "clear-room",
+              "start": {
+                "x": 4,
+                "y": 6
+              },
+              "goal": {
+                "x": 4,
+                "y": 2
+              },
+              "route": [
+                {
+                  "x": 4,
+                  "y": 6
+                }
+              ],
+              "records": [
+                {
+                  "tick": 0,
+                  "sim_time_ms": 0,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 0,
+                    "sim_time_ms": 0,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "waiting",
+                  "consecutive_unusable": 1,
+                  "link_event": null,
+                  "command": {
+                    "tick": 0,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "frame_missing"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 1,
+                  "sim_time_ms": 100,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 1,
+                    "sim_time_ms": 100,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 2,
+                  "link_event": "disconnected",
+                  "command": {
+                    "tick": 1,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 2,
+                  "sim_time_ms": 200,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 2,
+                    "sim_time_ms": 200,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 3,
+                  "link_event": null,
+                  "command": {
+                    "tick": 2,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 3,
+                  "sim_time_ms": 300,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 3,
+                    "sim_time_ms": 300,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 4,
+                  "link_event": null,
+                  "command": {
+                    "tick": 3,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 4,
+                  "sim_time_ms": 400,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 4,
+                    "sim_time_ms": 400,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 5,
+                  "link_event": null,
+                  "command": {
+                    "tick": 4,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 5,
+                  "sim_time_ms": 500,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 5,
+                    "sim_time_ms": 500,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 6,
+                  "link_event": null,
+                  "command": {
+                    "tick": 5,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 6,
+                  "sim_time_ms": 600,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 6,
+                    "sim_time_ms": 600,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 7,
+                  "link_event": null,
+                  "command": {
+                    "tick": 6,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 7,
+                  "sim_time_ms": 700,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 7,
+                    "sim_time_ms": 700,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 8,
+                  "link_event": null,
+                  "command": {
+                    "tick": 7,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 8,
+                  "sim_time_ms": 800,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 8,
+                    "sim_time_ms": 800,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 9,
+                  "link_event": null,
+                  "command": {
+                    "tick": 8,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 9,
+                  "sim_time_ms": 900,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 9,
+                    "sim_time_ms": 900,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 10,
+                  "link_event": null,
+                  "command": {
+                    "tick": 9,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 10,
+                  "sim_time_ms": 1000,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 10,
+                    "sim_time_ms": 1000,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 11,
+                  "link_event": null,
+                  "command": {
+                    "tick": 10,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "running",
+                  "collision": false,
+                  "arrived": false
+                },
+                {
+                  "tick": 11,
+                  "sim_time_ms": 1100,
+                  "frame_digest": null,
+                  "pose_before": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "pose_after": {
+                    "x": 4,
+                    "y": 6
+                  },
+                  "detection": {
+                    "scene_id": "clear-room",
+                    "tick": 11,
+                    "sim_time_ms": 1100,
+                    "frame_id": null,
+                    "detections": [],
+                    "status": "missing",
+                    "error": null
+                  },
+                  "link_state": "disconnected",
+                  "consecutive_unusable": 12,
+                  "link_event": null,
+                  "command": {
+                    "tick": 11,
+                    "source_frame_id": null,
+                    "action": "HOLD",
+                    "reason": "link_disconnected"
+                  },
+                  "run_state": "timeout",
+                  "collision": false,
+                  "arrived": false
+                }
+              ],
+              "run_state": "timeout",
+              "clock_ms": 100
+            }
+          }
+        },
+        "reset": {
+          "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+          "scene_id": "clear-room",
+          "scenes": [
+            "clear-room",
+            "fixed-obstacle",
+            "drop-and-recover"
+          ],
+          "state": "ready",
+          "link": "waiting",
+          "state_label": "就绪",
+          "tick": "—",
+          "time": "—",
+          "log_rows": 0,
+          "pose_label": "当前位置 (4, 6)",
+          "start_disabled": false,
+          "frame_status": "等待首帧",
+          "detections_text": "",
+          "error": null
+        },
+        "replay": {
+          "path": "timeout-reset-replay/rc8-drone-sim-v2-clear-room.json",
+          "sha256": "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+          "log": {
+            "contract_id": "rc8-drone-sim-v2",
+            "schema_version": 2,
+            "scene_id": "clear-room",
+            "start": {
+              "x": 4,
+              "y": 6
+            },
+            "goal": {
+              "x": 4,
+              "y": 2
+            },
+            "route": [
+              {
+                "x": 4,
+                "y": 6
+              },
+              {
+                "x": 4,
+                "y": 5
+              },
+              {
+                "x": 4,
+                "y": 4
+              },
+              {
+                "x": 4,
+                "y": 3
+              },
+              {
+                "x": 4,
+                "y": 2
+              }
+            ],
+            "records": [
+              {
+                "tick": 0,
+                "sim_time_ms": 0,
+                "frame_digest": "2c6c1dc5",
+                "pose_before": {
+                  "x": 4,
+                  "y": 6
+                },
+                "pose_after": {
+                  "x": 4,
+                  "y": 5
+                },
+                "detection": {
+                  "scene_id": "clear-room",
+                  "tick": 0,
+                  "sim_time_ms": 0,
+                  "frame_id": "clear-room:0",
+                  "detections": [],
+                  "status": "ok",
+                  "error": null
+                },
+                "link_state": "connected",
+                "consecutive_unusable": 0,
+                "link_event": "connected",
+                "command": {
+                  "tick": 0,
+                  "source_frame_id": "clear-room:0",
+                  "action": "MOVE_N",
+                  "reason": "toward_goal"
+                },
+                "run_state": "running",
+                "collision": false,
+                "arrived": false
+              },
+              {
+                "tick": 1,
+                "sim_time_ms": 100,
+                "frame_digest": "2c6c1dc5",
+                "pose_before": {
+                  "x": 4,
+                  "y": 5
+                },
+                "pose_after": {
+                  "x": 4,
+                  "y": 4
+                },
+                "detection": {
+                  "scene_id": "clear-room",
+                  "tick": 1,
+                  "sim_time_ms": 100,
+                  "frame_id": "clear-room:1",
+                  "detections": [],
+                  "status": "ok",
+                  "error": null
+                },
+                "link_state": "connected",
+                "consecutive_unusable": 0,
+                "link_event": null,
+                "command": {
+                  "tick": 1,
+                  "source_frame_id": "clear-room:1",
+                  "action": "MOVE_N",
+                  "reason": "toward_goal"
+                },
+                "run_state": "running",
+                "collision": false,
+                "arrived": false
+              },
+              {
+                "tick": 2,
+                "sim_time_ms": 200,
+                "frame_digest": "2c6c1dc5",
+                "pose_before": {
+                  "x": 4,
+                  "y": 4
+                },
+                "pose_after": {
+                  "x": 4,
+                  "y": 3
+                },
+                "detection": {
+                  "scene_id": "clear-room",
+                  "tick": 2,
+                  "sim_time_ms": 200,
+                  "frame_id": "clear-room:2",
+                  "detections": [],
+                  "status": "ok",
+                  "error": null
+                },
+                "link_state": "connected",
+                "consecutive_unusable": 0,
+                "link_event": null,
+                "command": {
+                  "tick": 2,
+                  "source_frame_id": "clear-room:2",
+                  "action": "MOVE_N",
+                  "reason": "toward_goal"
+                },
+                "run_state": "running",
+                "collision": false,
+                "arrived": false
+              },
+              {
+                "tick": 3,
+                "sim_time_ms": 300,
+                "frame_digest": "2c6c1dc5",
+                "pose_before": {
+                  "x": 4,
+                  "y": 3
+                },
+                "pose_after": {
+                  "x": 4,
+                  "y": 2
+                },
+                "detection": {
+                  "scene_id": "clear-room",
+                  "tick": 3,
+                  "sim_time_ms": 300,
+                  "frame_id": "clear-room:3",
+                  "detections": [],
+                  "status": "ok",
+                  "error": null
+                },
+                "link_state": "connected",
+                "consecutive_unusable": 0,
+                "link_event": null,
+                "command": {
+                  "tick": 3,
+                  "source_frame_id": "clear-room:3",
+                  "action": "MOVE_N",
+                  "reason": "toward_goal"
+                },
+                "run_state": "arrived",
+                "collision": false,
+                "arrived": true
+              }
+            ],
+            "run_state": "arrived",
+            "clock_ms": 100
+          },
+          "terminal": {
+            "url": "case-source://governance/testing/recorded/package/app/index.html#test",
+            "scene_id": "clear-room",
+            "scenes": [
+              "clear-room",
+              "fixed-obstacle",
+              "drop-and-recover"
+            ],
+            "state": "arrived",
+            "link": "connected",
+            "state_label": "已到达",
+            "tick": "拍 3",
+            "time": "300 ms",
+            "log_rows": 4,
+            "pose_label": "当前位置 (4, 2)",
+            "start_disabled": true,
+            "frame_status": "有效空帧",
+            "detections_text": "",
+            "error": null
+          }
+        },
+        "screenshot": "timeout.png"
+      }
+    },
+    {
+      "id": "SIM-EXPORT",
+      "status": "PASS",
+      "expected": {
+        "rounds_per_scene": 2,
+        "stable": [
+          "schema",
+          "ticks",
+          "digests",
+          "actions",
+          "route",
+          "terminal"
+        ]
+      },
+      "reproduce": "正常 file: 页面中，各场景重置后运行两次，点击导出并比较实际下载。",
+      "observed": [
+        {
+          "scene_id": "clear-room",
+          "record_count": 4,
+          "both_exports": [
+            "round-1-clear-room/rc8-drone-sim-v2-clear-room.json",
+            "round-2-clear-room/rc8-drone-sim-v2-clear-room.json"
+          ],
+          "sha256": [
+            "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+            "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753"
+          ],
+          "byte_identical": true
+        },
+        {
+          "scene_id": "fixed-obstacle",
+          "record_count": 6,
+          "both_exports": [
+            "round-1-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json",
+            "round-2-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json"
+          ],
+          "sha256": [
+            "66ac34a8126a8e5f83afaae3c069472bfca0eb567a93d0b9b540c9bad503e894",
+            "66ac34a8126a8e5f83afaae3c069472bfca0eb567a93d0b9b540c9bad503e894"
+          ],
+          "byte_identical": true
+        },
+        {
+          "scene_id": "drop-and-recover",
+          "record_count": 8,
+          "both_exports": [
+            "round-1-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json",
+            "round-2-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json"
+          ],
+          "sha256": [
+            "14a8b9da5571d678665571578b710fde32859f30111660cb6c8c4378a9776425",
+            "14a8b9da5571d678665571578b710fde32859f30111660cb6c8c4378a9776425"
+          ],
+          "byte_identical": true
+        }
+      ]
+    }
+  ],
+  "raw_browser_activity": {
+    "requests": [
+      {
+        "url": "case-source://governance/testing/recorded/package/app/index.html",
+        "method": "GET",
+        "type": "Document"
+      },
+      {
+        "url": "case-source://governance/testing/recorded/package/app/styles.css",
+        "method": "GET",
+        "type": "Stylesheet"
+      },
+      {
+        "url": "case-source://governance/testing/recorded/package/app/detector.js",
+        "method": "GET",
+        "type": "Script"
+      },
+      {
+        "url": "case-source://governance/testing/recorded/package/app/controller.js",
+        "method": "GET",
+        "type": "Script"
+      },
+      {
+        "url": "case-source://governance/testing/recorded/package/app/simulation.js",
+        "method": "GET",
+        "type": "Script"
+      },
+      {
+        "url": "case-source://governance/testing/recorded/package/app/monitor.js",
+        "method": "GET",
+        "type": "Script"
+      }
+    ],
+    "failures": [],
+    "external": [],
+    "exceptions": []
+  },
+  "completed_at": "2026-11-16T13:46:12.960Z",
+  "export_metadata": {
+    "scope": "Sanitized published evidence, not original receipt bytes",
+    "transformations": [
+      "Host paths and host conversation identifiers removed or replaced with descriptive source aliases",
+      "Numerical observations, check results and application hashes preserved"
+    ],
+    "source_identity_map": "Retained privately by the maintainer",
+    "non_exported_binary_evidence": "Recorded binary names are historical references. Browser verifier regenerates pixel buffers and screenshots in its local run directory."
+  }
+}

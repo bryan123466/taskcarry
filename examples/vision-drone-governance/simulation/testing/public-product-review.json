@@ -1,0 +1,108 @@
+{
+  "schema": "taskcarry.synthetic.public-product-review.v1",
+  "id": "PRODUCT-EVIDENCE",
+  "independent_review": {
+    "status": "PASS",
+    "reviewed_at": "2026-11-16T22:27:29.4732439+08:00",
+    "scope": "Read-only corrective review of the exact public product documents, file references, technical support, relative links, and sanitization.",
+    "reviewed_manifest_sha256": "7aeb5a34b87a5723efc56e9e9dcbb598565d459819cab22476eebb0bd992dec3",
+    "reviewed_object_file_count": 50,
+    "reviewed_manifest_entry_count": 49,
+    "public_references_verified": 97,
+    "byte_sizes_verified": 38,
+    "prior_mismatches_corrected": 24,
+    "supported_claims": 12,
+    "independent_technical_checks_passed": 10,
+    "local_links_verified": 110,
+    "sibling_historical_links_verified": 4,
+    "remaining_gaps": []
+  },
+  "prior_review": {
+    "status": "FAIL",
+    "reviewed_manifest_sha256": "18fff183e3952e6aee742831fd89361125a765832c2cd5011008b818a66c5b13",
+    "meaning": "Earlier public references and status labels were stale. The exact corrected object above was reviewed separately; the original failure receipt remains in private evidence."
+  },
+  "stable_technical_snapshot": {
+    "file": "testing/test-evidence.json",
+    "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+    "hash_scope": "public_file_bytes",
+    "historical_product_review_status": "PENDING at the earlier technical snapshot; superseded for the reviewed product object only by the separate independent review above"
+  },
+  "unchanged_executable_inputs": {
+    "INTERFACE_CONTRACT.json": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+    "verify-software.mjs": "f2b6134fa61be0902801bcd339b7d6a559b9653103f2331bb5bc02f002dc9d24",
+    "algorithm/verify-algorithm.cjs": "35d8ff9a7faad84dbc15ebbd01aabe48d8a737bc10157622526d3be0b562db44",
+    "app/controller.js": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+    "app/detector.js": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+    "app/index.html": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+    "app/monitor.js": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74",
+    "app/simulation.js": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+    "app/styles.css": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e",
+    "testing/chrome.mjs": "a21c5b330dc2e8ac8ad29da327584817fdb239be780d6b3a4f57a8be2463b9b7",
+    "testing/prepare-public-handoff.mjs": "1362be3db04b96bf299f0eaeaf39fef2e2e0f3be32620e6af45ced6c91bbfd64",
+    "testing/test-evidence.json": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+    "testing/verify-independent.mjs": "c9daf8d04f0b0f0807a4cf5c3a091beb9afb3442a626f91133d2ee0073d68a30"
+  },
+  "later_export_delta": {
+    "scope": "Text canonicalization, dependent hash recalculation, review-summary export and README links after the reviewed object. Later continuation evidence remains outside this review.",
+    "canonicalization": [
+      {
+        "path": "case-manifest.json",
+        "reviewed_sha256": "7aeb5a34b87a5723efc56e9e9dcbb598565d459819cab22476eebb0bd992dec3",
+        "lf_sha256": "64cca854adf272a1008da08769088a48ab3429676099bce6699f201e1926c770",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "evidence/native-acceptance.json",
+        "reviewed_sha256": "98d381ac506a9bfa031158396a6f1f09d9e53735fe912ce9fadd5899ce09c180",
+        "lf_sha256": "3f67c56b8311ac5619b25bde21dd829f18611f5ca7abf56596585630fdf4286b",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "product/DEMO_ROUTE.md",
+        "reviewed_sha256": "f78cbafca0e57a900978582a382fd10ed4aff281c59ea39e5fb3008c577626bd",
+        "lf_sha256": "3316eb0074de9bd9c60eeffe5ed36ecfdc58e8e244774105a0ce60fcaa66331b",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "product/product-claims.json",
+        "reviewed_sha256": "ad5e171788a608d413533cbe02524ca23987d953b2d96ae1f50427d36dd15aef",
+        "lf_sha256": "e1fbc57e46fb527ece99c7e3ec077f843a487810cc93b5af4c009a5d63d4be0b",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "product/product-replay-evidence.json",
+        "reviewed_sha256": "8ffde341b239b671880facca7df931c9f09415b4582f0ebd5a9f5d09d44ecde2",
+        "lf_sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "product/PRODUCT_INTRO.md",
+        "reviewed_sha256": "9122f15d49b59f376dcc8b647ae872d8c0b49fd381d090cffd9d4a33fce36a60",
+        "lf_sha256": "c3e443c4d5d4bb1c684a1a5203c029ce19e7596045fd9d65336bd649d31d5d35",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "product/USER_GUIDE.md",
+        "reviewed_sha256": "3f9fff63ef4b4b588411ba66e1bcfa56f1a8b93f87aef6bec6ebcb814a378163",
+        "lf_sha256": "e6be7f5fda3af927286f91d17abe8f571f3a41b648e6e9e65c6fb2982f74d6b2",
+        "change": "CRLF to LF only before dependent reference update"
+      },
+      {
+        "path": "testing/TEST_REPORT.md",
+        "reviewed_sha256": "5a7288e941bc4c5841b4936b6c76ecc84df1cdedf98059c4bf0fcd28499781bb",
+        "lf_sha256": "70754155c05e0decc47b40112e3364475e3fb5c4cfb5ff35baaf45f740e8683f",
+        "change": "CRLF to LF only before dependent reference update"
+      }
+    ],
+    "application_contract_scripts_and_technical_snapshot_unchanged": true,
+    "reviewed_public_object_equals_enclosing_current_manifest": false,
+    "receipt_direction": "This receipt names the earlier independently reviewed object and stable technical inputs. Product claims do not embed this receipt hash; the enclosing manifest may include this summary without a hash cycle.",
+    "verification": "Maintainer checks canonical public file references; final Git-blob/package validation is separate."
+  },
+  "export_metadata": {
+    "scope": "Sanitized summary of the actual independent corrected review, not raw receipt bytes",
+    "source_identity_map": "Original PASS and FAIL receipts and hashes retained privately",
+    "privacy": "Actual host paths, chat/turn IDs and private receipt paths omitted"
+  }
+}

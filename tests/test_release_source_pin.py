@@ -1,5 +1,7 @@
 """Real synthetic Git objects freeze exact release bytes without building wheels."""
 import os
+import hashlib
+import json
 from pathlib import Path
 import subprocess
 import tempfile
@@ -39,12 +41,37 @@ class ReleaseSourcePinTests(unittest.TestCase):
         entry += ''.join('[Guide](docs/' + lang + '/' + name + '.md)\n'
                          for lang in ('en', 'zh-CN', 'zh-TW') for name in ('windows-example', 'updating'))
         (self.repo / 'START_HERE.md').write_text(entry, encoding='utf-8', newline='\n')
+        self.refresh_simulation_manifest()
         self.git('add', '--', '.')
         self.git('commit', '--quiet', '-m', 'Synthetic reviewed source')
         self.commit = self.git('rev-parse', 'HEAD').decode().strip()
 
     def tearDown(self):
         self.temporary.cleanup()
+
+    def refresh_simulation_manifest(self):
+        folder = self.repo / 'examples/vision-drone-governance/simulation'
+        manifest = folder / 'case-manifest.json'
+        records = [{'path': p.relative_to(folder).as_posix(),
+                    'bytes': len(p.read_bytes()),
+                    'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
+                   for p in sorted(folder.rglob('*')) if p.is_file() and p != manifest]
+        manifest.write_bytes((json.dumps({'files': records}) + '\n').encode())
+
+    def test_git_line_conversion_cannot_publish_mismatched_example_digests(self):
+        example = self.repo / 'examples/vision-drone-governance/simulation/README.md'
+        example.write_bytes(example.read_bytes().replace(b'\n', b'\r\n'))
+        self.refresh_simulation_manifest()
+        # Checkout digests match, but Git stores LF due to the text attribute.
+        release.snapshot()
+        self.git('add', '--', 'examples/vision-drone-governance/simulation')
+        self.git('commit', '--quiet', '-m', 'Synthetic incorrect checkout digest')
+        candidate = self.git('rev-parse', 'HEAD').decode().strip()
+        destination = self.root / 'never-created'
+        with mock.patch.object(release, 'build_dependencies', side_effect=AssertionError('should not build')):
+            with self.assertRaisesRegex(RuntimeError, 'Simulation manifest differs from packaged bytes'):
+                release.build(destination, source_commit=candidate)
+        self.assertFalse(destination.exists())
 
     def git(self, *args):
         result = subprocess.run(['git', '-c', 'core.hooksPath=' + os.devnull, '-c', 'commit.gpgsign=false',
@@ -55,6 +82,9 @@ class ReleaseSourcePinTests(unittest.TestCase):
 
     def test_crlf_checkout_freezes_lf_git_bytes_and_rebuilds_all_six_resources(self):
         for path in self.repo.rglob('*.md'):
+            # Recorded example bytes have their own immutable digest contract.
+            if path.is_relative_to(self.repo / 'examples/vision-drone-governance/simulation'):
+                continue
             path.write_bytes(path.read_bytes().replace(b'\n', b'\r\n'))
         contents, _ = release.snapshot()
         self.assertIn(b'\r\n', contents['README.md'])

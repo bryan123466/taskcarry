@@ -1,0 +1,431 @@
+{
+  "contract_id": "rc8-drone-sim-v2",
+  "schema_version": 2,
+  "scene_id": "clear-room",
+  "start": {
+    "x": 4,
+    "y": 6
+  },
+  "goal": {
+    "x": 4,
+    "y": 2
+  },
+  "route": [
+    {
+      "x": 4,
+      "y": 6
+    }
+  ],
+  "records": [
+    {
+      "tick": 0,
+      "sim_time_ms": 0,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 0,
+        "sim_time_ms": 0,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "waiting",
+      "consecutive_unusable": 1,
+      "link_event": null,
+      "command": {
+        "tick": 0,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "frame_missing"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 1,
+      "sim_time_ms": 100,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 1,
+        "sim_time_ms": 100,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 2,
+      "link_event": "disconnected",
+      "command": {
+        "tick": 1,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 2,
+      "sim_time_ms": 200,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 2,
+        "sim_time_ms": 200,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 3,
+      "link_event": null,
+      "command": {
+        "tick": 2,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 3,
+      "sim_time_ms": 300,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 3,
+        "sim_time_ms": 300,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 4,
+      "link_event": null,
+      "command": {
+        "tick": 3,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 4,
+      "sim_time_ms": 400,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 4,
+        "sim_time_ms": 400,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 5,
+      "link_event": null,
+      "command": {
+        "tick": 4,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 5,
+      "sim_time_ms": 500,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 5,
+        "sim_time_ms": 500,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 6,
+      "link_event": null,
+      "command": {
+        "tick": 5,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 6,
+      "sim_time_ms": 600,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 6,
+        "sim_time_ms": 600,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 7,
+      "link_event": null,
+      "command": {
+        "tick": 6,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 7,
+      "sim_time_ms": 700,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 7,
+        "sim_time_ms": 700,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 8,
+      "link_event": null,
+      "command": {
+        "tick": 7,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 8,
+      "sim_time_ms": 800,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 8,
+        "sim_time_ms": 800,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 9,
+      "link_event": null,
+      "command": {
+        "tick": 8,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 9,
+      "sim_time_ms": 900,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 9,
+        "sim_time_ms": 900,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 10,
+      "link_event": null,
+      "command": {
+        "tick": 9,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 10,
+      "sim_time_ms": 1000,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 10,
+        "sim_time_ms": 1000,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 11,
+      "link_event": null,
+      "command": {
+        "tick": 10,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "running",
+      "collision": false,
+      "arrived": false
+    },
+    {
+      "tick": 11,
+      "sim_time_ms": 1100,
+      "frame_digest": null,
+      "pose_before": {
+        "x": 4,
+        "y": 6
+      },
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "detection": {
+        "scene_id": "clear-room",
+        "tick": 11,
+        "sim_time_ms": 1100,
+        "frame_id": null,
+        "detections": [],
+        "status": "missing",
+        "error": null
+      },
+      "link_state": "disconnected",
+      "consecutive_unusable": 12,
+      "link_event": null,
+      "command": {
+        "tick": 11,
+        "source_frame_id": null,
+        "action": "HOLD",
+        "reason": "link_disconnected"
+      },
+      "run_state": "timeout",
+      "collision": false,
+      "arrived": false
+    }
+  ],
+  "run_state": "timeout",
+  "clock_ms": 100
+}

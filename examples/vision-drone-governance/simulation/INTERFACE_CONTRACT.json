@@ -1,0 +1,499 @@
+{
+  "contract_id": "rc8-drone-sim-v2",
+  "schema_version": 2,
+  "status": "design_baseline_pending_implementation_and_validation",
+  "scope": "室内固定障碍的确定性二维合成仿真，运行于本地浏览器",
+  "logical_clock": {
+    "tick_ms": 100,
+    "tick_start": 0,
+    "max_ticks": 12,
+    "timestamp_rule": "sim_time_ms = tick * tick_ms",
+    "pause_policy": "暂停不推进节拍，恢复从原逻辑拍继续。"
+  },
+  "world": {
+    "width_cells": 9,
+    "height_cells": 9,
+    "coordinate_origin": "左上，x 向右，y 向下",
+    "movement_per_tick": "成功动作移动一个正交邻格",
+    "initial_visit_count_at_start": 1,
+    "collision_truth": "仿真器在收到命令后才根据固定场景核作碰撞判定。"
+  },
+  "camera": {
+    "model": "北向固定的俯视局部相机模拟画面，随仿真位置居中",
+    "width_px": 160,
+    "height_px": 120,
+    "pixel_format": "RGBA8",
+    "data_order": "逐行连续，顶部到下部，每像素 R、G、B、A",
+    "stride_bytes": 640,
+    "buffer_bytes": 76800,
+    "cells_x": 5,
+    "cells_y": 5,
+    "cell_width_px": 32,
+    "cell_height_px": 24,
+    "origin_cell": {
+      "col": 2,
+      "row": 2
+    },
+    "obstacle_inset_px": 2,
+    "palette_rgba": {
+      "background": [
+        24,
+        32,
+        40,
+        255
+      ],
+      "wall": [
+        96,
+        112,
+        128,
+        255
+      ],
+      "column": [
+        220,
+        90,
+        50,
+        255
+      ],
+      "box": [
+        230,
+        180,
+        60,
+        255
+      ]
+    },
+    "grid_projection": "世界格对应相机 col = x - pose.x + 2，row = y - pose.y + 2，只画 col、row 均在 0 至 4 的视野格。",
+    "drawing": "背景填充后按整像素网格画固定障碍矩形，每个矩形四边内缩 2 px。超出世界边界的视野格用 wall 色。检测叠框与文本在呈现层另画。",
+    "detector_baseline": "只读取帧缓冲区，以已声明的类别颜色做 4 连通分量。少于 16 像素的分量丢弃。输出原图归一化半开边界框与像素数。",
+    "minimum_component_pixels": 16,
+    "box_coordinates": "x_min/y_min 为第一个像素坐标除以总宽/高，x_max/y_max 为最后像素坐标加 1 后再除以总宽/高。",
+    "cell_projection": "col = floor(5 * (x_min + x_max) / 2)，row = floor(5 * (y_min + y_max) / 2)。dx = col - 2，dy = row - 2。",
+    "hash_encoding": "以原 RGBA 字节做 FNV-1a 32-bit，起始 2166136261，逐字节 xor 后乘 16777619 取低 32 位，输出小写 8 位十六进制。独立测试同时做实际字节比较。"
+  },
+  "enum": {
+    "labels": [
+      "wall",
+      "column",
+      "box"
+    ],
+    "detection_status": [
+      "ok",
+      "missing",
+      "invalid"
+    ],
+    "link_state": [
+      "waiting",
+      "connected",
+      "disconnected"
+    ],
+    "run_state": [
+      "ready",
+      "running",
+      "paused",
+      "arrived",
+      "collision",
+      "timeout"
+    ],
+    "action": [
+      "MOVE_N",
+      "MOVE_E",
+      "MOVE_S",
+      "MOVE_W",
+      "HOLD"
+    ],
+    "reason": [
+      "toward_goal",
+      "detour",
+      "frame_missing",
+      "link_disconnected",
+      "invalid_frame",
+      "no_safe_neighbor",
+      "at_goal"
+    ]
+  },
+  "movement": {
+    "order": [
+      "MOVE_N",
+      "MOVE_E",
+      "MOVE_S",
+      "MOVE_W"
+    ],
+    "offsets": {
+      "MOVE_N": {
+        "dx": 0,
+        "dy": -1
+      },
+      "MOVE_E": {
+        "dx": 1,
+        "dy": 0
+      },
+      "MOVE_S": {
+        "dx": 0,
+        "dy": 1
+      },
+      "MOVE_W": {
+        "dx": -1,
+        "dy": 0
+      },
+      "HOLD": {
+        "dx": 0,
+        "dy": 0
+      }
+    },
+    "distance": "曼哈顿距离 |x - goal.x| + |y - goal.y|",
+    "selection": "剔除越界邻格和检测为已占用的邻格。若有可缩短距离的邻格，按距离、访问次数、方向顺序选取。否则按访问次数、距离、方向顺序选取，或在无安全邻格时保持位置。",
+    "valid_frame_reason": "有效帧时在目标点使用 HOLD/at_goal。选中的邻格缩短距离时用 toward_goal，否则用 detour。无可用邻格时用 HOLD/no_safe_neighbor。",
+    "counter_policy": "visit_counts 由仿真器提供，按 y * 9 + x 排列。成功移动后才递增到达格计数。HOLD 保持计数。",
+    "information_boundary": "控制只接收当前像素检测结果、调用方链接状态、位置、目标和访问计数。地图障碍列表供仿真器渲染及动作后判碰撞。"
+  },
+  "integration": {
+    "js_global": "globalThis.RC8DroneSimV2",
+    "input_call": "detectFrame(frameEnvelope)",
+    "control_call": "chooseCommand(controlInput)",
+    "browser_entry": "app/index.html",
+    "packaging": "同目录经典脚本与本地资源可直接用 Chrome file: 打开。应用内静态嵌入与本协议同源的场景与配置。归档时附原字节 INTERFACE_CONTRACT.json 和摘要。"
+  },
+  "types": {
+    "Position": {
+      "x": "0 至 8 的整数",
+      "y": "0 至 8 的整数"
+    },
+    "FrameEnvelope": {
+      "scene_id": "scenes.id 之一",
+      "tick": "从 0 起的整数",
+      "sim_time_ms": "tick * 100",
+      "frame": "null 表示此拍缺帧，或 RenderedFrame"
+    },
+    "RenderedFrame": {
+      "frame_id": "scene_id + ':' + tick",
+      "width_px": "160",
+      "height_px": "120",
+      "pixel_format": "RGBA8",
+      "pixels": "内存 Uint8ClampedArray，长度恰为 76800"
+    },
+    "Detection": {
+      "label": "enum.labels 之一",
+      "region": {
+        "x_min": "[0,1]",
+        "y_min": "[0,1]",
+        "x_max": "[0,1] 且大于 x_min",
+        "y_max": "[0,1] 且大于 y_min"
+      },
+      "cell": {
+        "dx": "-2 至 2 的整数",
+        "dy": "-2 至 2 的整数"
+      },
+      "pixel_count": "连通块实际像素数，整数且至少 16"
+    },
+    "DetectionResult": {
+      "scene_id": "与输入相同",
+      "tick": "与输入相同",
+      "sim_time_ms": "与输入相同",
+      "frame_id": "有效帧 ID，missing 或 invalid 为 null",
+      "status": "ok、missing 或 invalid",
+      "detections": "Detection 数组，按 y_min、x_min、label 排序。missing 或 invalid 为 []。",
+      "error": "invalid 时为说明字符串，ok 与 missing 为 null"
+    },
+    "ControlInput": {
+      "detection": "DetectionResult",
+      "link_state": "enum.link_state 之一，已经更新到当前拍",
+      "pose": "动作前 Position",
+      "goal": "Position",
+      "visit_counts": "81 个非负整数"
+    },
+    "Command": {
+      "tick": "DetectionResult.tick",
+      "source_frame_id": "DetectionResult.frame_id 或 null",
+      "action": "enum.action 之一",
+      "reason": "enum.reason 之一"
+    },
+    "TickRecord": {
+      "tick": "连续逻辑拍",
+      "sim_time_ms": "tick * 100",
+      "frame_digest": "有效帧的像素摘要，否则为 null",
+      "pose_before": "Position",
+      "pose_after": "Position",
+      "detection": "DetectionResult",
+      "link_state": "当前拍链路状态",
+      "consecutive_unusable": "从最近一次有效帧至今连续不可用拍数",
+      "link_event": "connected、disconnected、reconnected 或 null",
+      "command": "实际使用的 Command",
+      "run_state": "本拍执行后的运行状态",
+      "collision": "布尔值",
+      "arrived": "布尔值"
+    },
+    "Export": {
+      "contract_id": "rc8-drone-sim-v2",
+      "schema_version": "2",
+      "scene_id": "实际运行的场景 ID",
+      "start": "Position",
+      "goal": "Position",
+      "route": "按成功移动累加的 Position 数组，第一项为 start",
+      "records": "按拍号排序的 TickRecord 数组，不携带原始像素",
+      "run_state": "导出时状态",
+      "clock_ms": "100"
+    }
+  },
+  "transition_rules": [
+    "每拍先根据姿态渲染像素或产生 null，再检测、更新链路、取控制命令，最后由仿真器应用移动并记录结果。",
+    "检测为 ok 且 detections=[] 表示收到了有效空帧。frame=null 时返回 missing。坏 ID、格式、尺寸或长度返回 invalid。",
+    "初始链路 waiting。第一个有效帧进入 connected。连续一拍不可用时保留现有连接状态，两拍进入 disconnected。下一有效帧清零并恢复为 connected。",
+    "missing 或 invalid 拍采用 HOLD，清除当前候选。missing 在 disconnected 时使用 link_disconnected，否则使用 frame_missing。invalid 使用 invalid_frame。",
+    "达到目标状态为 arrived。仿真碰撞状态为 collision，位置不前进。二者均停止推进。执行 12 拍且仍未终止时为 timeout，末拍索引为 11。",
+    "暂停期间无新拍或日志。重置回到 ready、waiting、场景起点、初始访问计数和空日志。"
+  ],
+  "scenes": [
+    {
+      "id": "clear-room",
+      "title": "空房间到达",
+      "start": {
+        "x": 4,
+        "y": 6
+      },
+      "goal": {
+        "x": 4,
+        "y": 2
+      },
+      "obstacles": [],
+      "missing_ticks": [],
+      "expected": {
+        "first_detection_count": 0,
+        "actions": [
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "terminal_tick": 3,
+        "terminal_state": "arrived",
+        "collisions": 0
+      }
+    },
+    {
+      "id": "fixed-obstacle",
+      "title": "固定障碍绕行",
+      "start": {
+        "x": 4,
+        "y": 6
+      },
+      "goal": {
+        "x": 4,
+        "y": 2
+      },
+      "obstacles": [
+        {
+          "x": 4,
+          "y": 5,
+          "label": "box"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "label": "wall"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "label": "column"
+        }
+      ],
+      "missing_ticks": [],
+      "expected": {
+        "first_detection_count": 3,
+        "first_blocked_cell": {
+          "dx": 0,
+          "dy": -1
+        },
+        "actions": [
+          "MOVE_E",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_W"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "terminal_tick": 5,
+        "terminal_state": "arrived",
+        "collisions": 0
+      }
+    },
+    {
+      "id": "drop-and-recover",
+      "title": "缺帧等待与恢复",
+      "start": {
+        "x": 4,
+        "y": 6
+      },
+      "goal": {
+        "x": 4,
+        "y": 2
+      },
+      "obstacles": [
+        {
+          "x": 4,
+          "y": 5,
+          "label": "box"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "label": "wall"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "label": "column"
+        }
+      ],
+      "missing_ticks": [
+        1,
+        2
+      ],
+      "expected": {
+        "first_detection_count": 3,
+        "actions": [
+          "MOVE_E",
+          "HOLD",
+          "HOLD",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_N",
+          "MOVE_W"
+        ],
+        "route": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          }
+        ],
+        "link_events": {
+          "connected": 0,
+          "disconnected": 2,
+          "reconnected": 3
+        },
+        "terminal_tick": 7,
+        "terminal_state": "arrived",
+        "collisions": 0
+      }
+    }
+  ],
+  "pixel_counterfactual": {
+    "scene_id": "clear-room",
+    "tick": 0,
+    "pose": {
+      "x": 4,
+      "y": 6
+    },
+    "goal": {
+      "x": 4,
+      "y": 2
+    },
+    "identical_metadata": true,
+    "intervention": "以同一帧元数据重新运行。只将相机 col=2,row=1 的单元格内缩矩形换为 box 色。",
+    "baseline": {
+      "detections": 0,
+      "command": "MOVE_N"
+    },
+    "changed": {
+      "label": "box",
+      "cell": {
+        "dx": 0,
+        "dy": -1
+      },
+      "command": "MOVE_E"
+    }
+  },
+  "collision_probe": {
+    "purpose": "以内部测试专用输入使仿真器处理一个会撞上场景固定障碍的命令，检验碰撞与停止。",
+    "scene_id": "fixed-obstacle",
+    "pose": {
+      "x": 4,
+      "y": 6
+    },
+    "command": "MOVE_N",
+    "expected": {
+      "pose_after": {
+        "x": 4,
+        "y": 6
+      },
+      "run_state": "collision",
+      "collision": true
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "product": "TaskCarry",
   "version": "0.2.0rc8",
   "recorded_date": "2026-11-16",
-  "snapshot_scope": "Complete source suite after shared-directory fixes; native-case exports and installation are separate evidence.",
+  "snapshot_scope": "Retained complete Core run at c3; subsequent method, native, exported simulation and package checks are separate observations.",
   "source_suite": {
     "schema": "taskcarry.test-evidence.v1",
     "recorded_at": "2026-11-16T12:31:49.646213+00:00",
@@ -2284,11 +2284,73 @@
         "test": "tests.test_workbench.WorkbenchTests.test_view_tamper_and_future_schema_are_refused",
         "outcome": "PASS"
       }
-    ]
+    ],
+    "source_commit": "c3aac797da4b1f9ca9fc57581bd004d600ef2d31"
   },
   "evidence_limits": [
-    "Engine and test sources did not change during the run. A subsequent Skill clarification and explicit example package membership are documentation/build checks, verified separately.",
-    "No installation or native host acceptance is inferred from source outcomes.",
-    "Exact public CI and artifact hashes belong to the matching release."
-  ]
+    "The 565-test complete source run belongs to c3. Later methods, example exports and build changes are validated separately; overlapping counts are not added together.",
+    "Native receipts identify the actual c3 runtime. Matching Python source bytes can support reuse, but do not mean a later wheel or revised Skill was installed in those chats.",
+    "Exact final package, public CI and downloadable hashes belong to the matching release object.",
+    "No new RC8 natural schedule, real hardware flight, arbitrary host access, production adoption or second-computer acceptance is inferred."
+  ],
+  "subsequent_validation": {
+    "core_source_unchanged_since": "c3aac797da4b1f9ca9fc57581bd004d600ef2d31",
+    "focused_release_checks": {
+      "tests_run": 20,
+      "passed": 20,
+      "failed": 0,
+      "scope": "source pinning, privacy screening, positive membership, product links and rejection of byte-inconsistent case manifests before any build output"
+    },
+    "standard_source_build": {
+      "tests_run": 1,
+      "passed": 1,
+      "scope": "setuptools wheel and sdist canonical four Skills and two references"
+    },
+    "relocated_simulator": {
+      "algorithm_checks_passed": 5,
+      "independent_browser_checks_passed": 9,
+      "software_checks_passed": 10,
+      "counts_are_separate_overlapping_layers": true,
+      "case": "examples/vision-drone-governance/simulation/"
+    },
+    "native_chats": {
+      "count": 6,
+      "all_passed": true,
+      "original_professional_chats_after_restart": 4,
+      "earlier_governance_and_tester_same_runtime": 2,
+      "source_commit": "c3aac797da4b1f9ca9fc57581bd004d600ef2d31",
+      "runtime_source_sha256_on_disk": "e1c8571120eea9eaaea60891a7cabef51cef1ab0e5c276d32318ae18262e6b90",
+      "each_own_view_consumption_reviewed": true,
+      "evidence": "examples/vision-drone-governance/simulation/evidence/native-acceptance.json",
+      "raw_host_verification_flags_preserved": true
+    },
+    "controlled_chat_continuation": {
+      "state": "COMPLETE",
+      "additional_actual_chat_count": 1,
+      "same_original_task_directory_control_checkpoint": true,
+      "new_chat_native_connection_and_own_consumption": "PASS",
+      "useful_followup": "Three-frame detector threshold and four-connected-component boundary check",
+      "followup_checks_passed": 3,
+      "old_chat_read_only_acknowledgment": "COMPLETED",
+      "old_chat_new_consume_performed": false,
+      "governance_final_review": "COMPLETE",
+      "precreated_empty_spare": false,
+      "actual_host_crash_induced_or_repaired": false,
+      "evidence": "examples/vision-drone-governance/simulation/continuity/continuity-evidence.json",
+      "portable_script_replay": {
+        "passed": 3,
+        "scope": "Algorithm inputs and outputs only, not host conversation handoff"
+      }
+    },
+    "public_product_claim_review": {
+      "state": "PASS",
+      "reviewed_snapshot_files": 50,
+      "reviewed_snapshot_manifest_sha256": "7aeb5a34b87a5723efc56e9e9dcbb598565d459819cab22476eebb0bd992dec3",
+      "file_references_checked": 97,
+      "supported_claims": 12,
+      "technical_checks": 10,
+      "evidence": "examples/vision-drone-governance/simulation/testing/public-product-review.json",
+      "scope": "Exact pre-canonical snapshot; later LF conversion, new continuation material and final package bytes checked separately"
+    }
+  }
 }

@@ -1,0 +1,59 @@
+{
+  "schema": "taskcarry.synthetic.chat-continuity.v1",
+  "exercise": "Controlled old-chat unavailability and on-demand continuation",
+  "state": "COMPLETE_SCOPED_CONTINUITY_EXERCISE",
+  "roles": {
+    "old": "algorithm-original",
+    "new": "algorithm-continuation",
+    "coordinator": "governance"
+  },
+  "same_original_task_directory_control_and_checkpoint": true,
+  "precreated_empty_spare": false,
+  "old_writer_stopped_and_background_checked": true,
+  "new_chat_created_in_existing_trusted_project": true,
+  "two_routes_published_for_original_task": true,
+  "new_native_and_own_consumption": "PASS",
+  "three_frame_check": "PASS",
+  "old_chat_returned_read_only": {
+    "host_turn_completed": true,
+    "host_idle": true,
+    "read_handoff_and_new_evidence": true,
+    "new_business_write": false,
+    "new_checkpoint": false,
+    "new_consume": false,
+    "prior_new_view_consumer_state": "NOT_VERIFIED",
+    "meaning": "Old chat provided a read-only host acknowledgment; no new Core consumption record was claimed."
+  },
+  "governance_closeout": {
+    "status": "COMPLETE",
+    "reviewed_at": "2026-11-16T22:41:11.921+08:00",
+    "same_governance_task": true,
+    "effect": "Reviewed summary artifacts saved; no original business-task completion claimed",
+    "original_business_task_state": "waiting",
+    "original_checkpoint_retained": true,
+    "reviewed_results": {
+      "continuity_exercise": "COMPLETE",
+      "new_chat_exact_route_and_own_consumption": "VERIFIED",
+      "one_synthetic_boundary_experiment": "PASS",
+      "old_chat_read_only_readback": "COMPLETED_READ_ONLY",
+      "original_task_git_wip_history_and_setup_preimages": "VERIFIED"
+    },
+    "original_existing_files_preserved": 25,
+    "original_setup_preimages_verified": 4,
+    "current_configs_legacy_views_pointers_and_old_sources_match_switch_receipt": true,
+    "whole_project_business_acceptance": "OUT_OF_SCOPE",
+    "final_public_package_and_ci": "SEPARATE_RELEASE_VERIFICATION"
+  },
+  "limits": [
+    "No actual Codex compaction failure was induced or repaired",
+    "No recovery of unsaved or unread context is claimed",
+    "Single writer relies on confirmed stopping and explicit responsibility; Core routing is not a filesystem lock",
+    "Native runtime fingerprint is on-disk evidence"
+  ],
+  "export_metadata": {
+    "scope": "Sanitized actual completed synthetic continuity exercise and governance review summary",
+    "actual_host_and_private_identity_removed": true,
+    "source_artifact_sha256": "493ae6bc8b4859d221a4c5d4df26cf8d78b8954ee27d3409720e5a436d86e184",
+    "source_hash_scope": "Private original final governance review bytes; this is not the hash of the public summary"
+  }
+}

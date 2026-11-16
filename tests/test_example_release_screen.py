@@ -11,6 +11,43 @@ from scripts.build_trial import ROOT, __version__, build, reviewed_example_path,
 
 
 class ExampleReleaseScreenTests(unittest.TestCase):
+    def test_invalid_simulation_digest_stops_build_before_creating_artifacts(self):
+        import json
+        read_bytes = Path.read_bytes
+        def incorrect_digest(path):
+            data = read_bytes(path)
+            if path == ROOT / 'examples/vision-drone-governance/simulation/case-manifest.json':
+                manifest = json.loads(data)
+                manifest['files'][0]['sha256'] = '0' * 64
+                data = json.dumps(manifest).encode('utf-8')
+            return data
+        with tempfile.TemporaryDirectory(prefix='taskcarry-case-digest-') as temporary:
+            destination = Path(temporary) / 'product'
+            with patch.object(Path, 'read_bytes', incorrect_digest):
+                with self.assertRaisesRegex(RuntimeError, 'Simulation manifest differs from packaged bytes'):
+                    build(destination, profile='product')
+            self.assertFalse(destination.exists())
+            self.assertEqual(list(Path(temporary).iterdir()), [])
+
+    def test_only_named_simulation_verifiers_and_ignore_file_are_included(self):
+        from scripts import build_trial as release
+        with tempfile.TemporaryDirectory(prefix='taskcarry-simulation-membership-') as temporary:
+            root = Path(temporary)
+            for name in release.REVIEWED_EXAMPLE_RESOURCES | {
+                'examples/other/unknown.mjs', 'examples/other/unknown.cjs',
+                'examples/other/.gitignore',
+                'examples/vision-drone-governance/simulation/local/private.json',
+            }:
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text('synthetic content\n', encoding='utf-8')
+            with patch.object(release, 'ROOT', root):
+                selected = {p.relative_to(root).as_posix() for p in release.files()}
+            self.assertEqual(selected, release.REVIEWED_EXAMPLE_RESOURCES)
+        for name in release.REVIEWED_EXAMPLE_RESOURCES:
+            with self.subTest(name=name), self.assertRaisesRegex(RuntimeError, 'unreviewed_absolute_path'):
+                screen_content({name: ('C:' + '/Users/example/private.txt').encode()})
+
     def test_private_discovery_inventory_never_enters_release_membership(self):
         from scripts import build_trial as release
         with tempfile.TemporaryDirectory(prefix='taskcarry-private-discovery-') as temporary:
@@ -79,6 +116,7 @@ class ExampleReleaseScreenTests(unittest.TestCase):
         root = "C:" + "/TaskCarry"
         for name in ("docs/en/windows-example.md", "docs/zh-CN/windows-example.md", "docs/zh-TW/windows-example.md",
                      "docs/en/manual-setup.md", "docs/zh-CN/manual-setup.md", "docs/zh-TW/manual-setup.md",
+                     "docs/en/user-feedback-examples.md", "docs/zh-CN/user-feedback-examples.md", "docs/zh-TW/user-feedback-examples.md",
                      "examples/windows_quickstart/bootstrap.py"):
             for path in (root, root + "/runtime/Scripts/python.exe", root + "/control/"):
                 with self.subTest(name=name, path=path):
@@ -92,8 +130,10 @@ class ExampleReleaseScreenTests(unittest.TestCase):
         for path in (root + "Other/file.md", root + "/../private.md",
                      root + "/./private.md", root + "/control/../../private.md",
                      "D:" + "/TaskCarry", "C:" + "/Users/example/private.md"):
-            with self.subTest(path=path), self.assertRaises(RuntimeError):
-                screen_content({"docs/en/windows-example.md": path.encode()})
+            for name in ("docs/en/windows-example.md", "docs/en/user-feedback-examples.md",
+                         "docs/zh-CN/user-feedback-examples.md", "docs/zh-TW/user-feedback-examples.md"):
+                with self.subTest(name=name, path=path), self.assertRaises(RuntimeError):
+                    screen_content({name: path.encode()})
 
     def test_complete_quoted_paths_and_standalone_lines_are_allowed(self):
         root = "C:" + "/TaskCarry"

@@ -1,0 +1,51 @@
+{
+  "schema": "taskcarry.synthetic.continuation-native.v1",
+  "role": "algorithm-continuation",
+  "retained_original_task": true,
+  "retained_original_checkpoint": true,
+  "same_workspace_and_control": true,
+  "initial_native_runtime_receipt": {
+    "transport": "native_mcp",
+    "host_turn_status": "completed",
+    "doctor": {
+      "ok": true,
+      "toolkit_version": "0.2.0rc8",
+      "source_sha256": "e1c8571120eea9eaaea60891a7cabef51cef1ab0e5c276d32318ae18262e6b90",
+      "source_fingerprint_scope": "on_disk",
+      "loaded_code_verified": false,
+      "host_loading_verified": false
+    },
+    "status_ok": true
+  },
+  "own_consumption": {
+    "current_view": true,
+    "consumer_state": "REVIEWED_EVIDENCE_RECORDED",
+    "native_acceptance_verified": false,
+    "recorded": true
+  },
+  "old_writer": {
+    "role": "algorithm-original",
+    "host_status": "idle",
+    "stop_turn_status": "completed",
+    "responsibility": "read-only reference"
+  },
+  "raw_native_responses_ok": {
+    "workbench_status_before": true,
+    "taskcarry_context": true,
+    "workbench_consume_response": true,
+    "workbench_status_after": true
+  },
+  "export_metadata": {
+    "scope": "Sanitized actual native receipt summary",
+    "removed": [
+      "Actual paths",
+      "Host chat/turn/project identifiers",
+      "Control replica/checkpoint/consumption IDs"
+    ],
+    "limits": [
+      "Disk fingerprint is not in-memory byte identity",
+      "Consumption is recorded reviewed evidence; raw native_acceptance_verified remains false",
+      "This is not proof of a real host crash, automatic writer fencing, or production adoption"
+    ]
+  }
+}

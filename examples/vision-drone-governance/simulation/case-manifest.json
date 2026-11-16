@@ -1,0 +1,298 @@
+{
+  "schema": "taskcarry.synthetic.simulation-case.v1",
+  "case_id": "rc8-drone-sim-v2",
+  "application_scope": "Discrete 2D pixel-driven offline simulation, engineering documents, no physical flight",
+  "evidence_scope": "Original app and contract bytes; sanitized observations and portable verification scripts; native and governance acceptance tracked separately",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "a7d8bdcefba82a95ebc021d87c629fdea21f13af953bf01e28b7cf8b0eeceb41",
+      "bytes": 7
+    },
+    {
+      "path": "algorithm/algorithm-evidence.json",
+      "sha256": "bac0b35672d988cf166884e6d0ad283c62658ddfea14c9e1ea4627c763a173e0",
+      "bytes": 48247
+    },
+    {
+      "path": "algorithm/ALGORITHM_BASELINE.md",
+      "sha256": "7265b8c0bc0b340ee104d4f1399723129b9c00e5b542dbc8cdda038245826125",
+      "bytes": 3735
+    },
+    {
+      "path": "algorithm/verify-algorithm.cjs",
+      "sha256": "35d8ff9a7faad84dbc15ebbd01aabe48d8a737bc10157622526d3be0b562db44",
+      "bytes": 16079
+    },
+    {
+      "path": "app/controller.js",
+      "sha256": "414b781b680a9ec2025f794eaa5eae9f2944f0b149a2bb130f8a40bae9a6d967",
+      "bytes": 2049
+    },
+    {
+      "path": "app/detector.js",
+      "sha256": "3581c1f94f780315bc29f3af19462e994aa8571c32ec6550ab16ddec9e3770a7",
+      "bytes": 4883
+    },
+    {
+      "path": "app/index.html",
+      "sha256": "7d809edc5a668568b1937fa15217f7a42315d6249b59b085b04df3dfb0ba58e6",
+      "bytes": 3732
+    },
+    {
+      "path": "app/monitor.js",
+      "sha256": "a57c789b464b20af4ef4d8a09c110e8b02fe695b2297d62aa8b400f51e9ddb74",
+      "bytes": 8100
+    },
+    {
+      "path": "app/simulation.js",
+      "sha256": "7d4976330dac830f195599245482639cd363054734dd08ec414300b576d5b387",
+      "bytes": 10846
+    },
+    {
+      "path": "app/styles.css",
+      "sha256": "17ea4d028c142dcb6789c21469f6f647db39b24da216be0c610bcb53721b3a1e",
+      "bytes": 3846
+    },
+    {
+      "path": "continuity/boundary-evidence.json",
+      "sha256": "47711521cdac2454e941bb05fc3b52aaf978529f8c4d7ada7850dec4bb09050c",
+      "bytes": 6032
+    },
+    {
+      "path": "continuity/continuity-evidence.json",
+      "sha256": "efdacd8daeab85de3b8602a99814fa1773871d65171528e79f24d573fb935bd5",
+      "bytes": 2692
+    },
+    {
+      "path": "continuity/native-acceptance.json",
+      "sha256": "4f4eed79e7252c32e018c69d59ca45641e74e865ac51a6a81ee68384d6b7a9b7",
+      "bytes": 1640
+    },
+    {
+      "path": "continuity/README.md",
+      "sha256": "527a822b41d2fb37fc852de63fa651f2c2fc36a1fda2b2f2bb43b152a484c808",
+      "bytes": 5800
+    },
+    {
+      "path": "continuity/README.zh-CN.md",
+      "sha256": "e000c63f037cc6f721100fc5119989e6ed9a657f66800d46df6215a8ecc7d7f7",
+      "bytes": 5519
+    },
+    {
+      "path": "continuity/README.zh-TW.md",
+      "sha256": "373a6bd7646e9108fd792c7030b9f49169d9f59b3fc3b0407763eeca5bf6935e",
+      "bytes": 4804
+    },
+    {
+      "path": "continuity/verify-boundary.cjs",
+      "sha256": "4cb4c531ce49e0894175ea0ed858bc75f941313f02fca5168246e4fc4f7a2e52",
+      "bytes": 10101
+    },
+    {
+      "path": "evidence/native-acceptance.json",
+      "sha256": "3f67c56b8311ac5619b25bde21dd829f18611f5ca7abf56596585630fdf4286b",
+      "bytes": 12059
+    },
+    {
+      "path": "governance/ACCEPTANCE_PLAN.md",
+      "sha256": "da98089ebe36896466279e05d8418112a312ebd88db2b92b314b1c97c1ffe65d",
+      "bytes": 7580
+    },
+    {
+      "path": "governance/PROJECT_PLAN.md",
+      "sha256": "1f3fcc203bf5de327a159090e0062b52e422563318054a1107b290849a3d6c55",
+      "bytes": 5069
+    },
+    {
+      "path": "hardware/hardware-evidence.json",
+      "sha256": "b1b3943adb161975b4f6d6332e66d5db9d5c7eb1c547f8f5a559fc0c55cd1dff",
+      "bytes": 3327
+    },
+    {
+      "path": "hardware/HARDWARE_ENGINEERING.md",
+      "sha256": "6e31ec82ae69a2eca4560acf8fea09c83b4cf96f4459a5f9fdd489c1241cc032",
+      "bytes": 7321
+    },
+    {
+      "path": "hardware/INTERFACE_WIRING_PLAN.md",
+      "sha256": "95ef9e5964835dabf651b8168b22b8d24601a0648f95e9646d8489b28862f7ef",
+      "bytes": 4528
+    },
+    {
+      "path": "hardware/RESOURCE_BUDGET.csv",
+      "sha256": "374e31f3a39e8c4d2ac3e4b60b78115aa90a94c49dd95eb497b1aa417215b55d",
+      "bytes": 1872
+    },
+    {
+      "path": "INTERFACE_CONTRACT.json",
+      "sha256": "77fa7df9dc17bbc95e3a728dd45e68c420dfbabdf770c3ac5ff9c714be025130",
+      "bytes": 13412
+    },
+    {
+      "path": "product/DEMO_ROUTE.md",
+      "sha256": "3316eb0074de9bd9c60eeffe5ed36ecfdc58e8e244774105a0ce60fcaa66331b",
+      "bytes": 2315
+    },
+    {
+      "path": "product/product-claims.json",
+      "sha256": "2ab5e204294e56484bc25a6b4337cf8eee1257d39ded3fcb50ab4ef0fa1bc231",
+      "bytes": 48036
+    },
+    {
+      "path": "product/product-replay-evidence.json",
+      "sha256": "0fb9b26d74ae7d2d9225252210b32c0309400784982c925cd8a045ab9edb49a6",
+      "bytes": 23905
+    },
+    {
+      "path": "product/PRODUCT_INTRO.md",
+      "sha256": "c3e443c4d5d4bb1c684a1a5203c029ce19e7596045fd9d65336bd649d31d5d35",
+      "bytes": 1920
+    },
+    {
+      "path": "product/USER_GUIDE.md",
+      "sha256": "e6be7f5fda3af927286f91d17abe8f571f3a41b648e6e9e65c6fb2982f74d6b2",
+      "bytes": 2370
+    },
+    {
+      "path": "README.md",
+      "sha256": "8d3855f5dc410d27181b942266b196af13a12039fb68e21f7de6566bd581a13a",
+      "bytes": 6976
+    },
+    {
+      "path": "README.zh-CN.md",
+      "sha256": "9a990dcdfce19e1e650e83c85596f878c18cdc7503c89806d09794bd5ed4bc86",
+      "bytes": 6497
+    },
+    {
+      "path": "README.zh-TW.md",
+      "sha256": "df3766205058e63e3e4b1009fa46eb513da91fc543ff09dea8ce688cf6d136cf",
+      "bytes": 6149
+    },
+    {
+      "path": "software-evidence.json",
+      "sha256": "deab2aaf674b6a8acf5f4b07ce63e1261ce242e085c0e3e04bfa8c2649e125b3",
+      "bytes": 90219
+    },
+    {
+      "path": "SOFTWARE_RUN.md",
+      "sha256": "aac1685d53dac72bfdb4c114e38afe736339b3e15885bd49c161a4a074ff0905",
+      "bytes": 5690
+    },
+    {
+      "path": "testing/chrome.mjs",
+      "sha256": "a21c5b330dc2e8ac8ad29da327584817fdb239be780d6b3a4f57a8be2463b9b7",
+      "bytes": 7015
+    },
+    {
+      "path": "testing/prepare-public-handoff.mjs",
+      "sha256": "1362be3db04b96bf299f0eaeaf39fef2e2e0f3be32620e6af45ced6c91bbfd64",
+      "bytes": 3066
+    },
+    {
+      "path": "testing/public-product-review.json",
+      "sha256": "f14ab5bef8c67bcae631acf1f2d68aaa07fa682762c65cf41ade2953b76704b9",
+      "bytes": 6414
+    },
+    {
+      "path": "testing/public-product-review.md",
+      "sha256": "614298fb6bbd187ea802f0f414d38c3fe40ca68110f1655e3d8109beedb36efb",
+      "bytes": 1979
+    },
+    {
+      "path": "testing/recorded/browser-activity-complete.json",
+      "sha256": "2e64138cf9fbb4384accd74a662a5f6a358760ff4e7eb3eec4c5d7a9e55f5b81",
+      "bytes": 2344
+    },
+    {
+      "path": "testing/recorded/browser-exports.json",
+      "sha256": "bb518e1d3ab3c81c14ab653b6765c3c03b65dc2e1b9748f7791aa0971c63415e",
+      "bytes": 66312
+    },
+    {
+      "path": "testing/recorded/collision-export/rc8-drone-sim-v2-fixed-obstacle.json",
+      "sha256": "07d652ab14c25e839747430408a7fcd257e5a96622fea276b6c590f8ed9459e6",
+      "bytes": 2150
+    },
+    {
+      "path": "testing/recorded/drop-first-steps.json",
+      "sha256": "5c2772c7f1af4a0ed873763aff8103cc04146fb87d3400aa67b8d39fdf0da8fb",
+      "bytes": 12920
+    },
+    {
+      "path": "testing/recorded/pixel-ab.json",
+      "sha256": "1c3de783e761d39c68302b4669720ad8577bcc709a8b8c26cbf9c245c0de6617",
+      "bytes": 9668
+    },
+    {
+      "path": "testing/recorded/round-1-clear-room/rc8-drone-sim-v2-clear-room.json",
+      "sha256": "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+      "bytes": 3475
+    },
+    {
+      "path": "testing/recorded/round-1-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json",
+      "sha256": "14a8b9da5571d678665571578b710fde32859f30111660cb6c8c4378a9776425",
+      "bytes": 10997
+    },
+    {
+      "path": "testing/recorded/round-1-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json",
+      "sha256": "66ac34a8126a8e5f83afaae3c069472bfca0eb567a93d0b9b540c9bad503e894",
+      "bytes": 9453
+    },
+    {
+      "path": "testing/recorded/round-2-clear-room/rc8-drone-sim-v2-clear-room.json",
+      "sha256": "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+      "bytes": 3475
+    },
+    {
+      "path": "testing/recorded/round-2-drop-and-recover/rc8-drone-sim-v2-drop-and-recover.json",
+      "sha256": "14a8b9da5571d678665571578b710fde32859f30111660cb6c8c4378a9776425",
+      "bytes": 10997
+    },
+    {
+      "path": "testing/recorded/round-2-fixed-obstacle/rc8-drone-sim-v2-fixed-obstacle.json",
+      "sha256": "66ac34a8126a8e5f83afaae3c069472bfca0eb567a93d0b9b540c9bad503e894",
+      "bytes": 9453
+    },
+    {
+      "path": "testing/recorded/run-evidence.json",
+      "sha256": "03db8ceac6810d8ba6eadc2777ad583db0417773dd846ad1cb04bd90f9efc3bc",
+      "bytes": 97852
+    },
+    {
+      "path": "testing/recorded/timeout-export/rc8-drone-sim-v2-clear-room.json",
+      "sha256": "f537200bd3042522fb723cf6aaa6ab90b20d044c69cdc6c1d938b64bc12ced54",
+      "bytes": 9195
+    },
+    {
+      "path": "testing/recorded/timeout-inputs.json",
+      "sha256": "18913c773650df4fa3c7b50e7b3977d2e9a2bc61f2ebc869cb5e5e3583c5ff45",
+      "bytes": 14300
+    },
+    {
+      "path": "testing/recorded/timeout-reset-replay/rc8-drone-sim-v2-clear-room.json",
+      "sha256": "c7b88c26e3e4be14b70cbb3daaf001b981bb20476a3d41db7538fe52da79b753",
+      "bytes": 3475
+    },
+    {
+      "path": "testing/test-evidence.json",
+      "sha256": "0ec097e0d1b4a6207b1fc83e9e82a22799a81d7a375bb99d70ea74f14c7dd968",
+      "bytes": 108061
+    },
+    {
+      "path": "testing/TEST_REPORT.md",
+      "sha256": "70754155c05e0decc47b40112e3364475e3fb5c4cfb5ff35baaf45f740e8683f",
+      "bytes": 6515
+    },
+    {
+      "path": "testing/verify-independent.mjs",
+      "sha256": "c9daf8d04f0b0f0807a4cf5c3a091beb9afb3442a626f91133d2ee0073d68a30",
+      "bytes": 40586
+    },
+    {
+      "path": "verify-software.mjs",
+      "sha256": "f2b6134fa61be0902801bcd339b7d6a559b9653103f2331bb5bc02f002dc9d24",
+      "bytes": 31448
+    }
+  ]
+}

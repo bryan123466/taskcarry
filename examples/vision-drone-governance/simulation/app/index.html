@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>室内视觉避障 · 离线仿真</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="detector.js"></script>
+  <script defer src="controller.js"></script>
+  <script defer src="simulation.js"></script>
+  <script defer src="monitor.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div>
+        <p class="context">室内固定障碍 · 合成仿真</p>
+        <h1>室内视觉避障</h1>
+      </div>
+      <div class="statuses" aria-label="仿真状态">
+        <span class="state" id="run-state" data-state="ready" role="status">就绪</span>
+        <span class="state" id="link-state" data-state="waiting" role="status">等待帧</span>
+      </div>
+    </header>
+
+    <section class="panel control-panel" aria-label="回放操作">
+      <label class="scene-control" for="scene-select">
+        <span>场景／任务</span>
+        <select id="scene-select"></select>
+      </label>
+      <div class="actions">
+        <button id="start-button" class="primary" type="button">开始</button>
+        <button id="pause-button" type="button" disabled>暂停</button>
+        <button id="reset-button" type="button">重置</button>
+        <button id="export-button" type="button">导出 JSON</button>
+      </div>
+      <p id="app-error" class="error" role="alert" hidden></p>
+      <noscript><p>启用 JavaScript 后可运行本地仿真。</p></noscript>
+    </section>
+
+    <section class="visuals" aria-label="相机与路线">
+      <section class="panel" aria-labelledby="camera-title">
+        <div class="panel-heading">
+          <h2 id="camera-title">局部相机</h2>
+          <p id="frame-status" class="meta">等待首帧</p>
+        </div>
+        <div class="camera">
+          <canvas id="camera-pixels" width="160" height="120" aria-label="160×120 模拟相机画面"></canvas>
+          <canvas id="camera-overlay" width="160" height="120" aria-hidden="true"></canvas>
+        </div>
+        <dl class="frame-info">
+          <div><dt>帧标识</dt><dd id="frame-id">—</dd></div>
+          <div><dt>像素摘要</dt><dd id="frame-digest">—</dd></div>
+        </dl>
+        <p id="detections" class="meta"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="map-heading">
+        <div class="panel-heading">
+          <h2 id="map-heading">运行路线</h2>
+          <p class="meta" id="pose-value">—</p>
+        </div>
+        <canvas class="map" id="route-map" width="360" height="360" aria-label="九乘九仿真路线图"></canvas>
+        <div class="legend" aria-hidden="true">
+          <span class="start">起点</span><span class="goal">目标</span><span class="pose">当前位置</span>
+        </div>
+        <p id="route-text" class="meta route-text"></p>
+      </section>
+    </section>
+
+    <section class="panel" aria-labelledby="log-heading">
+      <div class="panel-heading">
+        <h2 id="log-heading">逐拍记录</h2>
+        <p class="meta"><strong id="logical-tick">—</strong> · <span id="logical-time">—</span></p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="逻辑拍记录表">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">拍</th><th scope="col">逻辑时间</th><th scope="col">检测</th>
+              <th scope="col">链路</th><th scope="col">命令</th><th scope="col">动作后位置</th><th scope="col">结果</th>
+            </tr>
+          </thead>
+          <tbody id="log-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

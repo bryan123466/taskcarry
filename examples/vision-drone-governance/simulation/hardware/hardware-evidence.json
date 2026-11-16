@@ -1,0 +1,86 @@
+{
+  "role": "hardware",
+  "contract_id": "rc8-drone-sim-v2",
+  "schema_version": 2,
+  "task_id": "drone-hardware-concept",
+  "checked_at": "2026-11-16T21:20:46.6549324+08:00",
+  "artifacts": {
+    "HARDWARE_ENGINEERING.md": {
+      "bytes": 7321,
+      "sha256": "6e31ec82ae69a2eca4560acf8fea09c83b4cf96f4459a5f9fdd489c1241cc032"
+    },
+    "INTERFACE_WIRING_PLAN.md": {
+      "bytes": 4528,
+      "sha256": "95ef9e5964835dabf651b8168b22b8d24601a0648f95e9646d8489b28862f7ef"
+    },
+    "RESOURCE_BUDGET.csv": {
+      "bytes": 1875,
+      "sha256": "6a9ac9858b6b35b83fd9bebab4a1da3b6b545464c3be75f488c2262c6aa48e5f"
+    }
+  },
+  "checks": [
+    {
+      "id": "ENG-DOCS",
+      "status": "PASS",
+      "scope": "硬件窗口文档与预算自查",
+      "expected": {
+        "artifacts": [
+          "HARDWARE_ENGINEERING.md",
+          "INTERFACE_WIRING_PLAN.md",
+          "RESOURCE_BUDGET.csv"
+        ],
+        "row_stride_bytes": 640,
+        "bytes_per_frame": 76800,
+        "nominal_raw_bytes_per_second": 768000,
+        "two_buffers_raw_bytes": 153600
+      },
+      "observed": {
+        "profile": {
+          "width_px": 160,
+          "height_px": 120,
+          "pixel_format": "RGBA8",
+          "tick_ms": 100
+        },
+        "arithmetic": {
+          "bytes_per_pixel": 4,
+          "row_stride_bytes": 640,
+          "bytes_per_frame": 76800,
+          "ticks_per_second": 10,
+          "assumed_valid_frames_per_tick": 1,
+          "nominal_raw_bytes_per_second": 768000,
+          "assumed_frame_buffers": 2,
+          "two_buffers_raw_bytes": 153600
+        },
+        "coverage": {
+          "module_and_signal_flow": true,
+          "frame_and_timing_contract": true,
+          "fault_and_recovery": true,
+          "concept_wiring": true,
+          "bench_checklist": true,
+          "local_links": true,
+          "sim_timeout_procedure": true
+        },
+        "csv_rows": 23,
+        "csv_open_measurement_rows": 11,
+        "prior_output_files_sha256_matched": 14
+      },
+      "reproduce": "以接口合同的 160×120 RGBA8 与 100 ms 拍长重算。行长为 160×4，帧长为 640×120。按每拍一帧取帧长×1000÷100 得名义速率，按两份完整帧取帧长×2 得缓冲字节。用 CSV 导入读回各行并比对。按接口合同和验收计划逐节复核模块、时序、停留、接线及待测项。"
+    },
+    {
+      "id": "HARDWARE-BENCH",
+      "status": "PENDING",
+      "expected": "采集时钟与端到端时延、实际帧负载、处理与内存资源、缓冲水位、掉帧与恢复、处理失败的可复验记录。",
+      "observed": null,
+      "reproduce": "按 HARDWARE_ENGINEERING.md 的后续台架验证清单取得实际观测，关联帧号、时标、命令和状态。"
+    }
+  ],
+  "export_metadata": {
+    "scope": "Sanitized published evidence, not original receipt bytes",
+    "transformations": [
+      "Host paths and host conversation identifiers removed or replaced with descriptive source aliases",
+      "Numerical observations, check results and application hashes preserved"
+    ],
+    "source_identity_map": "Retained privately by the maintainer",
+    "non_exported_binary_evidence": "Recorded binary names are historical references. Browser verifier regenerates pixel buffers and screenshots in its local run directory."
+  }
+}

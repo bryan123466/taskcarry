@@ -1,0 +1,509 @@
+{
+  "role": "algorithm",
+  "replay_version": "rc8-indoor-replay-v1",
+  "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+  "task_id": "drone-vision-events",
+  "workspace": "algorithm",
+  "scope": "室内固定障碍的合成离线回放。核验预置事件的字段、帧关联、区域和时序。每条 confidence 是人工样例分数，逐拍记录保留全部候选。",
+  "fixture": {
+    "official_path": "../../governance/rc8-indoor-replay-v1.json",
+    "retained_path": "../../after/algorithm/rc8-indoor-replay-v1.json",
+    "bytes": 2113,
+    "sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+    "retained_byte_equal": true
+  },
+  "checks": [
+    {
+      "id": "fixture_identity",
+      "status": "PASS",
+      "expected": {
+        "replay_version": "rc8-indoor-replay-v1",
+        "sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "retained_byte_equal": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      "observed": {
+        "replay_version": "rc8-indoor-replay-v1",
+        "source_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "retained_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "bytes": 2113,
+        "retained_byte_equal": true,
+        "matching_cli_output": true,
+        "exit_codes": [
+          0,
+          0
+        ]
+      },
+      "reproduce": "在 execution 中分别运行 official_fixture 和 retained_fixture 的 PowerShell 命令，核对输出的 replay_version、fixture_sha256 与退出码。另读取两份文件的字节直接比对。"
+    },
+    {
+      "id": "tick_timing",
+      "status": "PASS",
+      "expected": {
+        "nominal_fps": 15,
+        "tick_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "timestamp_ms": [
+          0,
+          67,
+          133,
+          200,
+          267,
+          333
+        ]
+      },
+      "observed": {
+        "input_profile": {
+          "width_px": 640,
+          "height_px": 480,
+          "pixel_format": "RGB24",
+          "nominal_fps": 15
+        },
+        "tick_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "timestamp_ms": [
+          0,
+          67,
+          133,
+          200,
+          267,
+          333
+        ],
+        "adjacent_steps_ms": [
+          67,
+          66,
+          67,
+          67,
+          66
+        ]
+      },
+      "reproduce": "运行 official_fixture，核对输出的 input_profile 和每拍 tick、timestamp_ms。对拍号单独计算 floor(tick × 1000 / 15 + 0.5)。"
+    },
+    {
+      "id": "frame_event_contract",
+      "status": "PASS",
+      "expected": {
+        "received_frame_ids_unique": true,
+        "label_counts": {
+          "wall": 1,
+          "column": 1,
+          "box": 2
+        },
+        "linked_candidates": 4,
+        "finite_unit_scores": 4,
+        "normalized_positive_area_boxes": 4
+      },
+      "observed": {
+        "received_frame_ids": [
+          "indoor-000",
+          "indoor-001",
+          "indoor-002",
+          "indoor-005"
+        ],
+        "received_frame_ids_unique": true,
+        "label_counts": {
+          "wall": 1,
+          "column": 1,
+          "box": 2
+        },
+        "linked_candidates": 4,
+        "finite_unit_scores": 4,
+        "normalized_positive_area_boxes": 4
+      },
+      "reproduce": "运行 official_fixture，核对每个收到帧的 frame_id 唯一。逐条比较候选与外层帧的 frame_id、所属拍的 timestamp_ms，核对标签、confidence 和 region。"
+    },
+    {
+      "id": "tick_candidates_and_regions",
+      "status": "PASS",
+      "expected": [
+        {
+          "tick": 0,
+          "frame_id": "indoor-000",
+          "label_and_zone": [
+            [
+              "wall",
+              "left"
+            ]
+          ]
+        },
+        {
+          "tick": 1,
+          "frame_id": "indoor-001",
+          "label_and_zone": [
+            [
+              "column",
+              "center"
+            ],
+            [
+              "box",
+              "right"
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "frame_id": "indoor-002",
+          "label_and_zone": []
+        },
+        {
+          "tick": 3,
+          "frame_id": null,
+          "label_and_zone": null
+        },
+        {
+          "tick": 4,
+          "frame_id": null,
+          "label_and_zone": null
+        },
+        {
+          "tick": 5,
+          "frame_id": "indoor-005",
+          "label_and_zone": [
+            [
+              "box",
+              "left"
+            ]
+          ]
+        }
+      ],
+      "observed": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame": {
+            "frame_id": "indoor-000",
+            "processing_status": "ok",
+            "events": [
+              {
+                "frame_id": "indoor-000",
+                "timestamp_ms": 0,
+                "label": "wall",
+                "confidence": 0.92,
+                "region": {
+                  "x_min": 0.04,
+                  "y_min": 0.18,
+                  "x_max": 0.52,
+                  "y_max": 0.88
+                },
+                "center_x": "7/25",
+                "display_zone": "left"
+              }
+            ]
+          }
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame": {
+            "frame_id": "indoor-001",
+            "processing_status": "ok",
+            "events": [
+              {
+                "frame_id": "indoor-001",
+                "timestamp_ms": 67,
+                "label": "column",
+                "confidence": 0.84,
+                "region": {
+                  "x_min": 0.3,
+                  "y_min": 0.14,
+                  "x_max": 0.46,
+                  "y_max": 0.86
+                },
+                "center_x": "19/50",
+                "display_zone": "center"
+              },
+              {
+                "frame_id": "indoor-001",
+                "timestamp_ms": 67,
+                "label": "box",
+                "confidence": 0.81,
+                "region": {
+                  "x_min": 0.59,
+                  "y_min": 0.51,
+                  "x_max": 0.83,
+                  "y_max": 0.84
+                },
+                "center_x": "71/100",
+                "display_zone": "right"
+              }
+            ]
+          }
+        },
+        {
+          "tick": 2,
+          "timestamp_ms": 133,
+          "frame": {
+            "frame_id": "indoor-002",
+            "processing_status": "ok",
+            "events": []
+          }
+        },
+        {
+          "tick": 3,
+          "timestamp_ms": 200,
+          "frame": null
+        },
+        {
+          "tick": 4,
+          "timestamp_ms": 267,
+          "frame": null
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "frame": {
+            "frame_id": "indoor-005",
+            "processing_status": "ok",
+            "events": [
+              {
+                "frame_id": "indoor-005",
+                "timestamp_ms": 333,
+                "label": "box",
+                "confidence": 0.88,
+                "region": {
+                  "x_min": 0.14,
+                  "y_min": 0.52,
+                  "x_max": 0.4,
+                  "y_max": 0.86
+                },
+                "center_x": "27/100",
+                "display_zone": "left"
+              }
+            ]
+          }
+        }
+      ],
+      "reproduce": "运行 official_fixture，按输出的 ticks 检查每拍 frame_id、候选数组顺序、框坐标、中心点 center_x 和 display_zone。"
+    },
+    {
+      "id": "empty_and_missing",
+      "status": "PASS",
+      "expected": {
+        "ticks": 6,
+        "received_frames": 4,
+        "candidate_events": 4,
+        "empty_frames": 1,
+        "missing_ticks": 2,
+        "empty_frame_ticks": [
+          2
+        ],
+        "missing_tick_indices": [
+          3,
+          4
+        ]
+      },
+      "observed": {
+        "ticks": 6,
+        "received_frames": 4,
+        "candidate_events": 4,
+        "empty_frames": 1,
+        "missing_ticks": 2,
+        "empty_frame_ticks": [
+          2
+        ],
+        "missing_tick_indices": [
+          3,
+          4
+        ]
+      },
+      "reproduce": "运行 official_fixture，查看 counts 和 ticks。第 2 拍的帧状态为 ok 且 events 为 []，第 3、4 拍的 frame 为 null，第 5 拍收到帧。"
+    },
+    {
+      "id": "region_boundary_equality",
+      "status": "PASS",
+      "expected": [
+        {
+          "center_x": "1/3",
+          "display_zone": "center"
+        },
+        {
+          "center_x": "2/3",
+          "display_zone": "right"
+        }
+      ],
+      "observed": [
+        {
+          "x_min": "0",
+          "x_max": "2/3",
+          "center_x": "1/3",
+          "display_zone": "center"
+        },
+        {
+          "x_min": "1/3",
+          "x_max": "1",
+          "center_x": "2/3",
+          "display_zone": "right"
+        }
+      ],
+      "reproduce": "运行 official_fixture，查看 in_memory_probes.region_boundaries。内存框分别使用横向端点 (0, 2/3) 和 (1/3, 1)，经过同一个事件校验函数。"
+    },
+    {
+      "id": "invalid_events_rejected",
+      "status": "PASS",
+      "expected": {
+        "rejected_fields": [
+          "frame_id",
+          "timestamp_ms",
+          "label",
+          "confidence",
+          "region"
+        ],
+        "number_rejected": 5
+      },
+      "observed": {
+        "cases": [
+          {
+            "field": "frame_id",
+            "injected_value": "probe-other in parent frame probe-000",
+            "rejected": true,
+            "error": "invalid_event.frame_id must match 'probe-000'"
+          },
+          {
+            "field": "timestamp_ms",
+            "injected_value": "1 ms in the 0 ms tick",
+            "rejected": true,
+            "error": "invalid_event.timestamp_ms must match 0"
+          },
+          {
+            "field": "label",
+            "injected_value": "barrier",
+            "rejected": true,
+            "error": "invalid_event.label must be wall, column, or box"
+          },
+          {
+            "field": "confidence",
+            "injected_value": "float('inf')",
+            "rejected": true,
+            "error": "invalid_event.confidence must be a finite number in [0, 1]"
+          },
+          {
+            "field": "region",
+            "injected_value": "x_min = x_max = 1/4",
+            "rejected": true,
+            "error": "invalid_event.region must have positive width and height"
+          }
+        ],
+        "number_rejected": 5
+      },
+      "reproduce": "运行 official_fixture，查看 in_memory_probes.invalid_events。校验器在内存分别注入错误帧号、错误时间、非法标签、无穷大分数和零宽框，并核对明确的拒绝原因。"
+    },
+    {
+      "id": "original_plan_and_40ms_fixture",
+      "status": "PASS",
+      "expected": {
+        "timestamp_ms": [
+          0,
+          40,
+          80,
+          120,
+          160,
+          200
+        ],
+        "original_artifacts": [
+          {
+            "path": "../../before/algorithm/ALGORITHM_PLAN.md",
+            "sha256": "8bc7b7762d764f78ec7f967e8a6bf8e9d97611fbc07942e0f2a75fae3f9e1322"
+          },
+          {
+            "path": "../../before/algorithm/EVENT_SCHEMA.json",
+            "sha256": "cd52a6e8e04f05d5acfac0db4ffb1cc8354014b262951fd0e87b77ece71c3040"
+          },
+          {
+            "path": "../../before/algorithm/SYNTHETIC_EVENTS.json",
+            "sha256": "c5704889be56112a140fd4193953413c3522d20b2c782a5945a482c156c035a0"
+          },
+          {
+            "path": "../../before/algorithm/NEXT_STEP.md",
+            "sha256": "e7485cfefbfc914750c3ef3e5f3e76336fc19c1ca538fc7411a8f841a68d1589"
+          }
+        ]
+      },
+      "observed": {
+        "timestamp_ms": [
+          0,
+          40,
+          80,
+          120,
+          160,
+          200
+        ],
+        "frame_count": 6,
+        "candidate_count": 6,
+        "reference_region_count": 5,
+        "original_artifacts": [
+          {
+            "path": "../../before/algorithm/ALGORITHM_PLAN.md",
+            "sha256": "8bc7b7762d764f78ec7f967e8a6bf8e9d97611fbc07942e0f2a75fae3f9e1322"
+          },
+          {
+            "path": "../../before/algorithm/EVENT_SCHEMA.json",
+            "sha256": "cd52a6e8e04f05d5acfac0db4ffb1cc8354014b262951fd0e87b77ece71c3040"
+          },
+          {
+            "path": "../../before/algorithm/SYNTHETIC_EVENTS.json",
+            "sha256": "c5704889be56112a140fd4193953413c3522d20b2c782a5945a482c156c035a0"
+          },
+          {
+            "path": "../../before/algorithm/NEXT_STEP.md",
+            "sha256": "e7485cfefbfc914750c3ef3e5f3e76336fc19c1ca538fc7411a8f841a68d1589"
+          }
+        ],
+        "usage": "原方案的 40 ms 合成样例含手工参考框和候选，用于逐帧同类匹配、阈值边界以及误报和漏报走查。"
+      },
+      "reproduce": "在原 cwd 读取 outputs/SYNTHETIC_EVENTS.json 中 frames 的 timestamp_ms，并用 Get-FileHash -Algorithm SHA256 核对四份原成果。匹配口径见原 ALGORITHM_PLAN.md。"
+    }
+  ],
+  "pending_checks": [
+    {
+      "id": "reference_region_evaluation",
+      "status": "PENDING",
+      "expected": {
+        "inputs": "同一回放版本、评价配置与逐帧人工参考框",
+        "method": "沿用原计划按帧同类一对一匹配，按置信度和 IoU 阈值评估。",
+        "metrics": [
+          "TP",
+          "FP",
+          "FN",
+          "precision",
+          "recall"
+        ]
+      },
+      "observed": null,
+      "reproduce": "具备对应参考框后，按原 ALGORITHM_PLAN.md 复现匹配与统计。原 40 ms 样例走查的置信度和 IoU 阈值各为 0.50。"
+    },
+    {
+      "id": "measured_recognition_and_flight_performance",
+      "status": "PENDING",
+      "expected": "原计划保留真实识别表现、运行时延、避障成功率与飞行能力的独立评估。",
+      "observed": null,
+      "reproduce": "取得对应真实数据、实测链路和评估条件后，分别记录证据。"
+    }
+  ],
+  "reproduction": "From after/algorithm: python -I -B -X utf8 validate_replay.py rc8-indoor-replay-v1.json",
+  "export_metadata": {
+    "kind": "sanitized_professional_report",
+    "raw_host_receipt": false,
+    "source": "actual_dedicated_synthetic_chat_artifact",
+    "changes": [
+      "Removed host chat identity and execution envelope where present",
+      "Rebased source file paths to public relative paths",
+      "Retained technical observations and pending checks"
+    ],
+    "native_mcp_acceptance_proven_by_this_report": false
+  }
+}

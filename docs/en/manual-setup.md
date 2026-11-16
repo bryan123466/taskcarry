@@ -70,7 +70,7 @@ The generated `.taskcarry/codex.mcp.toml` is a **fragment**. In Codex, merge its
 
 First check that the original chat's actual working directory matches the configured directory. Keep a chat already in the correct directory, with its history and original task identity; there is no need to recreate it. If required by the host, open or select that original directory, complete its project-trust prompt, then use the supported MCP restart or reload action. Restarting the app alone does not prove directory trust; verify the native tools in the original chat afterward.
 
-If the directories differ, governance first checks supported host association or a continuation that preserves the history, using the same control. Writing a config in another folder does not connect the current chat. Setup does not choose a host folder, grant trust or reload the host. Follow the controls available in the current host; see the official [MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=app) and [configuration layers](https://learn.chatgpt.com/docs/config-file/config-basic).
+For an original chat not attached to a project, first check its actual cwd and prefer supported association with that same directory while preserving its history. That label does not establish MCP availability: user or project settings and plugins may provide connections. Inspect actual tools without automatically editing user-level configuration. If directories differ, governance checks supported association or a continuation that preserves the history, using the same control. Writing a config in another folder does not connect the current chat. Setup does not choose a host folder, grant trust or reload the host. Follow the controls available in the current host; see the official [MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=app) and [configuration layers](https://learn.chatgpt.com/docs/config-file/config-basic).
 
 Skills appear under `.agents/skills/`, including referenced method files. If not automatically discovered, explicitly read the needed `SKILL.md` and its references from that directory. Do not assume a new worktree inherits another directory's configuration. Verify each target window below; configuration files or a successful standalone stdio process do not prove native host loading.
 
@@ -78,15 +78,23 @@ Skills appear under `.agents/skills/`, including referenced method files. If not
 
 ### Connect a registered workbench
 
-Governance must already have registered this Git workspace and its task against the original control. The following is a **synthetic payload**, not a request to create sample work:
+Group chats by real directory and reuse its workspace registration in the original control. Several active chats in one business directory share MCP and Skills while retaining their own original tasks. This is a **synthetic request**, not an instruction to create the example directory or tasks:
 
 ```json
-{"mode":"preview","target":"C:/TaskCarry/workspaces/agent-1","workspace":"agent-1","task_id":"example-writing"}
+{"mode":"preview","binding_mode":"directory","target":"<existing-project-directory>","workspace":"drone"}
 ```
 
-Replace all three values with verified registration data, save the request and run the same preview command. Supply `target`, `workspace` and `task_id` together; target must match the registered workspace and its current Git identity, and the task must exist in the same control. Governance reviews the actual relationship; setup does not impose a one-to-one task/workspace assignment. Keep `--project` on the original control. Review, then install the same request with `mode: install`.
+Directory mode supplies `target` and `workspace` and omits `task_id`, so the directory does not pin every chat to one task. Target must match the registered workspace and its current Git identity. Save the verified request and run the preview command above, then review and install the same request with `mode: install`. Plan `connect` with the same `binding_mode: "directory"` and target; keep `--project` on the original control.
 
-This writes the workbench's four Skills and references, MCP fragment, and `.taskcarry/workbench.json` / `workbench.md`. It does not create a chat, register a task, initialize another database or activate host configuration. A plain document folder can use control-bound CLI for checkpoints; do not invent Git registration just to save documents.
+Existing single-task bindings can keep the default task mode, supplying `target`, `workspace` and `task_id` together; the task must exist in the same control. For example:
+
+```json
+{"mode":"preview","target":"<existing-project-directory>","workspace":"drone","task_id":"drone-software"}
+```
+
+Setup writes the directory's four Skills and references, MCP fragment and workbench materials. It does not create chats, tasks or another database. For shared-directory navigation, use `routing: "shared"` in the workbench plan; each target retains its actual `thread_id` and original `task_id`. The current chat selects its entry by its verified identity, never by picking the first task in the directory. Verify connection and record actual reading for each chat separately. Consider separate Git worktrees only when concurrent writes would conflict.
+
+Historical source-only chats need neither MCP nor Git setup in their original windows. A plain document folder can also use control-bound CLI for checkpoints; do not invent Git registration just to save documents.
 
 <a id="verify"></a>
 

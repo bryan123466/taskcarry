@@ -1,0 +1,75 @@
+{
+  "replay_version": "rc8-indoor-replay-v1",
+  "source": "synthetic",
+  "scenario": "indoor_fixed_obstacles",
+  "input_profile": {"width_px": 640, "height_px": 480, "pixel_format": "RGB24", "nominal_fps": 15},
+  "labels": {"wall": "墙面", "column": "立柱", "box": "箱体"},
+  "link": {"initial_state": "waiting", "disconnect_after_missed_ticks": 2},
+  "ticks": [
+    {
+      "tick": 0,
+      "timestamp_ms": 0,
+      "frame": {
+        "frame_id": "indoor-000",
+        "processing_status": "ok",
+        "events": [
+          {
+            "frame_id": "indoor-000",
+            "label": "wall",
+            "region": {"x_min": 0.04, "y_min": 0.18, "x_max": 0.52, "y_max": 0.88},
+            "confidence": 0.92,
+            "timestamp_ms": 0
+          }
+        ]
+      }
+    },
+    {
+      "tick": 1,
+      "timestamp_ms": 67,
+      "frame": {
+        "frame_id": "indoor-001",
+        "processing_status": "ok",
+        "events": [
+          {
+            "frame_id": "indoor-001",
+            "label": "column",
+            "region": {"x_min": 0.30, "y_min": 0.14, "x_max": 0.46, "y_max": 0.86},
+            "confidence": 0.84,
+            "timestamp_ms": 67
+          },
+          {
+            "frame_id": "indoor-001",
+            "label": "box",
+            "region": {"x_min": 0.59, "y_min": 0.51, "x_max": 0.83, "y_max": 0.84},
+            "confidence": 0.81,
+            "timestamp_ms": 67
+          }
+        ]
+      }
+    },
+    {
+      "tick": 2,
+      "timestamp_ms": 133,
+      "frame": {"frame_id": "indoor-002", "processing_status": "ok", "events": []}
+    },
+    {"tick": 3, "timestamp_ms": 200, "frame": null},
+    {"tick": 4, "timestamp_ms": 267, "frame": null},
+    {
+      "tick": 5,
+      "timestamp_ms": 333,
+      "frame": {
+        "frame_id": "indoor-005",
+        "processing_status": "ok",
+        "events": [
+          {
+            "frame_id": "indoor-005",
+            "label": "box",
+            "region": {"x_min": 0.14, "y_min": 0.52, "x_max": 0.40, "y_max": 0.86},
+            "confidence": 0.88,
+            "timestamp_ms": 333
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -70,7 +70,7 @@ control 尚未初始化時，doctor 回傳 `NOT_INITIALIZED`，不含執行環�
 
 先核對原對話的實際工作目錄與設定所在目錄一致。已在正確目錄的原對話直接沿用，保留歷史和原任務身分，無需重新建立視窗。依宿主要求開啟或選用該原目錄、完成專案的信任提示，再使用宿主支援的 MCP 重新啟動或重載操作。重新啟動應用程式本身不證明目錄已受信任；隨後仍須在原視窗呼叫原生工具驗收。
 
-目錄不相符時，先由治理核對宿主支援的關聯或保留歷史的接續方式，仍使用同一 control。把設定寫在另一目錄不會讓目前對話自動連線。setup 不選擇宿主目錄、不授予信任，也不重載宿主。操作入口以目前宿主為準，參考官方 [MCP 設定](https://learn.chatgpt.com/docs/extend/mcp?surface=app)與[設定層級](https://learn.chatgpt.com/docs/config-file/config-basic)。
+未掛在專案下的原對話，先核對實際 cwd，優先依宿主能力關聯同一目錄並保留原歷史。這個標籤不表示一定沒有 MCP；使用者級或專案級設定、外掛都可能提供連線，應查看實際工具，不自動改寫使用者級設定。目錄不相符時，先由治理核對宿主支援的關聯或保留歷史的接續方式，仍使用同一 control。把設定寫在另一目錄不會讓目前對話自動連線。setup 不選擇宿主目錄、不授予信任，也不重載宿主。操作入口以目前宿主為準，參考官方 [MCP 設定](https://learn.chatgpt.com/docs/extend/mcp?surface=app)與[設定層級](https://learn.chatgpt.com/docs/config-file/config-basic)。
 
 Skills 位於 `.agents/skills/`，包括引用的方法檔案；未被自動發現時，明確讀取該目錄下需要的 `SKILL.md` 及引用。新 worktree 不會自動繼承另一目錄的設定。每個目標視窗依下節分別驗收，設定檔案或獨立 stdio 程序成功均不證明原生宿主已載入。
 
@@ -78,15 +78,23 @@ Skills 位於 `.agents/skills/`，包括引用的方法檔案；未被自動發�
 
 ### 接入已登記工作台
 
-治理應已在原 control 登記該 Git 工作區及其任務。下列是**合成請求範例**，不是要求建立範例任務：
+先依真實目錄分組，復用原 control 中的工作區登記。多個活躍對話共用一個業務目錄時，目錄共享連線與 Skills，各對話仍使用自己的原任務。以下是**合成請求範例**，不是要求建立範例目錄或任務：
 
 ```json
-{"mode":"preview","target":"C:/TaskCarry/workspaces/agent-1","workspace":"agent-1","task_id":"example-writing"}
+{"mode":"preview","binding_mode":"directory","target":"<existing-project-directory>","workspace":"drone"}
 ```
 
-用核對過的登記值替換三項，儲存請求後執行相同的預覽指令。`target`、`workspace`、`task_id` 必須一起提供；target 須符合登記工作區及其目前 Git 身分，任務須存在於同一個 control。具體任務與工作台關係由治理核對，setup 不強制一對一歸屬。`--project` 始終指向原 control。審閱後把相同請求的 `mode` 改為 `install`。
+`directory` 模式提供 `target`、`workspace` 並省略 `task_id`，避免把目錄裡的所有對話固定到一個任務。target 須符合登記工作區及其目前 Git 身分。儲存核對過的請求後執行上面的預覽指令；審閱後將同一請求的 `mode` 改為 `install`。`connect` 計畫沿用 `binding_mode: "directory"` 和同一目標，`--project` 始終指向原 control。
 
-它寫入工作台的四項 Skills 及引用、MCP 片段、`.taskcarry/workbench.json` 與 `workbench.md`，不建立對話、不登記任務、不初始化另一資料庫，也不啟用宿主設定。普通文件目錄可以透過綁定 control 的 CLI 儲存 checkpoint，不為儲存文件偽造 Git 登記。
+既有單任務綁定仍可使用預設 `task` 模式，同時提供 `target`、`workspace`、`task_id`；任務須存在於同一 control。例如：
+
+```json
+{"mode":"preview","target":"<existing-project-directory>","workspace":"drone","task_id":"drone-software"}
+```
+
+setup 寫入目錄的四項 Skills 及引用、MCP 片段和工作台資料，不建立對話、任務或另一資料庫。共享目錄的工作台計畫使用 `routing: "shared"`，每個目標保留真實 `thread_id` 與原 `task_id`。目前視窗依自己的真實對話身分讀取入口，不能用目錄中的第一個任務代替；每個原對話分別驗收與記錄實際讀取。只有並行寫入確實存在衝突時，才考慮獨立 Git 工作樹。
+
+僅作歷史來源的對話不需要原視窗的 MCP 或 Git 設定。普通文件目錄也可用綁定 control 的 CLI 儲存 checkpoint，不為儲存文件偽造 Git 登記。
 
 <a id="verify"></a>
 

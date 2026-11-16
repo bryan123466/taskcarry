@@ -400,22 +400,86 @@ class ProjectRecoveryTests(unittest.TestCase):
         self.assertEqual(['developer'], backup['verification']['missing_workspace_payloads'])
         self.assertEqual(str(artifact), backup['verification']['missing_artifact_payloads'][0]['path'])
 
+    def test_shared_chat_history_survives_restore_without_activating_old_routes(self):
+        import base64
+        from taskcarry.api import invoke
+        from taskcarry.setup import configure
+        from taskcarry.workbench import Workbench
+
+        # One real Git directory, two original tasks, and an explicit v1 upgrade.
+        with (self.repo / '.git/info/exclude').open('a', encoding='utf-8') as stream:
+            stream.write('\n.taskcarry/\n.codex/\n.agents/\n')
+        self.core.task('algorithm', 'Continue original detection algorithm')
+        engine = Workbench(self.control)
+        configure(self.control, mode='install', target=self.repo, workspace='developer', task_id='booking')
+        legacy_setup = (self.repo / '.taskcarry/setup-manifest.json').read_bytes()
+        view = engine.workbench('freeze', body='Continue the original two tasks.',
+                                sources=[{'source_id': 'synthetic-project', 'revision': 'r1'}])
+        first = {'workspace': 'developer', 'task_id': 'booking', 'thread_id': 'software-chat',
+                 'host': 'codex', 'code_assessment': {'status': 'NO_CODE_DEPENDENCY', 'reason': 'Project navigation.'}}
+        old_plan = engine.workbench('plan', view_id=view['view_id'], targets=[first])
+        self.assertEqual('COMPLETED', engine.workbench('execute', plan_id=old_plan['plan_id'])['status'])
+        configure(self.control, mode='install', target=self.repo, workspace='developer', binding_mode='directory')
+        setup_history = self.core.store.list('workbench_setup_history')
+        self.assertEqual(1, len(setup_history))
+        self.assertEqual(legacy_setup, base64.b64decode(
+            setup_history[0]['files']['.taskcarry/setup-manifest.json']['bytes']))
+        shared = engine.workbench('plan', routing='shared', view_id=view['view_id'],
+            targets=[first, {**first, 'task_id': 'algorithm', 'thread_id': 'algorithm-chat'}])
+        self.assertEqual('COMPLETED', engine.workbench('execute', plan_id=shared['plan_id'])['status'])
+        pointers = self.core.store.list('workbench_chat_current')
+        self.assertEqual({'software-chat', 'algorithm-chat'}, {p['thread_id'] for p in pointers})
+        router = (self.repo / '.codex/taskcarry-routing.json').read_bytes()
+        source_tasks = self.core.store.list('tasks')
+        before = self.observe_source()
+        backup_plan = self.recovery.recovery('backup_plan', destination=str(self.root / 'shared-media'),
+            workspaces=[{'name': 'developer', 'paths': ['draft.txt', '.codex/config.toml', '.codex/taskcarry-routing.json']}])
+        backup = self.recovery.recovery('backup_execute', plan_id=backup_plan['plan_id'])
+        _, _, result = self.restore(backup)
+        control = Path(result['effect']['control'])
+        restored = Core(control)
+        target = control.parent / 'workspaces/developer'
+        self.assertEqual(source_tasks, restored.store.list('tasks'))
+        self.assertEqual(self.checkpoint['checkpoint_id'], restored.store.get('tasks', 'booking')['latest_checkpoint'])
+        self.assertEqual(setup_history, restored.store.list('workbench_setup_history'))
+        self.assertFalse((target / '.codex/taskcarry-routing.json').exists())
+        self.assertEqual(router, (target / '.taskcarry-disabled-host/.codex/taskcarry-routing.json').read_bytes())
+        self.assertEqual([], restored.store.list('workbench_chat_current'))
+        self.assertEqual([], restored.store.list('workbench_directory_current'))
+        recovery = ProjectRecovery(control)
+        for pointer in pointers:
+            history = recovery.recovery('history', collection='workbench_chat_current', local_id=pointer['binding_id'])
+            self.assertEqual(pointer, history['items'][0]['record'])
+        self.assertCode('RECOVERY_STANDBY', restored.task, 'unauthorized-new-writer')
+        self.assertEqual(before, self.observe_source())
+        self.assertEqual(router, (self.repo / '.codex/taskcarry-routing.json').read_bytes())
+        self.activate_restored(control)
+        for plan in (old_plan, shared):
+            self.assertCode('RESTORED_PLAN_INERT', invoke, control, 'workbench',
+                            {'action': 'execute', 'plan_id': plan['plan_id']})
+        self.assertFalse((target / '.codex/taskcarry-routing.json').exists())
+        self.assertEqual(before, self.observe_source())
+
     def test_tracked_and_untracked_native_configs_are_quarantined(self):
         (self.repo / '.codex').mkdir()
         config = b'[mcp_servers.example]\ncommand = "old-runtime"\n'
         (self.repo / '.codex' / 'config.toml').write_bytes(config)
         git(self.repo, 'add', '.codex/config.toml')
         (self.repo / '.mcp.json').write_bytes(b'{"old": "binding"}')
+        route = b'{"thread_id":"original-chat","control":"old-host","task_id":"booking"}\n'
+        (self.repo / '.codex' / 'taskcarry-routing.json').write_bytes(route)
         plan = self.recovery.recovery('backup_plan', destination=str(self.root / 'media'),
-                                      workspaces=[{'name': 'developer', 'paths': ['draft.txt', '.mcp.json']}])
+                                      workspaces=[{'name': 'developer', 'paths': ['draft.txt', '.mcp.json', '.codex/taskcarry-routing.json']}])
         backup = self.recovery.recovery('backup_execute', plan_id=plan['plan_id'])
         controller, restore_plan, result = self.restore(backup)
         target = Path(result['effect']['control']).parent / 'workspaces' / 'developer'
         self.assertFalse((target / '.codex' / 'config.toml').exists())
         self.assertFalse((target / '.mcp.json').exists())
+        self.assertFalse((target / '.codex' / 'taskcarry-routing.json').exists())
+        self.assertEqual(route, (target / '.taskcarry-disabled-host' / '.codex' / 'taskcarry-routing.json').read_bytes())
         self.assertEqual(config, (target / '.taskcarry-disabled-host' / '.codex' / 'config.toml').read_bytes())
         self.assertEqual(config, git(target, 'show', ':.codex/config.toml'))
-        self.assertEqual(2, len(result['effect']['disabled_host_files']))
+        self.assertEqual(3, len(result['effect']['disabled_host_files']))
         (target / '.taskcarry-disabled-host' / '.codex' / 'config.toml').write_bytes(b'later edit')
         self.assertCode('RECOVERY_EFFECT_CHANGED', controller.recovery, 'restore_execute', plan_id=restore_plan['plan_id'])
 

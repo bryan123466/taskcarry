@@ -31,6 +31,14 @@ One brain means maintained project identity, rules, relationships and governance
 
 Core `source_scan` performs bounded metadata enumeration of an explicitly authorized local root, retaining pages, exclusions and incomplete states. Reading chat bodies or material contents requires the appropriate host tools and permission, followed by AI interpretation. A prompt cannot create missing access. Unread sources or incomplete directories do not justify claims that content is absent or finished.
 
+## Projects, directories, chats and tasks have separate identities
+
+The real project defines the governance scope, with shared memory in the selected control. A working directory holds files, Git and host connection settings; a chat retains its discussion and responsibilities; a task retains its objective, decisions, checkpoint and next step. These need not map one to one: several chats can use one directory, and several chats can discuss the same task.
+
+Shared-directory mode prepares MCP and Skills materials once for the actual directory and records each original chat's task association separately. The directory entry supplies common navigation; each chat uses its verified identity to read its own task and current view. An unresolved identity requires clarification, never selection of the first route. Each chat supplies its own evidence of reading newly published guidance. An explicit plan expands a legacy single-task installation while preserving the meaning of old bindings, plans and receipts.
+
+A chat outside the host's project list can still be a user-selected historical source. To continue as an active chat that calls MCP directly, check its actual working directory and available host connection, retaining the original chat and directory where supported. Suggest a separate worktree when concurrent writes actually require isolation. The host controls trust and reloading for project configuration; a chat or config file alone does not prove connection. The official [configuration guide](https://learn.chatgpt.com/docs/config-file/config-basic) and [MCP guide](https://learn.chatgpt.com/docs/extend/mcp?surface=app) describe project and user configuration. This onboarding path uses project-scoped connections and does not silently expand to user-level configuration.
+
 ## A governance cycle has an owner, effects and a continuation point
 
 Each `cycle` binds the original task, owner and exact resources. The tools retain intended operations before actual-result evidence. Process locks coordinate cooperating local writers; durable reservations retain responsibility after interruption. Retry verifies completed effects and finishes missing supported receipts or steps. A local conflict preserves its work while independent work can continue.

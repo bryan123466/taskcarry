@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
+[See the actual synthetic-chat outputs](native-case/README.md): retained initial work, the shared interface, an offline page and four roles' evidence. Native MCP loading and natural scheduling remain separately identified acceptance steps.
+
 Three existing conversations have useful work: a software display, an algorithm event proposal, and a hardware interface sketch. They do not yet agree on the first milestone or the event fields. TaskCarry helps the governance conversation retain that work, reconcile the project memory, and give each original conversation a precise place to continue. A new product/presentation conversation fills a missing role.
 
 The example is a **vision obstacle-avoidance drone concept**. Its first milestone becomes an **indoor, fixed-obstacle offline demonstration**. It illustrates project governance and a product shape; it does not establish a working recognition model or aircraft.

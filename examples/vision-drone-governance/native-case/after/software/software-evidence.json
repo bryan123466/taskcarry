@@ -1,0 +1,798 @@
+{
+  "role": "software",
+  "replay_version": "rc8-indoor-replay-v1",
+  "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+  "browser": {
+    "product": "Chrome/155.0.8059.39",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "mode": "headless",
+    "driver": "Chrome DevTools Protocol"
+  },
+  "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 连续点击「单步」六次。",
+  "checks": [
+    {
+      "id": "software.fixture-bytes",
+      "status": "PASS",
+      "expected": {
+        "source_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "retained_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "browser_selected_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "name": "rc8-indoor-replay-v1.json",
+        "bytes": 2113
+      },
+      "observed": {
+        "source_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "retained_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "browser_selected_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "name": "rc8-indoor-replay-v1.json",
+        "bytes": 2113
+      },
+      "reproduce": "按二进制比较源文件和同目录副本。经本地文件选择器选中副本后，从浏览器 File.arrayBuffer() 读取实际字节并计算 SHA-256。"
+    },
+    {
+      "id": "software.offline-load",
+      "status": "PASS",
+      "expected": {
+        "replay_version": "rc8-indoor-replay-v1",
+        "page_protocol": "file:",
+        "load_message": "已载入 rc8-indoor-replay-v1.json · 6 拍",
+        "external_requests": [],
+        "page_errors": []
+      },
+      "observed": {
+        "replay_version": "rc8-indoor-replay-v1",
+        "page_protocol": "file:",
+        "load_message": "已载入 rc8-indoor-replay-v1.json · 6 拍",
+        "external_requests": [],
+        "page_errors": []
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 连续点击「单步」六次。 检查页面地址协议、载入提示和 DevTools 的网络请求及页面异常。"
+    },
+    {
+      "id": "software.tick-0",
+      "status": "PASS",
+      "expected": {
+        "tick": 0,
+        "timestamp_ms": 0,
+        "frame_id": "indoor-000",
+        "message": "本帧 1 条候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "wall",
+            "label_text": "墙面",
+            "display_region": "left",
+            "region_text": "左侧",
+            "box": [
+              0.04,
+              0.18,
+              0.52,
+              0.88
+            ],
+            "confidence": 0.92
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.04,
+            0.18,
+            0.52,
+            0.88
+          ]
+        ],
+        "candidate_log_rows": 1,
+        "highlighted_log_rows": 1,
+        "link_log_rows": 1,
+        "link_change": "connected",
+        "step_enabled": true
+      },
+      "observed": {
+        "tick": 0,
+        "timestamp_ms": 0,
+        "frame_id": "indoor-000",
+        "message": "本帧 1 条候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "wall",
+            "label_text": "墙面",
+            "display_region": "left",
+            "region_text": "左侧",
+            "box": [
+              0.04,
+              0.18,
+              0.52,
+              0.88
+            ],
+            "confidence": 0.92
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.04,
+            0.18,
+            0.52,
+            0.88
+          ]
+        ],
+        "candidate_log_rows": 1,
+        "highlighted_log_rows": 1,
+        "link_log_rows": 1,
+        "link_change": "connected",
+        "step_enabled": true
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 点击「单步」1 次，读取当前节拍、相对时间、帧标识、候选列表、绘制边界框、链路提示及两张日志表。"
+    },
+    {
+      "id": "software.tick-1",
+      "status": "PASS",
+      "expected": {
+        "tick": 1,
+        "timestamp_ms": 67,
+        "frame_id": "indoor-001",
+        "message": "本帧 2 条候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "column",
+            "label_text": "立柱",
+            "display_region": "center",
+            "region_text": "中部",
+            "box": [
+              0.3,
+              0.14,
+              0.46,
+              0.86
+            ],
+            "confidence": 0.84
+          },
+          {
+            "label": "box",
+            "label_text": "箱体",
+            "display_region": "right",
+            "region_text": "右侧",
+            "box": [
+              0.59,
+              0.51,
+              0.83,
+              0.84
+            ],
+            "confidence": 0.81
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.3,
+            0.14,
+            0.46,
+            0.86
+          ],
+          [
+            0.59,
+            0.51,
+            0.83,
+            0.84
+          ]
+        ],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 2,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "observed": {
+        "tick": 1,
+        "timestamp_ms": 67,
+        "frame_id": "indoor-001",
+        "message": "本帧 2 条候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "column",
+            "label_text": "立柱",
+            "display_region": "center",
+            "region_text": "中部",
+            "box": [
+              0.3,
+              0.14,
+              0.46,
+              0.86
+            ],
+            "confidence": 0.84
+          },
+          {
+            "label": "box",
+            "label_text": "箱体",
+            "display_region": "right",
+            "region_text": "右侧",
+            "box": [
+              0.59,
+              0.51,
+              0.83,
+              0.84
+            ],
+            "confidence": 0.81
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.3,
+            0.14,
+            0.46,
+            0.86
+          ],
+          [
+            0.59,
+            0.51,
+            0.83,
+            0.84
+          ]
+        ],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 2,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 点击「单步」2 次，读取当前节拍、相对时间、帧标识、候选列表、绘制边界框、链路提示及两张日志表。"
+    },
+    {
+      "id": "software.tick-2",
+      "status": "PASS",
+      "expected": {
+        "tick": 2,
+        "timestamp_ms": 133,
+        "frame_id": "indoor-002",
+        "message": "本帧无候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "observed": {
+        "tick": 2,
+        "timestamp_ms": 133,
+        "frame_id": "indoor-002",
+        "message": "本帧无候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 点击「单步」3 次，读取当前节拍、相对时间、帧标识、候选列表、绘制边界框、链路提示及两张日志表。"
+    },
+    {
+      "id": "software.tick-3",
+      "status": "PASS",
+      "expected": {
+        "tick": 3,
+        "timestamp_ms": 200,
+        "frame_id": null,
+        "message": "等待新帧",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "observed": {
+        "tick": 3,
+        "timestamp_ms": 200,
+        "frame_id": null,
+        "message": "等待新帧",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 点击「单步」4 次，读取当前节拍、相对时间、帧标识、候选列表、绘制边界框、链路提示及两张日志表。"
+    },
+    {
+      "id": "software.tick-4",
+      "status": "PASS",
+      "expected": {
+        "tick": 4,
+        "timestamp_ms": 267,
+        "frame_id": null,
+        "message": "模拟断流",
+        "link_state": "disconnected",
+        "link_text": "模拟断流",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 2,
+        "link_change": "disconnected",
+        "step_enabled": true
+      },
+      "observed": {
+        "tick": 4,
+        "timestamp_ms": 267,
+        "frame_id": null,
+        "message": "模拟断流",
+        "link_state": "disconnected",
+        "link_text": "模拟断流",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 2,
+        "link_change": "disconnected",
+        "step_enabled": true
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 点击「单步」5 次，读取当前节拍、相对时间、帧标识、候选列表、绘制边界框、链路提示及两张日志表。"
+    },
+    {
+      "id": "software.tick-5",
+      "status": "PASS",
+      "expected": {
+        "tick": 5,
+        "timestamp_ms": 333,
+        "frame_id": "indoor-005",
+        "message": "链路已恢复",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "box",
+            "label_text": "箱体",
+            "display_region": "left",
+            "region_text": "左侧",
+            "box": [
+              0.14,
+              0.52,
+              0.4,
+              0.86
+            ],
+            "confidence": 0.88
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.14,
+            0.52,
+            0.4,
+            0.86
+          ]
+        ],
+        "candidate_log_rows": 4,
+        "highlighted_log_rows": 1,
+        "link_log_rows": 3,
+        "link_change": "reconnected",
+        "step_enabled": false
+      },
+      "observed": {
+        "tick": 5,
+        "timestamp_ms": 333,
+        "frame_id": "indoor-005",
+        "message": "链路已恢复",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "box",
+            "label_text": "箱体",
+            "display_region": "left",
+            "region_text": "左侧",
+            "box": [
+              0.14,
+              0.52,
+              0.4,
+              0.86
+            ],
+            "confidence": 0.88
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.14,
+            0.52,
+            0.4,
+            0.86
+          ]
+        ],
+        "candidate_log_rows": 4,
+        "highlighted_log_rows": 1,
+        "link_log_rows": 3,
+        "link_change": "reconnected",
+        "step_enabled": false
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 点击「单步」6 次，读取当前节拍、相对时间、帧标识、候选列表、绘制边界框、链路提示及两张日志表。"
+    },
+    {
+      "id": "software.candidate-log",
+      "status": "PASS",
+      "expected": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame_id": "indoor-000",
+          "label": "wall",
+          "label_text": "墙面",
+          "display_region": "left",
+          "region_text": "左侧",
+          "box": [
+            0.04,
+            0.18,
+            0.52,
+            0.88
+          ],
+          "confidence": 0.92
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame_id": "indoor-001",
+          "label": "column",
+          "label_text": "立柱",
+          "display_region": "center",
+          "region_text": "中部",
+          "box": [
+            0.3,
+            0.14,
+            0.46,
+            0.86
+          ],
+          "confidence": 0.84
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame_id": "indoor-001",
+          "label": "box",
+          "label_text": "箱体",
+          "display_region": "right",
+          "region_text": "右侧",
+          "box": [
+            0.59,
+            0.51,
+            0.83,
+            0.84
+          ],
+          "confidence": 0.81
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "frame_id": "indoor-005",
+          "label": "box",
+          "label_text": "箱体",
+          "display_region": "left",
+          "region_text": "左侧",
+          "box": [
+            0.14,
+            0.52,
+            0.4,
+            0.86
+          ],
+          "confidence": 0.88
+        }
+      ],
+      "observed": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame_id": "indoor-000",
+          "label": "wall",
+          "label_text": "墙面",
+          "display_region": "left",
+          "region_text": "左侧",
+          "box": [
+            0.04,
+            0.18,
+            0.52,
+            0.88
+          ],
+          "confidence": 0.92
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame_id": "indoor-001",
+          "label": "column",
+          "label_text": "立柱",
+          "display_region": "center",
+          "region_text": "中部",
+          "box": [
+            0.3,
+            0.14,
+            0.46,
+            0.86
+          ],
+          "confidence": 0.84
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame_id": "indoor-001",
+          "label": "box",
+          "label_text": "箱体",
+          "display_region": "right",
+          "region_text": "右侧",
+          "box": [
+            0.59,
+            0.51,
+            0.83,
+            0.84
+          ],
+          "confidence": 0.81
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "frame_id": "indoor-005",
+          "label": "box",
+          "label_text": "箱体",
+          "display_region": "left",
+          "region_text": "左侧",
+          "box": [
+            0.14,
+            0.52,
+            0.4,
+            0.86
+          ],
+          "confidence": 0.88
+        }
+      ],
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 连续点击「单步」六次。 核对候选日志四行的节拍、帧号、类别、展示区域、原框与置信度，按节拍及原数组顺序读取。"
+    },
+    {
+      "id": "software.link-log",
+      "status": "PASS",
+      "expected": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "change": "connected"
+        },
+        {
+          "tick": 4,
+          "timestamp_ms": 267,
+          "change": "disconnected"
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "change": "reconnected"
+        }
+      ],
+      "observed": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "change": "connected"
+        },
+        {
+          "tick": 4,
+          "timestamp_ms": 267,
+          "change": "disconnected"
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "change": "reconnected"
+        }
+      ],
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 连续点击「单步」六次。 核对独立链路记录中变化的类型、节拍和相对时间。"
+    },
+    {
+      "id": "software.reset",
+      "status": "PASS",
+      "expected": {
+        "before": {
+          "tick": null,
+          "timestamp_ms": null,
+          "frame_id": null,
+          "message": "等待单步",
+          "link_state": "waiting",
+          "link_text": "等待首帧",
+          "candidates": [],
+          "plotted_boxes": [],
+          "candidate_log_rows": 0,
+          "highlighted_log_rows": 0,
+          "link_log_rows": 0,
+          "link_change": null,
+          "step_enabled": true,
+          "event_rows": [],
+          "link_rows": []
+        },
+        "after": {
+          "tick": null,
+          "timestamp_ms": null,
+          "frame_id": null,
+          "message": "等待单步",
+          "link_state": "waiting",
+          "link_text": "等待首帧",
+          "candidates": [],
+          "plotted_boxes": [],
+          "candidate_log_rows": 0,
+          "highlighted_log_rows": 0,
+          "link_log_rows": 0,
+          "link_change": null,
+          "step_enabled": true,
+          "event_rows": [],
+          "link_rows": []
+        },
+        "next_tick": {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame_id": "indoor-000",
+          "message": "本帧 1 条候选",
+          "link_state": "connected",
+          "link_text": "模拟已连接",
+          "candidates": [
+            {
+              "label": "wall",
+              "label_text": "墙面",
+              "display_region": "left",
+              "region_text": "左侧",
+              "box": [
+                0.04,
+                0.18,
+                0.52,
+                0.88
+              ],
+              "confidence": 0.92
+            }
+          ],
+          "plotted_boxes": [
+            [
+              0.04,
+              0.18,
+              0.52,
+              0.88
+            ]
+          ],
+          "candidate_log_rows": 1,
+          "highlighted_log_rows": 1,
+          "link_log_rows": 1,
+          "link_change": "connected",
+          "step_enabled": true
+        }
+      },
+      "observed": {
+        "before": {
+          "tick": null,
+          "timestamp_ms": null,
+          "frame_id": null,
+          "message": "等待单步",
+          "link_state": "waiting",
+          "link_text": "等待首帧",
+          "candidates": [],
+          "plotted_boxes": [],
+          "candidate_log_rows": 0,
+          "highlighted_log_rows": 0,
+          "link_log_rows": 0,
+          "link_change": null,
+          "step_enabled": true,
+          "event_rows": [],
+          "link_rows": []
+        },
+        "after": {
+          "tick": null,
+          "timestamp_ms": null,
+          "frame_id": null,
+          "message": "等待单步",
+          "link_state": "waiting",
+          "link_text": "等待首帧",
+          "candidates": [],
+          "plotted_boxes": [],
+          "candidate_log_rows": 0,
+          "highlighted_log_rows": 0,
+          "link_log_rows": 0,
+          "link_change": null,
+          "step_enabled": true,
+          "event_rows": [],
+          "link_rows": []
+        },
+        "next_tick": {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame_id": "indoor-000",
+          "message": "本帧 1 条候选",
+          "link_state": "connected",
+          "link_text": "模拟已连接",
+          "candidates": [
+            {
+              "label": "wall",
+              "label_text": "墙面",
+              "display_region": "left",
+              "region_text": "左侧",
+              "box": [
+                0.04,
+                0.18,
+                0.52,
+                0.88
+              ],
+              "confidence": 0.92
+            }
+          ],
+          "plotted_boxes": [
+            [
+              0.04,
+              0.18,
+              0.52,
+              0.88
+            ]
+          ],
+          "candidate_log_rows": 1,
+          "highlighted_log_rows": 1,
+          "link_log_rows": 1,
+          "link_change": "connected",
+          "step_enabled": true
+        }
+      },
+      "reproduce": "在 Chrome 中以 file:// 打开 monitor.html。选择同目录的 rc8-indoor-replay-v1.json，点击「载入」，再点击「重置」。 连续点击「单步」六次。 点击「重置」，检查等待状态与空日志。再次点击「单步」，检查是否从拍 0 重放。"
+    },
+    {
+      "id": "software.protocol-validation",
+      "status": "PASS",
+      "expected": {
+        "duplicate_frame_id": "唯一的帧标识",
+        "wrong_event_frame_id": "帧标识或时间与外层记录不一致",
+        "wrong_tick_time": "时间须为 67 ms",
+        "wrong_event_time": "帧标识或时间与外层记录不一致",
+        "unknown_label": "标签必须是 wall、column 或 box",
+        "inverted_box": "归一化边界框无效",
+        "invalid_confidence": "置信度须在 [0, 1] 内"
+      },
+      "observed": {
+        "duplicate_frame_id": "拍 1 需要有效且唯一的帧标识。",
+        "wrong_event_frame_id": "拍 0 第 1 条候选 的帧标识或时间与外层记录不一致。",
+        "wrong_tick_time": "拍 1 的时间须为 67 ms。",
+        "wrong_event_time": "拍 0 第 1 条候选 的帧标识或时间与外层记录不一致。",
+        "unknown_label": "拍 0 第 1 条候选 的标签必须是 wall、column 或 box。",
+        "inverted_box": "拍 0 第 1 条候选 的归一化边界框无效。",
+        "invalid_confidence": "拍 0 第 1 条候选 的置信度须在 [0, 1] 内。"
+      },
+      "reproduce": "在 Chrome DevTools 中读取选中文件的内存副本，每次仅更改一项，调用页面的 validateReplay。依次设置重复帧号、候选帧号错配、拍 1 时间改为 68、候选时间错配、未知标签、x_max 小于 x_min、置信度改为 1.1。记录抛出的校验提示。"
+    },
+    {
+      "id": "software.zone-boundaries",
+      "status": "PASS",
+      "expected": {
+        "center_x_1_over_3": "center",
+        "center_x_2_over_3": "right"
+      },
+      "observed": {
+        "center_x_1_over_3": "center",
+        "center_x_2_over_3": "right"
+      },
+      "reproduce": "在 Chrome DevTools 中调用页面的 displayZone，依次传入 x_min = 1/6、x_max = 1/2 和 x_min = 1/3、x_max = 1，比较两个边界处的区域。"
+    }
+  ],
+  "export_metadata": {
+    "kind": "sanitized_professional_report",
+    "raw_host_receipt": false,
+    "source": "actual_dedicated_synthetic_chat_artifact",
+    "changes": [
+      "Removed host chat identity and execution envelope where present",
+      "Rebased source file paths to public relative paths",
+      "Retained technical observations and pending checks"
+    ],
+    "native_mcp_acceptance_proven_by_this_report": false
+  }
+}

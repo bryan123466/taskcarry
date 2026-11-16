@@ -93,24 +93,46 @@ class CompleteOnboarding(Onboarding):
                 raise GovernanceError('ONBOARDING_EVIDENCE', 'Verify this portable project and replica identity.')
         elif key == 'workbenches':
             from .workbench import Workbench
-            expected = {w['workspace'] for w in scope['windows'] if w['mode'] == 'active'}
+            windows = [w for w in scope['windows'] if w['mode'] == 'active']
+            identity_fields = ('workspace', 'task_id', 'thread_id')
+            expected = {tuple(w[k] for k in identity_fields) for w in windows}
             entries = evidence.get('entries')
             if (not isinstance(entries, list) or any(not isinstance(e, dict) for e in entries)
-                    or {e.get('workspace') for e in entries} != expected or len(entries) != len(expected)):
-                raise GovernanceError('ONBOARDING_EVIDENCE', 'Verify each active workspace current entry and consumption.')
+                    or len(entries) != len(windows)):
+                raise GovernanceError('ONBOARDING_EVIDENCE', 'Verify each selected active chat current entry and consumption.')
+            selected_entries, seen = [], set()
             for entry in entries:
-                items = Workbench(self.root).workbench('status', workspace=entry['workspace'])['items']
-                selected = next(w for w in scope['windows'] if w.get('workspace') == entry['workspace'])
+                # Older evidence named only a workspace. Keep it readable when
+                # exactly one selected chat owns that workspace, without
+                # rewriting the stored receipt or inferring another consumer.
+                selected = dict(entry)
+                if any(k not in entry for k in ('task_id', 'thread_id')):
+                    candidates = [w for w in windows if w['workspace'] == entry.get('workspace')]
+                    if len(candidates) != 1:
+                        raise GovernanceError('ONBOARDING_EVIDENCE', 'Shared-workspace evidence must identify each original task and chat.')
+                    for field in ('task_id', 'thread_id'):
+                        selected.setdefault(field, candidates[0][field])
+                if any(not isinstance(selected.get(k), str) for k in identity_fields):
+                    raise GovernanceError('ONBOARDING_EVIDENCE', 'Use the exact workspace, task and chat identity.')
+                identity = tuple(selected[k] for k in identity_fields)
+                if identity not in expected or identity in seen:
+                    raise GovernanceError('ONBOARDING_EVIDENCE', 'Each selected active chat needs exactly one matching entry.')
+                seen.add(identity)
+                selected_entries.append(selected)
+            if seen != expected:
+                raise GovernanceError('ONBOARDING_EVIDENCE', 'Current-entry evidence does not cover every selected active chat.')
+            for entry in selected_entries:
+                items = Workbench(self.root).workbench('status', workspace=entry['workspace'],
+                                                       thread_id=entry['thread_id'])['items']
                 if (len(items) != 1 or items[0].get('view_id') != entry.get('view_id')
-                        or items[0].get('task_id') != selected['task_id']
-                        or items[0].get('thread_id') != selected['thread_id']
+                        or any(items[0].get(k) != entry[k] for k in identity_fields)
                         or items[0].get('state') != 'PUBLISHED'
                         or items[0].get('consumer_state') != 'REVIEWED_EVIDENCE_RECORDED'
                         or items[0].get('finalization_pending') is not False
                         or not items[0].get('source_freshness')
                         or any(s.get('state') != 'MATCHES' for s in items[0]['source_freshness'])
                         or entry.get('native_doctor_status_verified') is not True):
-                    raise GovernanceError('ONBOARDING_EVIDENCE', 'A generated entry alone is not a consumed native workspace.')
+                    raise GovernanceError('ONBOARDING_EVIDENCE', 'Each selected chat needs its own consumed current entry and native evidence.')
         elif key == 'recovery':
             from .project_recovery import ProjectRecovery
             verified = ProjectRecovery(self.root).recovery('verify', manifest=text(evidence.get('manifest'), 'Recovery manifest'),

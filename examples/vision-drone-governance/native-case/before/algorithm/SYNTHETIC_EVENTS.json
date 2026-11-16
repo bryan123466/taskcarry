@@ -1,0 +1,103 @@
+{
+  "source": "synthetic",
+  "frames": [
+    {
+      "frame_id": "sim-000",
+      "timestamp_ms": 0,
+      "reference_regions": []
+    },
+    {
+      "frame_id": "sim-001",
+      "timestamp_ms": 40,
+      "reference_regions": [
+        {
+          "label": "wall",
+          "region": { "x_min": 0, "y_min": 0.12, "x_max": 0.56, "y_max": 1 }
+        }
+      ]
+    },
+    {
+      "frame_id": "sim-002",
+      "timestamp_ms": 80,
+      "reference_regions": [
+        {
+          "label": "column",
+          "region": { "x_min": 0.68, "y_min": 0.10, "x_max": 0.80, "y_max": 0.86 }
+        },
+        {
+          "label": "box",
+          "region": { "x_min": 0.15, "y_min": 0.57, "x_max": 0.42, "y_max": 0.85 }
+        }
+      ]
+    },
+    {
+      "frame_id": "sim-003",
+      "timestamp_ms": 120,
+      "reference_regions": [
+        {
+          "label": "box",
+          "region": { "x_min": 0.28, "y_min": 0.51, "x_max": 0.53, "y_max": 0.81 }
+        }
+      ]
+    },
+    {
+      "frame_id": "sim-004",
+      "timestamp_ms": 160,
+      "reference_regions": []
+    },
+    {
+      "frame_id": "sim-005",
+      "timestamp_ms": 200,
+      "reference_regions": [
+        {
+          "label": "column",
+          "region": { "x_min": 0.72, "y_min": 0.10, "x_max": 0.82, "y_max": 0.84 }
+        }
+      ]
+    }
+  ],
+  "candidate_events": [
+    {
+      "frame_id": "sim-001",
+      "label": "wall",
+      "region": { "x_min": 0, "y_min": 0.14, "x_max": 0.55, "y_max": 0.98 },
+      "confidence": 0.92,
+      "timestamp_ms": 40
+    },
+    {
+      "frame_id": "sim-002",
+      "label": "column",
+      "region": { "x_min": 0.69, "y_min": 0.12, "x_max": 0.81, "y_max": 0.85 },
+      "confidence": 0.84,
+      "timestamp_ms": 80
+    },
+    {
+      "frame_id": "sim-002",
+      "label": "box",
+      "region": { "x_min": 0.16, "y_min": 0.56, "x_max": 0.43, "y_max": 0.84 },
+      "confidence": 0.81,
+      "timestamp_ms": 80
+    },
+    {
+      "frame_id": "sim-002",
+      "label": "box",
+      "region": { "x_min": 0.18, "y_min": 0.59, "x_max": 0.42, "y_max": 0.86 },
+      "confidence": 0.63,
+      "timestamp_ms": 80
+    },
+    {
+      "frame_id": "sim-004",
+      "label": "column",
+      "region": { "x_min": 0.45, "y_min": 0.15, "x_max": 0.58, "y_max": 0.90 },
+      "confidence": 0.50,
+      "timestamp_ms": 160
+    },
+    {
+      "frame_id": "sim-005",
+      "label": "column",
+      "region": { "x_min": 0.72, "y_min": 0.10, "x_max": 0.82, "y_max": 0.84 },
+      "confidence": 0.35,
+      "timestamp_ms": 200
+    }
+  ]
+}

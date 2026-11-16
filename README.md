@@ -12,6 +12,8 @@ TaskCarry helps projects already advancing in AI chats **keep their memory and c
 
 Keep working in your existing main or specialist chats. A separate governance chat uses your existing AI tool to review the progress you connect, maintain shared guidance, and check saving and recovery through TaskCarry. Add specialist chats only when the work benefits from them.
 
+Governance organizes the real project without requiring a new folder for each chat. Reuse original directories and conversations: chats in one directory share a connection while retaining their own tasks and progress. Older reference chats can inform project memory without becoming active workbenches.
+
 **The current step-by-step examples use Codex.** The toolkit exposes the same local engine through a command line and MCP, providing a foundation for other AI-tool integrations. Each host still needs its own connection and workflow verification.
 
 ## Why add TaskCarry to Git and project instructions?

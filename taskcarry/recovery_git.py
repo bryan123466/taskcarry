@@ -11,7 +11,7 @@ from .recovery_files import MAX_BYTES, MAX_FILE, MAX_FILES, digest, encoded, nor
 
 def host_entry(path):
     name = path.casefold()
-    return (name in ('.codex/config.toml', '.mcp.json', '.claude/settings.json')
+    return (name in ('.codex/config.toml', '.codex/taskcarry-routing.json', '.mcp.json', '.claude/settings.json')
             or name.startswith('.codex/automations/') and name.endswith('/automation.toml'))
 
 

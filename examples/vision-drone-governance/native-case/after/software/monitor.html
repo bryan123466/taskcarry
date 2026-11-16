@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>障碍物地面监控 · 室内离线回放</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font: 16px/1.5 Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      color: #182d47;
+      background: #edf2f5;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    h1, h2, p, dl, dd { margin: 0; }
+    h1 { margin-top: 4px; font-size: clamp(1.55rem, 3vw, 2rem); }
+    h2 { font-size: 1.15rem; }
+    code, .mono { font-family: "IBM Plex Mono", Consolas, monospace; }
+    .shell {
+      width: min(1060px, calc(100% - 32px));
+      margin: clamp(16px, 4vw, 44px) auto;
+    }
+    .masthead, .panel-heading, .actions, .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .masthead, .panel-heading { justify-content: space-between; }
+    .masthead {
+      border-radius: 16px;
+      padding: clamp(18px, 3vw, 28px);
+      color: #f3f8ff;
+      background: #152d47;
+    }
+    .notice { color: #c2d2e4; font-size: 0.875rem; }
+    .connection {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #e1eaf4;
+      background: #233e5a;
+      border: 1px solid #48637d;
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: 0.875rem;
+    }
+    .connection[data-state="connected"] { color: #b6f5db; }
+    .connection[data-state="disconnected"] { color: #ffdcac; }
+    .connection::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .panel {
+      margin-top: 14px;
+      padding: clamp(14px, 3vw, 22px);
+      border: 1px solid #d3dfe6;
+      border-radius: 16px;
+      background: #fff;
+    }
+    .file-field { min-width: 0; }
+    .file-field label { display: block; margin-bottom: 4px; font-weight: 650; }
+    input[type="file"] { max-width: 100%; font: inherit; color: #364f65; }
+    button, input::file-selector-button {
+      padding: 7px 12px;
+      border: 1px solid #9aafbd;
+      border-radius: 8px;
+      font: inherit;
+      color: #182d47;
+      background: #f4f7f9;
+      cursor: pointer;
+    }
+    input::file-selector-button { margin-right: 8px; }
+    button.primary { color: #fff; background: #12605d; border-color: #12605d; }
+    button:disabled { color: #586c7c; background: #e9eef1; border-color: #d3dfe6; cursor: default; }
+    :is(input, button, [tabindex]):focus-visible { outline: 3px solid #257abe; outline-offset: 3px; }
+    .meta, .file-message { color: #53697d; font-size: 0.875rem; }
+    .file-message { margin-top: 10px; overflow-wrap: anywhere; }
+    .file-message[data-error="true"] { color: #a32525; }
+    .metadata { font-size: 0.875rem; gap: 8px 16px; }
+    .metadata div { display: flex; gap: 6px; align-items: baseline; }
+    .metadata dt { color: #53697d; }
+    .metadata dd { overflow-wrap: anywhere; }
+    .scene {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+      align-items: start;
+      gap: 20px;
+      margin-top: 12px;
+    }
+    .zone-labels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 5px;
+      color: #364f65;
+      font-size: 0.875rem;
+      text-align: center;
+    }
+    .plane {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px solid #b8cad5;
+      border-radius: 10px;
+      background: #f4f7f9;
+    }
+    .guides, .boxes { position: absolute; inset: 0; }
+    .guides { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .guides span + span { border-left: 1px dashed #90a8b8; }
+    .box {
+      position: absolute;
+      border: 2px solid #207c76;
+      background: #227d7626;
+    }
+    .box span {
+      display: inline-block;
+      padding: 0 5px;
+      color: #fff;
+      background: #12605d;
+      font-size: 0.75rem;
+      vertical-align: top;
+    }
+    .details { padding-top: 25px; }
+    #frame-message { font-weight: 650; }
+    .candidates { margin: 10px 0 0; padding-left: 24px; }
+    .candidates:empty { margin: 0; }
+    .candidates li {
+      padding: 8px 10px;
+      border: 1px solid #d6e7e5;
+      border-radius: 8px;
+      background: #eef7f5;
+    }
+    .candidates li + li { margin-top: 6px; }
+    .candidate-title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 10px;
+      align-items: baseline;
+    }
+    .candidate-zone { color: #12605d; font-size: 0.875rem; }
+    .candidate-bounds { overflow-wrap: anywhere; font-size: 0.875rem; }
+    .table-wrap { margin-top: 10px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #dce5eb;
+      text-align: left;
+    }
+    th { color: #364f65; background: #f4f7f9; white-space: nowrap; }
+    td:nth-child(-n+2) { white-space: nowrap; }
+    .current { background: #e9f5f2; }
+    @media (max-width: 640px) {
+      .scene { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+      .details { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div>
+        <p class="notice">室内离线回放 · 合成数据</p>
+        <h1>障碍物地面监控</h1>
+      </div>
+      <span class="connection" id="connection-status" data-state="waiting" role="status">等待首帧</span>
+    </header>
+
+    <form class="panel" id="replay-controls">
+      <div class="panel-heading">
+        <div class="file-field">
+          <label for="replay-file">本地回放 JSON</label>
+          <input id="replay-file" type="file" accept=".json,application/json">
+        </div>
+        <div class="actions">
+          <button id="load-button" type="submit" disabled>载入</button>
+          <button class="primary" id="step-button" type="button" disabled>单步</button>
+          <button id="reset-button" type="button" disabled>重置</button>
+        </div>
+      </div>
+      <p class="file-message" id="file-message" role="status">选择文件后点击「载入」，再点击「单步」。</p>
+      <noscript><p>启用 JavaScript 即可回放本地文件。</p></noscript>
+    </form>
+
+    <section class="panel" aria-labelledby="scene-title">
+      <div class="panel-heading">
+        <h2 id="scene-title">画面区域</h2>
+        <dl class="metadata">
+          <div><dt>节拍</dt><dd class="mono" id="tick-value">—</dd></div>
+          <div><dt>相对时间</dt><dd class="mono" id="time-value">—</dd></div>
+          <div><dt>帧标识</dt><dd class="mono" id="frame-value">—</dd></div>
+        </dl>
+      </div>
+      <div class="scene">
+        <div aria-hidden="true">
+          <div class="zone-labels"><span>左侧</span><span>中部</span><span>右侧</span></div>
+          <div class="plane">
+            <div class="guides"><span></span><span></span><span></span></div>
+            <div class="boxes" id="boxes"></div>
+          </div>
+        </div>
+        <div class="details">
+          <p id="frame-message" role="status">等待载入</p>
+          <ol class="candidates" id="current-candidates" aria-label="当前候选"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="events-title">
+      <div class="panel-heading">
+        <h2 id="events-title">候选日志</h2>
+        <p class="meta" id="event-count">0 条</p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="候选日志表格">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">节拍</th>
+              <th scope="col">相对时间</th>
+              <th scope="col">帧标识</th>
+              <th scope="col">类别</th>
+              <th scope="col">展示区域</th>
+              <th scope="col">原框 <code>[x_min, y_min, x_max, y_max]</code></th>
+              <th scope="col">置信度</th>
+            </tr>
+          </thead>
+          <tbody id="event-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="link-title">
+      <div class="panel-heading">
+        <h2 id="link-title">链路记录</h2>
+        <p class="meta" id="link-count">0 条</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">节拍</th>
+              <th scope="col">相对时间</th>
+              <th scope="col">状态变化</th>
+            </tr>
+          </thead>
+          <tbody id="link-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script>
+    const replayVersion = "rc8-indoor-replay-v1";
+    const labels = { wall: "墙面", column: "立柱", box: "箱体" };
+    const zones = { left: "左侧", center: "中部", right: "右侧" };
+    const connectionLabels = { waiting: "等待首帧", connected: "模拟已连接", disconnected: "模拟断流" };
+    const eventKeys = ["frame_id", "label", "region", "confidence", "timestamp_ms"];
+    const boundsKeys = ["x_min", "y_min", "x_max", "y_max"];
+
+    function isRecord(value) {
+      return value !== null && typeof value === "object" && !Array.isArray(value);
+    }
+
+    function hasExactKeys(value, keys) {
+      return isRecord(value) && Object.keys(value).length === keys.length
+        && keys.every(key => Object.hasOwn(value, key));
+    }
+
+    function requireInput(condition, message) {
+      if (!condition) throw new Error(message);
+    }
+
+    function validateReplay(input) {
+      requireInput(isRecord(input) && input.replay_version === replayVersion,
+        "回放版本必须是 " + replayVersion + "。");
+      requireInput(input.source === "synthetic" && input.scenario === "indoor_fixed_obstacles",
+        "回放场景必须是室内固定障碍合成数据。");
+      const { input_profile: profile, link, ticks } = input;
+      requireInput(isRecord(profile) && profile.width_px === 640 && profile.height_px === 480
+        && profile.pixel_format === "RGB24" && profile.nominal_fps === 15,
+        "输入画面规格须为 640×480 RGB24，名义帧率为 15 fps。");
+      requireInput(isRecord(link) && link.initial_state === "waiting" && link.disconnect_after_missed_ticks === 2,
+        "链路须从 waiting 开始，并在连续缺帧两拍后断开。");
+      requireInput(hasExactKeys(input.labels, Object.keys(labels))
+        && Object.entries(labels).every(([key, name]) => input.labels[key] === name),
+        "标签字典须使用 wall、column、box 及其协议名称。");
+      requireInput(Array.isArray(ticks) && ticks.length > 0, "ticks 必须是非空数组。");
+
+      const frameIds = new Set();
+      for (const [index, tick] of ticks.entries()) {
+        const at = "拍 " + index;
+        requireInput(isRecord(tick) && tick.tick === index, at + " 的节拍编号须从 0 连续递增。");
+        const timestamp = Math.floor(index * 1000 / profile.nominal_fps + 0.5);
+        requireInput(tick.timestamp_ms === timestamp, at + " 的时间须为 " + timestamp + " ms。");
+        const frame = tick.frame;
+        if (frame === null) continue;
+        requireInput(isRecord(frame) && typeof frame.frame_id === "string"
+          && frame.frame_id.trim() !== "" && !frameIds.has(frame.frame_id),
+          at + " 需要有效且唯一的帧标识。");
+        requireInput(frame.processing_status === "ok" && Array.isArray(frame.events),
+          at + " 的帧需要 ok 状态和 events 数组。");
+        frameIds.add(frame.frame_id);
+
+        for (const [eventIndex, event] of frame.events.entries()) {
+          const item = at + " 第 " + (eventIndex + 1) + " 条候选";
+          requireInput(hasExactKeys(event, eventKeys), item + " 的事件字段不符合协议。");
+          requireInput(event.frame_id === frame.frame_id && event.timestamp_ms === tick.timestamp_ms,
+            item + " 的帧标识或时间与外层记录不一致。");
+          requireInput(typeof event.label === "string" && Object.hasOwn(labels, event.label),
+            item + " 的标签必须是 wall、column 或 box。");
+          const box = event.region;
+          requireInput(hasExactKeys(box, boundsKeys) && boundsKeys.every(key => Number.isFinite(box[key]))
+            && 0 <= box.x_min && box.x_min < box.x_max && box.x_max <= 1
+            && 0 <= box.y_min && box.y_min < box.y_max && box.y_max <= 1,
+            item + " 的归一化边界框无效。");
+          requireInput(Number.isFinite(event.confidence) && 0 <= event.confidence && event.confidence <= 1,
+            item + " 的置信度须在 [0, 1] 内。");
+        }
+      }
+    }
+
+    function displayZone(box) {
+      const centerX = (box.x_min + box.x_max) / 2;
+      if (centerX < 1 / 3) return "left";
+      if (centerX < 2 / 3) return "center";
+      return "right";
+    }
+
+    const form = document.getElementById("replay-controls");
+    const fileInput = document.getElementById("replay-file");
+    const loadButton = document.getElementById("load-button");
+    const stepButton = document.getElementById("step-button");
+    const resetButton = document.getElementById("reset-button");
+    const fileMessage = document.getElementById("file-message");
+    const connectionStatus = document.getElementById("connection-status");
+    const tickValue = document.getElementById("tick-value");
+    const timeValue = document.getElementById("time-value");
+    const frameValue = document.getElementById("frame-value");
+    const frameMessage = document.getElementById("frame-message");
+    const boxes = document.getElementById("boxes");
+    const candidates = document.getElementById("current-candidates");
+    const eventRows = document.getElementById("event-rows");
+    const linkRows = document.getElementById("link-rows");
+    const eventCount = document.getElementById("event-count");
+    const linkCount = document.getElementById("link-count");
+
+    let replay = null;
+    let loading = false;
+    let nextTick = 0;
+    let missedTicks = 0;
+    let connection = "waiting";
+
+    function setFileMessage(text, isError = false) {
+      fileMessage.textContent = text;
+      fileMessage.dataset.error = String(isError);
+    }
+
+    function refreshStatus() {
+      connectionStatus.textContent = connectionLabels[connection];
+      connectionStatus.dataset.state = connection;
+      eventCount.textContent = eventRows.rows.length + " 条";
+      linkCount.textContent = linkRows.rows.length + " 条";
+      fileInput.disabled = loading;
+      loadButton.disabled = loading || fileInput.files.length === 0;
+      stepButton.disabled = loading || !replay || nextTick >= replay.ticks.length;
+      resetButton.disabled = loading || !replay;
+    }
+
+    function resetReplay() {
+      nextTick = 0;
+      missedTicks = 0;
+      connection = replay?.link.initial_state ?? "waiting";
+      tickValue.textContent = "—";
+      timeValue.textContent = "—";
+      frameValue.textContent = "—";
+      frameMessage.textContent = replay ? "等待单步" : "等待载入";
+      boxes.replaceChildren();
+      candidates.replaceChildren();
+      eventRows.replaceChildren();
+      linkRows.replaceChildren();
+      refreshStatus();
+    }
+
+    function appendRow(body, values) {
+      const row = body.insertRow();
+      for (const value of values) row.insertCell().textContent = value;
+      return row;
+    }
+
+    function textElement(tag, className, text) {
+      const element = document.createElement(tag);
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function showCandidate(event, number, tickNumber) {
+      const box = event.region;
+      const zone = displayZone(box);
+      const name = replay.labels[event.label];
+      const bounds = "[" + boundsKeys.map(key => box[key]).join(", ") + "]";
+
+      const marker = document.createElement("div");
+      marker.className = "box";
+      marker.style.left = 100 * box.x_min + "%";
+      marker.style.top = 100 * box.y_min + "%";
+      marker.style.width = 100 * (box.x_max - box.x_min) + "%";
+      marker.style.height = 100 * (box.y_max - box.y_min) + "%";
+      marker.append(textElement("span", "", number));
+      boxes.append(marker);
+
+      const item = document.createElement("li");
+      const title = document.createElement("div");
+      title.className = "candidate-title";
+      title.append(textElement("strong", "candidate-label", name),
+        textElement("span", "candidate-zone", zones[zone]),
+        textElement("span", "meta candidate-score", "置信度 " + event.confidence));
+      item.append(title, textElement("code", "candidate-bounds", bounds));
+      candidates.append(item);
+
+      const row = appendRow(eventRows, [tickNumber, event.timestamp_ms + " ms", event.frame_id,
+        name, zones[zone], bounds, event.confidence]);
+      row.classList.add("current");
+      row.cells[2].classList.add("mono");
+      row.cells[5].classList.add("mono");
+    }
+
+    function advanceLink(frame) {
+      if (frame) {
+        missedTicks = 0;
+        const previous = connection;
+        connection = "connected";
+        if (previous === "waiting") return "connected";
+        if (previous === "disconnected") return "reconnected";
+      } else {
+        missedTicks += 1;
+        if (missedTicks >= replay.link.disconnect_after_missed_ticks && connection !== "disconnected") {
+          connection = "disconnected";
+          return "disconnected";
+        }
+      }
+      return null;
+    }
+
+    function stepReplay() {
+      const { tick, timestamp_ms: timestamp, frame } = replay.ticks[nextTick];
+      nextTick += 1;
+      const change = advanceLink(frame);
+      if (change) appendRow(linkRows, [tick, timestamp + " ms", change]).cells[2].classList.add("mono");
+
+      tickValue.textContent = tick;
+      timeValue.textContent = timestamp + " ms";
+      frameValue.textContent = frame?.frame_id ?? "—";
+      boxes.replaceChildren();
+      candidates.replaceChildren();
+      for (const row of eventRows.querySelectorAll(".current")) row.classList.remove("current");
+
+      if (!frame) {
+        frameMessage.textContent = connection === "disconnected" ? "模拟断流" : "等待新帧";
+      } else if (frame.events.length === 0) {
+        frameMessage.textContent = "本帧无候选";
+      } else {
+        frameMessage.textContent = change === "reconnected" ? "链路已恢复" : "本帧 " + frame.events.length + " 条候选";
+        for (const [index, event] of frame.events.entries()) showCandidate(event, index + 1, tick);
+      }
+      refreshStatus();
+    }
+
+    fileInput.addEventListener("change", () => {
+      replay = null;
+      setFileMessage(fileInput.files.length ? "已选择文件，点击「载入」。" : "请选择本地回放 JSON。");
+      resetReplay();
+    });
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      const file = fileInput.files[0];
+      if (!file || loading) return;
+      loading = true;
+      replay = null;
+      setFileMessage("正在载入 " + file.name + "。");
+      resetReplay();
+      try {
+        const input = JSON.parse(await file.text());
+        validateReplay(input);
+        replay = input;
+        setFileMessage("已载入 " + file.name + " · " + input.ticks.length + " 拍");
+      } catch (error) {
+        setFileMessage("载入失败。" + (error instanceof SyntaxError ? "文件不是有效的 JSON。" : error.message), true);
+      } finally {
+        loading = false;
+        resetReplay();
+      }
+    });
+
+    stepButton.addEventListener("click", stepReplay);
+    resetButton.addEventListener("click", resetReplay);
+    resetReplay();
+  </script>
+</body>
+</html>

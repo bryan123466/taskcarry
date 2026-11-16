@@ -99,7 +99,13 @@ Ordinary MCP/CLI calls retain durable ownership between calls and take OS locks 
 
 `workbench` supports `freeze/plan/execute/status/consume`. Freeze text with exact local file/record revisions or labeled external references. Plan registered workspace/task targets, original chat IDs and code-dependency assessments. Execute the exact plan. The Codex adapter preserves other settings, comments and professional instructions while updating its managed section. Private entry paths must be ignored and untracked; tracked configuration remains a review conflict.
 
+Several original chats may share one registered directory. First preview and install its connection materials with `binding_mode: "directory"`, `target` and `workspace`, omitting `task_id`; then create a workbench plan with `routing: "shared"`. Each target still carries its own original `task_id` and `thread_id`. One `.codex/taskcarry-routing.json` index selects separate current entries by exact chat identity. An unknown chat must request its binding rather than choose the first task. `status` accepts `thread_id`; querying the directory returns its individual chat entries. Publish and consume each chat independently, including when two chats share a task.
+
+The default `binding_mode: "task"` and saved v1 plans retain their existing contract. Converting the same control/workspace to directory mode is explicit: setup preserves its old byte preimages, and the first shared publication includes the original chat and task. A new publication cannot silently reassign that identity. Old objects remain historical evidence, and old single-task plans cannot replace a shared directory's router. Restore retains history and disables the old host routing file until bindings are verified for the recovered machine.
+
 Publication and consumption have separate receipts. A consumer supplies the matching view/plan/task/source/chat/turn and a hashed evidence file. This records reviewed evidence, not independent host access. Native tools still need actual calls in each chat. Complete setup requires matching tasks/chats, fresh source revisions, verified publication, no pending finalization and consumption. Code adoption follows a separate dependency. One workbench's conflict does not force others to restart.
+
+In `complete_v1`, workbench evidence has one entry for every selected active `(workspace, task_id, thread_id)`. A workspace-level receipt cannot cover another chat. Legacy entries lacking task/chat fields are accepted only when that workspace has exactly one selected active chat and the live publication matches it; stored historical evidence is not rewritten. Reference-only source chats do not require a native workbench connection.
 
 ## Selected recovery sets and one writer
 

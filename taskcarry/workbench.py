@@ -375,8 +375,16 @@ class Workbench(Core):
                 if target.get("source_id", self.source()["source_id"]) not in self._source_ids():
                     fail("Workbench task belongs to another source.", "WORKBENCH_SOURCE_MISMATCH")
                 previous = self._pointer(workspace)
+                from .shared_workbench import assert_chat_identity
+                assert_chat_identity(self, target['thread_id'], workspace, task_id)
                 if previous and previous["task_id"] != task_id:
                     fail("A workbench entry must retain its original task.", "WORKBENCH_BINDING_MISMATCH")
+                if previous and self.store.get("workbench_receipts", previous["receipt_id"])["thread_id"] != target["thread_id"]:
+                    fail("Another original chat already owns this single entry; use explicit shared routing.", "WORKBENCH_BINDING_MISMATCH")
+                for other in self.store.list("workspaces"):
+                    if (other['name'] != workspace and os.path.normcase(other['path']) == os.path.normcase(str(root))
+                            and self._pointer(other['name']) is not None):
+                        fail("Another workspace entry uses this directory; retain it and use shared routing.", "WORKBENCH_BINDING_MISMATCH")
                 assessment = target.get("code_assessment")
                 if (not isinstance(assessment, dict) or set(assessment) != {"status", "reason"}
                         or assessment.get("status") not in {"NO_CODE_DEPENDENCY", "ALREADY_CONTAINS", "SEPARATE_CODE_PLAN_REQUIRED"}
@@ -452,6 +460,8 @@ class Workbench(Core):
     def _execute_target(self, plan_id, plan, row):
         workspace = row["workspace"]
         root = self._binding(workspace, row["task_id"])
+        from .shared_workbench import assert_chat_identity
+        assert_chat_identity(self, row['thread_id'], workspace, row['task_id'])
         receipt_id = plan_id + "." + workspace
         existing = self.store.get("workbench_receipts", receipt_id)
         pointer = {"schema": "taskcarry.workbench.current.v1", "workspace": workspace, "task_id": row["task_id"],
@@ -534,8 +544,13 @@ class Workbench(Core):
                 self._object("workbench_consumption", consumption_id, record)
                 self.store.put("workbench_consumed", receipt_id, {"consumption_id": consumption_id})
             immutable(self._path("consumption", consumption_id + ".json"), canonical(record))
+        from .shared_workbench import chat_key
+        shared_key = chat_key(proof['thread_id'])
+        shared_current = (self.store.get('workbench_chat_current', shared_key) is not None
+                          or self._path('chats', shared_key + '.json').exists())
         return {"consumption_id": consumption_id, "receipt_id": receipt_id, "consumer_state": "REVIEWED_EVIDENCE_RECORDED",
-                "current_view": bool((self._pointer(workspace) or {}).get("plan_id") == plan_id), "native_acceptance_verified": False}
+                "current_view": not shared_current and bool((self._pointer(workspace) or {}).get("plan_id") == plan_id),
+                "native_acceptance_verified": False}
 
     def _status(self, workspace, limit, cursor):
         if type(limit) is not int or not 1 <= limit <= 100:
@@ -582,7 +597,21 @@ class Workbench(Core):
                 "read_only": True, "meaning": "Current publication and reviewed evidence are separate; query Core for the latest task/checkpoint."}
 
     def workbench(self, action="status", body=None, sources=None, view_id=None, targets=None, plan_id=None,
-                  workspace=None, proof=None, limit=20, cursor=None):
+                  workspace=None, proof=None, limit=20, cursor=None, routing=None, thread_id=None):
+        if routing not in (None, 'shared') or (routing is not None and action not in ('plan', 'status')):
+            fail("Shared routing selects a new plan or status; execution uses its saved schema.", "INVALID_ARGUMENT")
+        if thread_id is not None and action != 'status':
+            fail("thread_id filters status only; targets/proof carry publication identities.", "INVALID_ARGUMENT")
+        from .shared_workbench import SharedWorkbench, PLAN
+        if action == 'plan' and routing == 'shared':
+            return SharedWorkbench(self.root).plan_shared(view_id, targets)
+        saved_id = plan_id if action == 'execute' else proof.get('plan_id') if action == 'consume' and isinstance(proof, dict) else None
+        if saved_id and (self.store.get('workbench_plans', saved_id) or {}).get('schema') == PLAN:
+            shared = SharedWorkbench(self.root)
+            return shared.execute_shared(saved_id) if action == 'execute' else shared.consume_shared(proof)
+        if action == 'status' and (routing == 'shared' or thread_id is not None
+                                   or self.store.list('workbench_directory_current')):
+            return SharedWorkbench(self.root).status_shared(workspace, thread_id, limit, cursor)
         if action == "freeze":
             return self._freeze(body, sources)
         if action == "plan":

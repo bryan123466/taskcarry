@@ -49,7 +49,23 @@ An existing algorithm chat might receive the following wording, accompanied by i
 >
 > This milestone shares the confirmed input and acceptance boundaries with software and hardware. Report the decisions you actually read, missing inputs and next step. If the entry or connection is not loaded, name the exact gap and continue unaffected work.
 
-A chat without a working directory needs supported host association or an explicit continuation arrangement. Governance reports whether the original remains in place, whether a continuation chat was created and how history is linked. A prompt cannot move the directory or replace a native MCP call in that window.
+For an active chat not attached to a project, check its actual directory and tools first, retaining its original chat and history and preferring supported association with the same directory. The label alone does not establish MCP availability. If trust or loading is still missing, governance gives only the necessary next action, then returns to the original chat for verification. A prompt cannot change cwd or replace a real MCP call.
+
+### When several original chats share one directory
+
+This is still an **expected feedback example, not a report of observed acceptance**. Suppose verification shows that three original chats use the same existing business directory, shown here as `drone/`:
+
+| Original chat | Retained task | Actual working directory | Connection plan |
+|---|---|---|---|
+| Drone software | `drone-software` | Existing `drone/` directory | Use the directory connection and read its own software task entry. |
+| Vision algorithms | `drone-vision` | Same directory | Reuse MCP and Skills, and read its own algorithm task entry. |
+| Hardware concept | `drone-hardware` | Same directory | Reuse MCP and Skills, and read its own hardware task entry. |
+
+> I will keep all three original chats and prepare one set of connection materials for this existing directory. You do not need three separate folders or replacement chats to connect. Each window continues its original task; native connection and actual reading of shared memory are still verified separately in each chat.
+>
+> An older component-selection discussion can remain a historical source with references, without MCP or Git setup in its original window. If the active chats later need to change conflicting files or Git state concurrently, we can assess separate worktrees then.
+
+Shared configuration does not merge task identities. Governance maps each verified chat to its original task. An unknown chat needs its binding checked; it never defaults to the directory's first task.
 
 ## 4. Each responsibility receives the relevant effect of a shared decision
 

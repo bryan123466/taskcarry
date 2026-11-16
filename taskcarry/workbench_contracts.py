@@ -26,5 +26,6 @@ SCHEMAS = {"workbench": obj({
     "action": {"type": "string", "enum": ["freeze", "plan", "execute", "status", "consume"]},
     "body": TEXT, "sources": {"type": "array", "items": SOURCE, "minItems": 1, "maxItems": 50}, "view_id": TEXT,
     "targets": {"type": "array", "items": TARGET, "minItems": 1, "maxItems": 24}, "plan_id": TEXT, "workspace": TEXT,
+    "routing": {"type": "string", "enum": ["shared"]}, "thread_id": TEXT,
     "proof": PROOF, "limit": {"type": "integer", "minimum": 1, "maximum": 100}, "cursor": TEXT}, ("action",))}
 DESCRIPTIONS = {"workbench": "Freeze navigation and explicit source revisions; plan then publish private workbench entries without changing Git, tasks or professional instructions. Read current publication and separate reviewed-consumption evidence, or record that evidence. Generated entries do not prove host loading or business acceptance."}

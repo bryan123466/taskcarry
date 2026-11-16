@@ -16,7 +16,7 @@ Use the three-step onboarding conversation with an existing Codex project. Estab
 
 The shared Core and maintained Skills work alongside your own project rules. A real project can include several directories, conversations and existing state sources. Source-qualified records keep those identities distinct. The bounded task-context reader returns related decisions, checkpoints, next steps and evidence without treating a read as acceptance.
 
-- Keep one receiving baseline per control scope and separate registered workspaces for parallel tasks. CLI and MCP call the same tools for saved progress, stage collection, workspace updates, and supported recovery.
+- Keep one receiving baseline per control scope. Several chats can share one registered directory and connection while retaining separate task identities and current-entry receipts. Use separate Git worktrees when concurrent file writes require isolation. CLI and MCP call the same tools for saved progress, stage collection, workspace updates, and supported recovery.
 - Preserve unfinished work without marking it complete. A checkpoint captures selected files already saved to disk; it does not capture unsaved editor buffers or all conversation history.
 - Review plans before collecting stages or updating workspaces. Supported local commits, staged changes, working-file changes, and new files are preserved during updates; specific conflicts need attention.
 - Reuse a known recovery action when its conditions match. An unfamiliar problem needs diagnosis; an experience note alone does not create a new repair function.
@@ -61,7 +61,7 @@ TaskCarry 为 AI 辅助项目提供本地进度与成果记录。它把任务记
 
 共享 Core 和随产品维护的 Skills 与用户自己的项目规则共同工作。一个现实项目可以包含多个目录、对话和既有状态来源；记录保留来源身份。有界任务上下文返回相关决定、检查点、下一步和证据，读取本身不会变成接收或验收。
 
-- 每个治理范围保留一条接收基线，并为并行任务登记独立工作区。CLI 与 MCP 调用同一套保存进度、汇总阶段、更新工作区和已知恢复工具。
+- 每个治理范围保留一条接收基线。多个聊天可以共用一个登记目录和连接，分别保留任务身份与当前入口回执；并行文件写入确实需要隔离时，再使用独立 Git 工作树。CLI 与 MCP 调用同一套保存进度、汇总阶段、更新工作区和已知恢复工具。
 - 保留未完成工作，不必把它标成完成。检查点保存选定且已经写入磁盘的文件，不包含编辑器未保存内容或全部聊天历史。
 - 汇总阶段或更新工作区前先检查计划。更新会保全支持范围内的本地提交、暂存修改、工作文件修改和新文件；具体冲突需单独处理。
 - 条件符合时复用已有恢复动作。陌生问题需要诊断，写下一段经验不会自动产生新的修复功能。
@@ -106,7 +106,7 @@ TaskCarry 為 AI 輔助專案提供本機進度與成果記錄。它把任務記
 
 共用 Core 與隨產品維護的 Skills 和使用者自己的專案規則共同工作。一個現實專案可以包含多個目錄、對話及既有狀態來源；記錄保留來源身分。有界任務上下文傳回相關決定、檢查點、下一步與證據，讀取本身不會變成接收或驗收。
 
-- 每個治理範圍保留一條接收基線，並為並行任務登記獨立工作區。CLI 與 MCP 呼叫同一套儲存進度、彙整階段、更新工作區及已知恢復工具。
+- 每個治理範圍保留一條接收基線。多個聊天可以共用一個登記目錄與連線，分別保留任務身分與目前入口回執；並行檔案寫入確實需要隔離時，再使用獨立 Git 工作樹。CLI 與 MCP 呼叫同一套儲存進度、彙整階段、更新工作區及已知恢復工具。
 - 保留未完成工作，不必將它標為完成。檢查點儲存選定且已寫入磁碟的檔案，不包含編輯器未儲存的內容或全部對話歷史。
 - 彙整階段或更新工作區前先檢查計畫。更新會保全支援範圍內的本機提交、暫存修改、工作檔案修改與新檔案；具體衝突需個別處理。
 - 條件符合時重用已有恢復動作。陌生問題需要診斷，寫下一段經驗不會自動產生新的修復功能。

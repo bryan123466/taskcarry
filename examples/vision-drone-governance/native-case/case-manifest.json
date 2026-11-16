@@ -1,0 +1,416 @@
+{
+  "schema": "taskcarry.synthetic_chat_case_export.v1",
+  "case": "vision-drone-indoor-offline",
+  "replay_version": "rc8-indoor-replay-v1",
+  "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+  "raw_host_receipts_published": false,
+  "native_mcp_acceptance": "pending",
+  "natural_schedule_execution": "not_verified",
+  "engineering_scope": "Synthetic metadata and preset events; no recognition, real aircraft or flight validation",
+  "manifest_scope": "Lists every public case file except this manifest itself. Source paths and raw-host receipt mapping remain private.",
+  "files": [
+    {
+      "path": "before/software/SOFTWARE_BRIEF.md",
+      "phase": "before",
+      "role": "software",
+      "sha256": "4dbe680cc9b57b3060d4895c1629a96ab3adac0619399f2bc720eefcee5e5d0a",
+      "bytes": 1077,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/software/INTERFACE_DRAFT.json",
+      "phase": "before",
+      "role": "software",
+      "sha256": "e4bf9ae586cf4962274c51403b6fd99ae0ddd5dfb4eaf4063d349250c57d8b88",
+      "bytes": 1237,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/software/monitor.html",
+      "phase": "before",
+      "role": "software",
+      "sha256": "df443bce7ca50029c19c6f763ea0d827e4a0e252788f97ba72f2b8e91c48a842",
+      "bytes": 7871,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/software/NEXT_STEP.md",
+      "phase": "before",
+      "role": "software",
+      "sha256": "b832de7ea262e6466ef236d76e6911c741e10d2674b0396db8d6b2e43a0cd642",
+      "bytes": 1072,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/algorithm/ALGORITHM_PLAN.md",
+      "phase": "before",
+      "role": "algorithm",
+      "sha256": "8bc7b7762d764f78ec7f967e8a6bf8e9d97611fbc07942e0f2a75fae3f9e1322",
+      "bytes": 3312,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/algorithm/EVENT_SCHEMA.json",
+      "phase": "before",
+      "role": "algorithm",
+      "sha256": "cd52a6e8e04f05d5acfac0db4ffb1cc8354014b262951fd0e87b77ece71c3040",
+      "bytes": 1612,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/algorithm/SYNTHETIC_EVENTS.json",
+      "phase": "before",
+      "role": "algorithm",
+      "sha256": "c5704889be56112a140fd4193953413c3522d20b2c782a5945a482c156c035a0",
+      "bytes": 2518,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/algorithm/NEXT_STEP.md",
+      "phase": "before",
+      "role": "algorithm",
+      "sha256": "e7485cfefbfc914750c3ef3e5f3e76336fc19c1ca538fc7411a8f841a68d1589",
+      "bytes": 1406,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/hardware/HARDWARE_CONCEPT.md",
+      "phase": "before",
+      "role": "hardware",
+      "sha256": "c28eb9fddc4ed995eabb8241bfdd4747c14589628ff979baad9ceb9d42202c73",
+      "bytes": 3500,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/hardware/CONSTRAINTS.csv",
+      "phase": "before",
+      "role": "hardware",
+      "sha256": "0264af87a309a20e2fd26bd45028358814630561bf6e0ae8fbca4615fa2629d8",
+      "bytes": 2233,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/hardware/DECISIONS.md",
+      "phase": "before",
+      "role": "hardware",
+      "sha256": "f1df859e346585fa0cde2ca22faaeb52914250e90ef76598bca5baef561f2c30",
+      "bytes": 1450,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/hardware/NEXT_STEP.md",
+      "phase": "before",
+      "role": "hardware",
+      "sha256": "7583d60be67437093c2040ab3eadbe67332274ac64e79ef4756d5f2f3b32bb81",
+      "bytes": 2069,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/software/monitor.html",
+      "phase": "after",
+      "role": "software",
+      "sha256": "742057a1dd514c519be79952033a6dc060b5be7a37a836abadcd97095610b4b1",
+      "bytes": 19741,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/software/rc8-indoor-replay-v1.json",
+      "phase": "after",
+      "role": "software",
+      "sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "bytes": 2113,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/algorithm/validate_replay.py",
+      "phase": "after",
+      "role": "algorithm",
+      "sha256": "f5552db7c4ba2209afcf8b4c27ddce59d886dfab45fd3c8cd25b6dc83db64ccd",
+      "bytes": 9884,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/algorithm/rc8-indoor-replay-v1.json",
+      "phase": "after",
+      "role": "algorithm",
+      "sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "bytes": 2113,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/hardware/verify_hardware_replay.py",
+      "phase": "after",
+      "role": "hardware",
+      "sha256": "28e4e8b081a4be582910abbb044ce89a94b1cc63498460ed334d0cfbb64348bb",
+      "bytes": 9079,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/hardware/rc8-indoor-replay-v1.json",
+      "phase": "after",
+      "role": "hardware",
+      "sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "bytes": 2113,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/hardware/HARDWARE_REPLAY.md",
+      "phase": "after",
+      "role": "hardware",
+      "sha256": "531ce27281a353590119e9f4bb29219b0fd703b74dadff94baebc790e729d56c",
+      "bytes": 3938,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Removed machine interpreter path",
+        "Rebased protocol link",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "governance/rc8-indoor-replay-v1.json",
+      "phase": "after",
+      "role": "governance",
+      "sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "bytes": 2113,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "governance/INTAKE_MEMORY.md",
+      "phase": "intake",
+      "role": "governance",
+      "sha256": "5be6a1ae6c6e70ad110f010d25d0ac6fecb4ebef2a18b62c1f4247f39b06cd6c",
+      "bytes": 3341,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Rebased original artifact references",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "governance/SHARED_INTERFACE.md",
+      "phase": "after",
+      "role": "governance",
+      "sha256": "de1128ed18aa73d49cd84f90ca12049795f748e2bb8b4509a90ee63d26309119",
+      "bytes": 5495,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Replaced private receipt link with export manifest",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "governance/TECHNICAL_REVIEW.md",
+      "phase": "after",
+      "role": "governance",
+      "sha256": "461aad574c913e74f1a551a5ea050ba632ff32b53c42fea0b44ae6733d564c40",
+      "bytes": 5140,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Rebased artifact links",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "after/software/software-evidence.json",
+      "phase": "after",
+      "role": "software",
+      "sha256": "8af27db6ead3dbc80d4e88d1d43df2a3c18e80ece9bd33bd7623bb7597541605",
+      "bytes": 24468,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Removed host chat identity and execution envelope where present",
+        "Rebased source file paths to public relative paths",
+        "Retained technical observations and pending checks"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "after/algorithm/algorithm-evidence.json",
+      "phase": "after",
+      "role": "algorithm",
+      "sha256": "df5ae8eb400c8d4bff10dc1519d5810d2015025582b68eee4db5c1d41fcee8ec",
+      "bytes": 14886,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Removed host chat identity and execution envelope where present",
+        "Rebased source file paths to public relative paths",
+        "Retained technical observations and pending checks"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "after/hardware/hardware-evidence.json",
+      "phase": "after",
+      "role": "hardware",
+      "sha256": "4bcbd66d490b400443415ece986d11c29104a13989e27a9803002be80c9b3ed7",
+      "bytes": 7792,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Removed host chat identity and execution envelope where present",
+        "Rebased source file paths to public relative paths",
+        "Retained technical observations and pending checks"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "before/product/PRODUCT_DEMO_BRIEF.md",
+      "phase": "role_intake",
+      "role": "product",
+      "sha256": "e800164c08b648db3f125ca4a7e078329465470fc8c9c29e4c00cb52938d9c39",
+      "bytes": 782,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "before/product/NEXT_STEP.md",
+      "phase": "role_intake",
+      "role": "product",
+      "sha256": "a3482fc6918f988b4ab195030b454301c73e31e04bf8f55f7205421d46ae9b2c",
+      "bytes": 167,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [],
+      "byte_identical_to_source": true
+    },
+    {
+      "path": "after/product/PRODUCT_INTRO.md",
+      "phase": "after",
+      "role": "product",
+      "sha256": "dda69f71cb55b2645bc68174ec18cd379c61e52d2b1876189e4daf08360d27b0",
+      "bytes": 1853,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Reused the byte-identical software page and fixture through relative links",
+        "Linked cited technical check IDs to sanitized public reports",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "after/product/DEMO_ROUTE.md",
+      "phase": "after",
+      "role": "product",
+      "sha256": "72cb24c6231acfc7111807c31f167373a97054b33bdf43adb89682f065b672c1",
+      "bytes": 2466,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Reused the byte-identical software page and fixture through relative links",
+        "Linked cited technical check IDs to sanitized public reports",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "after/product/USER_GUIDE.md",
+      "phase": "after",
+      "role": "product",
+      "sha256": "1d11bab3396c09d59e05daf6acb9f08b2139934f440a19cdde0cbf598d896e10",
+      "bytes": 2666,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Reused the byte-identical software page and fixture through relative links",
+        "Linked cited technical check IDs to sanitized public reports",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "after/product/product-evidence.json",
+      "phase": "after",
+      "role": "product",
+      "sha256": "9910808245ba6a396eefe550e23c0d0174872a1c7cb436f238e2acb875de19bf",
+      "bytes": 21568,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Rebased artifact and technical report references",
+        "Recomputed cited report and protocol hashes for the sanitized public files",
+        "Retained actual browser observations and check IDs; raw source hashes remain in private mapping"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "governance/PROJECT_REVIEW.md",
+      "phase": "after",
+      "role": "governance",
+      "sha256": "2b46b15a50334e0efdf5b5b0e2d30947655ddfc3b06f884ba950391c4d942a02",
+      "bytes": 5694,
+      "origin": "reviewed_synthetic_chat_export",
+      "transformations": [
+        "Rebased project artifact and governance links",
+        "Replaced local test service name with semantic label",
+        "Preserved original correction of the product summary omission",
+        "Added export label"
+      ],
+      "byte_identical_to_source": false
+    },
+    {
+      "path": "README.md",
+      "phase": "guide",
+      "role": "governance",
+      "sha256": "922bed0fc1115604bf8243b70e1b42da0eecfdf9553379d1ec8f40f0990ff6ec",
+      "bytes": 5286,
+      "origin": "editorial_export_guide",
+      "transformations": []
+    },
+    {
+      "path": "README.zh-CN.md",
+      "phase": "guide",
+      "role": "governance",
+      "sha256": "e68744d425b226d0c50fb8a1f662526e5715ba84695c602bbed9136f6f3812ab",
+      "bytes": 6717,
+      "origin": "editorial_export_guide",
+      "transformations": []
+    },
+    {
+      "path": "README.zh-TW.md",
+      "phase": "guide",
+      "role": "governance",
+      "sha256": "69443032dfef72aa3ddbaf337bd77db9c924a0c00e3c0166049c824ee4b85018",
+      "bytes": 4504,
+      "origin": "editorial_export_guide",
+      "transformations": []
+    }
+  ]
+}

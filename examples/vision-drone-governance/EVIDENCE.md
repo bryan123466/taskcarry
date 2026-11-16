@@ -2,6 +2,8 @@
 
 The files under `initial/`, `scenario.json`, the runbook and `replay.py` are authored synthetic tutorial inputs. They are not exports of real customer projects or claims of native chat execution.
 
+The separate [native-case export](native-case/README.md) now contains actual outputs from the dedicated synthetic chats. Three existing specialist chats retained their initial artifacts, followed a common indoor replay protocol and produced new technical outputs; the new product role reviewed the evidence and wrote its introduction, demo route and user guide. Governance reviewed the cross-role claims and retained omitted pending algorithm checks. The exported evidence is sanitized and labeled, with its own hashes. The chats' native MCP loading and natural scheduled governance remain unverified in that account; technical continuation is not reported as a completed native connection.
+
 ## Useful project outputs
 
 The project should have tangible outputs beyond a list of task names:

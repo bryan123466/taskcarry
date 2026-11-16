@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>障碍物地面监控 · 离线示意</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font: 16px/1.5 Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      color: #182d47;
+      background: #edf2f5;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .shell {
+      width: min(1024px, calc(100% - 32px));
+      margin: clamp(16px, 4vw, 48px) auto;
+    }
+    .masthead, .panel-heading, .connection, .frame-control {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .masthead, .panel-heading { justify-content: space-between; }
+    .masthead {
+      border-radius: 16px;
+      padding: clamp(18px, 3vw, 30px);
+      color: #f3f8ff;
+      background: #152d47;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { margin-top: 6px; font-size: clamp(1.5rem, 4vw, 2rem); }
+    h2 { font-size: 1.15rem; }
+    h3 { font-size: 0.875rem; color: #364f65; }
+    .notice { font-size: 0.875rem; color: #c2d2e4; }
+    .connection { font-size: 0.875rem; gap: 10px; }
+    .status {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      color: #b6f5db;
+    }
+    .status[data-connected="false"] { color: #ffdcac; }
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    button, select {
+      font: inherit;
+      padding: 7px 10px;
+      border: 1px solid #9aafbd;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button { color: #f3f8ff; background: #29435e; }
+    select { color: #182d47; background: #fff; }
+    button:focus-visible, select:focus-visible {
+      outline: 3px solid #2784c7;
+      outline-offset: 3px;
+    }
+    .panel {
+      margin-top: 16px;
+      padding: clamp(14px, 3vw, 24px);
+      border: 1px solid #d3dfe6;
+      border-radius: 16px;
+      background: #fff;
+    }
+    .frame-control { font-size: 0.875rem; gap: 8px; }
+    .zones {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(6px, 1.5vw, 14px);
+      margin-top: 16px;
+    }
+    .zone {
+      min-height: 112px;
+      padding: clamp(8px, 2vw, 16px);
+      border: 1px solid #d6e0e7;
+      border-radius: 10px;
+      background: #f4f7f9;
+      overflow-wrap: anywhere;
+    }
+    .zone[data-has-events="true"] {
+      border-color: #8fb9b7;
+      background: #e9f5f2;
+    }
+    .labels {
+      padding: 0;
+      margin: 10px 0 0;
+      list-style: none;
+      font-weight: 650;
+    }
+    .labels li + li { margin-top: 4px; }
+    .empty { margin-top: 10px; color: #53697d; font-size: 0.875rem; }
+    table { width: 100%; margin-top: 10px; border-collapse: collapse; }
+    th, td {
+      padding: 10px clamp(6px, 2vw, 16px);
+      border-bottom: 1px solid #dce5eb;
+      text-align: left;
+    }
+    th { color: #364f65; font-size: 0.875rem; background: #f4f7f9; }
+    td:first-child { font-family: "IBM Plex Mono", Consolas, monospace; }
+    .current { background: #e9f5f2; }
+    caption {
+      caption-side: bottom;
+      padding-top: 10px;
+      color: #53697d;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div>
+        <p class="notice">离线示意 · 合成数据</p>
+        <h1>障碍物地面监控</h1>
+      </div>
+      <div class="connection">
+        <span>连接状态</span>
+        <span class="status" id="connection-status" data-connected="true" role="status">模拟已连接</span>
+        <button id="connection-toggle" type="button">模拟断开</button>
+      </div>
+    </header>
+
+    <section class="panel" aria-labelledby="regions-title">
+      <div class="panel-heading">
+        <h2 id="regions-title">画面区域</h2>
+        <div class="frame-control">
+          <label for="frame-picker">当前帧</label>
+          <select id="frame-picker"></select>
+        </div>
+      </div>
+      <div class="zones" id="zones" aria-live="polite"></div>
+      <noscript><p>启用 JavaScript 即可查看本地合成事件。</p></noscript>
+    </section>
+
+    <section class="panel" aria-labelledby="events-title">
+      <h2 id="events-title">事件记录</h2>
+      <table>
+        <caption>高亮行对应当前帧</caption>
+        <thead>
+          <tr>
+            <th scope="col">帧标识</th>
+            <th scope="col">障碍物类别</th>
+            <th scope="col">位置区域</th>
+          </tr>
+        </thead>
+        <tbody id="event-rows"></tbody>
+      </table>
+    </section>
+  </main>
+  <script id="demo-data" type="application/json">
+    {
+      "regions": { "left": "左侧", "center": "中部", "right": "右侧" },
+      "examples": [
+        { "frame_id": "sim-001", "label": "立柱", "region": "left" },
+        { "frame_id": "sim-002", "label": "箱体", "region": "center" },
+        { "frame_id": "sim-003", "label": "箱体", "region": "center" },
+        { "frame_id": "sim-003", "label": "围挡", "region": "right" }
+      ]
+    }
+  </script>
+  <script>
+    const { regions, examples } = JSON.parse(document.getElementById("demo-data").textContent);
+    const framePicker = document.getElementById("frame-picker");
+    const zones = document.getElementById("zones");
+    const eventRows = document.getElementById("event-rows");
+    const connectionStatus = document.getElementById("connection-status");
+    const connectionToggle = document.getElementById("connection-toggle");
+
+    const frameIds = Array.from(new Set(examples.map(event => event.frame_id)));
+    for (const frameId of frameIds) {
+      framePicker.add(new Option(frameId, frameId));
+    }
+    framePicker.selectedIndex = frameIds.length - 1;
+
+    for (const event of examples) {
+      const row = eventRows.insertRow();
+      row.dataset.frameId = event.frame_id;
+      for (const value of [event.frame_id, event.label, regions[event.region]]) {
+        row.insertCell().textContent = value;
+      }
+    }
+
+    function showFrame() {
+      const frameEvents = examples.filter(event => event.frame_id === framePicker.value);
+      zones.replaceChildren();
+      for (const [region, name] of Object.entries(regions)) {
+        const matchingEvents = frameEvents.filter(event => event.region === region);
+        const zone = document.createElement("div");
+        zone.className = "zone";
+        zone.dataset.hasEvents = String(matchingEvents.length > 0);
+
+        const heading = document.createElement("h3");
+        heading.textContent = name;
+        zone.append(heading);
+
+        if (matchingEvents.length > 0) {
+          const labels = document.createElement("ul");
+          labels.className = "labels";
+          for (const event of matchingEvents) {
+            const label = document.createElement("li");
+            label.textContent = event.label;
+            labels.append(label);
+          }
+          zone.append(labels);
+        } else {
+          const empty = document.createElement("p");
+          empty.className = "empty";
+          empty.textContent = "无样例事件";
+          zone.append(empty);
+        }
+        zones.append(zone);
+      }
+
+      for (const row of eventRows.rows) {
+        row.classList.toggle("current", row.dataset.frameId === framePicker.value);
+      }
+    }
+
+    framePicker.addEventListener("change", showFrame);
+    connectionToggle.addEventListener("click", () => {
+      const connected = connectionStatus.dataset.connected === "false";
+      connectionStatus.dataset.connected = String(connected);
+      connectionStatus.textContent = connected ? "模拟已连接" : "模拟已断开";
+      connectionToggle.textContent = connected ? "模拟断开" : "模拟连接";
+    });
+    showFrame();
+  </script>
+</body>
+</html>

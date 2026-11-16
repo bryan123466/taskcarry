@@ -60,6 +60,48 @@ REQUIRED.update({"examples/vision-drone-governance/" + name for name in (
     "initial/hardware.md", "initial/product-brief.md")})
 
 
+# Reviewed, sanitized outputs from the dedicated synthetic conversation exercise.
+REQUIRED.update({"examples/vision-drone-governance/native-case/" + name for name in (
+    "after/algorithm/algorithm-evidence.json",
+    "after/algorithm/rc8-indoor-replay-v1.json",
+    "after/algorithm/validate_replay.py",
+    "after/hardware/hardware-evidence.json",
+    "after/hardware/HARDWARE_REPLAY.md",
+    "after/hardware/rc8-indoor-replay-v1.json",
+    "after/hardware/verify_hardware_replay.py",
+    "after/product/DEMO_ROUTE.md",
+    "after/product/product-evidence.json",
+    "after/product/PRODUCT_INTRO.md",
+    "after/product/USER_GUIDE.md",
+    "after/software/monitor.html",
+    "after/software/rc8-indoor-replay-v1.json",
+    "after/software/software-evidence.json",
+    "before/algorithm/ALGORITHM_PLAN.md",
+    "before/algorithm/EVENT_SCHEMA.json",
+    "before/algorithm/NEXT_STEP.md",
+    "before/algorithm/SYNTHETIC_EVENTS.json",
+    "before/hardware/CONSTRAINTS.csv",
+    "before/hardware/DECISIONS.md",
+    "before/hardware/HARDWARE_CONCEPT.md",
+    "before/hardware/NEXT_STEP.md",
+    "before/product/NEXT_STEP.md",
+    "before/product/PRODUCT_DEMO_BRIEF.md",
+    "before/software/INTERFACE_DRAFT.json",
+    "before/software/monitor.html",
+    "before/software/NEXT_STEP.md",
+    "before/software/SOFTWARE_BRIEF.md",
+    "case-manifest.json",
+    "governance/INTAKE_MEMORY.md",
+    "governance/PROJECT_REVIEW.md",
+    "governance/rc8-indoor-replay-v1.json",
+    "governance/SHARED_INTERFACE.md",
+    "governance/TECHNICAL_REVIEW.md",
+    "README.md",
+    "README.zh-CN.md",
+    "README.zh-TW.md",
+)})
+
+
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 

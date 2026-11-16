@@ -70,7 +70,7 @@ control 尚未初始化时，doctor 返回 `NOT_INITIALIZED`，不含运行时�
 
 先核对原聊天的实际工作目录与配置所在目录一致。已在正确目录的原聊天直接沿用，保留历史和原任务身份，无需重新建立窗口。按宿主要求打开或选用该原目录、完成项目的信任提示，再使用宿主支持的 MCP 重启或重载操作。重启应用本身不证明目录已受信任；随后仍须在原窗口调用原生工具验收。
 
-目录不匹配时，先由治理核对宿主支持的关联或保留历史的接续方式，仍使用同一 control。把配置写在另一目录不会让当前聊天自动连接。setup 不选择宿主目录、不授予信任，也不重载宿主。操作入口以当前宿主为准，参考官方 [MCP 配置](https://learn.chatgpt.com/docs/extend/mcp?surface=app)和[配置层级](https://learn.chatgpt.com/docs/config-file/config-basic)。
+未挂在项目下的原对话，先核对实际 cwd，优先按宿主能力关联同一目录并保留原历史。这个标签不表示一定没有 MCP；用户级或项目级配置、插件都可能提供连接，应查看实际工具，不自动改写用户级配置。目录不匹配时，先由治理核对宿主支持的关联或保留历史的接续方式，仍使用同一 control。把配置写在另一目录不会让当前聊天自动连接。setup 不选择宿主目录、不授予信任，也不重载宿主。操作入口以当前宿主为准，参考官方 [MCP 配置](https://learn.chatgpt.com/docs/extend/mcp?surface=app)和[配置层级](https://learn.chatgpt.com/docs/config-file/config-basic)。
 
 Skills 位于 `.agents/skills/`，包括引用的方法文件；未被自动发现时，明确读取该目录下需要的 `SKILL.md` 及引用。新 worktree 不会自动继承另一目录的配置。每个目标窗口按下节单独验收，配置文件或独立 stdio 进程成功均不证明原生宿主已经加载。
 
@@ -78,15 +78,23 @@ Skills 位于 `.agents/skills/`，包括引用的方法文件；未被自动发�
 
 ### 接入已登记工作台
 
-治理应已在原 control 登记该 Git 工作区及其任务。下列是**合成请求示例**，不是要求建立样例任务：
+先按真实目录分组，复用原 control 中的工作区登记。多个活跃对话共用一个业务目录时，目录共享连接与 Skills，各对话仍使用自己的原任务。以下是**合成请求示例**，不是要求建立样例目录或任务：
 
 ```json
-{"mode":"preview","target":"C:/TaskCarry/workspaces/agent-1","workspace":"agent-1","task_id":"example-writing"}
+{"mode":"preview","binding_mode":"directory","target":"<existing-project-directory>","workspace":"drone"}
 ```
 
-用核对过的登记值替换三项，保存请求后执行相同的预览命令。`target`、`workspace`、`task_id` 必须一起提供；target 须匹配登记工作区及其当前 Git 身份，任务须存在于同一个 control。具体任务与工作台关系由治理核对，setup 不强制一对一归属。`--project` 始终指向原 control。审阅后把相同请求的 `mode` 改为 `install`。
+`directory` 模式提供 `target`、`workspace` 并省略 `task_id`，避免把目录里的所有对话固定到一个任务。target 须匹配登记工作区及其当前 Git 身份。保存核对过的请求后执行上面的预览命令；审阅后将同一请求的 `mode` 改为 `install`。`connect` 计划沿用 `binding_mode: "directory"` 和同一目标，`--project` 始终指向原 control。
 
-它写入工作台的四项 Skills 及引用、MCP 片段、`.taskcarry/workbench.json` 和 `workbench.md`，不创建聊天、不登记任务、不初始化另一数据库，也不激活宿主配置。普通文档目录可以通过绑定 control 的 CLI 保存 checkpoint，不为保存文档伪造 Git 登记。
+已有单任务绑定仍可使用默认 `task` 模式，同时提供 `target`、`workspace`、`task_id`；任务须存在于同一 control。例如：
+
+```json
+{"mode":"preview","target":"<existing-project-directory>","workspace":"drone","task_id":"drone-software"}
+```
+
+setup 写入目录的四项 Skills 及引用、MCP 片段和工作台材料，不创建聊天、任务或另一数据库。共享目录的工作台计划使用 `routing: "shared"`，每个目标保留真实 `thread_id` 与原 `task_id`。当前窗口按自己的真实聊天身份读取入口，不能使用目录中的第一个任务代替；每个原对话分别验收与记录实际读取。只有并行写入确实存在冲突时，才考虑独立 Git 工作树。
+
+仅作历史来源的对话不需要原窗口的 MCP 或 Git 配置。普通文档目录也可用绑定 control 的 CLI 保存 checkpoint，不为保存文档伪造 Git 登记。
 
 <a id="verify"></a>
 

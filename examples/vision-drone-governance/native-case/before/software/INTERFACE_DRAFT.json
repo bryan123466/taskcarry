@@ -1,0 +1,33 @@
+{
+  "status": "draft",
+  "data_source": "synthetic",
+  "event_fields": {
+    "frame_id": {
+      "example_type": "string",
+      "description": "所属帧的标识。样例允许同一帧对应多条事件，标识格式和唯一性范围待确认。"
+    },
+    "label": {
+      "example_type": "string",
+      "description": "障碍物类别。样例直接使用展示名称，类别字典待确认。"
+    },
+    "region": {
+      "example_type": "string",
+      "description": "障碍物在示意画面中的位置区域。下列枚举用于离线展示，正式编码与参考系待确认。",
+      "example_values": {
+        "left": "左侧",
+        "center": "中部",
+        "right": "右侧"
+      }
+    }
+  },
+  "pending": {
+    "confidence": "置信度的字段名、含义、取值范围和缺省规则待统一。",
+    "timestamp": "时间戳的字段名、采样或记录时点、时钟基准和单位待统一。"
+  },
+  "examples": [
+    { "frame_id": "sim-001", "label": "立柱", "region": "left" },
+    { "frame_id": "sim-002", "label": "箱体", "region": "center" },
+    { "frame_id": "sim-003", "label": "箱体", "region": "center" },
+    { "frame_id": "sim-003", "label": "围挡", "region": "right" }
+  ]
+}

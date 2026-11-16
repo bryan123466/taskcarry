@@ -24,12 +24,12 @@ class Connection(Core):
             raise GovernanceError('CONNECTION_FRAGMENT_CHANGED', 'Regenerate or review the modified setup fragment.')
         return manifest
 
-    def _target(self, target, workspace, task_id):
+    def _target(self, target, workspace, task_id, binding_mode="task"):
         root = project_root(target or self.root)
         if root == Path.home().resolve() or root.name.casefold() == '.codex':
             raise GovernanceError('PROJECT_CONFIG_REQUIRED', 'Select a project directory, not user-level configuration.')
         if target is not None:
-            workbench_binding(self.root, root, workspace, task_id)
+            workbench_binding(self.root, root, workspace, task_id, binding_mode=binding_mode)
         elif workspace is not None or task_id is not None:
             raise GovernanceError('INVALID_ARGUMENT', 'Workbench identity requires its explicit target.')
         return root
@@ -65,15 +65,17 @@ class Connection(Core):
             raise GovernanceError('CONNECTION_CONFLICT', 'The merge would change unrelated configuration.')
         return merged
 
-    def connect(self, action='plan', target=None, workspace=None, task_id=None, plan_id=None):
+    def connect(self, action='plan', target=None, workspace=None, task_id=None, plan_id=None, binding_mode="task"):
         if action not in ('plan', 'execute', 'status'):
             raise GovernanceError('INVALID_ARGUMENT', 'Use plan, execute or status.')
         if action == 'plan':
             if plan_id is not None:
                 raise GovernanceError('INVALID_ARGUMENT', 'A new plan does not take a plan ID.')
-            root = self._target(target, workspace, task_id)
+            if binding_mode not in ('task', 'directory') or (binding_mode == 'directory' and target is None):
+                raise GovernanceError('INVALID_ARGUMENT', 'Directory connection needs its registered target and workspace.')
+            root = self._target(target, workspace, task_id, binding_mode)
             fragment = read_file_bytes(safe_target(root, '.taskcarry/codex.mcp.toml'), max_bytes=65536)
-            binding = {'control': str(self.root), 'target': str(root), 'workspace': workspace, 'task_id': task_id} if target is not None else None
+            binding = workbench_binding(self.root, root, workspace, task_id, binding_mode=binding_mode) if target is not None else None
             manifest = self._materials(root, binding, fragment)
             server = manifest['server_name']
             try:
@@ -90,6 +92,8 @@ class Connection(Core):
                 body = {'target': str(root), 'workspace': workspace, 'task_id': task_id,
                         'server': server, 'before': digest_bytes(before), 'after': digest_bytes(merged),
                         'fragment': fragment.decode('utf-8'), 'existed': destination.exists()}
+                if binding_mode == 'directory':
+                    body['binding_mode'] = binding_mode
                 key = 'connection-' + digest_bytes(json.dumps(body, sort_keys=True).encode())[:24]
                 prior = self.store.get('connection_plans', key)
                 if prior is None:
@@ -97,7 +101,7 @@ class Connection(Core):
                     self.store.put('connection_plans', key, prior)
                     self.store.event('connection_planned', {'plan_id': key, 'target': str(root)})
             return self._result(prior)
-        if any(value is not None for value in (target, workspace, task_id)):
+        if any(value is not None for value in (target, workspace, task_id)) or binding_mode != 'task':
             raise GovernanceError('INVALID_ARGUMENT', 'Execute the exact saved plan without new target arguments.')
         key = _id(plan_id, 'Connection plan ID')
         with self.store.guard():
@@ -107,7 +111,7 @@ class Connection(Core):
             if action == 'status':
                 return self._result(plan)
             root = self._target(plan['target'] if plan['workspace'] is not None else None,
-                                plan['workspace'], plan['task_id'])
+                                plan['workspace'], plan['task_id'], plan.get('binding_mode', 'task'))
             if str(root) != plan['target']:
                 raise GovernanceError('CONNECTION_BINDING_CHANGED', 'The saved target binding changed.')
             destination = safe_target(root, '.codex/config.toml')
@@ -120,8 +124,8 @@ class Connection(Core):
                 live = read_file_bytes(safe_target(root, '.taskcarry/codex.mcp.toml'), max_bytes=65536)
                 if live != fragment:
                     raise GovernanceError('CONNECTION_FRAGMENT_CHANGED', 'The setup changed after planning.')
-                binding = ({'control': str(self.root), 'target': str(root), 'workspace': plan['workspace'],
-                            'task_id': plan['task_id']} if plan['workspace'] is not None else None)
+                binding = (workbench_binding(self.root, root, plan['workspace'], plan['task_id'],
+                           binding_mode=plan.get('binding_mode', 'task')) if plan['workspace'] is not None else None)
                 manifest = self._materials(root, binding, live)
                 if manifest['server_name'] != plan['server']:
                     raise GovernanceError('CONNECTION_BINDING_CHANGED', 'The setup service changed after planning.')

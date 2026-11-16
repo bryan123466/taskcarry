@@ -1,0 +1,714 @@
+{
+  "role": "product",
+  "task_id": "drone-product-demo",
+  "workspace": "product",
+  "validation_scope": "室内固定障碍的合成离线回放",
+  "replay_version": "rc8-indoor-replay-v1",
+  "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+  "fixture": {
+    "name": "../software/rc8-indoor-replay-v1.json",
+    "bytes": 2113,
+    "browser_selected_bytes_equal": true
+  },
+  "monitor": {
+    "name": "../software/monitor.html",
+    "sha256": "742057a1dd514c519be79952033a6dc060b5be7a37a836abadcd97095610b4b1",
+    "bytes": 19741,
+    "copied_from_verified_software_output": true
+  },
+  "common_protocol": {
+    "file": "../../governance/SHARED_INTERFACE.md",
+    "sha256": "de1128ed18aa73d49cd84f90ca12049795f748e2bb8b4509a90ee63d26309119"
+  },
+  "browser": {
+    "product": "Chrome/155.0.8059.39",
+    "protocol_version": "1.3",
+    "mode": "headless Chrome DevTools Protocol"
+  },
+  "fixture_summary": {
+    "input_profile": {
+      "width_px": 640,
+      "height_px": 480,
+      "pixel_format": "RGB24",
+      "nominal_fps": 15
+    },
+    "times": [
+      0,
+      67,
+      133,
+      200,
+      267,
+      333
+    ],
+    "frame_ids": [
+      "indoor-000",
+      "indoor-001",
+      "indoor-002",
+      null,
+      null,
+      "indoor-005"
+    ],
+    "events_by_tick": [
+      1,
+      2,
+      0,
+      null,
+      null,
+      1
+    ],
+    "empty_ticks": [
+      2
+    ],
+    "miss_ticks": [
+      3,
+      4
+    ],
+    "received_frames": 4,
+    "candidate_count": 4
+  },
+  "technical_evidence": [
+    {
+      "file": "../software/software-evidence.json",
+      "file_sha256": "8af27db6ead3dbc80d4e88d1d43df2a3c18e80ece9bd33bd7623bb7597541605",
+      "replay_version": "rc8-indoor-replay-v1",
+      "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "passed_ids": [
+        "software.fixture-bytes",
+        "software.offline-load",
+        "software.tick-0",
+        "software.tick-1",
+        "software.tick-2",
+        "software.tick-3",
+        "software.tick-4",
+        "software.tick-5",
+        "software.candidate-log",
+        "software.link-log",
+        "software.reset",
+        "software.protocol-validation",
+        "software.zone-boundaries"
+      ],
+      "failed_ids": [],
+      "pending": [],
+      "hash_scope": "sanitized_public_export"
+    },
+    {
+      "file": "../algorithm/algorithm-evidence.json",
+      "file_sha256": "df5ae8eb400c8d4bff10dc1519d5810d2015025582b68eee4db5c1d41fcee8ec",
+      "replay_version": "rc8-indoor-replay-v1",
+      "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "passed_ids": [
+        "fixture_identity",
+        "tick_timing",
+        "frame_event_contract",
+        "tick_candidates_and_regions",
+        "empty_and_missing",
+        "region_boundary_equality",
+        "invalid_events_rejected",
+        "original_plan_and_40ms_fixture"
+      ],
+      "failed_ids": [],
+      "pending": [],
+      "hash_scope": "sanitized_public_export"
+    },
+    {
+      "file": "../hardware/hardware-evidence.json",
+      "file_sha256": "4bcbd66d490b400443415ece986d11c29104a13989e27a9803002be80c9b3ed7",
+      "replay_version": "rc8-indoor-replay-v1",
+      "fixture_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+      "passed_ids": [
+        "fixture_identity",
+        "input_profile",
+        "replay_clock",
+        "frame_delivery",
+        "link_replay",
+        "resource_arithmetic"
+      ],
+      "failed_ids": [],
+      "pending": [
+        {
+          "id": "capture_time_and_latency",
+          "expected": "源帧交付时的 capture_time、时钟和单位约定，以及可与监控端同基准计算的延迟记录。",
+          "reproduce": "待接口确认后在入等待队列前记录采集时刻，并按帧匹配同基准的监控接收或显示打点。"
+        },
+        {
+          "id": "hardware_measurement",
+          "expected": "实际帧载荷和设备的持续吞吐、处理耗时、CPU 占用与峰值内存记录。",
+          "reproduce": "需有真实采集和处理链路的测量记录。当前回放提供帧元数据与预置事件。"
+        },
+        {
+          "id": "buffer_behavior",
+          "expected": "实际缓冲峰值、队列停留和过载处置记录。等待队列深度暂按 3 帧假设。",
+          "reproduce": "待对接处理链路后逐帧记录入队、出队和丢弃事件，再核对积压与过载行为。"
+        }
+      ],
+      "hash_scope": "sanitized_public_export"
+    }
+  ],
+  "checks": [
+    {
+      "id": "product.fixture-bytes",
+      "status": "PASS",
+      "expected": "产品目录中的保留件及浏览器选中的 File 与治理原始输入一致。",
+      "observed": {
+        "name": "rc8-indoor-replay-v1.json",
+        "size": 2113,
+        "selected_sha256": "2c5e0a9157c0bc0ce7a2f4681f3faeb1e8693e19f144b72b0b066e1386198b17",
+        "byte_equal": true
+      },
+      "reproduce": "比较源文件与保留件的原字节。经 Chrome 的本地文件输入选择保留件后，在浏览器读取 File.arrayBuffer() 并核对字节及 SHA-256。"
+    },
+    {
+      "id": "product.offline-load",
+      "status": "PASS",
+      "expected": "本地打开监控页，选择原始回放文件，载入六拍。浏览器未发出外部页面请求，页面无异常。",
+      "observed": {
+        "protocol": "file:",
+        "interface_titles": [
+          "障碍物地面监控",
+          "本地回放 JSON",
+          "载入",
+          "单步",
+          "重置",
+          "画面区域",
+          "左侧",
+          "中部",
+          "右侧",
+          "候选日志",
+          "链路记录"
+        ],
+        "initial_message": "等待载入",
+        "selection_message": "已选择文件，点击「载入」。",
+        "load_message": "已载入 rc8-indoor-replay-v1.json · 6 拍",
+        "external_requests": [],
+        "page_errors": []
+      },
+      "reproduce": "在 Chrome 用 file:// 打开 monitor.html。在本地回放 JSON 中选中 rc8-indoor-replay-v1.json，点击「载入」。通过 DevTools 记录页面请求与异常。"
+    },
+    {
+      "id": "product.tick-0",
+      "status": "PASS",
+      "expected": "画面、候选区、模拟链路与日志行数符合 software-evidence.json 的 software.tick-0。",
+      "observed": {
+        "tick": 0,
+        "timestamp_ms": 0,
+        "frame_id": "indoor-000",
+        "message": "本帧 1 条候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "wall",
+            "label_text": "墙面",
+            "display_region": "left",
+            "region_text": "左侧",
+            "box": [
+              0.04,
+              0.18,
+              0.52,
+              0.88
+            ],
+            "confidence": 0.92
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.04,
+            0.18,
+            0.52,
+            0.88
+          ]
+        ],
+        "candidate_log_rows": 1,
+        "highlighted_log_rows": 1,
+        "link_log_rows": 1,
+        "link_change": "connected",
+        "step_enabled": true
+      },
+      "reproduce": "载入后点击「重置」，点击「单步」1 次，读取节拍、时间、帧号、状态、候选、框位置和日志。"
+    },
+    {
+      "id": "product.tick-1",
+      "status": "PASS",
+      "expected": "画面、候选区、模拟链路与日志行数符合 software-evidence.json 的 software.tick-1。",
+      "observed": {
+        "tick": 1,
+        "timestamp_ms": 67,
+        "frame_id": "indoor-001",
+        "message": "本帧 2 条候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "column",
+            "label_text": "立柱",
+            "display_region": "center",
+            "region_text": "中部",
+            "box": [
+              0.3,
+              0.14,
+              0.46,
+              0.86
+            ],
+            "confidence": 0.84
+          },
+          {
+            "label": "box",
+            "label_text": "箱体",
+            "display_region": "right",
+            "region_text": "右侧",
+            "box": [
+              0.59,
+              0.51,
+              0.83,
+              0.84
+            ],
+            "confidence": 0.81
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.3,
+            0.14,
+            0.46,
+            0.86
+          ],
+          [
+            0.59,
+            0.51,
+            0.83,
+            0.84
+          ]
+        ],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 2,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "reproduce": "载入后点击「重置」，点击「单步」2 次，读取节拍、时间、帧号、状态、候选、框位置和日志。"
+    },
+    {
+      "id": "product.tick-2",
+      "status": "PASS",
+      "expected": "画面、候选区、模拟链路与日志行数符合 software-evidence.json 的 software.tick-2。",
+      "observed": {
+        "tick": 2,
+        "timestamp_ms": 133,
+        "frame_id": "indoor-002",
+        "message": "本帧无候选",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "reproduce": "载入后点击「重置」，点击「单步」3 次，读取节拍、时间、帧号、状态、候选、框位置和日志。"
+    },
+    {
+      "id": "product.tick-3",
+      "status": "PASS",
+      "expected": "画面、候选区、模拟链路与日志行数符合 software-evidence.json 的 software.tick-3。",
+      "observed": {
+        "tick": 3,
+        "timestamp_ms": 200,
+        "frame_id": null,
+        "message": "等待新帧",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 1,
+        "link_change": null,
+        "step_enabled": true
+      },
+      "reproduce": "载入后点击「重置」，点击「单步」4 次，读取节拍、时间、帧号、状态、候选、框位置和日志。"
+    },
+    {
+      "id": "product.tick-4",
+      "status": "PASS",
+      "expected": "画面、候选区、模拟链路与日志行数符合 software-evidence.json 的 software.tick-4。",
+      "observed": {
+        "tick": 4,
+        "timestamp_ms": 267,
+        "frame_id": null,
+        "message": "模拟断流",
+        "link_state": "disconnected",
+        "link_text": "模拟断流",
+        "candidates": [],
+        "plotted_boxes": [],
+        "candidate_log_rows": 3,
+        "highlighted_log_rows": 0,
+        "link_log_rows": 2,
+        "link_change": "disconnected",
+        "step_enabled": true
+      },
+      "reproduce": "载入后点击「重置」，点击「单步」5 次，读取节拍、时间、帧号、状态、候选、框位置和日志。"
+    },
+    {
+      "id": "product.tick-5",
+      "status": "PASS",
+      "expected": "画面、候选区、模拟链路与日志行数符合 software-evidence.json 的 software.tick-5。",
+      "observed": {
+        "tick": 5,
+        "timestamp_ms": 333,
+        "frame_id": "indoor-005",
+        "message": "链路已恢复",
+        "link_state": "connected",
+        "link_text": "模拟已连接",
+        "candidates": [
+          {
+            "label": "box",
+            "label_text": "箱体",
+            "display_region": "left",
+            "region_text": "左侧",
+            "box": [
+              0.14,
+              0.52,
+              0.4,
+              0.86
+            ],
+            "confidence": 0.88
+          }
+        ],
+        "plotted_boxes": [
+          [
+            0.14,
+            0.52,
+            0.4,
+            0.86
+          ]
+        ],
+        "candidate_log_rows": 4,
+        "highlighted_log_rows": 1,
+        "link_log_rows": 3,
+        "link_change": "reconnected",
+        "step_enabled": false
+      },
+      "reproduce": "载入后点击「重置」，点击「单步」6 次，读取节拍、时间、帧号、状态、候选、框位置和日志。"
+    },
+    {
+      "id": "product.candidate-log",
+      "status": "PASS",
+      "expected": "4 条候选按节拍和同帧数组顺序累计。",
+      "observed": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame_id": "indoor-000",
+          "label": "wall",
+          "label_text": "墙面",
+          "display_region": "left",
+          "region_text": "左侧",
+          "box": [
+            0.04,
+            0.18,
+            0.52,
+            0.88
+          ],
+          "confidence": 0.92
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame_id": "indoor-001",
+          "label": "column",
+          "label_text": "立柱",
+          "display_region": "center",
+          "region_text": "中部",
+          "box": [
+            0.3,
+            0.14,
+            0.46,
+            0.86
+          ],
+          "confidence": 0.84
+        },
+        {
+          "tick": 1,
+          "timestamp_ms": 67,
+          "frame_id": "indoor-001",
+          "label": "box",
+          "label_text": "箱体",
+          "display_region": "right",
+          "region_text": "右侧",
+          "box": [
+            0.59,
+            0.51,
+            0.83,
+            0.84
+          ],
+          "confidence": 0.81
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "frame_id": "indoor-005",
+          "label": "box",
+          "label_text": "箱体",
+          "display_region": "left",
+          "region_text": "左侧",
+          "box": [
+            0.14,
+            0.52,
+            0.4,
+            0.86
+          ],
+          "confidence": 0.88
+        }
+      ],
+      "reproduce": "单步至第 5 拍，核对候选日志的节拍、相对时间、帧号、类别、展示区域、原框和样例分数。"
+    },
+    {
+      "id": "product.link-log",
+      "status": "PASS",
+      "expected": "按顺序记录建立模拟连接、模拟断流和恢复。",
+      "observed": [
+        {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "change": "connected"
+        },
+        {
+          "tick": 4,
+          "timestamp_ms": 267,
+          "change": "disconnected"
+        },
+        {
+          "tick": 5,
+          "timestamp_ms": 333,
+          "change": "reconnected"
+        }
+      ],
+      "reproduce": "单步至第 5 拍，读取独立链路记录的三条状态变化。"
+    },
+    {
+      "id": "product.reset",
+      "status": "PASS",
+      "expected": "重置后清空画面与两类日志，回到等待首帧。下一次单步从第 0 拍开始。",
+      "observed": {
+        "before": {
+          "tick": null,
+          "timestamp_ms": null,
+          "frame_id": null,
+          "message": "等待单步",
+          "link_state": "waiting",
+          "link_text": "等待首帧",
+          "candidates": [],
+          "plotted_boxes": [],
+          "candidate_log_rows": 0,
+          "highlighted_log_rows": 0,
+          "link_log_rows": 0,
+          "link_change": null,
+          "step_enabled": true,
+          "event_rows": [],
+          "link_rows": []
+        },
+        "after": {
+          "tick": null,
+          "timestamp_ms": null,
+          "frame_id": null,
+          "message": "等待单步",
+          "link_state": "waiting",
+          "link_text": "等待首帧",
+          "candidates": [],
+          "plotted_boxes": [],
+          "candidate_log_rows": 0,
+          "highlighted_log_rows": 0,
+          "link_log_rows": 0,
+          "link_change": null,
+          "step_enabled": true,
+          "event_rows": [],
+          "link_rows": []
+        },
+        "next_tick": {
+          "tick": 0,
+          "timestamp_ms": 0,
+          "frame_id": "indoor-000",
+          "message": "本帧 1 条候选",
+          "link_state": "connected",
+          "link_text": "模拟已连接",
+          "candidates": [
+            {
+              "label": "wall",
+              "label_text": "墙面",
+              "display_region": "left",
+              "region_text": "左侧",
+              "box": [
+                0.04,
+                0.18,
+                0.52,
+                0.88
+              ],
+              "confidence": 0.92
+            }
+          ],
+          "plotted_boxes": [
+            [
+              0.04,
+              0.18,
+              0.52,
+              0.88
+            ]
+          ],
+          "candidate_log_rows": 1,
+          "highlighted_log_rows": 1,
+          "link_log_rows": 1,
+          "link_change": "connected",
+          "step_enabled": true
+        }
+      },
+      "reproduce": "第 5 拍时单步按钮变灰。点击「重置」，核对节拍、帧号及两张空日志，再点一次「单步」。"
+    }
+  ],
+  "documents": [
+    {
+      "name": "PRODUCT_INTRO.md",
+      "citations": [
+        {
+          "file": "../software/software-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "software.offline-load",
+            "software.tick-0",
+            "software.tick-1",
+            "software.tick-2",
+            "software.tick-3",
+            "software.tick-4",
+            "software.tick-5",
+            "software.candidate-log",
+            "software.link-log"
+          ]
+        },
+        {
+          "file": "../algorithm/algorithm-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "frame_event_contract",
+            "empty_and_missing"
+          ]
+        },
+        {
+          "file": "../hardware/hardware-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "link_replay"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DEMO_ROUTE.md",
+      "citations": [
+        {
+          "file": "../software/software-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "software.fixture-bytes",
+            "software.offline-load",
+            "software.reset",
+            "software.tick-0",
+            "software.tick-1",
+            "software.tick-2",
+            "software.tick-3",
+            "software.tick-4",
+            "software.tick-5",
+            "software.candidate-log",
+            "software.link-log"
+          ]
+        },
+        {
+          "file": "../hardware/hardware-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "replay_clock"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "USER_GUIDE.md",
+      "citations": [
+        {
+          "file": "../software/software-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "software.offline-load",
+            "software.fixture-bytes",
+            "software.reset",
+            "software.tick-0",
+            "software.tick-1",
+            "software.tick-2",
+            "software.tick-3",
+            "software.tick-4",
+            "software.tick-5",
+            "software.candidate-log",
+            "software.link-log"
+          ]
+        },
+        {
+          "file": "../algorithm/algorithm-evidence.json",
+          "status": "PASS",
+          "ids": [
+            "tick_candidates_and_regions"
+          ]
+        }
+      ]
+    }
+  ],
+  "open_items": [
+    {
+      "source": "../hardware/hardware-evidence.json",
+      "check_id": "capture_time_and_latency",
+      "needed": "真实采集时钟、capture_time 的含义及端到端时延测量。"
+    },
+    {
+      "source": "../hardware/hardware-evidence.json",
+      "check_id": "hardware_measurement",
+      "needed": "真实帧载荷与设备持续吞吐、处理耗时、CPU 和峰值内存的测量。"
+    },
+    {
+      "source": "../hardware/hardware-evidence.json",
+      "check_id": "buffer_behavior",
+      "needed": "实测缓冲峰值、队列停留及过载处置。"
+    },
+    {
+      "source": "../../governance/SHARED_INTERFACE.md",
+      "needed": "处理失败、乱序和队列溢出的单独行为验证。"
+    },
+    {
+      "needed": "真实识别、真实链路恢复、室外及实飞能力各自所需的验证证据。"
+    }
+  ],
+  "original_artifacts": [
+    {
+      "name": "../../before/product/PRODUCT_DEMO_BRIEF.md",
+      "bytes": 782,
+      "sha256": "e800164c08b648db3f125ca4a7e078329465470fc8c9c29e4c00cb52938d9c39",
+      "matches_pre_run": true
+    },
+    {
+      "name": "../../before/product/NEXT_STEP.md",
+      "bytes": 167,
+      "sha256": "a3482fc6918f988b4ab195030b454301c73e31e04bf8f55f7205421d46ae9b2c",
+      "matches_pre_run": true
+    }
+  ],
+  "export_metadata": {
+    "kind": "sanitized_professional_report",
+    "raw_host_receipt": false,
+    "source": "actual_dedicated_synthetic_chat_artifact",
+    "changes": [
+      "Rebased artifact and technical report references",
+      "Recomputed cited report and protocol hashes for the sanitized public files",
+      "Retained actual browser observations and check IDs; raw source hashes remain in private mapping"
+    ],
+    "pending_scope_note": "The technical_evidence pending arrays reflect the original summary; also read algorithm-evidence.json pending_checks for its two independent evaluation limits.",
+    "native_mcp_acceptance_proven_by_this_report": false
+  }
+}

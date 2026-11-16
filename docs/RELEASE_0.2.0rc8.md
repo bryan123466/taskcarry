@@ -13,6 +13,7 @@
 - **选择过程可以接续。** 新增共享 `discovery` 操作，保存有界索引覆盖、候选理由、用户选择与后续接入记录的关联。查看与计划不创建项目状态；执行须核对计划和原修订。中断后继续已有草稿，不会为每个候选项目创建一份治理。
 - **已有治理有明确的接续入口。** TaskCarry 更新、其他工具的治理、仅有治理对话分开处理；保留现有规则和状态，先评估共存或迁移范围。
 - **反馈围绕用户下一步。** 三语手册和 Skill 要求给出已填好的原窗口接入内容、新窗口建立位置和激活方法。实际连接、读到共同记忆、配置时段与自然定时执行分别报告。
+- **原聊天可以共用原目录。** 连接与 Skills 按真实目录复用，当前任务入口按原聊天分别选择；同目录两个聊天不会再覆盖一个入口，也不会用其中一个的已读回执代替另一个。旧单任务配置可明确转换，保留原任务、检查点和历史前像。独立恢复会停用旧机器的路由，等待重新核对接入。
 - **独立的视觉避障无人机实例。** 软件、视觉算法、硬件概念和产品推广通过共同决定协作。它展示如何处理原有接口分歧以及“先完成室内离线演示”的范围变更，不表示真实模型、硬件或飞行已完成。
 - **入口与包保持一致。** 三语 README、产品入口、手册、安装后备页、随包方法与构建清单同步；临时对话发现草稿不会进入公开发行包。
 
@@ -27,6 +28,7 @@ This update brings existing Codex conversations into a three-step, assistant-led
 - The shared `discovery` action retains bounded index coverage, candidate reasons, confirmed selection and the link to onboarding. Status and planning do not initialize a control store. Execution validates the exact plan and revision so interrupted selection can resume.
 - Existing TaskCarry installations, other governance tools and governance-only chats have distinct continuation routes that preserve existing rules and state.
 - Filled-in activation instructions and observable per-chat receipts guide the user. Native connection, shared-memory consumption, schedule configuration and natural execution remain separate results.
+- Original chats can share their existing directory, MCP connection and Skills while selecting separate task entries. Publishing or consuming one chat's entry no longer replaces or certifies another's. Explicit conversion retains legacy tasks, checkpoints and setup preimages; isolated recovery disables old-machine routing until reconnection is verified.
 - A standalone vision-drone case connects software, algorithms, hardware concepts and product communication around a shared indoor offline-demo scope. It does not claim a trained model, working aircraft or flight validation.
 - Three-language entrypoints, packaged methods and build membership agree. Local discovery drafts are excluded from public packages.
 
@@ -41,6 +43,7 @@ Existing users start in their original governance chat with the [update guide](e
 - 共用 `discovery` 操作保留有界索引覆蓋、候選理由、確認選擇及後續接入關聯。查看和規劃不初始化治理狀態；執行核對精確計畫和修訂，中斷後可接續。
 - 既有 TaskCarry、其他治理工具及僅有治理對話分流處理，保留原規則與狀態。
 - 提供填好的原視窗接入內容、新視窗位置與激活方法；原生連接、共同記憶讀取、時段配置和自然執行分別回報。
+- 原聊天可共用既有目錄、MCP 連線與 Skills，並依原聊天選擇各自的任務入口；其中一個的發布或已讀回執不會覆蓋或證明另一個。明確轉換保留舊任務、檢查點與設定前像，獨立恢復後停用舊機器路由，等待重新核對連線。
 - 獨立視覺避障無人機實例讓軟體、演算法、硬體概念及產品推廣依共同決定協作，處理接口分歧和室內離線演示的範圍變更，不宣稱真實模型、硬體或飛行已完成。
 - 三語入口、隨包方法與建置清單一致，本機發現草稿排除在公開套件外。
 

@@ -53,3 +53,7 @@ To resume: **“Continue the original TaskCarry update; verify already completed
 Ask the original governance chat to verify existing tasks, decisions, sources and the latest checkpoint. In an independent candidate environment with authorized state copies, exercise project backup, manifest verification and restoration into a separate directory. Check selected artifacts and historical relationships; keep the restored replica in standby. If an explicit index upgrade is needed, verify preservation of original evidence. Users do not need to edit database markers or initialize another project.
 
 Evaluate governance methods, project rules and the Core package separately. If a candidate is unsuitable, keep the verified runtime combination and name affected capabilities and next conditions. Unrelated governance improvements and specialist work can continue. Report package installation, managed configuration, native loading and actual local resolution separately. Rollback must retain facts added after switching; do not overwrite current records with an old database.
+
+## What happens when a release is available
+
+Governance explains the value for this project and prepares a concrete plan, then offers maintenance now, a later window or skipping this candidate. After confirmation it retains project memory and original work chats, verifying installation and native loading separately. See the [RC8 maintenance supplement](core-update-maintenance.md) for the procedure and a prompt for existing governance.

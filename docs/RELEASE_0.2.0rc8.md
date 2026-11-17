@@ -63,3 +63,13 @@ Existing users start in their original governance chat with the [update guide](e
 Validation reuses the unchanged Core's complete local suite of 565 tests (559 passed, 6 skipped), with 20 later source-pinning/release-screen checks, one standard wheel/sdist build check and exported-simulator replay recorded separately. Six chats have their own successful native calls and current-entry consumption for the recorded batches; the four professional chats passed after restart, while governance and testing retain their earlier matching-runtime evidence. The bundled [case evidence](../examples/vision-drone-governance/EVIDENCE.md) and [native summary](../examples/vision-drone-governance/simulation/evidence/native-acceptance.json) distinguish those observations from natural scheduled execution.
 
 This document describes the local RC8 candidate. [Independent review](../examples/vision-drone-governance/simulation/testing/public-product-review.md) passed the recorded 50-file public product snapshot, including ten checks and twelve claims; subsequent line-ending normalization changes file bytes and needs separate manifest verification. The [controlled continuation exercise](../examples/vision-drone-governance/simulation/continuity/README.md) is complete: the new algorithm chat passed its own native access, current-entry consumption and three-frame pixel-threshold/connectivity check; the old chat returned read-only, and governance absorbed the new evidence. Its receipts are separate from the earlier six-chat batch and product review. Exact final source, matching CI and downloadable artifact hashes belong to the actual GitHub prerelease after publication; this file is not a publication receipt. Real aircraft, production adoption, arbitrary host access and multi-computer operation remain outside this example.
+
+## Online method supplement / 在线方法补充 / 線上方法補充
+
+[English](en/core-update-maintenance.md) · [简体中文](zh-CN/core-update-maintenance.md) · [繁體中文](zh-TW/core-update-maintenance.md)
+
+The follow-up guide explains release monitoring, applicability review, a concrete user maintenance decision, preservation and native reload acceptance. It does not replace the original RC8 tag or download attachments; existing installed methods change only when explicitly adopted.
+
+补充说明官方更新发现、适用性判断、具体维护确认、保全和原生重载验收。原 RC8 标签与下载附件保持原内容；已安装方法需要明确采用才会改变。
+
+補充說明官方更新發現、適用性判斷、具體維護確認、保全和原生重新載入驗收。原 RC8 標籤與下載附件保持原內容；已安裝方法需要明確採用才會改變。

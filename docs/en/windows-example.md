@@ -94,6 +94,8 @@ For an active chat not attached to a project, first check its actual directory a
 
 Local version saving, working-window connections, recovery verification, daily governance configuration and official update checking are standard setup. Private Git remotes and cloud storage can follow if you choose them; they are not required for local governance. Finding an update leads to an applicability review, not an automatic runtime replacement.
 
+When an applicable official Core release appears, governance prepares preservation, configuration and reload steps, then asks whether to maintain. An unchanged or deferred candidate does not prompt repeated questions. See the [official update and maintenance loop](core-update-maintenance.md).
+
 ## 3. Review the completion report and keep working
 
 Governance should return a readable report covering:

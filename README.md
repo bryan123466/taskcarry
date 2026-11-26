@@ -30,7 +30,7 @@ The last time a teammate tested the drone demo, they left a note: “Check the c
 
 You’re halfway through the demo guide and want another AI to finish it. Ask the new manager to pick up the guide. It can find the draft you saved in the last chat, the demo version everyone agreed on, and the step your teammate marked as missing. Hand over just the guide, or ask it to manage the whole project.
 
-[Release notes and workflows exercised](docs/RELEASE_0.2.0rc9.md#en)
+[Release notes and workflows exercised](docs/RELEASE_0.2.0.md#en)
 
 ## Why add TaskCarry to Git and project instructions?
 
@@ -120,7 +120,7 @@ Keep working in your original chats. Governance maintains project memory; ongoin
 
 (If TaskCarry is installed, another governance tool is in use, or you already have a governance chat, start with [update and continuation](docs/en/updating.md).) It distinguishes package updates from inheriting existing governance, preserving original records, settings and unfinished work.
 
-If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [RC9 release notes](docs/RELEASE_0.2.0rc9.md#en).
+If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [0.2.0 release notes](docs/RELEASE_0.2.0.md#en).
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="Example arrangement of governance and working chats; specialist count is optional" width="360">
 
@@ -151,7 +151,7 @@ TaskCarry uses Python 3.11+ and includes four project Skills for setup, task del
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0rc9.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0.md)
 
 ## Join in
 

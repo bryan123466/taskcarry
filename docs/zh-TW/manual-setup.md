@@ -33,7 +33,7 @@
 ```powershell
 & {
     $ErrorActionPreference = 'Stop'
-    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc9'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0'
     $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
     if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }

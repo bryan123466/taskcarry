@@ -1,4 +1,10 @@
-# RC9 verification / RC9 验证 / RC9 驗證
+# TaskCarry 0.2.0 verification / 正式版验证 / 正式版驗證
+
+The stable release preserves the verified RC9 functionality. Its exact-source CI, rebuilt artifacts and installation checks are recorded in [RELEASE-VALIDATION.json](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0/RELEASE-VALIDATION.json) on the [0.2.0 release page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0). Collaboration and migration exercises below are retained evidence, not new runs for this metadata-only promotion.
+
+正式版沿用 RC9 的功能与演练结论。最终提交、重新构建的安装包及其检查结果见正式发行附件；原三机与跨 AI 演练不重复执行，也不记作本轮新测。
+
+## Retained RC9 candidate evidence
 
 RC9 changes and exercised capabilities are mapped in [RC9_VERIFICATION.md](RC9_VERIFICATION.md). Exact-source regression, final package, installation, upgrade and CI results are recorded in the [release evidence](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/RC9-VALIDATION.json) and [release page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc9).
 

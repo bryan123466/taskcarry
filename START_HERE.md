@@ -8,15 +8,15 @@
 
 <a id="download"></a>
 
-**0.2.0rc9 · Release candidate / 发行候选版 / 發行候選版**
+**0.2.0 · Stable release / 正式版 / 正式版**
 
-[**Windows x64 · Download the complete package / 下载完整包 / 下載完整套件**](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/TaskCarry-0.2.0rc9-Windows-x64.zip)
+[**Windows x64 · Download the complete package / 下载完整包 / 下載完整套件**](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0/TaskCarry-0.2.0-Windows-x64.zip)
 
 **Python + Git included / 内含 Python + Git / 內含 Python + Git**
 
-[macOS / Linux · Portable product ZIP / 通用产品包 / 通用產品套件](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/taskcarry-0.2.0rc9-product.zip)
+[macOS / Linux · Portable product ZIP / 通用产品包 / 通用產品套件](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0/taskcarry-0.2.0-product.zip)
 
-[Release page and checksums / 发行页与校验文件 / 發行頁與校驗檔案](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc9) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0rc9.md)
+[Release page and checksums / 发行页与校验文件 / 發行頁與校驗檔案](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0.md)
 
 Choose the complete product ZIP above for the toolkit, guides and examples. On the release page, entries labeled **Source code** contain source snapshots. If you already have the product ZIP, continue below.
 

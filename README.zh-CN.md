@@ -30,7 +30,7 @@ TaskCarry 把你和同事在不同 AI 窗口里的决定和成果接起来，存
 
 演示指南写了一半，你想换个 AI 帮忙收尾。告诉新管家“接着写这份指南”，它能从项目记录里找到上个窗口保存的草稿、大家最后选的演示版本，以及同事标出来要补的那一步。你可以只交给它这份指南，也可以让它接着管整个项目。
 
-[本版更新与已演练的工作流程](docs/RELEASE_0.2.0rc9.md#zh-cn)
+[本版更新与已演练的工作流程](docs/RELEASE_0.2.0.md#zh-cn)
 
 ## 已经有 Git 和项目指令，为什么还需要 TaskCarry？
 
@@ -120,7 +120,7 @@ TaskCarry 保存记录并执行已支持的本地操作。你保留项目方向�
 
 （如果已安装 TaskCarry、使用其他治理工具或已有治理对话，需要更新或接续，请参阅[更新与接续入口](docs/zh-CN/updating.md)。）入口区分包更新与既有治理继承，保留原记录、配置和未完成工作。
 
-需要你完成宿主操作时，助手只给当前一步。具体命令放在[手动后备](docs/zh-CN/manual-setup.md)，每次迭代改了什么集中在[本版更新（审阅稿）](docs/RELEASE_0.2.0rc9.md#zh-cn)。
+需要你完成宿主操作时，助手只给当前一步。具体命令放在[手动后备](docs/zh-CN/manual-setup.md)，每次迭代改了什么集中在[本版更新](docs/RELEASE_0.2.0.md#zh-cn)。
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="治理与工作聊天的组织示例，专业窗口数量按需确定" width="360">
 
@@ -151,7 +151,7 @@ TaskCarry 使用 Python 3.11+，包含安装接入、任务交付、治理和恢
 
 [治理闭环如何变得更简洁](docs/zh-CN/governance-evolution.md)
 
-[CLI / MCP 参考](docs/COMMANDS.md) · [公开技能](skills) · [验证记录](docs/RELEASE_0.2.0rc9.md)
+[CLI / MCP 参考](docs/COMMANDS.md) · [公开技能](skills) · [验证记录](docs/RELEASE_0.2.0.md)
 
 ## 一起改进
 

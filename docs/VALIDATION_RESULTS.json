@@ -1,9 +1,9 @@
 {
   "product": "TaskCarry",
-  "version": "0.2.0rc9",
+  "version": "0.2.0",
   "recorded_date": "2026-11-26",
   "rc9_evidence": "https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/RC9-VALIDATION.json",
-  "scope": "RC9 exact-source test, artifact and installation results are attached to the release. The retained RC8 evidence below is historical, not a new RC9 run.",
+  "scope": "0.2.0 is a metadata-only promotion of verified RC9 functionality. Exact-source CI and rebuilt-package checks belong to the stable release attachment; retained RC9 and RC8 evidence is historical.",
   "retained_rc8": {
     "product": "TaskCarry",
     "version": "0.2.0rc8",
@@ -2359,5 +2359,6 @@
         "scope": "Exact pre-canonical snapshot; later LF conversion, new continuation material and final package bytes checked separately"
       }
     }
-  }
+  },
+  "stable_evidence": "https://github.com/bryan123466/taskcarry/releases/download/v0.2.0/RELEASE-VALIDATION.json"
 }

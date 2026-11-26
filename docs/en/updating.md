@@ -46,7 +46,7 @@ Governance checks the registered official channel during its routine. Offline me
 
 Core updates, capability/method updates and user-project decisions are separate responsibilities. Public release, local installation, managed-file publication and a running host loading them are different receipts.
 
-To resume: **“Continue the original TaskCarry update; verify already completed effects and finish the remaining plan.”** Read [release details](../RELEASE_0.2.0rc8.md) for version differences, [feedback examples](user-feedback-examples.md) for expected results, and [manual fallback](manual-setup.md) only for the blocked step.
+To resume: **“Continue the original TaskCarry update; verify already completed effects and finish the remaining plan.”** Read [release details](../RELEASE_0.2.0rc9.md) for version differences, [feedback examples](user-feedback-examples.md) for expected results, and [manual fallback](manual-setup.md) only for the blocked step.
 
 ## Verify continuity during an update
 

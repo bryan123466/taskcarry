@@ -17,9 +17,9 @@ SCHEMAS = {
     'cycle': _object({
         'action': _string(enum=['list', 'status', 'start', 'resume', 'effect_plan', 'effect_result',
                                'source', 'health', 'question_check', 'question_delivered',
-                               'question_response', 'report_delivered', 'finish']),
+                               'question_response', 'report_delivered', 'join_inbox', 'join_absorb', 'finish']),
         'cycle_id': _string('Original finite cycle identity.'),
-        'owner': _string('Original owner, required for mutations and question_check.'),
+        'owner': _string('Original owner; for project chat intake use the original governance thread ID and include chat-joins in scope.'),
         'task_id': _string('Existing task; required at start, never a new task authority.'),
         'scope': {'type': 'array', 'items': _string(), 'minItems': 1, 'maxItems': 100, 'uniqueItems': True,
                   'description': 'Exact shared resource identities, immutable for this cycle; required at start/resume.'},
@@ -67,3 +67,7 @@ DESCRIPTIONS = {
     'facts': 'Read or retain source-qualified decisions, artifacts and relationships with immutable history and revision CAS. Source evidence and AI interpretation remain distinct; aliases do not merge sources or tasks automatically. Reads are bounded and do not change project state.',
     'source_scan': 'Register an authorized local root and enumerate metadata through repeatable bounded pages. Sources are never written and file bodies are never read. Exclusions, budgets, directory watermarks and explicit incomplete states prevent partial scans from becoming deletion claims.',
 }
+
+SCHEMAS['cycle']['properties']['data']['description'] += (
+    ' join_inbox: queue (new or pending_report), read all pages; absorb each page before advancing or combine by join_id. join_absorb: observation_id/source_revision '
+    'from new. During report_delivered include optional join_ids for the pending joins in the actual report.')

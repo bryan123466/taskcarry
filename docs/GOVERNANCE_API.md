@@ -85,6 +85,8 @@ New projects receive a persistent `project_id` and a local `replica_id`. `identi
 
 `cycle` supports `start/resume/status/list`, effect plans/results, source phases, health, actual question/report receipts and `finish`. Owner/task/resource scope is frozen. Request IDs bind evidence mutations to original inputs. Inspect uncertain effects before retrying. The existing `run` action remains the selected delivery/operation receipt aggregate.
 
+For working chats joining this project, reserve `chat-joins` in the original manager's cycle. `join_inbox` reads new or awaiting-report joins. `join_absorb` records the reviewed observation and receipt revision. `report_delivered` accepts the IDs of joins in the delivered report. The [working chat's receipt fields](../skills/taskcarry-project-setup/references/onboarding.md#register-the-working-chats-join-receipt) and [manager's intake sequence](../skills/taskcarry-governance-reconcile/references/daily-governance.md#pick-up-chats-that-joined-this-project) describe the two sides of the exchange.
+
 | Evidence | Required distinction |
 |---|---|
 | Sources | Same ID/revision advances through observed, understood, published to a named target, and consumed there. |

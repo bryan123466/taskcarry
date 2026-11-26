@@ -34,7 +34,7 @@ def invoke(project, action, arguments=None):
     read_modes = {
         'identity': {'status'}, 'onboarding': {'status'}, 'preserve': {'status'},
         'connect': {'status'}, 'governance': {'inspect'}, 'run': {'inspect'},
-        'workbench': {'status'}, 'cycle': {'status', 'list', 'question_check'}, 'source_scan': {'status', 'registry'},
+        'workbench': {'status'}, 'cycle': {'status', 'list', 'question_check', 'join_inbox'}, 'source_scan': {'status', 'registry'},
         'facts': {'get', 'history', 'list'},
         'transfer': {'verify', 'status'},
     }

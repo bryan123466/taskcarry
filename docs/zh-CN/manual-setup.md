@@ -17,16 +17,23 @@
 
 ## 安装或核对固定运行时
 
-先检查已有安装与 control，有效时直接复用。确实首次安装工具时，创建 `C:/TaskCarry`，将选定产品 ZIP 解压到 `C:/TaskCarry/toolkit`。产品 ZIP 自带顶层目录 `taskcarry-0.2.0rc8/`，因此实际产品根是 `C:/TaskCarry/toolkit/taskcarry-0.2.0rc8`，其中包含 `START_HERE.md`、`packages/`、`docs/` 和 `skills/`。选用其他版本时按实际解压出的版本目录调整。原业务项目保留在原位置。需要 Python 3.11+；本地 Git 是标准接入项；普通文件 API 仍保留无 Git 兼容。
+先核实现有安装与治理位置，可用时从原处接续。首次安装时先校验整个 ZIP。官方发行包使用同一 Release 单独提供的 `SHA256SUMS.txt`。内部审阅包使用交付时单独提供的整包 SHA-256。用 PowerShell 的 `Get-FileHash` 读取 ZIP 的 SHA-256，与对应值逐位比对。校验值缺失或不同，先核实来源再安装。
+
+将 ZIP 解压到空位置，按实际看到的目录继续。
+
+- 如果已有 `TaskCarry/START_HERE.md` 和 `TaskCarry/toolkit/`，直接使用这层 `TaskCarry`。工具在 `toolkit/` 下的版本目录中。
+- 旧版 RC8 的 ZIP 解压后只有 `taskcarry-0.2.0rc8/`。使用这份旧包时，建一个空的 `TaskCarry/toolkit/`，将版本目录放进去。
+
+下方命令假设外层为 `C:/TaskCarry`。若你使用其他位置，请将所有示例路径一起换成实际路径。版本目录里应有 `RELEASE_MANIFEST.json`、`packages/`、`docs/` 和 `skills/`。运行需要 Python 3.11+。Git 保存还需要 Git，普通文件读取可以独立进行。
 
 以下命令在 PowerShell 执行，**仅用于专用 runtime 尚不存在的情况**。安装工具不创建新的业务项目，也不意味着获准升级已有运行时。
 
-命令块先将内置 wheel 与 `RELEASE_MANIFEST.json` 中的精确记录核对；记录缺失或不唯一、大小不符或 SHA-256 不符时，在创建 runtime 和安装之前立即停止。这只证明包内一致性。请另从所选官方 Release 单独取得 `SHA256SUMS.txt`，在解压前核对下载产品 ZIP 的 SHA-256。该外部校验文件提供 ZIP 之外的比对来源；两种校验值都不是数字签名，单凭它们不能证明发行者身份。
+下方命令再将内置 wheel 与版本目录中的 `RELEASE_MANIFEST.json` 核对。记录缺失、不唯一、大小或 SHA-256 不符时，命令在建立 runtime 前停止。这项检查验证包内一致性。发行者身份仍取决于包和整包校验值的来源。
 
 ```powershell
 & {
     $ErrorActionPreference = 'Stop'
-    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc8'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc9'
     $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
     if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }

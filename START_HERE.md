@@ -8,19 +8,21 @@
 
 <a id="download"></a>
 
-**0.2.0rc8 · Release candidate / 发行候选版 / 發行候選版**
+**0.2.0rc9 · Release candidate / 发行候选版 / 發行候選版**
 
-[**Download the complete product ZIP / 下载完整产品包 / 下載完整產品套件**](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc8/taskcarry-0.2.0rc8-product.zip)
+[**Windows x64 · Download the complete package / 下载完整包 / 下載完整套件**](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/TaskCarry-0.2.0rc9-Windows-x64.zip)
 
-`taskcarry-0.2.0rc8-product.zip`
+**Python + Git included / 内含 Python + Git / 內含 Python + Git**
 
-[Release page and checksums / 发行页与校验文件 / 發行頁與校驗檔案](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc8) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0rc8.md)
+[macOS / Linux · Portable product ZIP / 通用产品包 / 通用產品套件](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/taskcarry-0.2.0rc9-product.zip)
 
-Choose the complete product ZIP above; GitHub's automatically generated **Source code** archives are not the complete product package. If you already have the package, continue below.
+[Release page and checksums / 发行页与校验文件 / 發行頁與校驗檔案](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc9) · [Changes and verification / 更新内容与验证 / 更新內容與驗證](docs/RELEASE_0.2.0rc9.md)
 
-下载上方完整产品 ZIP；GitHub 自动生成的 **Source code** 压缩包不是完整产品包。已取得完整包可直接从下方开始。
+Choose the complete product ZIP above for the toolkit, guides and examples. On the release page, entries labeled **Source code** contain source snapshots. If you already have the product ZIP, continue below.
 
-下載上方完整產品 ZIP；GitHub 自動產生的 **Source code** 壓縮檔不是完整產品套件。已取得完整套件可直接從下方開始。
+下载上方完整产品 ZIP，其中包含工具、手册与示例。发行页上标为 **Source code** 的条目提供源码快照。已取得完整包可直接从下方开始。
+
+下載上方完整產品 ZIP，其中包含工具、手冊與範例。發行頁上標為 **Source code** 的項目提供原始碼快照。已取得完整套件可直接從下方開始。
 
 <a id="zh-CN"></a>
 
@@ -28,13 +30,13 @@ Choose the complete product ZIP above; GitHub's automatically generated **Source
 
 ### 第一次使用 TaskCarry
 
-取得完整产品包后，按[三步上手手册](docs/zh-CN/windows-example.md)接入已经在 Codex 推进的项目：
+**用 TaskCarry 给手头的项目设一个 AI 管家。** 你在原对话继续做事。想知道各项工作做到哪里、上次为什么采用某个版本时，回到管家对话就能按记录查找。
 
-1. **建立治理窗口。** 创建本地 TaskCarry 文件夹，将产品包解压到 toolkit 子目录，在 Codex 中打开外层目录并发送手册中的完整提示词，无需填写产品路径。
-2. **选择项目，跟随治理。** 总控先整理当前可见的对话索引及覆盖范围；你选定项目后再读取相关历史，为各窗口准备完整接入提示词。随后由它带你完成本地 Git、MCP、记忆、恢复和日常治理配置，包括官方更新检查。
-3. **查看验收与下一步。** 核对已接入的窗口、职责和实际结果，完成具体缺步，再按建议继续工作。自然定时触发在实际发生后补验收。
+1. **开一个项目管家对话。** 把 ZIP 解压到一个空文件夹，按[文件夹打开方式与开场提示](docs/zh-CN/windows-example.md)新开一个使用这个文件夹的管家对话。Codex 用 Windows **Ctrl+O** 或 Mac **⌘O（Command+O）** 选择文件夹，再开新对话。如果你要加入另一个已经使用 TaskCarry 治理的项目，也可以一开始就告诉管家。
+2. **让工作对话加入。** 管家会直接给你一段加入提示。你可以从推荐的项目和对话中选，也可以跳过推荐，把提示直接贴到想加入的对话里。加入后，各个对话都可以在原处继续工作。以后想加新对话，告诉管家，它会给你提示和贴法。开启定时治理后，管家会在下次检查时收录并告诉你谁加入了。想确认时，直接问「最近有哪些对话加入了？」
+3. **开始工作，让管家持续跟进。** 看管家整理的项目近况和下一步，回工作对话继续。建议开启定时治理，按需要让管家协助设置 GitHub 私有仓库备份、其他 AI 或电脑协作，以及项目迁移。
 
-你仍可直接在原来的工作窗口推进；长期项目协调按需选择。私有远端与网盘可以在对话中继续配置。
+如果管家提示缺少 Git 或 Python，建议安装缺少的工具后继续。 [Git](https://git-scm.com/downloads) · [Python 3.11+](https://www.python.org/downloads/)
 
 ### 更新与接续
 
@@ -50,13 +52,13 @@ Choose the complete product ZIP above; GitHub's automatically generated **Source
 
 ### First time using TaskCarry
 
-With the complete product package, follow the [three-step guide](docs/en/windows-example.md) for a project already advancing in Codex:
+**Give the project you are already working on its own AI project manager.** Keep working in your original chats. When you need to know where work stopped or why you adopted a particular version, ask the manager to trace the answer to the project record.
 
-1. **Establish governance.** Create a local TaskCarry folder, extract the package under toolkit, open the outer folder in Codex and send the guide's complete prompt. No product path needs filling in.
-2. **Choose a project and follow governance.** Governance inventories accessible conversation indexes and their coverage. After your selection, it reads relevant history and prepares complete connection prompts for each chat, then guides local Git, MCP, memory, recovery and daily governance including official update checks.
-3. **Review acceptance and next steps.** Check connected windows, responsibilities and actual results, complete any concrete gap, and continue the work. The first natural scheduled trigger is verified when it occurs.
+1. **Start a project manager chat.** Extract the ZIP into an empty folder. Follow the [folder-opening instructions and opening prompt](docs/en/windows-example.md) to start a manager chat using it. In Codex, select the folder with **Ctrl+O** on Windows or **⌘O (Command+O)** on Mac, then start a new chat using it. If you want to join another project that already uses TaskCarry, you can tell the manager right away.
+2. **Invite your working chats.** The manager gives you a message to paste. Choose from the projects and chats it suggests, or skip the suggestions and paste the message into the chats you want to include. Once a chat joins, carry on working there. To add another chat later, ask the manager for the message and where to paste it. With scheduled checks on, the manager picks up new chats at its next check and tells you who joined. You can also ask “Which chats have joined?”
+3. **Get to work and let the manager follow up.** Review the project overview and next steps, then continue in your working chats. Enable scheduled check-ins, and ask the manager to help set up private GitHub backups, collaboration with other AIs or computers, or project migration as needed.
 
-Keep working directly in your existing chats; ongoing project coordination is optional. Private remotes and cloud storage can be configured through the same conversation if you choose them.
+If the manager reports that Git or Python is missing, install the missing tool and continue. [Git](https://git-scm.com/downloads) · [Python 3.11+](https://www.python.org/downloads/)
 
 ### Update and continuation
 
@@ -72,13 +74,13 @@ Keep working directly in your existing chats; ongoing project coordination is op
 
 ### 第一次使用 TaskCarry
 
-取得完整產品套件後，依[三步上手手冊](docs/zh-TW/windows-example.md)接入已經在 Codex 推進的專案：
+**用 TaskCarry 為手上的專案設一位 AI 管家。** 你在原對話繼續做事。想知道各項工作做到哪裡、上次為什麼採用某個版本時，回到管家對話就能依記錄查找。
 
-1. **建立治理視窗。** 建立本機 TaskCarry 資料夾，將產品套件解壓縮到 toolkit 子目錄，在 Codex 中開啟外層目錄並傳送手冊中的完整提示詞，無需填寫產品路徑。
-2. **選擇專案，跟隨治理。** 總控先整理目前可見的對話索引及涵蓋範圍；你選定專案後再讀取相關歷史，為各視窗準備完整接入提示詞。隨後由它帶你完成本機 Git、MCP、記憶、恢復及日常治理設定，包括官方更新檢查。
-3. **查看驗收與下一步。** 核對已接入的視窗、職責及實際結果，完成具體缺步，再依建議繼續工作。自然排程觸發在實際發生後補驗收。
+1. **開一個專案管家對話。** 把 ZIP 解壓縮到一個空資料夾，按照[資料夾開啟方式與開場提示](docs/zh-TW/windows-example.md)開啟一個使用這個資料夾的管家對話。Codex 用 Windows **Ctrl+O** 或 Mac **⌘O（Command+O）** 選擇資料夾，再開啟新對話。如果你要加入另一個已經使用 TaskCarry 治理的專案，也可以一開始就告訴管家。
+2. **讓工作對話加入。** 管家會直接給你一段加入提示。你可以從推薦的專案和對話中選，也可以跳過推薦，把提示直接貼到想加入的對話裡。加入後，各個對話都可以在原處繼續工作。以後想加新對話，告訴管家，它會給你提示與貼法。開啟定時治理後，管家會在下次檢查時收錄並告訴你誰加入了。想確認時，直接問「最近有哪些對話加入了？」
+3. **開始工作，讓管家持續跟進。** 看管家整理的專案近況與下一步，回工作對話繼續。建議開啟定時治理，按需要讓管家協助設定 GitHub 私人儲存庫備份、其他 AI 或電腦協作，以及專案移轉。
 
-你仍可直接在原來的工作視窗推進；長期專案協調按需選擇。私有遠端與網路磁碟可以在對話中繼續設定。
+如果管家提示缺少 Git 或 Python，建議安裝缺少的工具後繼續。 [Git](https://git-scm.com/downloads) · [Python 3.11+](https://www.python.org/downloads/)
 
 ### 更新與接續
 

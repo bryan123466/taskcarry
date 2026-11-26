@@ -10,19 +10,12 @@
 <a id="31-existing-ongoing-chats-preserve-history-and-connect-current-state"></a>
 <a id="32-create-new-professional-task-chats-add-1n-as-needed"></a>
 <a id="4-configure-mcp-recommended-for-governance-with-cli-as-a-fallback"></a>
-<a id="agents"></a>
-<a id="existing"></a>
-<a id="mcp"></a>
 <a id="5-first-governance-pass-review-current-work-and-see-the-result"></a>
 <a id="9-what-you-should-see-when-finished"></a>
-<a id="delivery"></a>
-<a id="check"></a>
 <a id="6-create-scheduled-governance-read-the-actual-registered-scope"></a>
 <a id="7-optional-a-private-git-memory-repository"></a>
 <a id="8-optional-parallel-work-on-different-computers"></a>
 <a id="automation"></a>
-<a id="private-git"></a>
-<a id="multi-computer"></a>
 <a id="windows-guide-connect-your-existing-codex-project"></a>
 <a id="1-establish-a-governance-chat"></a>
 <a id="send-one-onboarding-prompt"></a>
@@ -34,83 +27,105 @@
 <a id="optional-additions"></a>
 <a id="install"></a>
 
-# First installation: complete project governance in three steps
+# Get started with TaskCarry in three steps
 
 [Update or continue existing governance](updating.md) · [Manual fallback](manual-setup.md) · [Feedback examples](user-feedback-examples.md) · [Drone project example](../../examples/vision-drone-governance/README.md) · [简体中文](../zh-CN/windows-example.md) · [繁體中文](../zh-TW/windows-example.md)
 
-This guide is for people already advancing projects in Codex. A separate governance chat maintains project memory, connects existing work and guides setup. Keep working directly in your original chats; ongoing project coordination by governance is your choice.
+Keep writing code, designing and organizing materials in your existing AI chats. Start a separate **project manager** chat to track progress, connect the work across chats and find earlier decisions and lessons. If you already have a manager or are upgrading, start with [update and continuation](updating.md).
 
-## 1. Open the governance folder and send one prompt
+## 1. Extract TaskCarry and start a project manager chat
 
-Create a local `TaskCarry` folder and extract the [complete product package](../../START_HERE.md#download) under `toolkit/`, retaining the version directory inside the package. Open the **outer TaskCarry folder** in Codex and create a separate chat. Keep existing business files where they are.
+**① Extract the ZIP** into an empty folder of your choice. For example, create a folder on your D: drive and extract the package there.
 
-(If you already installed TaskCarry, use another governance tool or have a governance chat, see [update and continuation](updating.md).)
+**② Start a project manager chat.** Follow the row for your tool to select the folder you extracted into and start a new chat using that folder. This chat will be your project manager.
 
-```text
-TaskCarry/                 Governance working folder opened in Codex
-  toolkit/                 Extracted product package
-```
-
-**Copy this complete prompt. No product path needs filling in:**
-
-> Read the TaskCarry product entry and onboarding Skill under toolkit in the current working directory, then guide me through project governance setup. Inspect existing governance, installations and work first; preserve my rules, decisions, tasks and unfinished work.
->
-> Start with a read-only inventory of conversation indexes available through the current tools. Show likely projects and their included chats for me to choose; read relevant history only after I select a scope. Prepare complete connection prompts for my existing chats and recommend new chats only where useful.
->
-> Then reuse local Git, MCP and Skills by actual working directory, keeping each original chat's task identity when chats share a directory. Do not require a new folder for every chat. Help complete project memory, the first governance cycle and recovery verification. Confirm times and time zone with me before configuring daily governance and official update checks. When I need to act, give me only the necessary next step, with the key or menu entry, exact directory, purpose and what to report afterward. If new connections are not loaded, finish configuration and original-chat project associations first, then guide me through one Codex restart and verification in each original chat. Do not repeat a restart for connections already verified. Resume missing steps after an interruption.
->
-> Finish by telling me which chats are connected, their responsibilities, what remains incomplete and what to do next. I can still work directly in my original chats.
-
-The product directory means the TaskCarry package under `toolkit/`; the assistant locates it from this working folder. Reading it teaches the governance method. **Your project information comes from the chats and files you subsequently select.** The assistant asks about the package only when it is missing, incomplete or genuinely ambiguous.
-
-## 2. Let governance complete connection and its first cycle
-
-Follow the current step governance supplies. First it reports which conversation indexes it can access, whether archived chats are included, whether more pages remain and what it cannot see. It then groups candidate projects for your choice. Indexes provide clues such as titles and directories; relevant history is read after you confirm the scope. You can also name the project directly.
-
-After selection, expect these results:
-
-| What you receive | What governance does |
+| Your tool | How to open the folder |
 |---|---|
-| Project understanding and a connection proposal | Preserve existing outputs, effective decisions, tasks and stopping points; distinguish facts from suggestions. Historical reference chats may remain references. |
-| Specific instructions for each chat | Supply a fully filled-in connection prompt for each original chat. Recommend a new role only when useful, with its working location, activation prompt and expected receipt. There is no required number of chats. |
-| The current action requiring you | Prepare real working locations, local Git, project settings and MCP. For host trust, login or reload, explain where to act and the expected result, then verify it. |
-| Connection and first-cycle results | Verify each window's actual connection, original task and current entry; establish shared memory, save selected files precisely, check official updates and rehearse local recovery. |
-| A proposed daily rhythm | Confirm times and time zone, create or reuse report and progress-review slots returning to this original governance chat, then read back the actual configuration. |
+| **Codex desktop** | Press **Ctrl+O** on Windows or **⌘O (Command+O)** on Mac. Select the extracted folder, then start a new chat using it. |
+| **WorkBuddy** | Start a new task. Set the working directory below the input box to the extracted folder, then send the opening message below. |
+| **Claude Code (CC, desktop)** | Open the **Code** tab in the Claude desktop app, start a local session and select the extracted folder. |
+| **Claude Code (CC) / Gemini CLI / Kimi Code CLI (terminal)** | In Windows PowerShell or a Mac terminal, run `cd "full path to the extracted folder"`. Then run the command for your tool: `claude` for CC, `gemini` for Gemini CLI, or `kimi` for Kimi Code CLI. |
+| **DeepSeek / GLM (used through CC or WorkBuddy)** | If you already configured the model in CC, follow the CC instructions above. If you use it in WorkBuddy, follow the WorkBuddy instructions. |
 
-**Keep existing chats; a separate folder for every chat is not required.** Several original chats can share a business directory and its connection settings while retaining their own tasks, checkpoints and memory entries. Governance recommends separate Git worktrees only when concurrent writes need isolation.
+**③ Paste this message** into the new chat:
 
-If the original chat's directory has not been opened and trusted in Codex, governance first verifies and supplies that exact existing directory, then guides these actions:
+> Find the TaskCarry instructions in this folder and set up my project manager. If I already have one here, continue with it. You may suggest projects and chats from titles I allow you to see, or I can choose the chats myself. Give me a single invitation I can paste into the chats I want to include. Only read the work I choose to share.
 
-1. Press **Ctrl+O** in the current Windows Codex app; in other interfaces, use the **Open / Add project folder** entry.
-2. Select the **original working directory** supplied by governance and open it. **Do not create a new chat or copy files at this point.**
-3. If a trust prompt appears, check that it names this directory and confirm it.
-4. Return to governance and reply, “I opened the specified directory and confirmed the trust prompt.” If no prompt appeared, report that instead. Governance checks the configuration and the original chat's project association.
-5. Once governance confirms that this batch of directories is ready and new connections need loading, save ongoing work, then **quit and reopen Codex once**. Prepare all directories in this batch before restarting; a restart for every directory is unnecessary.
-6. Return to the **original governance chat** and reply, “I restarted Codex.” Return to each **original working chat** for the verification prompt governance supplies. Keep the original history, tasks and files; do not reinstall or create replacement chats.
+The manager follows the package instructions to install and configure TaskCarry, then gives you an invitation. Choose from the projects and chats it suggests, or say, “Give me the invitation. I’ll choose the chats myself.” It will tell you when a step needs a click or confirmation.
 
-These actions register and trust the existing directory, **associate the original chat with that project and load its connection settings**, using the same governance memory. Governance uses the host's supported association method, verifies that the actual working directory is unchanged, then calls native `taskcarry_doctor` and `taskcarry_status` in each chat to check version, source, control, original task and latest checkpoint. For newly added connections in this Windows Codex workflow, restart once after the directories and chat associations are ready, then verify the original chats. Skip it for connections already verified; other hosts use their supported loading mechanism. A sidebar entry or a completed restart alone is not native acceptance. [See an example with the directory filled in](user-feedback-examples.md#open-existing-project).
+If the manager reports that Git or Python is missing, install the missing tool and continue. [Git](https://git-scm.com/downloads) · [Python 3.11+](https://www.python.org/downloads/)
 
-For an active chat not attached to a project, first check its actual directory and tools, then use a supported association with that directory while retaining the original chat. That label alone does not mean MCP is unavailable, and a prompt cannot change the chat's directory. Historical reference chats can remain sources without MCP or Git setup in those windows. When the host cannot read needed history, connect or schedule, governance supplies the current missing step and resume instruction, with [manual fallback](manual-setup.md) only where needed.
+<details>
+<summary>Official instructions for each tool</summary>
 
-Local version saving, working-window connections, recovery verification, daily governance configuration and official update checking are standard setup. Private Git remotes and cloud storage can follow if you choose them; they are not required for local governance. Finding an update leads to an applicability review, not an automatic runtime replacement.
+[Codex shortcuts](https://developers.openai.com/codex/app/commands) · [WorkBuddy working directory](https://www.workbuddy.ai/docs/zh/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Task-Bar) · [Open a project in Claude Code](https://support.claude.com/en/articles/14552382-your-first-day-in-claude-code) · [Gemini CLI](https://github.com/google-gemini/gemini-cli#quick-examples) · [Kimi Code CLI](https://moonshotai.github.io/kimi-code/en/reference/kimi-command.html) · [DeepSeek in CC](https://api-docs.deepseek.com/quick_start/agent_integrations/claude_code/) · [GLM in CC](https://docs.z.ai/devpack/tool/claude)
 
-When an applicable official Core release appears, governance prepares preservation, configuration and reload steps, then asks whether to maintain. An unchanged or deferred candidate does not prompt repeated questions. See the [official update and maintenance loop](core-update-maintenance.md).
+</details>
 
-## 3. Review the completion report and keep working
+<a id="agents"></a>
+<a id="existing"></a>
+<a id="mcp"></a>
 
-Governance should return a readable report covering:
+## 2. Paste the invitation into the chats you want to include
 
-- **What it understood:** project goals, inherited decisions and outputs, and unresolved questions.
-- **Which chats are connected:** each responsibility, original task, real work location and connection result.
-- **What setup completed:** actual local saving, project memory, recovery, official update checking and daily schedule results.
-- **What remains:** concrete missing steps, their impact and the next necessary action. Pending work is not labeled complete.
-- **What to do next:** which original chats can continue which work, and which recommendations await your decision.
+**① Paste the invitation into your working chats.** The manager gives you a message to copy. Paste it once into each chat you want to include. Use the original chat for work already underway. For a new task, you can start a new chat.
 
-“Configuration complete” and “natural scheduled cycle verified” are reported separately. Reading back a schedule is followed by waiting for a real trigger, then checking the original AI's execution, saving and report delivery. A pending host action does not erase the other completed results.
+**② Complete the connection with the manager’s help.** It guides you through setup and tells you when to select a working folder, save work or restart your AI tool. Once connected, each working chat reports its responsibility, where it left off and what comes next. For a new chat, tell it which task to take on.
 
-Continue with “resume my last unfinished task” in the working chat, or “review current project progress” in governance. After an interruption, say “retain completed results and continue the remaining setup”; no restart from step one is needed.
+**③ Check which chats have joined and continue working.** Ask the manager “Which chats have joined?” It lists their responsibilities, progress and next actions. If one is missing, give the manager its name so it can check the remaining step.
 
-[See feedback at each stage](user-feedback-examples.md) · [See the separate drone governance example and final layout](../../examples/vision-drone-governance/README.md)
+To add another chat later, say “I want to add another chat.” The manager gives you the invitation and instructions. With scheduled check-ins enabled, it picks up the new chat and reports back at the next check-in.
+
+**Drone project example.** Paste the same invitation into the software development and product testing chats. The software chat says, “The demo is updated.” The product chat says, “Testing is done.” Ask the manager, “Did the product team test the version the software chat just changed?” It checks both versions and the test records, then tells you which version was tested and whether the change reached the shared version. When more changes arrive, it also points out what needs another test.
+
+<a id="check"></a>
+<a id="delivery"></a>
+<a id="private-git"></a>
+<a id="multi-computer"></a>
+
+## 3. Get to work and let the manager follow up
+
+**① Review the project overview**
+
+Once your chats are connected, the manager puts together a project overview. You can also ask:
+
+> Show me where the project stands and what I should work on next.
+
+| What you want to know | What the manager tells you |
+|---|---|
+| **How is the project going?** | The current goal, completed work, and anything unfinished or blocked. |
+| **What is each chat working on?** | Each chat's responsibility, where it left off and what it plans to do next. |
+| **What is already set up?** | Whether the working chats are connected, where project records are saved and which setup steps remain. |
+| **What should I do next?** | Which chat to return to, what to work on and which decisions need your input. |
+
+Return to a working chat and say “Continue where we left off.” You can also ask the manager “Which chat has already done this?” or “How did we solve a similar problem last time?”
+
+**② Turn on scheduled check-ins — recommended**
+
+Let the manager check progress in the connected chats, organize new results, decisions and lessons, and flag things that need your attention. You can say:
+
+> Help me enable scheduled check-ins. Suggest times to review progress and report back that suit this project.
+
+The manager gives you setup instructions for your AI tool and confirms the check-in and reporting times with you. Once enabled, keep working in your usual chats while the manager follows up as agreed. New chats are picked up at the next check-in after you paste their invitation.
+
+To change the arrangement, say “Report every evening instead” or “Pause scheduled check-ins for now.”
+
+**③ Add online backups or collaboration with other AIs and computers as needed**
+
+The manager suggests whether your project would benefit from online backups or collaboration across computers and AI tools. If you need to keep the project long term, move computers or work with others, back up important files and organized project records to **your own private GitHub repository**.
+
+Tell the manager what you want to do:
+
+| What you want to do | What to say to the manager |
+|---|---|
+| **Back up important materials online** | “Help me back up this project's important files and project records to my own private GitHub repository. Walk me through setup.” |
+| **Bring in another AI or computer** | “I want another AI or computer to work on this project with me. Help me plan its role and how to connect it.” |
+| **Join someone else's managed project** | “I want to join a project that already uses TaskCarry as a collaborator. Tell me what I need from its manager.” |
+| **Move project management to another AI or computer** | “I want to move overall project coordination from the other AI or computer to you. Please take over that role and help me rebuild the full existing workflow locally.” If only part of the work is moving, name the chats to move. |
+
+Combine these arrangements as needed, or add them later. The manager gives you the steps and tells you where to act when you need to sign in, choose what to share or open a working chat.
+
+[Scheduled check-in setup](automation.md) · [Online backup and collaboration](remote-and-multicomputer.md) · [Project migration steps](operation-manual.md#move-project) · [Daily operations](operation-manual.md) · [Official update and maintenance](core-update-maintenance.md)
 
 <details>
 <summary>Complete setup acceptance and technical references</summary>

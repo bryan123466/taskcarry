@@ -24,10 +24,18 @@ EXTENSIONS = {".py", ".md", ".json", ".toml", ".html", ".css", ".js", ".yaml", "
 # are not allowed. A changed or additional binary must be reviewed explicitly.
 REVIEWED_BINARY_ASSETS = {
     "docs/assets/workspace-sidebar-example.png": "dfc75af11cf1a2950f16479b70e95346b97fb0a06f73fc0fbdfca6dbacfaee22",
-    "docs/assets/social-preview.png": "8763f806449c8aa1ee5cb7e4a3680bd2f4d3c96ba3c0a08e5bd107bf51b7db5a",
+    "docs/assets/project-manager.en.png": "eef6e89cd73e985012b67e75d9ee7451e1c09f4211a57e49dd7d4a070be48759",
+    "docs/assets/project-manager.zh-CN.png": "f245b75c2a79bc5012bccb49f85de3db6e88adb5ba618b0ab7868dec1c2b2a40",
+    "docs/assets/story-experience.en.png": "524ce7b86abcd94b9bd6979f41a82227451c0899a7ac845b09f4bd412017aec5",
+    "docs/assets/story-experience.zh-CN.png": "4f31df11e2b0dd1f58badceace90cc0ad3f90b325f87b1f2e3fb9f907e1c5cc7",
+    "docs/assets/story-version.en.png": "9a2dc99223d37c0e015e2313e4b16ae8a19b88a4754bf2100e964c1fb6d3c794",
+    "docs/assets/story-version.zh-CN.png": "ed29ab64efc0e412b39959ef171aea70a986b388b1eeaab72a5b478287b2d12b",
+    "docs/assets/social-preview.png": "eef6e89cd73e985012b67e75d9ee7451e1c09f4211a57e49dd7d4a070be48759",
+    "docs/assets/social-preview.jpg": "926af9f46b6598aa82cb1335aa3d94d876a9e1f32a0c2febe19900dbe1770f0a",
 }
 EXCLUDED = {"__pycache__", ".taskcarry", ".taskcarry-onboarding", ".venv", ".git", "node_modules", "dist", "build", "local"}
 SKILLS = {"taskcarry-project-setup", "taskcarry-task-delivery", "taskcarry-governance-reconcile", "taskcarry-experience-recovery"}
+FIRST_USE_TEMPLATE = "templates/first-use/START_HERE.md"
 SKILL_REFERENCES = {"taskcarry-project-setup/references/onboarding.md",
                     "taskcarry-governance-reconcile/references/daily-governance.md"}
 REQUIRED = {"docs/VALIDATION.md", "docs/VALIDATION_RESULTS.json", "README.md", "README.zh-CN.md", "README.zh-TW.md", "LICENSE", "LICENSE_SCOPE.md", "pyproject.toml", "setup.py"}
@@ -234,7 +242,8 @@ def screen_content(contents, deny_tokens=()):
     absolute_pattern = re.compile(r'''(?<![A-Za-z0-9_])(?:[A-Za-z]:[\\/])[^"'`\s<>()\[\]{},;]*''')
     for name, content in contents.items():
         if name in REVIEWED_BINARY_ASSETS:
-            if sha(content) != REVIEWED_BINARY_ASSETS[name] or not content.startswith(b"\x89PNG\r\n\x1a\n"):
+            header = b"\xff\xd8\xff" if name.endswith(".jpg") else b"\x89PNG\r\n\x1a\n"
+            if sha(content) != REVIEWED_BINARY_ASSETS[name] or not content.startswith(header):
                 findings.append({"path": name, "kind": "reviewed_asset_changed"})
             continue
         try:
@@ -460,7 +469,7 @@ def product_contents(contents):
     excluded_prefixes = ("tests/", "scripts/", ".github/", "examples/quality_forms/reference/")
     result = {name: data for name, data in contents.items()
               if name not in excluded_files and not name.startswith(excluded_prefixes)}
-    required = {"START_HERE.md", "docs/en/getting-started.md", "docs/zh-CN/getting-started.md",
+    required = {"START_HERE.md", FIRST_USE_TEMPLATE, "docs/en/getting-started.md", "docs/zh-CN/getting-started.md",
                 "docs/en/windows-example.md", "docs/zh-CN/windows-example.md", "docs/zh-TW/windows-example.md",
                 "examples/windows_quickstart/bootstrap.py"}
     if not required.issubset(result):
@@ -472,6 +481,31 @@ def product_contents(contents):
     if not {"skills/" + name for name in SKILL_REFERENCES}.issubset(result):
         raise RuntimeError("Product package needs the public onboarding skill references")
     return result
+
+
+def archive_members(contents, profile, wheel, source_commit):
+    """Keep manifests relative to their toolkit; expose first use at the product root."""
+    directory = "taskcarry-" + __version__
+    toolkit = dict(contents)
+    members = {}
+    manifest = {"product": "TaskCarry", "version": __version__, "source_commit": source_commit}
+    if profile == "product":
+        relative_toolkit = "toolkit/" + directory
+        directory = "TaskCarry/" + relative_toolkit
+        # The template links also work when read directly in the source tree.
+        entry = toolkit.pop(FIRST_USE_TEMPLATE).replace(b"](../../docs/", b"](" + relative_toolkit.encode("ascii") + b"/docs/")
+        entry_path = "TaskCarry/START_HERE.md"
+        members[entry_path] = entry
+        manifest["first_use_entry"] = {"archive_path": entry_path, "sha256": sha(entry), "bytes": len(entry)}
+        wheel_path = "packages/" + wheel.name
+        wheel_bytes = wheel.read_bytes()
+        toolkit[wheel_path] = wheel_bytes
+        toolkit["SHA256SUMS.txt"] = (sha(wheel_bytes) + "  " + wheel_path + "\n").encode("utf-8")
+    manifest["files"] = [{"path": name, "sha256": sha(content), "bytes": len(content)}
+                         for name, content in sorted(toolkit.items())]
+    toolkit["RELEASE_MANIFEST.json"] = json.dumps(manifest, indent=2, ensure_ascii=False).encode("utf-8")
+    members.update({directory + "/" + name: data for name, data in toolkit.items()})
+    return members
 
 
 def build(destination, replace=False, deny_tokens=(), profile="source", source_commit=None):
@@ -502,26 +536,20 @@ def build(destination, replace=False, deny_tokens=(), profile="source", source_c
         if len(wheels) != 1:
             raise RuntimeError("Expected exactly one newly built wheel")
         wheel_check = inspect_wheel(wheels[0], contents, deny_tokens)
-        archive_contents = dict(contents)
-        if profile == "product":
-            archive_contents["packages/" + wheels[0].name] = wheels[0].read_bytes()
-            archive_contents["SHA256SUMS.txt"] = (sha(wheels[0].read_bytes()) + "  packages/" + wheels[0].name + "\n").encode("utf-8")
-        manifest = {"product": "TaskCarry", "version": __version__, "source_commit": source_commit,
-                    "files": [{"path": name, "sha256": sha(content), "bytes": len(content)} for name, content in sorted(archive_contents.items())]}
+        payloads = archive_members(contents, profile, wheels[0], source_commit)
         archive = output / (prefix + ("-product" if profile == "product" else "") + ".zip")
         with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as zipped:
-            payloads = {**archive_contents, "RELEASE_MANIFEST.json": json.dumps(manifest, indent=2, ensure_ascii=False).encode("utf-8")}
             for name, content in sorted(payloads.items()):
-                info = zipfile.ZipInfo(prefix + "/" + name, date_time=(2026, 1, 1, 0, 0, 0))
+                info = zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
                 info.compress_type = zipfile.ZIP_DEFLATED
                 info.external_attr = 0o100644 << 16
                 zipped.writestr(info, content)
         with zipfile.ZipFile(archive) as zipped:
-            expected_names = {prefix + "/" + name for name in payloads}
+            expected_names = set(payloads)
             if len(zipped.namelist()) != len(expected_names) or set(zipped.namelist()) != expected_names:
-                raise RuntimeError("Source archive membership differs from its positive allowlist")
-            if zipped.testzip() is not None or any(zipped.read(prefix + "/" + name) != data for name, data in payloads.items()):
-                raise RuntimeError("Source archive bytes do not match the frozen source")
+                raise RuntimeError("Archive membership differs from its positive allowlist")
+            if zipped.testzip() is not None or any(zipped.read(name) != data for name, data in payloads.items()):
+                raise RuntimeError("Archive bytes differ from the expected payload")
         candidates = [archive, wheels[0]]
         if source_commit is not None:
             from taskcarry.updates import build_release_manifest, MANIFEST_NAME

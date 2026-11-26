@@ -17,16 +17,23 @@ Use this fallback only for the step your governance assistant cannot complete. F
 
 ## Install or inspect the fixed runtime
 
-First check for an existing installation/control and keep it when valid. For a genuinely first tool installation, create `C:/TaskCarry` and extract the selected product ZIP into `C:/TaskCarry/toolkit`. The product ZIP includes a top-level `taskcarry-0.2.0rc8/` directory: the extracted product root is `C:/TaskCarry/toolkit/taskcarry-0.2.0rc8`, containing `START_HERE.md`, `packages/`, `docs/` and `skills/`. Use the actual extracted version directory if selecting another package. Keep the existing business project in place. Python 3.11+ is required; Local Git is a standard onboarding requirement; ordinary file APIs retain compatibility without it.
+Inspect existing governance and its installed runtime first. Resume in place when they are usable. For a first installation, verify the whole ZIP. For an official package, use the separate `SHA256SUMS.txt` from its release. For an internal review package, use the whole-ZIP SHA-256 supplied separately with that delivery. Use PowerShell's `Get-FileHash` on the ZIP and compare all digits of the SHA-256. If the expected digest is missing or differs, verify the source before installing.
+
+Extract the ZIP into an empty location and inspect its contents.
+
+- If you see `TaskCarry/START_HERE.md` and `TaskCarry/toolkit/`, use that outer `TaskCarry` folder. The toolkit lives in the version folder under `toolkit/`.
+- The older RC8 ZIP opens to a single `taskcarry-0.2.0rc8/` folder. For this layout, create an empty `TaskCarry/toolkit/` and place the extracted version folder inside.
+
+The commands below assume the outer folder is `C:/TaskCarry`. If yours is elsewhere, adjust every example path to match. The version folder contains `RELEASE_MANIFEST.json`, `packages/`, `docs/` and `skills/`. The runtime requires Python 3.11+. Git-backed saving also requires Git. Ordinary file reads can proceed independently.
 
 Run these commands in PowerShell **only when the dedicated runtime does not already exist**. Installing the package does not create a new business project or authorize upgrading an existing runtime.
 
-The block first checks the included wheel against its exact entry in `RELEASE_MANIFEST.json`; a missing or ambiguous entry, wrong size or SHA-256 mismatch stops the block before creating a runtime or installing anything. This proves package-internal consistency only. Separately obtain `SHA256SUMS.txt` from the selected official Release and compare the downloaded product ZIP's SHA-256 before extraction. That external checksum is a comparison source outside the ZIP; neither checksum is a digital signature or, by itself, proof of the publisher's identity.
+The commands below also check the included wheel against its entry in the version folder's `RELEASE_MANIFEST.json`. A missing or ambiguous entry, incorrect size or mismatched SHA-256 stops installation before creating the runtime. This check verifies consistency inside the package. Trust in the publisher depends on where you obtained the package and its whole-ZIP digest.
 
 ```powershell
 & {
     $ErrorActionPreference = 'Stop'
-    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc8'
+    $taskcarryProductRoot = 'C:/TaskCarry/toolkit/taskcarry-0.2.0rc9'
     $taskcarryManifest = Get-Content -LiteralPath (Join-Path $taskcarryProductRoot 'RELEASE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $taskcarryWheels = @(Get-ChildItem -LiteralPath (Join-Path $taskcarryProductRoot 'packages') -Filter '*.whl' -File)
     if ($taskcarryWheels.Count -ne 1) { throw 'Expected exactly one wheel in the selected product package.' }

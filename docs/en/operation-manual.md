@@ -5,6 +5,7 @@
 Use this page for everyday work after setup. For initial setup, see [First installation](windows-example.md); to update an existing installation, return to your original governance chat with the [update prompt](updating.md).
 
 - [Onboarding and working modes](#onboarding)
+- [Continue your project on another computer or with another AI](#move-project)
 - [Responsibilities](#responsibilities)
 - [Save, read and continue work](#continuation)
   - [Understand what a result proves](#evidence)
@@ -67,6 +68,20 @@ This continues saved, verifiable project work. It does not repair host compactio
 | Interrupted operation | Verify actual effects and original identity; complete supported missing steps. |
 
 The map and notes describe the project; engine records and actual files establish effects. A checkpoint, delivery, reception, adoption and business acceptance are different. A recorded artifact path is not a verified backup.
+
+<a id="move-project"></a>
+
+## Continue your project on another computer or with another AI
+
+Open a TaskCarry manager chat on the destination computer or in the AI tool you want to use. To move responsibility for integrating the project's work, tell it what to take over.
+
+> The integration manager for [project name] is currently in [other AI tool or computer]. I want to move that role here and have you take it over. Rebuild the local setup for the project's existing work. Tell me where each workstream stands and which chat to use to continue it.
+
+You can move the integration role while keeping some working chats where they are. For example, add “Set up only development and acceptance testing on this computer. The other chats will continue where they are.” To keep the original integration manager and move specific work, use this request instead.
+
+> Keep the current integration manager for [project name]. Move only [workstream] here. Help me reconnect its files, progress and working chat.
+
+The new manager checks the owners, adopted versions and next actions against the project files and records you authorize it to use. It helps you connect those tasks to local chats. If it needs handoff material or you need to sign in or open a chat, it gives you the next step. When moving the integration role, first review what the new manager found. After you confirm the switch, it verifies that the original manager has stopped writing as the primary and takes over. [Cross-computer recovery and handoff guide](remote-and-multicomputer.md)
 
 <a id="connection"></a>
 

@@ -99,6 +99,110 @@ class SharedFolderWorkbenchTests(unittest.TestCase):
         finally:
             self.worker = original
 
+    def join_receipt(self, observation, target, consumed, **overrides):
+        folder = self.control / observation
+        folder.mkdir()
+        receipt = {'schema':'taskcarry.chat-join-receipt.v1', 'project_id':self.engine.source()['source_id'],
+                   'control':str(self.control), 'thread_id':target['thread_id'], 'task_id':target['task_id'],
+                   'workspace':target['workspace'], 'responsibility':'Review an entry sign',
+                   'business_progress':{'progress':'Draft ready', 'waiting_for':'Entrance confirmation'},
+                   'workbench':{'consumption_id':consumed['consumption_id'], 'view_id':self.view['view_id']},
+                   'pending_governance':{'owner_thread':'governor'}, **overrides}
+        path = folder / 'JOIN_RECEIPT.json'
+        path.write_text(json.dumps(receipt), encoding='utf-8')
+        revision = digest_bytes(path.read_bytes())
+        invoke(self.control, 'observe', {'observation_id':observation, 'source_ref':path.relative_to(self.control).as_posix(),
+               'source_revision':revision, 'task_id':target['task_id'], 'workspace':target['workspace'],
+               'summary':'Selected chat registered its receipt.'})
+        return path, revision
+
+    def test_join_absorption_survives_to_report_then_deduplicates_across_governance_cycles(self):
+        self.install()
+        plan = self.plan()
+        self.execute(plan)
+        target = self.target()
+        consumed = self.consume(plan, target)
+        path, revision = self.join_receipt('my-receipt', target, consumed)
+        invoke(self.control, 'observe', {'observation_id':'second-reference', 'source_ref':path.relative_to(self.control).as_posix(),
+               'source_revision':revision, 'task_id':target['task_id'], 'workspace':target['workspace'],
+               'summary':'The same selected chat submitted the same receipt again.'})
+
+        def run(action, arguments=None, cycle='absorb-slot', **kwargs):
+            return invoke(self.control, 'cycle', {'action':action, 'cycle_id':cycle, 'owner':'governor',
+                                                  'data':arguments or {}, **kwargs})
+
+        def inbox(queue, cycle='absorb-slot'):
+            return run('join_inbox', {'queue':queue}, cycle=cycle)
+
+        scope = {'scope':['chat-joins'], 'task_id':'software'}
+        run('start', **scope)
+        self.assertEqual(inbox('pending_report')['items'], [])
+        [item] = inbox('new')['items']
+        self.assertEqual(item['thread_id'], target['thread_id'])
+        self.assertEqual(item['waiting_for'], 'Entrance confirmation')
+        self.assertEqual(item['progress'], 'Draft ready')
+        first_page = run('join_inbox', {'queue':'new'}, limit=1)
+        self.assertEqual([row['join_id'] for row in first_page['items']], [item['join_id']])
+        self.assertIsNotNone(first_page['next_cursor'])
+        selected = {'observation_id':'my-receipt', 'source_revision':revision}
+        run('join_absorb', selected, request_id='accept')
+        next_page = run('join_inbox', {'queue':'new'}, limit=1, cursor=first_page['next_cursor'])
+        self.assertEqual(next_page['items'], [])
+        self.assertIsNone(next_page['next_cursor'])
+        self.assertTrue(run('join_absorb', selected, request_id='accept')['reused'])
+        self.assertFalse(run('join_absorb', selected, request_id='second-read')['receipt']['result']['newly_absorbed'])
+        self.assertEqual(inbox('new')['items'], [])
+        run('finish', {'state':'completed', 'next_step':'report next morning'}, request_id='finish')
+        path.unlink()
+        run('start', cycle='report-slot', **scope)
+        self.assertEqual(inbox('new', 'report-slot')['needs_review'], [])
+        self.assertEqual([i['join_id'] for i in inbox('pending_report', 'report-slot')['items']], [item['join_id']])
+        delivery = {'report_id':'daily', 'receipt_ref':'host:synthetic-delivery', 'delivered_at':'2026-01-01T10:00:00Z',
+                    'utc_offset_minutes':0, 'local_date':'2026-01-01', 'join_ids':[item['join_id'], 'missing']}
+        with self.assertRaises(GovernanceError):
+            run('report_delivered', delivery, cycle='report-slot', request_id='failed-receipt')
+        self.assertEqual(len(inbox('pending_report', 'report-slot')['items']), 1)
+        delivery['join_ids'] = [item['join_id']]
+        run('report_delivered', delivery, cycle='report-slot', request_id='report-receipt')
+        self.assertTrue(run('report_delivered', delivery, cycle='report-slot', request_id='report-receipt')['reused'])
+        self.assertEqual(inbox('pending_report', 'report-slot')['items'], [])
+        run('finish', {'state':'completed', 'next_step':'regular work'}, cycle='report-slot', request_id='finish')
+        run('start', cycle='next-day', **scope)
+        for queue in ('new','pending_report'):
+            self.assertEqual(inbox(queue, 'next-day')['items'], [])
+
+    def test_join_inbox_exact_project_owner_chat_and_stale_receipt(self):
+        self.install()
+        plan = self.plan()
+        self.execute(plan)
+        first, second = self.target(), self.target('original-algorithm','algorithm')
+        proof = self.consume(plan, first)
+        self.join_receipt('wrong-project', first, proof, project_id='project-unrelated')
+        self.join_receipt('another-governor', first, proof, pending_governance={'owner_thread':'peer'})
+        self.join_receipt('wrong-thread', second, proof)
+        path, revision = self.join_receipt('selected', first, proof)
+        cycle = {'cycle_id':'daily', 'owner':'governor'}
+        invoke(self.control, 'cycle', {'action':'start', **cycle, 'scope':['chat-joins'], 'task_id':'software'})
+        entries, rejected, cursor = [], [], None
+        while True:
+            arguments = {'action':'join_inbox', **cycle, 'data':{'queue':'new'}, 'limit':1}
+            if cursor:
+                arguments['cursor'] = cursor
+            page = invoke(self.control, 'cycle', arguments)
+            entries.extend(r['observation_id'] for r in page['items'])
+            rejected.extend(r['observation_id'] for r in page['needs_review'])
+            cursor = page['next_cursor']
+            if cursor is None:
+                break
+        self.assertEqual(entries, ['selected'])
+        self.assertCountEqual(rejected, ['wrong-project','wrong-thread'])
+        path.write_bytes(b'{}')
+        with self.assertRaises(GovernanceError):
+            invoke(self.control, 'cycle', {'action':'join_absorb', **cycle, 'request_id':'try',
+                   'data':{'observation_id':'selected','source_revision':revision}})
+        pending = invoke(self.control, 'cycle', {'action':'join_inbox', **cycle, 'data':{'queue':'pending_report'}})
+        self.assertEqual(pending['items'], [])
+
     def test_shared_connection_preserves_config_git_wip_and_exact_chat_routes(self):
         before = (git_snapshot(self.worker), self.git('status','--porcelain=v1'), (self.worker/'source.txt').read_bytes())
         self.install()

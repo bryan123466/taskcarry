@@ -2,19 +2,35 @@
 
 # TaskCarry
 
-**Project memory and collaboration for AI tools.**
-
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
 
-[Get TaskCarry](START_HERE.md#download) · [First-time setup](docs/en/windows-example.md) · [Update or continue governance](docs/en/updating.md)
+![Two collaborators hand off work from their own chats. The project manager keeps the decisions and results together.](docs/assets/project-manager.en.png)
 
-TaskCarry helps projects already advancing in AI chats **keep their memory and coordinate ongoing work**. It keeps confirmed decisions, task relationships, saved results and next steps in a durable local record, so work can continue beyond any one conversation.
+**Bring AI together. Keep projects moving.**
 
-Keep working in your existing main or specialist chats. A separate governance chat uses your existing AI tool to review the progress you connect, maintain shared guidance, and check saving and recovery through TaskCarry. Add specialist chats only when the work benefits from them.
+TaskCarry brings decisions and work from your team’s AI chats into one lasting project record.
 
-Governance organizes the real project without requiring a new folder for each chat. Reuse original directories and conversations: chats in one directory share a connection while retaining their own tasks and progress. Older reference chats can inform project memory without becoming active workbenches.
+[Download the complete package and get started](START_HERE.md#download) · [Update an existing project](docs/en/updating.md)
 
-**The current step-by-step examples use Codex.** The toolkit exposes the same local engine through a command line and MCP, providing a foundation for other AI-tool integrations. Each host still needs its own connection and workflow verification.
+## What can TaskCarry do for your project?
+
+### Which version should I send?
+
+You update the demo in one chat. A teammate tries it with their own AI and messages you, “This one’s ready to send.” Two days later, which file did they mean? Ask your project manager. It can pull up the demo they actually tested, along with their feedback.
+
+![The same drone scene appears in the developer’s build, both reviews and the final handoff.](docs/assets/story-version.en.png)
+
+### Who’s tried this before? What worked?
+
+The last time a teammate tested the drone demo, they left a note: “Check the camera feed first.” Now you’re reviewing a new build with a different AI, and the screen is blank again. Your manager finds that note. You know to check whether a picture came through before deciding the way is clear.
+
+![A reviewer hands over a card reading “Check the camera feed first” beside a laptop with a missing camera feed.](docs/assets/story-experience.en.png)
+
+### Switch AI tools and pick up where you left off.
+
+You’re halfway through the demo guide and want another AI to finish it. Ask the new manager to pick up the guide. It can find the draft you saved in the last chat, the demo version everyone agreed on, and the step your teammate marked as missing. Hand over just the guide, or ask it to manage the whole project.
+
+[Release notes and workflows exercised](docs/RELEASE_0.2.0rc9.md#en)
 
 ## Why add TaskCarry to Git and project instructions?
 
@@ -94,9 +110,9 @@ A received stage can be part of an unfinished task. A paused task can stay pause
 
 [Get the complete product package](START_HERE.md#download), then follow the [three-step guide](docs/en/windows-example.md):
 
-1. **Establish governance.** Extract the package under `TaskCarry/toolkit/`, open the outer `TaskCarry` folder in Codex and send the guide's complete prompt. No product path needs filling in.
-2. **Choose a project and follow governance.** The assistant inventories accessible conversation indexes with their coverage, suggests project groups, then reads relevant history after your selection. It prepares each existing chat's complete connection prompt, recommends new roles when useful, and guides local Git, MCP, memory, the first cycle, recovery and daily official update checks. Host actions are given one necessary step at a time.
-3. **Review the evidence and continue.** Receive the inherited decisions, chat/role/task map, connection, saving, recovery and update results, remaining conditions and next actions. Complete setup and verified natural scheduling are distinct; configuration, trigger, AI execution and report delivery each need evidence. See [the feedback you should receive](docs/en/user-feedback-examples.md).
+1. **Start a project manager chat.** Extract the ZIP into an empty folder. Follow the [folder-opening instructions and opening prompt](docs/en/windows-example.md#install) to start a manager chat using it. In Codex, select the folder with **Ctrl+O** on Windows or **⌘O (Command+O)** on Mac, then start a new chat using it.
+2. **Invite your working chats.** The manager gives you a message to paste. Choose from the projects and chats it suggests, or skip the suggestions and paste the message into the chats you want to include. Once a chat joins, carry on working there. To add another chat later, ask the manager for the message and where to paste it. With scheduled checks on, the manager picks up new chats at its next check and tells you who joined. You can also ask “Which chats have joined?”
+3. **Get to work and let the manager follow up.** Review the project overview and next steps, then continue in your working chats. Enable scheduled check-ins, and ask the manager to help set up private GitHub backups, collaboration with other AIs or computers, or project migration as needed. [See example feedback](docs/en/user-feedback-examples.md).
 
 Keep working in your original chats. Governance maintains project memory; ongoing project coordination is optional, and you may need no additional specialist chats.
 
@@ -104,7 +120,7 @@ Keep working in your original chats. Governance maintains project memory; ongoin
 
 (If TaskCarry is installed, another governance tool is in use, or you already have a governance chat, start with [update and continuation](docs/en/updating.md).) It distinguishes package updates from inheriting existing governance, preserving original records, settings and unfinished work.
 
-If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [release notes](docs/RELEASE_0.2.0rc8.md).
+If the host needs you to complete an action, the assistant supplies that one step. Detailed commands are in the [manual fallback](docs/en/manual-setup.md); changes between releases are in the [RC9 release notes](docs/RELEASE_0.2.0rc9.md#en).
 
 <img src="docs/assets/workspace-sidebar-example.png" alt="Example arrangement of governance and working chats; specialist count is optional" width="360">
 
@@ -116,8 +132,8 @@ For a concrete walkthrough, explore the [drone simulation and governance example
 
 - **Standard local governance:** local Git, workbench publication/consumption, a first complete cycle and recovery rehearsal, official release checking, and two or three daily original-chat slots: one report plus one or two absorption periods. Missing host steps stay explicit. A new release is evaluated before installation.
 - **Private Git:** configure your own remote repository for selected committed results. File references help locate materials, but copying, backup, and remote synchronization remain explicit operations.
-- **Additional AI tools:** CLI and MCP provide integration points around one engine. The Codex guide is the current concrete onboarding path; it does not establish that every MCP client, model, or AI platform has been verified.
-- **Multiple computers:** selected recovery sets can rebuild an independent standby copy; separate task branches can return exact outputs to one governance writer. Transfer the writer role explicitly. [The guide](docs/en/remote-and-multicomputer.md) separates local recovery, remote transport and actual second-host evidence; real two-computer end-to-end validation remains a separate condition.
+- **Additional AI tools:** AI tools that can launch a custom local stdio MCP server can try joining a project. Codex, WorkBuddy and Google Antigravity CLI running Gemini have each exercised specific workflows. A scoped web trial let Gemini read authorized project records over HTTPS.
+- **Multiple computers:** Collaborators return selected results on task branches. The integration manager reviews which changes to adopt in the shared version. When moving computers, restore the project and review its state before transferring write authority. [Guide](docs/en/remote-and-multicomputer.md)
 
 TaskCarry uses Python 3.11+ and includes four project Skills for setup, task delivery, governance, and recovery. Standard onboarding prepares local Git; the lower-level ability to checkpoint ordinary files remains available for compatibility and recovery. Each control scope has one local store and one receiving baseline; a user-defined project can connect multiple existing sources without silently merging them. Installation updates tools and Skills; adopting received business changes into a workspace is a separate, reviewed action. See [maintenance](docs/en/governance-maintenance.md) and [capabilities and limits](docs/RELEASE_BOUNDARIES.md).
 
@@ -135,7 +151,7 @@ TaskCarry uses Python 3.11+ and includes four project Skills for setup, task del
 
 [How the workflow became simpler](docs/en/governance-evolution.md)
 
-[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0rc8.md)
+[CLI / MCP reference](docs/COMMANDS.md) · [Public Skills](skills) · [Validation records](docs/RELEASE_0.2.0rc9.md)
 
 ## Join in
 

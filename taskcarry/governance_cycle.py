@@ -16,6 +16,7 @@ import stat
 import threading
 
 from .core import Core, _id, digest_bytes
+from .chat_joins import absorb_join, join_inbox, mark_joins_reported
 from .store import GovernanceError, _linked, now
 
 
@@ -160,6 +161,9 @@ class GovernanceCycle(Core):
 
     def _cycle_status(self, value):
         result = dict(value)
+        if 'chat-joins' in value['scope']:
+            result['chat_join_intake'] = ('Read every join_inbox new page, then join_absorb each authorized receipt. '
+                'Report slots also read pending_report; acknowledge the included join_ids only after actual report delivery.')
         result['lock'] = {'durable_reservation': value['state'] != 'completed',
                           'os_lock_held_by_this_session': getattr(self._cycle_local, 'session', None) ==
                           (value['cycle_id'], value['owner'], value['scope']),
@@ -184,7 +188,7 @@ class GovernanceCycle(Core):
             page['items'] = [self._cycle_status(_record(item, 'taskcarry.cycle.v1')) for item in page['items']]
             return page
         cycle_id = _id(cycle_id, 'Cycle ID')
-        if action not in ('status', 'question_check') and cycle_id in (
+        if action not in ('status', 'question_check', 'join_inbox') and cycle_id in (
                 self.store.get('config', 'project') or {}).get('recovery_inert_cycle_ids', []):
             raise GovernanceError('RESTORED_RUN_INERT', 'Historical cycles cannot be replayed on a recovered replica.')
         record = self._read('governance_cycles', cycle_id, 'taskcarry.cycle.v1')
@@ -232,6 +236,8 @@ class GovernanceCycle(Core):
             raise GovernanceError('INVALID_EVIDENCE', 'Cycle payload must be an object of at most 64 KiB.')
         if action == 'question_check':
             return self._question_check(data)
+        if action == 'join_inbox':
+            return join_inbox(self, record, data, limit, cursor)
         request_id = _id(request_id, 'Request ID')
         request_key = cycle_id + ':' + request_id
         fingerprint = _hash({'action': action, 'owner': owner, 'data': data})
@@ -268,6 +274,8 @@ class GovernanceCycle(Core):
             raise GovernanceError('CYCLE_CAPACITY', 'Close this finite cycle before adding further distinct evidence.')
 
     def _cycle_apply(self, record, action, data):
+        if action == 'join_absorb':
+            return absorb_join(self, record, data)
         if action == 'effect_plan':
             self._fields(data, ('effect_id', 'kind', 'resource', 'expected'))
             identity = _id(data['effect_id'], 'Effect ID')
@@ -386,7 +394,7 @@ class GovernanceCycle(Core):
             self.store.put('cycle_questions', _hash(identity), record)
             return record
         self._fields(data, (name, 'receipt_ref', 'delivered_at', 'utc_offset_minutes', 'local_date'),
-                     ('max_distinct_dates',) if question else ())
+                     ('max_distinct_dates',) if question else ('join_ids',))
         _text(data['receipt_ref'], 'Actual native delivery receipt')
         delivered = _stamp(data['delivered_at'], 'Delivered time')
         offset = _integer(data['utc_offset_minutes'], 'UTC offset minutes', -720, 840)
@@ -424,6 +432,8 @@ class GovernanceCycle(Core):
         prior = self._read('cycle_reports', key, 'taskcarry.report.v1')
         if prior and prior['delivery'] != data:
             raise GovernanceError('REPORT_ALREADY_DELIVERED', 'This report already has a retained receipt on that date.', prior)
+        if 'join_ids' in data:
+            mark_joins_reported(self, cycle, data)
         record = prior or {'schema': 'taskcarry.report.v1', 'report_id': identity, 'local_date': actual_date, 'delivery': data}
         self.store.put('cycle_reports', key, record)
         self._bounded(cycle['reports'], key)

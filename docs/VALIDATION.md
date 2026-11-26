@@ -1,3 +1,13 @@
+# RC9 verification / RC9 验证 / RC9 驗證
+
+RC9 changes and exercised capabilities are mapped in [RC9_VERIFICATION.md](RC9_VERIFICATION.md). Exact-source regression, final package, installation, upgrade and CI results are recorded in the [release evidence](https://github.com/bryan123466/taskcarry/releases/download/v0.2.0rc9/RC9-VALIDATION.json) and [release page](https://github.com/bryan123466/taskcarry/releases/tag/v0.2.0rc9).
+
+RC9 的功能与已完成演练见[验证对照](RC9_VERIFICATION.md)。本次源码回归、最终包、新安装、旧版升级和 CI 的实际结果随发行附件提供。以下保留 RC8 历史证据，不把旧结果冒充本版重跑。
+
+可重复执行 / Reproduce: `python scripts/verify_release.py --output <evidence.json>`; `python scripts/verify_installed_wheel.py --directory <wheel-directory>`. Use an isolated temporary directory outside the checkout for fixtures that verify plain directories without Git ancestors.
+
+---
+
 # TaskCarry 0.2.0rc8 source validation
 
 [Machine-readable results](VALIDATION_RESULTS.json) · [Release changes](RELEASE_0.2.0rc8.md) · [Complete simulator case](../examples/vision-drone-governance/simulation/README.md)

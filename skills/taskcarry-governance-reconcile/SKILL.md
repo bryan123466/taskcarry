@@ -1,9 +1,13 @@
 ---
 name: taskcarry-governance-reconcile
-description: Reconcile explicit deliveries and update project workspaces using TaskCarry plans and effect evidence. Use for requested governance intake or an authorized scheduled reconciliation.
+description: Give a read-only takeover briefing for an existing project (接手项目、接管项目、交接盘点), reconcile explicit deliveries, or run an authorized scheduled governance pass.
 ---
 
 # Governance reconciliation / 治理接收
+
+When the user asks to take over an existing project, understand where it stands, or report what to do next, start with the [project assessment](references/daily-governance.md#read-only-project-takeover). Follow the intent in the user's own words. Use the selected project's evidence and deliver the briefing in this chat. Assess before onboarding, starting a cycle, join intake or scheduled reconciliation. A request only to assess remains read-only; an explicit request to migrate or take over integration also uses the [authorized migration route](references/daily-governance.md#authorized-project-migration). Carry forward authorization already given in the current session.
+
+On each scheduled progress review or report, or when asked about new chats, follow [join intake](references/daily-governance.md#pick-up-chats-that-joined-this-project). An invited working chat leaves a receipt in this project. Review it once, record intake and include the role and next step in the next delivered report.
 
 Use `cycle` for a complete bounded governance pass: retain owner/task/resource scope, reserve it once, and resume its exact unfinished effects. Ordinary MCP/CLI calls take an OS lock while executing and keep a durable reservation between calls; only a live Python `cycle_session` holds the OS lock for the whole session. Do not claim a database lock spans AI turns. `run` below remains the existing selected-delivery receipt aggregate and does not replace the wider cycle.
 

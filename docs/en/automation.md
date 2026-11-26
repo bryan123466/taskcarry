@@ -12,6 +12,10 @@ Standard setup establishes **two or three daily slots** in your original governa
 
 ## The two kinds of slot
 
+When you paste the invitation into a chosen chat, it leaves a receipt in this project. The manager picks it up during the next progress review or morning report. For example, “The inventory chat joined. It has recorded 12 exhibits and is waiting for the venue to confirm their dimensions.” The same receipt is announced once. You choose any further chats to invite and which results the project adopts. With manual governance, ask the manager “Which chats have joined?” to run the same check.
+
+If you installed the original RC8 package, follow the [update guide](updating.md) for a version with join intake before using this feature. The manager checks both its running Core and the project rule used by its existing schedule.
+
 | Slot | Work and user feedback |
 |---|---|
 | Morning report | Review selected current sources, facts, decisions, dependencies and health; continue authorized missing effects; check the official release channel and recovery coverage; save meaningful changes and deliver a concise report with necessary decisions and next work. |

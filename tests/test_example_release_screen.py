@@ -1,16 +1,53 @@
 """Permit the named public tutorial without opening arbitrary host paths."""
-import unittest
+import hashlib
+import json
 import posixpath
 import re
 import tempfile
+import unittest
 from pathlib import Path
 from unittest.mock import patch
 from urllib.parse import unquote, urlsplit
 
-from scripts.build_trial import ROOT, __version__, build, reviewed_example_path, screen_content, snapshot, product_contents
+from scripts.build_trial import (
+    FIRST_USE_TEMPLATE, ROOT, __version__, archive_members, build, product_contents,
+    reviewed_example_path, screen_content, snapshot,
+)
 
 
 class ExampleReleaseScreenTests(unittest.TestCase):
+    def test_product_first_use_and_manifest_resolve_from_the_extracted_root(self):
+        source, _ = snapshot()
+        version = "taskcarry-" + __version__
+        toolkit = "TaskCarry/toolkit/" + version + "/"
+        with tempfile.TemporaryDirectory() as temporary:
+            wheel = Path(temporary) / "synthetic.whl"
+            wheel.write_bytes(b"synthetic wheel bytes")
+            product = archive_members(product_contents(source), "product", wheel, None)
+            source_zip = archive_members(source, "source", wheel, None)
+        outer = "TaskCarry/START_HERE.md"
+        self.assertEqual({outer}, {name for name in product if not name.startswith(toolkit)})
+        self.assertNotIn(toolkit + FIRST_USE_TEMPLATE, product)
+        members = {name.removeprefix(toolkit): data for name, data in product.items() if name.startswith(toolkit)}
+        manifest = json.loads(members.pop("RELEASE_MANIFEST.json"))
+        self.assertEqual(manifest["first_use_entry"], {"archive_path": outer, "bytes": len(product[outer]),
+                                                       "sha256": hashlib.sha256(product[outer]).hexdigest()})
+        self.assertEqual(manifest["files"], [{"path": path, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                                             for path, data in sorted(members.items())])
+        checksum, wheel_path = members["SHA256SUMS.txt"].decode().strip().split("  ")
+        self.assertEqual(checksum, hashlib.sha256(members[wheel_path]).hexdigest())
+        entry = product[outer].decode("utf-8")
+        targets = {posixpath.normpath(posixpath.join("TaskCarry", link))
+                   for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)', entry)}
+        self.assertTrue(targets.issubset(product.keys()))
+        for language in ("en", "zh-CN", "zh-TW"):
+            for guide in ("windows-example", "updating"):
+                self.assertIn(toolkit + "docs/" + language + "/" + guide + ".md", targets)
+            guide = members["docs/" + language + "/windows-example.md"].decode("utf-8")
+            first_prompt = next(line for line in guide.splitlines() if line.startswith("> "))
+            self.assertIn(first_prompt, entry)
+        self.assertEqual(set(source_zip), {version + "/" + p for p in (*source, "RELEASE_MANIFEST.json")})
+
     def test_invalid_simulation_digest_stops_build_before_creating_artifacts(self):
         import json
         read_bytes = Path.read_bytes

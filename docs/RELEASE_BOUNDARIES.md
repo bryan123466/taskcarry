@@ -6,7 +6,7 @@
 
 ## English
 
-TaskCarry gives AI-assisted projects a local record of progress and results. It connects task records, selected saved files, Git history, and a governance chat so work can pause, contribute useful stages, and continue later. The current user manual demonstrates this workflow with Codex.
+TaskCarry gives AI-assisted projects a local record of progress and results. It connects task records, selected saved files, Git history, and a governance chat so work can pause, contribute useful stages, and continue later. The user manual describes local AI workspaces, with exercised paths for Codex, WorkBuddy and Gemini via a local CLI.
 
 ### Everyday use
 
@@ -31,7 +31,7 @@ The packaged Codex reader uses a bounded App Server read-method allowlist and st
 
 Official updates use the selected stable/RC channel. Checks verify available manifest, tag and asset metadata; they do not download every package byte or install a candidate. Older releases without structured metadata require review. Offline checks stay unverified. Saved applicability decisions, installed packages and actual host loading remain distinct.
 
-Private Git can hold selected committed and pushed results. Remote push and deployment are separate operations. The [multi-computer guide](en/remote-and-multicomputer.md) describes independent task branches and one integration host; it **has not completed a real two-computer end-to-end validation**. Computers do not share a live control database, merge their local state automatically, or take over pending operations automatically.
+Private Git can hold selected committed and pushed results. Remote push and deployment are separate operations. The [multi-computer guide](en/remote-and-multicomputer.md) describes independent task branches and one integration host; the synthetic drone exercise verified separate-computer branch delivery, selected integration and shared-version readback ([RC9 summary](RC9_VERIFICATION.md)). Computers do not share a live control database, merge their local state automatically, or take over pending operations automatically.
 
 ### Practical limits to account for
 
@@ -45,13 +45,13 @@ Private Git can hold selected committed and pushed results. Remote push and depl
 - Installing or updating tools and Skills does not merge business Git history. Receiving results and adopting them into a selected workspace use their own reviewed plans. Saved setup diagnostics describe files on disk and do not prove that an existing host process loaded a newly installed version.
 - The toolkit does not repair the operating system, move AI-host accounts, send external messages, or guarantee recovery of arbitrary external effects. You decide professional or business acceptance and external sharing.
 
-[Start with the manual](en/windows-example.md) · [Working together over time](OPERATING_PRINCIPLES.md) · [Recorded validation](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc8/docs/VALIDATION.md)
+[Start with the manual](en/windows-example.md) · [Working together over time](OPERATING_PRINCIPLES.md) · [Recorded validation](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc9/docs/VALIDATION.md)
 
 <a id="zh-CN"></a>
 
 ## 简体中文
 
-TaskCarry 为 AI 辅助项目提供本地进度与成果记录。它把任务记录、选定的已保存文件、Git 历史和治理聊天接起来，让工作可以暂停、按阶段贡献成果，再从原位置继续。当前操作手册使用 Codex 演示这套流程。
+TaskCarry 为 AI 辅助项目提供本地进度与成果记录。它把任务记录、选定的已保存文件、Git 历史和治理聊天接起来，让工作可以暂停、按阶段贡献成果，再从原位置继续。操作手册说明本地 AI 工作区接入，并已演练 Codex、WorkBuddy 与通过本地 CLI 运行 Gemini 的项目协作。
 
 ### 日常可以怎样用
 
@@ -76,7 +76,7 @@ MCP 要在你使用的 AI 宿主中接通，并实际调用工具确认。CLI �
 
 官方更新按所选正式/RC 通道检查现有清单、tag 和附件元数据，不代表每个包的字节已下载，也不会安装候选。缺少结构化清单的旧发行保留人工复核；离线检查保留未核实。已保存适用性判断、实际安装和宿主实际加载分别记录。
 
-私有 Git 可以保存选定且已经提交、推送的成果；远端推送和部署属于单独操作。[多电脑手册](zh-CN/remote-and-multicomputer.md)介绍独立任务分支与单一集成主机的配合，但**尚未完成真实双电脑端到端验证**。电脑之间不共享运行中的治理库，也不自动合并本地状态或接管未完成操作。
+私有 Git 可以保存选定且已经提交、推送的成果；远端推送和部署属于单独操作。[多电脑手册](zh-CN/remote-and-multicomputer.md)介绍独立任务分支与单一集成主机的配合；**已完成合成无人机项目的跨机分支交付、选定集成与共同版读回（见 [RC9 验证摘要](RC9_VERIFICATION.md)）**。电脑之间不共享运行中的治理库，也不自动合并本地状态或接管未完成操作。
 
 ### 使用时需要知道的范围
 
@@ -90,13 +90,13 @@ MCP 要在你使用的 AI 宿主中接通，并实际调用工具确认。CLI �
 - 安装或更新工具与技能不会合并业务 Git 历史。接收成果、将其更新到选定工作区，都使用各自需要检查的计划。安装诊断说明磁盘上的文件状态，不证明已有宿主进程已经加载新版本。
 - 工具不修复操作系统、不迁移 AI 宿主账号、不发送外部消息，也不保证恢复任意外部操作。专业或业务验收以及对外分享由你决定。
 
-[从手册开始](zh-CN/windows-example.md) · [持续协作](OPERATING_PRINCIPLES.md) · [验证记录](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc8/docs/VALIDATION.md)
+[从手册开始](zh-CN/windows-example.md) · [持续协作](OPERATING_PRINCIPLES.md) · [验证记录](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc9/docs/VALIDATION.md)
 
 <a id="zh-TW"></a>
 
 ## 繁體中文
 
-TaskCarry 為 AI 輔助專案提供本機進度與成果記錄。它把任務記錄、選定且已儲存的檔案、Git 歷史與治理對話接起來，讓工作可以暫停、按階段貢獻成果，再從原位置繼續。目前操作手冊使用 Codex 示範這套流程。
+TaskCarry 為 AI 輔助專案提供本機進度與成果記錄。它把任務記錄、選定且已儲存的檔案、Git 歷史與治理對話接起來，讓工作可以暫停、按階段貢獻成果，再從原位置繼續。操作手冊說明本機 AI 工作區接入，並已演練 Codex、WorkBuddy 與透過本機 CLI 執行 Gemini 的專案協作。
 
 ### 日常可以如何使用
 
@@ -121,7 +121,7 @@ MCP 要在你使用的 AI 宿主中接通，並實際呼叫工具確認。CLI �
 
 官方更新按所選正式/RC 通道檢查現有清單、tag 與附件中繼資料，不代表每個套件的位元組已下載，也不會安裝候選。缺少結構化清單的舊發行保留人工複核；離線檢查保留未核實。已儲存適用性判斷、實際安裝與宿主實際載入分別記錄。
 
-私有 Git 可以儲存選定且已提交、推送的成果；遠端推送與部署屬於個別操作。[多電腦手冊](zh-TW/remote-and-multicomputer.md)介紹獨立任務分支與單一整合主機的配合，但**尚未完成真實雙電腦端到端驗證**。電腦之間不共用執行中的治理資料庫，也不自動合併本機狀態或接管未完成操作。
+私有 Git 可以儲存選定且已提交、推送的成果；遠端推送與部署屬於個別操作。[多電腦手冊](zh-TW/remote-and-multicomputer.md)介紹獨立任務分支與單一整合主機的配合；**已完成合成無人機專案的跨機分支交付、選定整合與共同版讀回（見 [RC9 驗證摘要](RC9_VERIFICATION.md)）**。電腦之間不共用執行中的治理資料庫，也不自動合併本機狀態或接管未完成操作。
 
 ### 使用時需要知道的範圍
 
@@ -135,4 +135,4 @@ MCP 要在你使用的 AI 宿主中接通，並實際呼叫工具確認。CLI �
 - 安裝或更新工具與技能不會合併業務 Git 歷史。接收成果、將其更新到選定工作區，都使用各自需要檢查的計畫。安裝診斷說明磁碟上的檔案狀態，不證明既有宿主程序已經載入新版本。
 - 工具不修復作業系統、不遷移 AI 宿主帳號、不傳送外部訊息，也不保證恢復任意外部操作。專業或業務驗收以及對外分享由你決定。
 
-[從手冊開始](zh-TW/windows-example.md) · [持續協作](OPERATING_PRINCIPLES.md) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc8/docs/VALIDATION.md)
+[從手冊開始](zh-TW/windows-example.md) · [持續協作](OPERATING_PRINCIPLES.md) · [驗證記錄](https://github.com/bryan123466/taskcarry/blob/v0.2.0rc9/docs/VALIDATION.md)
